@@ -335,6 +335,15 @@
     },
     {
       "product": "registry-notary",
+      "code": "posture.unavailable",
+      "path": "posture/unavailable",
+      "title": "posture state is unavailable",
+      "description": "Posture state could not be read at this time.",
+      "category": "Readiness and posture",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
       "code": "profile.unsupported",
       "path": "profile/unsupported",
       "title": "evidence request profile is unsupported",
