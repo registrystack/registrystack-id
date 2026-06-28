@@ -6,6 +6,10 @@
   "kind": "namespace",
   "documented_by": [
     {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
       "title": "Registry Relay product docs",
       "href": "https://docs.registrystack.org/products/registry-relay/"
     },

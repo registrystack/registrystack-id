@@ -26,6 +26,10 @@ const documentation = {
     title: 'Error and status code reference',
     href: `${docsBaseUrl}/reference/errors/`,
   },
+  contractsReference: {
+    title: 'Contracts and machine identifiers',
+    href: `${docsBaseUrl}/reference/contracts/`,
+  },
   relayProduct: {
     title: 'Registry Relay product docs',
     href: `${docsBaseUrl}/products/registry-relay/`,
@@ -128,6 +132,7 @@ function documentationForProblem(entry) {
 function documentationForIdentifier(entry) {
   const product = productForEntry(entry);
   return uniqueLinks([
+    documentation.contractsReference,
     ...documentationForProduct(product),
     ...(entry.documented_by ?? []),
     documentation.docsHome,
@@ -419,33 +424,6 @@ ${renderLinks(docs)}
   writeOutput(`${path.replace(/\.jsonld$/, '')}/index.html`, page(entry.title, body));
 }
 
-function writeShape(entry) {
-  const path = uriToPath(entry.uri);
-  const record = {
-    id: entry.id,
-    type: entry.uri,
-    kind: 'shape',
-    title: entry.title,
-    product: 'registry-relay',
-    documented_by: documentationForIdentifier({ ...entry, product: 'registry-relay' }),
-    authority: authorityRecord(),
-  };
-  const body = `    <h1>${escapeHtml(entry.title)}</h1>
-    <p><code>${escapeHtml(entry.uri)}</code></p>
-    <p>Registry Relay SHACL shape identifier.</p>
-    <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
-      <p>${escapeHtml(resolverAuthorityStatement)}</p>
-    </section>
-    <h2>Documentation</h2>
-${renderLinks(record.documented_by)}
-    <h2>Shape record</h2>
-    <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
-    <p><a href="${escapeHtml(`${baseUrl}/${path}.json`)}">Machine-readable JSON</a></p>`;
-  writeOutput(`${path}/index.html`, page(entry.title, body));
-  writeOutput(`${path}.json`, json(record));
-}
-
 function writeStaticControls() {
   const machineHeaders = [
     {
@@ -476,11 +454,6 @@ function writeStaticControls() {
     {
       path: 'contexts/*.jsonld',
       contentType: 'application/ld+json; charset=utf-8',
-      cache: 'public, max-age=86400',
-    },
-    {
-      path: 'shapes/*.json',
-      contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=86400',
     },
     {
@@ -515,19 +488,16 @@ const problems = readJson('src/catalogs/problems.json').entries;
 const namespaces = readJson('src/catalogs/namespaces.json').entries;
 const schemas = readJson('src/catalogs/schemas.json').entries;
 const contexts = readJson('src/catalogs/contexts.json').entries;
-const shapes = readJson('src/catalogs/shapes.json').entries;
 
 for (const entry of problems) writeProblem(entry);
 for (const entry of namespaces) writeNamespace(entry);
 for (const entry of schemas) writeSchema(entry);
 for (const entry of contexts) writeContext(entry);
-for (const entry of shapes) writeShape(entry);
 
 writeCatalogIndex('Problems', problems, problemUri);
 writeCatalogIndex('Namespaces', namespaces, (entry) => entry.uri.replace(/#$/, ''));
 writeCatalogIndex('Schemas', schemas, (entry) => entry.uri);
 writeCatalogIndex('Contexts', contexts, (entry) => entry.uri);
-writeCatalogIndex('Shapes', shapes, (entry) => entry.uri);
 
 writeOutput('problems/index.json', json({ entries: problems.map(problemRecord) }));
 writeOutput('index.json', json({
@@ -544,11 +514,10 @@ writeOutput('index.json', json({
     namespaces: `${baseUrl}/namespaces/`,
     schemas: `${baseUrl}/schemas/`,
     contexts: `${baseUrl}/contexts/`,
-    shapes: `${baseUrl}/shapes/`,
   },
 }));
 writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry Stack identifiers</h1>
-    <p>Stable machine identifiers for Registry Stack problem types, namespaces, schemas, contexts, and shapes.</p>
+    <p>Stable machine identifiers for Registry Stack problem types, namespaces, schemas, and contexts.</p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
@@ -557,9 +526,7 @@ writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry S
       <li><a href="/problems/">Problem types</a></li>
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>
-      <li><a href="/shapes/">Shapes</a></li>
-    </ul>`));
+      <li><a href="/contexts/">Contexts</a></li>    </ul>`));
 writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not found</h1>
     <p class="lede">This path is not a registered Registry Stack identifier.</p>
     <section class="notice" aria-labelledby="authority">
@@ -571,14 +538,12 @@ writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not fou
       <li><a href="/problems/">Problem types</a></li>
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>
-      <li><a href="/shapes/">Shapes</a></li>
-    </ul>`));
+      <li><a href="/contexts/">Contexts</a></li>    </ul>`));
 writeOutput('llms.txt', `# Registry Stack identifier resolver
 
 Canonical host: ${baseUrl}/
 
-This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces, JSON Schemas, JSON-LD contexts, and SHACL shapes.
+This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces, JSON Schemas, and JSON-LD contexts.
 
 Authority boundary: ${resolverAuthorityStatement}
 

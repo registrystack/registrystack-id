@@ -2,7 +2,7 @@
 
 This repository prepares the static site for `https://id.registrystack.org/`.
 It hosts stable machine identifiers owned by Registry Stack: problem type URIs,
-JSON-LD namespaces, JSON Schemas, JSON-LD contexts, and SHACL shape identifiers.
+JSON-LD namespaces, JSON Schemas, and JSON-LD contexts.
 
 Deployment is configured for Cloudflare Workers Static Assets with:
 
