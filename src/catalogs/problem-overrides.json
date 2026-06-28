@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "product": "registry-platform",
+      "code": "request.body_too_large",
+      "path": "request/body-too-large",
+      "title": "Payload Too Large",
+      "description": "The request body exceeds the configured limit. Published as a problem `type` only: the platform HTTP-security layer does not attach a `code` member to this response.",
+      "source": "registry-platform-httpsec"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.conflict",
+      "path": "request/conflict",
+      "title": "request conflicts with current state",
+      "description": "OpenAPI contract umbrella example for 409 responses; not emitted verbatim at runtime. Runtime responses use specific codes such as `idempotency.conflict` or `target.match_ambiguous`.",
+      "source": "registry-notary-openapi"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.too_large",
+      "path": "request/too_large",
+      "title": "request is too large",
+      "description": "OpenAPI contract umbrella example for 413 responses; not emitted verbatim at runtime. Runtime responses use specific codes such as `batch.too_large` or `federation.payload_too_large`.",
+      "source": "registry-notary-openapi"
+    }
+  ]
+}

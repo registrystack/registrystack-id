@@ -1,0 +1,25 @@
+{
+  "id": "registry-notary-v1",
+  "uri": "https://id.registrystack.org/ns/registry-notary/v1#",
+  "title": "Registry Notary v1 namespace",
+  "description": "JSON-LD namespace for Registry Notary metadata terms.",
+  "kind": "namespace",
+  "documented_by": [
+    {
+      "title": "Registry Notary product docs",
+      "href": "https://docs.registrystack.org/products/registry-notary/"
+    },
+    {
+      "title": "Registry Notary API overview",
+      "href": "https://docs.registrystack.org/reference/apis/registry-notary/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior."
+  }
+}

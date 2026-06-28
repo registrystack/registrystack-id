@@ -1,0 +1,13 @@
+{
+  "name": "registrystack-id",
+  "compatibility_date": "2026-06-27",
+  "assets": {
+    "directory": "./public"
+  },
+  "routes": [
+    {
+      "pattern": "id.registrystack.org/*",
+      "zone_name": "registrystack.org"
+    }
+  ]
+}

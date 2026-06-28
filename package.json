@@ -1,0 +1,17 @@
+{
+  "name": "registrystack-id",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static identifier registry for id.registrystack.org.",
+  "scripts": {
+    "import:problems": "node scripts/import-registry-stack-problems.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "check:upstream": "node scripts/check-upstream-artifacts.mjs",
+    "test": "npm run check"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

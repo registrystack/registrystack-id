@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "id": "registry-manifest-v1",
+      "uri": "https://id.registrystack.org/ns/registry-manifest/v1#",
+      "title": "Registry Manifest v1 namespace",
+      "description": "JSON-LD namespace for Registry Manifest terms."
+    },
+    {
+      "id": "registry-relay-v1",
+      "uri": "https://id.registrystack.org/ns/registry-relay/v1#",
+      "title": "Registry Relay v1 namespace",
+      "description": "JSON-LD namespace for Registry Relay metadata terms."
+    },
+    {
+      "id": "registry-notary-v1",
+      "uri": "https://id.registrystack.org/ns/registry-notary/v1#",
+      "title": "Registry Notary v1 namespace",
+      "description": "JSON-LD namespace for Registry Notary metadata terms."
+    },
+    {
+      "id": "registry-relay-provenance-v1",
+      "uri": "https://id.registrystack.org/ns/registry-relay/provenance/v1#",
+      "title": "Registry Relay provenance v1 namespace",
+      "description": "JSON-LD namespace for Registry Relay provenance credential terms."
+    }
+  ]
+}

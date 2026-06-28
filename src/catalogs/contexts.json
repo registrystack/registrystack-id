@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "id": "registry-relay-provenance-v1",
+      "uri": "https://id.registrystack.org/contexts/registry-relay/provenance/v1.jsonld",
+      "title": "Registry Relay provenance v1 context",
+      "description": "JSON-LD context for Registry Relay provenance credential subjects.",
+      "source": "src/contexts/registry-relay/provenance/v1.jsonld"
+    }
+  ]
+}

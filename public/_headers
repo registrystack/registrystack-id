@@ -1,0 +1,43 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+/index.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/problems/*.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/ns/*.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/contexts/*.jsonld
+  Content-Type: application/ld+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/shapes/*.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/.well-known/registrystack-identifiers
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300

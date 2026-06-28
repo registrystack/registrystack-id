@@ -1,0 +1,20 @@
+{
+  "base_url": "https://id.registrystack.org",
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior."
+  },
+  "documentation": {
+    "home": "https://docs.registrystack.org/",
+    "error_reference": "https://docs.registrystack.org/reference/errors/",
+    "llms": "https://docs.registrystack.org/llms.txt",
+    "full_corpus": "https://docs.registrystack.org/llms-full.txt"
+  },
+  "catalogs": {
+    "problems": "https://id.registrystack.org/problems/index.json",
+    "namespaces": "https://id.registrystack.org/namespaces/",
+    "schemas": "https://id.registrystack.org/schemas/",
+    "contexts": "https://id.registrystack.org/contexts/",
+    "shapes": "https://id.registrystack.org/shapes/"
+  }
+}

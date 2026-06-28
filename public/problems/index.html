@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Problems | Registry Stack identifiers</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
+    main { display: grid; gap: 1rem; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+    h2 { margin-top: 2rem; }
+    p { margin-block: 0.5rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
+    a { color: LinkText; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
+    th { width: 12rem; }
+    .lede { font-size: 1.125rem; }
+    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Problems</h1>
+    <p>Stable Registry Stack identifiers.</p>
+    <section class="notice" aria-labelledby="authority">
+      <h2 id="authority">Authority Boundary</h2>
+      <p>This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.</p>
+    </section>
+    <table>
+      <thead><tr><th>Identifier</th><th>Title</th></tr></thead>
+      <tbody>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/admin/config_bundle_invalid">https://id.registrystack.org/problems/registry-notary/admin/config_bundle_invalid</a></td><td>config bundle is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/audit/write_failed">https://id.registrystack.org/problems/registry-notary/audit/write_failed</a></td><td>audit write failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/auth/missing_credential">https://id.registrystack.org/problems/registry-notary/auth/missing_credential</a></td><td>credential is missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/auth/multiple_credentials">https://id.registrystack.org/problems/registry-notary/auth/multiple_credentials</a></td><td>multiple authentication credentials were provided</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/auth/purpose_required">https://id.registrystack.org/problems/registry-notary/auth/purpose_required</a></td><td>purpose is required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/auth/scope_denied">https://id.registrystack.org/problems/registry-notary/auth/scope_denied</a></td><td>required scope is missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/batch/too_large">https://id.registrystack.org/problems/registry-notary/batch/too_large</a></td><td>batch request is too large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/disclosure_not_allowed">https://id.registrystack.org/problems/registry-notary/claim/disclosure_not_allowed</a></td><td>requested disclosure is not allowed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/format_not_supported">https://id.registrystack.org/problems/registry-notary/claim/format_not_supported</a></td><td>format is unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/not_found">https://id.registrystack.org/problems/registry-notary/claim/not_found</a></td><td>claim was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/operation_unsupported">https://id.registrystack.org/problems/registry-notary/claim/operation_unsupported</a></td><td>claim operation is unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/rule_evaluation_failed">https://id.registrystack.org/problems/registry-notary/claim/rule_evaluation_failed</a></td><td>claim rule evaluation failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/claim/version_not_found">https://id.registrystack.org/problems/registry-notary/claim/version_not_found</a></td><td>claim version was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/config/apply_unavailable">https://id.registrystack.org/problems/registry-notary/config/apply_unavailable</a></td><td>config apply is unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/config/candidate_invalid">https://id.registrystack.org/problems/registry-notary/config/candidate_invalid</a></td><td>config candidate is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential_status/disabled">https://id.registrystack.org/problems/registry-notary/credential_status/disabled</a></td><td>credential status is disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential_status/invalid_status">https://id.registrystack.org/problems/registry-notary/credential_status/invalid_status</a></td><td>credential status is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential_status/invalid_transition">https://id.registrystack.org/problems/registry-notary/credential_status/invalid_transition</a></td><td>credential status transition is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential_status/not_found">https://id.registrystack.org/problems/registry-notary/credential_status/not_found</a></td><td>credential status was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential_status/unavailable">https://id.registrystack.org/problems/registry-notary/credential_status/unavailable</a></td><td>credential status is unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential/holder_proof_replay">https://id.registrystack.org/problems/registry-notary/credential/holder_proof_replay</a></td><td>holder proof has already been used</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential/holder_proof_required">https://id.registrystack.org/problems/registry-notary/credential/holder_proof_required</a></td><td>holder proof is required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential/issuance_failed">https://id.registrystack.org/problems/registry-notary/credential/issuance_failed</a></td><td>credential issuance failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/credential/issuer_not_configured">https://id.registrystack.org/problems/registry-notary/credential/issuer_not_configured</a></td><td>credential issuer is not configured</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/evaluation/binding_mismatch">https://id.registrystack.org/problems/registry-notary/evaluation/binding_mismatch</a></td><td>evaluation binding mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/evaluation/not_found">https://id.registrystack.org/problems/registry-notary/evaluation/not_found</a></td><td>evaluation was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/evidence/not_available">https://id.registrystack.org/problems/registry-notary/evidence/not_available</a></td><td>evidence is not available</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/evidence/server_disabled">https://id.registrystack.org/problems/registry-notary/evidence/server_disabled</a></td><td>evidence server is disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/disabled">https://id.registrystack.org/problems/registry-notary/federation/disabled</a></td><td>federation is disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/forbidden">https://id.registrystack.org/problems/registry-notary/federation/forbidden</a></td><td>federation request is forbidden</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/invalid_request">https://id.registrystack.org/problems/registry-notary/federation/invalid_request</a></td><td>federation request is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/invalid_token">https://id.registrystack.org/problems/registry-notary/federation/invalid_token</a></td><td>federation token is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/payload_too_large">https://id.registrystack.org/problems/registry-notary/federation/payload_too_large</a></td><td>federation payload is too large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/replay">https://id.registrystack.org/problems/registry-notary/federation/replay</a></td><td>federation request was replayed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/server_error">https://id.registrystack.org/problems/registry-notary/federation/server_error</a></td><td>federation server error</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/stale_source_observation">https://id.registrystack.org/problems/registry-notary/federation/stale_source_observation</a></td><td>federation source observation is stale</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/federation/unsupported_media_type">https://id.registrystack.org/problems/registry-notary/federation/unsupported_media_type</a></td><td>federation media type is unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/idempotency/conflict">https://id.registrystack.org/problems/registry-notary/idempotency/conflict</a></td><td>idempotency key was reused with a different request</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/posture/filter_failed">https://id.registrystack.org/problems/registry-notary/posture/filter_failed</a></td><td>posture filter failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/profile/unsupported">https://id.registrystack.org/problems/registry-notary/profile/unsupported</a></td><td>evidence request profile is unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/purpose/not_allowed">https://id.registrystack.org/problems/registry-notary/purpose/not_allowed</a></td><td>purpose is not allowed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/readiness/not_ready">https://id.registrystack.org/problems/registry-notary/readiness/not_ready</a></td><td>service is not ready</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/registry/admin/capability/not_supported">https://id.registrystack.org/problems/registry-notary/registry/admin/capability/not_supported</a></td><td>registry admin capability is not supported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/registry/admin/config/inline_apply_rejected">https://id.registrystack.org/problems/registry-notary/registry/admin/config/inline_apply_rejected</a></td><td>registry admin inline config apply was rejected</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/registry/admin/posture/invalid_tier">https://id.registrystack.org/problems/registry-notary/registry/admin/posture/invalid_tier</a></td><td>registry admin posture tier is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/relationship/attributes_insufficient">https://id.registrystack.org/problems/registry-notary/relationship/attributes_insufficient</a></td><td>relationship attributes are insufficient for matching</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/relationship/match_ambiguous">https://id.registrystack.org/problems/registry-notary/relationship/match_ambiguous</a></td><td>relationship match is ambiguous</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/relationship/not_established">https://id.registrystack.org/problems/registry-notary/relationship/not_established</a></td><td>relationship was not established</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/relationship/policy_rejected">https://id.registrystack.org/problems/registry-notary/relationship/policy_rejected</a></td><td>relationship policy rejected the request</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/relationship/purpose_not_allowed">https://id.registrystack.org/problems/registry-notary/relationship/purpose_not_allowed</a></td><td>relationship is not allowed for the requested purpose</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/request/conflict">https://id.registrystack.org/problems/registry-notary/request/conflict</a></td><td>request conflicts with current state</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/request/invalid">https://id.registrystack.org/problems/registry-notary/request/invalid</a></td><td>evidence request is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/request/too_large">https://id.registrystack.org/problems/registry-notary/request/too_large</a></td><td>request is too large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/request/uri_too_long">https://id.registrystack.org/problems/registry-notary/request/uri_too_long</a></td><td>request uri is too long</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/attributes_insufficient">https://id.registrystack.org/problems/registry-notary/requester/attributes_insufficient</a></td><td>requester attributes are insufficient for matching</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/identifier_missing">https://id.registrystack.org/problems/registry-notary/requester/identifier_missing</a></td><td>requester identifier is missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/match_ambiguous">https://id.registrystack.org/problems/registry-notary/requester/match_ambiguous</a></td><td>requester lookup returned more than one record</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/matching_policy_rejected">https://id.registrystack.org/problems/registry-notary/requester/matching_policy_rejected</a></td><td>requester matching policy rejected the request</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/not_found">https://id.registrystack.org/problems/registry-notary/requester/not_found</a></td><td>requester record was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/requester/reauthentication_required">https://id.registrystack.org/problems/registry-notary/requester/reauthentication_required</a></td><td>requester must reauthenticate</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/self_attestation/denied">https://id.registrystack.org/problems/registry-notary/self_attestation/denied</a></td><td>self-attestation request is denied</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/self_attestation/rate_limited">https://id.registrystack.org/problems/registry-notary/self_attestation/rate_limited</a></td><td>self-attestation request is rate limited</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/source/unavailable">https://id.registrystack.org/problems/registry-notary/source/unavailable</a></td><td>source is unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/attributes_insufficient">https://id.registrystack.org/problems/registry-notary/target/attributes_insufficient</a></td><td>target attributes are insufficient for matching</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/identifier_missing">https://id.registrystack.org/problems/registry-notary/target/identifier_missing</a></td><td>target identifier is missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/match_ambiguous">https://id.registrystack.org/problems/registry-notary/target/match_ambiguous</a></td><td>target lookup returned more than one record</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/match_low_confidence">https://id.registrystack.org/problems/registry-notary/target/match_low_confidence</a></td><td>target match confidence is too low</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/matching_policy_rejected">https://id.registrystack.org/problems/registry-notary/target/matching_policy_rejected</a></td><td>target matching policy rejected the request</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/not_found">https://id.registrystack.org/problems/registry-notary/target/not_found</a></td><td>target record was not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-notary/target/not_in_valid_state">https://id.registrystack.org/problems/registry-notary/target/not_in_valid_state</a></td><td>target is not in a valid state</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-platform/request/body-too-large">https://id.registrystack.org/problems/registry-platform/request/body-too-large</a></td><td>Payload Too Large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/admin/reload_failed">https://id.registrystack.org/problems/registry-relay/admin/reload_failed</a></td><td>reload failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/admin/unknown_resource">https://id.registrystack.org/problems/registry-relay/admin/unknown_resource</a></td><td>unknown admin resource</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate/disclosure_violation">https://id.registrystack.org/problems/registry-relay/aggregate/disclosure_violation</a></td><td>disclosure violation</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate/execution_failed">https://id.registrystack.org/problems/registry-relay/aggregate/execution_failed</a></td><td>aggregate execution failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate/filter_required">https://id.registrystack.org/problems/registry-relay/aggregate/filter_required</a></td><td>filter required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate/format_unsupported">https://id.registrystack.org/problems/registry-relay/aggregate/format_unsupported</a></td><td>aggregate format unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate/measure_unsupported">https://id.registrystack.org/problems/registry-relay/aggregate/measure_unsupported</a></td><td>aggregate measure unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/admin_required">https://id.registrystack.org/problems/registry-relay/auth/admin_required</a></td><td>admin scope required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/algorithm_not_allowed">https://id.registrystack.org/problems/registry-relay/auth/algorithm_not_allowed</a></td><td>algorithm not allowed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/audience_mismatch">https://id.registrystack.org/problems/registry-relay/auth/audience_mismatch</a></td><td>audience mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/client_not_allowed">https://id.registrystack.org/problems/registry-relay/auth/client_not_allowed</a></td><td>client not allowed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/invalid_credential">https://id.registrystack.org/problems/registry-relay/auth/invalid_credential</a></td><td>invalid credential</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/issuer_mismatch">https://id.registrystack.org/problems/registry-relay/auth/issuer_mismatch</a></td><td>issuer mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/jwks_unavailable">https://id.registrystack.org/problems/registry-relay/auth/jwks_unavailable</a></td><td>jwks unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/kid_unknown">https://id.registrystack.org/problems/registry-relay/auth/kid_unknown</a></td><td>kid unknown</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/malformed_credential">https://id.registrystack.org/problems/registry-relay/auth/malformed_credential</a></td><td>malformed credential</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/missing_credential">https://id.registrystack.org/problems/registry-relay/auth/missing_credential</a></td><td>missing credential</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/purpose_denied">https://id.registrystack.org/problems/registry-relay/auth/purpose_denied</a></td><td>purpose denied</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/purpose_required">https://id.registrystack.org/problems/registry-relay/auth/purpose_required</a></td><td>purpose header required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/scope_denied">https://id.registrystack.org/problems/registry-relay/auth/scope_denied</a></td><td>scope denied</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/token_expired">https://id.registrystack.org/problems/registry-relay/auth/token_expired</a></td><td>token expired</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/token_not_yet_valid">https://id.registrystack.org/problems/registry-relay/auth/token_not_yet_valid</a></td><td>token not yet valid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/token_signature_invalid">https://id.registrystack.org/problems/registry-relay/auth/token_signature_invalid</a></td><td>token signature invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/config/duplicate_id">https://id.registrystack.org/problems/registry-relay/config/duplicate_id</a></td><td>duplicate identifier in config</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/config/missing_secret">https://id.registrystack.org/problems/registry-relay/config/missing_secret</a></td><td>missing secret</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/config/parse_error">https://id.registrystack.org/problems/registry-relay/config/parse_error</a></td><td>config parse error</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/config/validation_error">https://id.registrystack.org/problems/registry-relay/config/validation_error</a></td><td>config validation error</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/entity/filter_required">https://id.registrystack.org/problems/registry-relay/entity/filter_required</a></td><td>filter required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/invalid_range">https://id.registrystack.org/problems/registry-relay/filter/invalid_range</a></td><td>invalid range</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/invalid_value">https://id.registrystack.org/problems/registry-relay/filter/invalid_value</a></td><td>invalid filter value</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/limit_out_of_range">https://id.registrystack.org/problems/registry-relay/filter/limit_out_of_range</a></td><td>limit out of range</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/not_allowed">https://id.registrystack.org/problems/registry-relay/filter/not_allowed</a></td><td>filter not allowed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/too_many_filters">https://id.registrystack.org/problems/registry-relay/filter/too_many_filters</a></td><td>too many filters</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/too_many_values">https://id.registrystack.org/problems/registry-relay/filter/too_many_values</a></td><td>too many filter values</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/unknown_field">https://id.registrystack.org/problems/registry-relay/filter/unknown_field</a></td><td>unknown field</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/unsupported_op">https://id.registrystack.org/problems/registry-relay/filter/unsupported_op</a></td><td>unsupported operator</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/cache_write_failed">https://id.registrystack.org/problems/registry-relay/ingest/cache_write_failed</a></td><td>cache write failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/registration_failed">https://id.registrystack.org/problems/registry-relay/ingest/registration_failed</a></td><td>table registration failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/schema_mismatch">https://id.registrystack.org/problems/registry-relay/ingest/schema_mismatch</a></td><td>schema mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/source_not_found">https://id.registrystack.org/problems/registry-relay/ingest/source_not_found</a></td><td>source not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/source_unreadable">https://id.registrystack.org/problems/registry-relay/ingest/source_unreadable</a></td><td>source unreadable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ingest/strict_extra_column">https://id.registrystack.org/problems/registry-relay/ingest/strict_extra_column</a></td><td>strict schema rejected extra column</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/payload_too_large">https://id.registrystack.org/problems/registry-relay/internal/payload_too_large</a></td><td>payload too large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/timeout">https://id.registrystack.org/problems/registry-relay/internal/timeout</a></td><td>request timed out</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/unhandled">https://id.registrystack.org/problems/registry-relay/internal/unhandled</a></td><td>unhandled internal error</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/uri_too_long">https://id.registrystack.org/problems/registry-relay/internal/uri_too_long</a></td><td>uri too long</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_invalid">https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_invalid</a></td><td>metadata manifest digest invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_mismatch">https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_mismatch</a></td><td>metadata manifest digest mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_required">https://id.registrystack.org/problems/registry-relay/metadata/manifest/digest_required</a></td><td>metadata manifest digest required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/file_not_found">https://id.registrystack.org/problems/registry-relay/metadata/manifest/file_not_found</a></td><td>metadata manifest file not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/parse_failed">https://id.registrystack.org/problems/registry-relay/metadata/manifest/parse_failed</a></td><td>metadata manifest parse failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/validation_failed">https://id.registrystack.org/problems/registry-relay/metadata/manifest/validation_failed</a></td><td>metadata manifest validation failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/metadata/manifest/version_unsupported">https://id.registrystack.org/problems/registry-relay/metadata/manifest/version_unsupported</a></td><td>metadata manifest version unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogc/collection_not_found">https://id.registrystack.org/problems/registry-relay/ogc/collection_not_found</a></td><td>ogc collection not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogc/feature_not_found">https://id.registrystack.org/problems/registry-relay/ogc/feature_not_found</a></td><td>ogc feature not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogc/record_not_found">https://id.registrystack.org/problems/registry-relay/ogc/record_not_found</a></td><td>ogc record not found</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogcapi/edr/config/feature_disabled">https://id.registrystack.org/problems/registry-relay/ogcapi/edr/config/feature_disabled</a></td><td>ogc api edr feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogcapi/features/config/feature_disabled">https://id.registrystack.org/problems/registry-relay/ogcapi/features/config/feature_disabled</a></td><td>ogc api features feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/ogcapi/records/config/feature_disabled">https://id.registrystack.org/problems/registry-relay/ogcapi/records/config/feature_disabled</a></td><td>ogc api records feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/assurance_insufficient">https://id.registrystack.org/problems/registry-relay/pdp/assurance_insufficient</a></td><td>assurance insufficient</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/consent_required">https://id.registrystack.org/problems/registry-relay/pdp/consent_required</a></td><td>consent required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/evidence_stale">https://id.registrystack.org/problems/registry-relay/pdp/evidence_stale</a></td><td>evidence stale</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/jurisdiction_not_permitted">https://id.registrystack.org/problems/registry-relay/pdp/jurisdiction_not_permitted</a></td><td>jurisdiction not permitted</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/legal_basis_required">https://id.registrystack.org/problems/registry-relay/pdp/legal_basis_required</a></td><td>legal basis required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/policy_hash_invalid">https://id.registrystack.org/problems/registry-relay/pdp/policy_hash_invalid</a></td><td>policy hash invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/policy_id_required">https://id.registrystack.org/problems/registry-relay/pdp/policy_id_required</a></td><td>policy id required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/policy_required">https://id.registrystack.org/problems/registry-relay/pdp/policy_required</a></td><td>policy required</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/purpose_not_permitted">https://id.registrystack.org/problems/registry-relay/pdp/purpose_not_permitted</a></td><td>purpose not permitted</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/pdp/unsupported_policy_term">https://id.registrystack.org/problems/registry-relay/pdp/unsupported_policy_term</a></td><td>unsupported policy term</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/algorithm_unsupported">https://id.registrystack.org/problems/registry-relay/provenance/config/algorithm_unsupported</a></td><td>provenance signing algorithm unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/claim_validity_out_of_range">https://id.registrystack.org/problems/registry-relay/provenance/config/claim_validity_out_of_range</a></td><td>provenance claim validity out of range</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/context_base_url_invalid">https://id.registrystack.org/problems/registry-relay/provenance/config/context_base_url_invalid</a></td><td>provenance context base url invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/issuer_did_mismatch">https://id.registrystack.org/problems/registry-relay/provenance/config/issuer_did_mismatch</a></td><td>provenance issuer did mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/jwk_env_missing">https://id.registrystack.org/problems/registry-relay/provenance/config/jwk_env_missing</a></td><td>provenance jwk_env missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/missing_issuer">https://id.registrystack.org/problems/registry-relay/provenance/config/missing_issuer</a></td><td>provenance issuer missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/schema_base_url_invalid">https://id.registrystack.org/problems/registry-relay/provenance/config/schema_base_url_invalid</a></td><td>provenance schema base url invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/signer_kind_invalid">https://id.registrystack.org/problems/registry-relay/provenance/config/signer_kind_invalid</a></td><td>provenance signer kind invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/config/verification_method_mismatch">https://id.registrystack.org/problems/registry-relay/provenance/config/verification_method_mismatch</a></td><td>provenance verification method mismatch</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/did_document_unavailable">https://id.registrystack.org/problems/registry-relay/provenance/did_document_unavailable</a></td><td>provenance did document unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/issuance_failed">https://id.registrystack.org/problems/registry-relay/provenance/issuance_failed</a></td><td>provenance issuance failed</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/signer_unavailable">https://id.registrystack.org/problems/registry-relay/provenance/signer_unavailable</a></td><td>provenance signer unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/provenance/unknown_resource">https://id.registrystack.org/problems/registry-relay/provenance/unknown_resource</a></td><td>provenance unknown claim type or version</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/publicschema/config/feature_disabled">https://id.registrystack.org/problems/registry-relay/publicschema/config/feature_disabled</a></td><td>publicschema cel feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/query/cursor_invalid">https://id.registrystack.org/problems/registry-relay/query/cursor_invalid</a></td><td>query cursor invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/dataset_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/dataset_missing</a></td><td>runtime dataset missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/ecosystem_binding_invalid">https://id.registrystack.org/problems/registry-relay/runtime/binding/ecosystem_binding_invalid</a></td><td>runtime ecosystem binding is invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/ecosystem_binding_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/ecosystem_binding_missing</a></td><td>runtime ecosystem binding missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/entity_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/entity_missing</a></td><td>runtime entity missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/field_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/field_missing</a></td><td>runtime field missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/filter_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/filter_missing</a></td><td>runtime filter missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/relationship_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/relationship_missing</a></td><td>runtime relationship missing from metadata</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/scope_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/scope_missing</a></td><td>runtime scope missing or invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/table_missing">https://id.registrystack.org/problems/registry-relay/runtime/binding/table_missing</a></td><td>runtime table missing</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/runtime/binding/unsupported_evidence_offering">https://id.registrystack.org/problems/registry-relay/runtime/binding/unsupported_evidence_offering</a></td><td>runtime evidence offering kind is unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/schema/resource_unavailable">https://id.registrystack.org/problems/registry-relay/schema/resource_unavailable</a></td><td>resource unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/schema/unknown_aggregate">https://id.registrystack.org/problems/registry-relay/schema/unknown_aggregate</a></td><td>unknown aggregate</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/schema/unknown_dataset">https://id.registrystack.org/problems/registry-relay/schema/unknown_dataset</a></td><td>unknown dataset</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/schema/unknown_resource">https://id.registrystack.org/problems/registry-relay/schema/unknown_resource</a></td><td>unknown resource</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spatial/bbox_invalid">https://id.registrystack.org/problems/registry-relay/spatial/bbox_invalid</a></td><td>spatial bbox invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spatial/crs_unsupported">https://id.registrystack.org/problems/registry-relay/spatial/crs_unsupported</a></td><td>spatial crs unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spatial/filter_unsupported">https://id.registrystack.org/problems/registry-relay/spatial/filter_unsupported</a></td><td>spatial filter unsupported</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spatial/geometry_invalid">https://id.registrystack.org/problems/registry-relay/spatial/geometry_invalid</a></td><td>spatial geometry invalid</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spatial/geometry_too_large">https://id.registrystack.org/problems/registry-relay/spatial/geometry_too_large</a></td><td>spatial geometry too large</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/config/feature_disabled">https://id.registrystack.org/problems/registry-relay/spdci/config/feature_disabled</a></td><td>spdci api standards feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/config/mapping_feature_disabled">https://id.registrystack.org/problems/registry-relay/spdci/config/mapping_feature_disabled</a></td><td>spdci cel mapping feature disabled</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/mapper/unavailable">https://id.registrystack.org/problems/registry-relay/spdci/mapper/unavailable</a></td><td>spdci response mapper unavailable</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header">https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header</a></td><td>invalid spdci header</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_message">https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_message</a></td><td>invalid spdci message</td></tr>
+<tr><td><a href="https://id.registrystack.org/problems/registry-relay/spdci/request/missing_transaction_id">https://id.registrystack.org/problems/registry-relay/spdci/request/missing_transaction_id</a></td><td>missing transaction_id</td></tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-notary/claim/operation_unsupported",
+  "type": "https://id.registrystack.org/problems/registry-notary/claim/operation_unsupported",
+  "kind": "problem",
+  "product": "registry-notary",
+  "code": "claim.operation_unsupported",
+  "title": "claim operation is unsupported",
+  "summary": "The requested operation is not supported for the claim.",
+  "description": "The requested operation is not supported for the claim.",
+  "category": null,
+  "http_statuses": null,
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    },
+    {
+      "title": "Registry Notary product docs",
+      "href": "https://docs.registrystack.org/products/registry-notary/"
+    },
+    {
+      "title": "Registry Notary API overview",
+      "href": "https://docs.registrystack.org/reference/apis/registry-notary/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx",
+  "source_reference": {
+    "repository": "registry-stack",
+    "path": "docs/site/src/content/docs/reference/errors.mdx",
+    "label": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+  }
+}

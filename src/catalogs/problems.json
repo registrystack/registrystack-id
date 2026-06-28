@@ -1,0 +1,1579 @@
+{
+  "generated_from": "registry-stack/docs/site/src/content/docs/reference/errors.mdx",
+  "generated_at": "1970-01-01T00:00:00.000Z",
+  "entries": [
+    {
+      "product": "registry-notary",
+      "code": "admin.config_bundle_invalid",
+      "path": "admin/config_bundle_invalid",
+      "title": "config bundle is invalid",
+      "description": "A submitted configuration bundle could not be validated.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "audit.write_failed",
+      "path": "audit/write_failed",
+      "title": "audit write failed",
+      "description": "An audit record could not be written.",
+      "category": "Request handling",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "auth.missing_credential",
+      "path": "auth/missing_credential",
+      "title": "credential is missing",
+      "description": "No authentication credential was provided.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "auth.multiple_credentials",
+      "path": "auth/multiple_credentials",
+      "title": "multiple authentication credentials were provided",
+      "description": "More than one authentication credential was provided.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "auth.purpose_required",
+      "path": "auth/purpose_required",
+      "title": "purpose is required",
+      "description": "The request omits a required purpose.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "auth.scope_denied",
+      "path": "auth/scope_denied",
+      "title": "required scope is missing",
+      "description": "The caller's scopes do not include the required scope.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "batch.too_large",
+      "path": "batch/too_large",
+      "title": "batch request is too large",
+      "description": "The batch request exceeds the configured item limit.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.disclosure_not_allowed",
+      "path": "claim/disclosure_not_allowed",
+      "title": "requested disclosure is not allowed",
+      "description": "The requested disclosure level is not permitted for the claim.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.format_not_supported",
+      "path": "claim/format_not_supported",
+      "title": "format is unsupported",
+      "description": "The requested response format is not supported.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.not_found",
+      "path": "claim/not_found",
+      "title": "claim was not found",
+      "description": "The requested claim id is not configured.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.operation_unsupported",
+      "path": "claim/operation_unsupported",
+      "title": "claim operation is unsupported",
+      "description": "The requested operation is not supported for the claim.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.rule_evaluation_failed",
+      "path": "claim/rule_evaluation_failed",
+      "title": "claim rule evaluation failed",
+      "description": "A configured claim rule could not be evaluated.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "claim.version_not_found",
+      "path": "claim/version_not_found",
+      "title": "claim version was not found",
+      "description": "The requested claim version does not exist.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "config.apply_unavailable",
+      "path": "config/apply_unavailable",
+      "title": "config apply is unavailable",
+      "description": "Runtime configuration apply is not available for this deployment.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "config.candidate_invalid",
+      "path": "config/candidate_invalid",
+      "title": "config candidate is invalid",
+      "description": "A submitted runtime configuration candidate failed validation.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential_status.disabled",
+      "path": "credential_status/disabled",
+      "title": "credential status is disabled",
+      "description": "The credential status surface is turned off for this deployment.",
+      "category": "Credential status",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential_status.invalid_status",
+      "path": "credential_status/invalid_status",
+      "title": "credential status is invalid",
+      "description": "The requested credential status value is not valid.",
+      "category": "Credential status",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential_status.invalid_transition",
+      "path": "credential_status/invalid_transition",
+      "title": "credential status transition is invalid",
+      "description": "The requested status transition is not permitted.",
+      "category": "Credential status",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential_status.not_found",
+      "path": "credential_status/not_found",
+      "title": "credential status was not found",
+      "description": "The requested credential status record does not exist.",
+      "category": "Credential status",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential_status.unavailable",
+      "path": "credential_status/unavailable",
+      "title": "credential status is unavailable",
+      "description": "Credential status could not be checked at this time.",
+      "category": "Credential status",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential.holder_proof_replay",
+      "path": "credential/holder_proof_replay",
+      "title": "holder proof has already been used",
+      "description": "The supplied holder proof was already consumed.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential.holder_proof_required",
+      "path": "credential/holder_proof_required",
+      "title": "holder proof is required",
+      "description": "Credential issuance requires a holder proof that was not supplied.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential.issuance_failed",
+      "path": "credential/issuance_failed",
+      "title": "credential issuance failed",
+      "description": "The credential could not be issued for an internal reason.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "credential.issuer_not_configured",
+      "path": "credential/issuer_not_configured",
+      "title": "credential issuer is not configured",
+      "description": "Credential issuance was requested but no issuer is configured.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "evaluation.binding_mismatch",
+      "path": "evaluation/binding_mismatch",
+      "title": "evaluation binding mismatch",
+      "description": "The referenced evaluation does not match the requested binding.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "evaluation.not_found",
+      "path": "evaluation/not_found",
+      "title": "evaluation was not found",
+      "description": "The referenced evaluation id does not exist.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "evidence.not_available",
+      "path": "evidence/not_available",
+      "title": "evidence is not available",
+      "description": "Evidence could not be produced; also the collapsed public code for several matching-evidence conditions.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "evidence.server_disabled",
+      "path": "evidence/server_disabled",
+      "title": "evidence server is disabled",
+      "description": "The evidence surface is turned off in configuration.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.disabled",
+      "path": "federation/disabled",
+      "title": "federation is disabled",
+      "description": "The federation surface is turned off in configuration.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.forbidden",
+      "path": "federation/forbidden",
+      "title": "federation request is forbidden",
+      "description": "A known federation peer was denied by local policy.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.invalid_request",
+      "path": "federation/invalid_request",
+      "title": "federation request is invalid",
+      "description": "A federation JSON or JWT request failed validation.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.invalid_token",
+      "path": "federation/invalid_token",
+      "title": "federation token is invalid",
+      "description": "A federation request is missing valid authentication or its token failed verification.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.payload_too_large",
+      "path": "federation/payload_too_large",
+      "title": "federation payload is too large",
+      "description": "The federation request body exceeds the configured limit.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.replay",
+      "path": "federation/replay",
+      "title": "federation request was replayed",
+      "description": "A federation `jti` or nonce was already used.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.server_error",
+      "path": "federation/server_error",
+      "title": "federation server error",
+      "description": "The federation request could not be served for an internal reason.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.stale_source_observation",
+      "path": "federation/stale_source_observation",
+      "title": "federation source observation is stale",
+      "description": "The federation source observation is older than policy allows; returned in a signed response body.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "federation.unsupported_media_type",
+      "path": "federation/unsupported_media_type",
+      "title": "federation media type is unsupported",
+      "description": "The federation request used a content type the surface does not accept.",
+      "category": "Federation",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "idempotency.conflict",
+      "path": "idempotency/conflict",
+      "title": "idempotency key was reused with a different request",
+      "description": "The idempotency key was reused with a different request body.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "posture.filter_failed",
+      "path": "posture/filter_failed",
+      "title": "posture filter failed",
+      "description": "A posture report filter could not be evaluated.",
+      "category": "Readiness and posture",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "profile.unsupported",
+      "path": "profile/unsupported",
+      "title": "evidence request profile is unsupported",
+      "description": "The requested evidence profile is not supported.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "purpose.not_allowed",
+      "path": "purpose/not_allowed",
+      "title": "purpose is not allowed",
+      "description": "The requested purpose is not permitted for the claim.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "readiness.not_ready",
+      "path": "readiness/not_ready",
+      "title": "service is not ready",
+      "description": "The service is not ready to serve traffic.",
+      "category": "Readiness and posture",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "registry.admin.capability.not_supported",
+      "path": "registry/admin/capability/not_supported",
+      "title": "registry admin capability is not supported",
+      "description": "The requested registry administration capability is not supported.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "registry.admin.config.inline_apply_rejected",
+      "path": "registry/admin/config/inline_apply_rejected",
+      "title": "registry admin inline config apply was rejected",
+      "description": "An inline configuration apply was rejected.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "registry.admin.posture.invalid_tier",
+      "path": "registry/admin/posture/invalid_tier",
+      "title": "registry admin posture tier is invalid",
+      "description": "The requested posture tier is not a recognized value.",
+      "category": "Administration and configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "relationship.attributes_insufficient",
+      "path": "relationship/attributes_insufficient",
+      "title": "relationship attributes are insufficient for matching",
+      "description": "The supplied attributes cannot resolve a relationship match.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "relationship.match_ambiguous",
+      "path": "relationship/match_ambiguous",
+      "title": "relationship match is ambiguous",
+      "description": "The relationship lookup matched more than one relationship.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "relationship.not_established",
+      "path": "relationship/not_established",
+      "title": "relationship was not established",
+      "description": "The required relationship between requester and target was not found.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "relationship.policy_rejected",
+      "path": "relationship/policy_rejected",
+      "title": "relationship policy rejected the request",
+      "description": "The relationship policy denied the request.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "relationship.purpose_not_allowed",
+      "path": "relationship/purpose_not_allowed",
+      "title": "relationship is not allowed for the requested purpose",
+      "description": "The relationship cannot be used for the requested purpose.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.conflict",
+      "path": "request/conflict",
+      "title": "request conflicts with current state",
+      "description": "OpenAPI contract umbrella example for 409 responses; not emitted verbatim at runtime. Runtime responses use specific codes such as `idempotency.conflict` or `target.match_ambiguous`.",
+      "source": "registry-notary-openapi"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.invalid",
+      "path": "request/invalid",
+      "title": "evidence request is invalid",
+      "description": "The request body or parameters failed validation.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.too_large",
+      "path": "request/too_large",
+      "title": "request is too large",
+      "description": "OpenAPI contract umbrella example for 413 responses; not emitted verbatim at runtime. Runtime responses use specific codes such as `batch.too_large` or `federation.payload_too_large`.",
+      "source": "registry-notary-openapi"
+    },
+    {
+      "product": "registry-notary",
+      "code": "request.uri_too_long",
+      "path": "request/uri_too_long",
+      "title": "request uri is too long",
+      "description": "The request URI exceeds the configured limit.",
+      "category": "Request handling",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.attributes_insufficient",
+      "path": "requester/attributes_insufficient",
+      "title": "requester attributes are insufficient for matching",
+      "description": "The supplied requester attributes cannot resolve a match.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.identifier_missing",
+      "path": "requester/identifier_missing",
+      "title": "requester identifier is missing",
+      "description": "The request omits a required requester identifier.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.match_ambiguous",
+      "path": "requester/match_ambiguous",
+      "title": "requester lookup returned more than one record",
+      "description": "The requester lookup matched more than one record.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.matching_policy_rejected",
+      "path": "requester/matching_policy_rejected",
+      "title": "requester matching policy rejected the request",
+      "description": "The requester matching policy denied the request.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.not_found",
+      "path": "requester/not_found",
+      "title": "requester record was not found",
+      "description": "The requester lookup matched no record.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "requester.reauthentication_required",
+      "path": "requester/reauthentication_required",
+      "title": "requester must reauthenticate",
+      "description": "The requester needs to authenticate again before the request can proceed.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "self_attestation.denied",
+      "path": "self_attestation/denied",
+      "title": "self-attestation request is denied",
+      "description": "A self-attestation request was denied; also the public code for invalid-token and assurance-denied conditions. The audit record carries the specific reason.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "self_attestation.rate_limited",
+      "path": "self_attestation/rate_limited",
+      "title": "self-attestation request is rate limited",
+      "description": "Too many self-attestation requests in the configured window.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "source.unavailable",
+      "path": "source/unavailable",
+      "title": "source is unavailable",
+      "description": "A configured source service could not be reached or did not respond.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.attributes_insufficient",
+      "path": "target/attributes_insufficient",
+      "title": "target attributes are insufficient for matching",
+      "description": "The supplied target attributes cannot resolve a match.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.identifier_missing",
+      "path": "target/identifier_missing",
+      "title": "target identifier is missing",
+      "description": "The request omits a required target identifier.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.match_ambiguous",
+      "path": "target/match_ambiguous",
+      "title": "target lookup returned more than one record",
+      "description": "The target lookup matched more than one source record.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.match_low_confidence",
+      "path": "target/match_low_confidence",
+      "title": "target match confidence is too low",
+      "description": "The best target match scored below the configured threshold.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.matching_policy_rejected",
+      "path": "target/matching_policy_rejected",
+      "title": "target matching policy rejected the request",
+      "description": "The target matching policy denied the request.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.not_found",
+      "path": "target/not_found",
+      "title": "target record was not found",
+      "description": "The target lookup matched no source record.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-notary",
+      "code": "target.not_in_valid_state",
+      "path": "target/not_in_valid_state",
+      "title": "target is not in a valid state",
+      "description": "The matched target is not in a state that allows evaluation.",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-platform",
+      "code": "request.body_too_large",
+      "path": "request/body-too-large",
+      "title": "Payload Too Large",
+      "description": "The request body exceeds the configured limit. Published as a problem `type` only: the platform HTTP-security layer does not attach a `code` member to this response.",
+      "source": "registry-platform-httpsec"
+    },
+    {
+      "product": "registry-relay",
+      "code": "admin.reload_failed",
+      "path": "admin/reload_failed",
+      "title": "reload failed",
+      "description": "One or more resources failed to reload.",
+      "category": "Admin",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "admin.unknown_resource",
+      "path": "admin/unknown_resource",
+      "title": "unknown admin resource",
+      "description": "The reload target id was not found.",
+      "category": "Admin",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "aggregate.disclosure_violation",
+      "path": "aggregate/disclosure_violation",
+      "title": "disclosure violation",
+      "description": "A disclosure-control invariant was violated before response.",
+      "category": "Aggregate",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "aggregate.execution_failed",
+      "path": "aggregate/execution_failed",
+      "title": "aggregate execution failed",
+      "description": "The query engine returned an execution error.",
+      "category": "Aggregate",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "aggregate.filter_required",
+      "path": "aggregate/filter_required",
+      "title": "filter required",
+      "description": "A required aggregate filter was not supplied.",
+      "category": "Aggregate",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "aggregate.format_unsupported",
+      "path": "aggregate/format_unsupported",
+      "title": "aggregate format unsupported",
+      "description": "The requested aggregate response format is not supported.",
+      "category": "Aggregate",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "aggregate.measure_unsupported",
+      "path": "aggregate/measure_unsupported",
+      "title": "aggregate measure unsupported",
+      "description": "A configured measure references a function that is not implemented.",
+      "category": "Aggregate",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.admin_required",
+      "path": "auth/admin_required",
+      "title": "admin scope required",
+      "description": "The endpoint requires the admin scope.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.algorithm_not_allowed",
+      "path": "auth/algorithm_not_allowed",
+      "title": "algorithm not allowed",
+      "description": "The bearer token `alg` is not in the configured allowlist.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.audience_mismatch",
+      "path": "auth/audience_mismatch",
+      "title": "audience mismatch",
+      "description": "The bearer token `aud` does not intersect the configured audience set.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.client_not_allowed",
+      "path": "auth/client_not_allowed",
+      "title": "client not allowed",
+      "description": "The bearer token client is not in the configured `allowed_clients` list.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.invalid_credential",
+      "path": "auth/invalid_credential",
+      "title": "invalid credential",
+      "description": "The credential did not match any configured key.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.issuer_mismatch",
+      "path": "auth/issuer_mismatch",
+      "title": "issuer mismatch",
+      "description": "The bearer token `iss` does not equal the configured issuer.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.jwks_unavailable",
+      "path": "auth/jwks_unavailable",
+      "title": "jwks unavailable",
+      "description": "The JWKS endpoint is unreachable and no cached keys are available.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.kid_unknown",
+      "path": "auth/kid_unknown",
+      "title": "kid unknown",
+      "description": "The bearer token `kid` is not in the JWKS document after one refresh.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.malformed_credential",
+      "path": "auth/malformed_credential",
+      "title": "malformed credential",
+      "description": "The credential header could not be parsed.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.missing_credential",
+      "path": "auth/missing_credential",
+      "title": "missing credential",
+      "description": "No credential in the `Authorization` or `x-api-key` header.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.purpose_denied",
+      "path": "auth/purpose_denied",
+      "title": "purpose denied",
+      "description": "The `Data-Purpose` header is not permitted by policy for the resource.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.purpose_required",
+      "path": "auth/purpose_required",
+      "title": "purpose header required",
+      "description": "The `Data-Purpose` header is required for the resource.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.scope_denied",
+      "path": "auth/scope_denied",
+      "title": "scope denied",
+      "description": "The caller lacks the required scope.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.token_expired",
+      "path": "auth/token_expired",
+      "title": "token expired",
+      "description": "The bearer token `exp` is in the past beyond the configured leeway.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.token_not_yet_valid",
+      "path": "auth/token_not_yet_valid",
+      "title": "token not yet valid",
+      "description": "The bearer token `nbf` is in the future beyond the configured leeway.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "auth.token_signature_invalid",
+      "path": "auth/token_signature_invalid",
+      "title": "token signature invalid",
+      "description": "The bearer token signature did not verify against the resolved key.",
+      "category": "Authentication",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "config.duplicate_id",
+      "path": "config/duplicate_id",
+      "title": "duplicate identifier in config",
+      "description": "Two configured ids collide.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "config.missing_secret",
+      "path": "config/missing_secret",
+      "title": "missing secret",
+      "description": "A required hash environment variable is unset.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "config.parse_error",
+      "path": "config/parse_error",
+      "title": "config parse error",
+      "description": "The configuration document did not deserialize.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "config.validation_error",
+      "path": "config/validation_error",
+      "title": "config validation error",
+      "description": "The configuration failed cross-field validation.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "entity.filter_required",
+      "path": "entity/filter_required",
+      "title": "filter required",
+      "description": "A row-collection read on an entity with `required_filters` received no qualifying filter.",
+      "category": "Entity",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.invalid_range",
+      "path": "filter/invalid_range",
+      "title": "invalid range",
+      "description": "The range bounds are inverted or invalid.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.invalid_value",
+      "path": "filter/invalid_value",
+      "title": "invalid filter value",
+      "description": "The value does not parse for the field's type.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.limit_out_of_range",
+      "path": "filter/limit_out_of_range",
+      "title": "limit out of range",
+      "description": "The limit exceeds the configured maximum or is non-positive.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.not_allowed",
+      "path": "filter/not_allowed",
+      "title": "filter not allowed",
+      "description": "The field is not in the resource's `allowed_filters` list.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.too_many_filters",
+      "path": "filter/too_many_filters",
+      "title": "too many filters",
+      "description": "The request carries more filter parameters than the per-request cap allows.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.too_many_values",
+      "path": "filter/too_many_values",
+      "title": "too many filter values",
+      "description": "An in-list exceeds the configured maximum of 100 values.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.unknown_field",
+      "path": "filter/unknown_field",
+      "title": "unknown field",
+      "description": "A query parameter references a field not in the resource schema.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "filter.unsupported_op",
+      "path": "filter/unsupported_op",
+      "title": "unsupported operator",
+      "description": "The operator is not allowed for the field.",
+      "category": "Filter",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.cache_write_failed",
+      "path": "ingest/cache_write_failed",
+      "title": "cache write failed",
+      "description": "The parquet cache could not be written.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.registration_failed",
+      "path": "ingest/registration_failed",
+      "title": "table registration failed",
+      "description": "Table registration in the query engine failed.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.schema_mismatch",
+      "path": "ingest/schema_mismatch",
+      "title": "schema mismatch",
+      "description": "The declared schema does not match observed columns or types.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.source_not_found",
+      "path": "ingest/source_not_found",
+      "title": "source not found",
+      "description": "A configured source is missing or unreadable.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.source_unreadable",
+      "path": "ingest/source_unreadable",
+      "title": "source unreadable",
+      "description": "A source could not be read or parsed.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ingest.strict_extra_column",
+      "path": "ingest/strict_extra_column",
+      "title": "strict schema rejected extra column",
+      "description": "A source contains columns absent from a strict schema.",
+      "category": "Ingest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "internal.payload_too_large",
+      "path": "internal/payload_too_large",
+      "title": "payload too large",
+      "description": "The request body or response cardinality exceeds configured caps.",
+      "category": "Internal",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "internal.timeout",
+      "path": "internal/timeout",
+      "title": "request timed out",
+      "description": "The request exceeded the configured timeout.",
+      "category": "Internal",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "internal.unhandled",
+      "path": "internal/unhandled",
+      "title": "unhandled internal error",
+      "description": "The request could not be served for an unexpected reason.",
+      "category": "Internal",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "internal.uri_too_long",
+      "path": "internal/uri_too_long",
+      "title": "uri too long",
+      "description": "The request URI exceeds the configured length cap.",
+      "category": "Internal",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.digest_invalid",
+      "path": "metadata/manifest/digest_invalid",
+      "title": "metadata manifest digest invalid",
+      "description": "The manifest digest is not valid.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.digest_mismatch",
+      "path": "metadata/manifest/digest_mismatch",
+      "title": "metadata manifest digest mismatch",
+      "description": "The manifest digest did not match the configured digest.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.digest_required",
+      "path": "metadata/manifest/digest_required",
+      "title": "metadata manifest digest required",
+      "description": "Governed configuration requires a manifest digest.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.file_not_found",
+      "path": "metadata/manifest/file_not_found",
+      "title": "metadata manifest file not found",
+      "description": "The metadata manifest could not be read.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.parse_failed",
+      "path": "metadata/manifest/parse_failed",
+      "title": "metadata manifest parse failed",
+      "description": "The metadata manifest did not deserialize.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.validation_failed",
+      "path": "metadata/manifest/validation_failed",
+      "title": "metadata manifest validation failed",
+      "description": "The manifest failed semantic validation.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "metadata.manifest.version_unsupported",
+      "path": "metadata/manifest/version_unsupported",
+      "title": "metadata manifest version unsupported",
+      "description": "The manifest `schema_version` is not supported.",
+      "category": "Metadata manifest",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogc.collection_not_found",
+      "path": "ogc/collection_not_found",
+      "title": "ogc collection not found",
+      "description": "The collection is not registered, spatially exposed, or visible to the caller.",
+      "category": "OGC",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogc.feature_not_found",
+      "path": "ogc/feature_not_found",
+      "title": "ogc feature not found",
+      "description": "The feature is not registered, visible, or within the required filter context.",
+      "category": "OGC",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogc.record_not_found",
+      "path": "ogc/record_not_found",
+      "title": "ogc record not found",
+      "description": "The record is not registered or visible to the caller.",
+      "category": "OGC",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogcapi.edr.config.feature_disabled",
+      "path": "ogcapi/edr/config/feature_disabled",
+      "title": "ogc api edr feature disabled",
+      "description": "OGC API EDR config was set but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogcapi.features.config.feature_disabled",
+      "path": "ogcapi/features/config/feature_disabled",
+      "title": "ogc api features feature disabled",
+      "description": "OGC API Features config was set but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "ogcapi.records.config.feature_disabled",
+      "path": "ogcapi/records/config/feature_disabled",
+      "title": "ogc api records feature disabled",
+      "description": "OGC API Records config was set but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.assurance_insufficient",
+      "path": "pdp/assurance_insufficient",
+      "title": "assurance insufficient",
+      "description": "The request assurance is insufficient for policy.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.consent_required",
+      "path": "pdp/consent_required",
+      "title": "consent required",
+      "description": "The policy requires a consent reference the request did not carry.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.evidence_stale",
+      "path": "pdp/evidence_stale",
+      "title": "evidence stale",
+      "description": "The source evidence is too old for policy.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.jurisdiction_not_permitted",
+      "path": "pdp/jurisdiction_not_permitted",
+      "title": "jurisdiction not permitted",
+      "description": "The request jurisdiction is not permitted by policy.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.legal_basis_required",
+      "path": "pdp/legal_basis_required",
+      "title": "legal basis required",
+      "description": "The policy requires a legal basis the request did not carry.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.policy_hash_invalid",
+      "path": "pdp/policy_hash_invalid",
+      "title": "policy hash invalid",
+      "description": "The policy hash did not validate.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.policy_id_required",
+      "path": "pdp/policy_id_required",
+      "title": "policy id required",
+      "description": "The policy identity is required but absent.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.policy_required",
+      "path": "pdp/policy_required",
+      "title": "policy required",
+      "description": "An enforceable policy constraint is required but absent.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.purpose_not_permitted",
+      "path": "pdp/purpose_not_permitted",
+      "title": "purpose not permitted",
+      "description": "The request purpose is not permitted by policy.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "pdp.unsupported_policy_term",
+      "path": "pdp/unsupported_policy_term",
+      "title": "unsupported policy term",
+      "description": "The policy contains a term the service cannot enforce.",
+      "category": "Policy",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.algorithm_unsupported",
+      "path": "provenance/config/algorithm_unsupported",
+      "title": "provenance signing algorithm unsupported",
+      "description": "`signing_algorithm` is not EdDSA or ES256.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.claim_validity_out_of_range",
+      "path": "provenance/config/claim_validity_out_of_range",
+      "title": "provenance claim validity out of range",
+      "description": "Claim validity is below 1 minute or above 365 days.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.context_base_url_invalid",
+      "path": "provenance/config/context_base_url_invalid",
+      "title": "provenance context base url invalid",
+      "description": "`context_base_url` is not a valid http or https URL.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.issuer_did_mismatch",
+      "path": "provenance/config/issuer_did_mismatch",
+      "title": "provenance issuer did mismatch",
+      "description": "The configured issuer DID does not match the deployment host.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.jwk_env_missing",
+      "path": "provenance/config/jwk_env_missing",
+      "title": "provenance jwk_env missing",
+      "description": "The configured signing key material is unavailable.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.missing_issuer",
+      "path": "provenance/config/missing_issuer",
+      "title": "provenance issuer missing",
+      "description": "Provenance is enabled but no issuer block resolved.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.schema_base_url_invalid",
+      "path": "provenance/config/schema_base_url_invalid",
+      "title": "provenance schema base url invalid",
+      "description": "`schema_base_url` is not a valid http or https URL.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.signer_kind_invalid",
+      "path": "provenance/config/signer_kind_invalid",
+      "title": "provenance signer kind invalid",
+      "description": "The signer kind is not `software` or `file_watch`.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.config.verification_method_mismatch",
+      "path": "provenance/config/verification_method_mismatch",
+      "title": "provenance verification method mismatch",
+      "description": "`verification_method_id` does not start with the issuer DID plus a fragment.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.did_document_unavailable",
+      "path": "provenance/did_document_unavailable",
+      "title": "provenance did document unavailable",
+      "description": "The deployment does not host a `did:web` document.",
+      "category": "Provenance",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.issuance_failed",
+      "path": "provenance/issuance_failed",
+      "title": "provenance issuance failed",
+      "description": "The request could not be served as a verifiable credential.",
+      "category": "Provenance",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.signer_unavailable",
+      "path": "provenance/signer_unavailable",
+      "title": "provenance signer unavailable",
+      "description": "The configured signing backend is not currently available.",
+      "category": "Provenance",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "provenance.unknown_resource",
+      "path": "provenance/unknown_resource",
+      "title": "provenance unknown claim type or version",
+      "description": "No resource is registered for the requested claim type or version.",
+      "category": "Provenance",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "publicschema.config.feature_disabled",
+      "path": "publicschema/config/feature_disabled",
+      "title": "publicschema cel feature disabled",
+      "description": "PublicSchema CEL mapping was configured but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "query.cursor_invalid",
+      "path": "query/cursor_invalid",
+      "title": "query cursor invalid",
+      "description": "The cursor is malformed, expired, or bound to a different query context.",
+      "category": "Query",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.dataset_missing",
+      "path": "runtime/binding/dataset_missing",
+      "title": "runtime dataset missing from metadata",
+      "description": "A runtime dataset id is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.ecosystem_binding_invalid",
+      "path": "runtime/binding/ecosystem_binding_invalid",
+      "title": "runtime ecosystem binding is invalid",
+      "description": "The ecosystem binding does not reference a governed-evidence binding with policy identity and ODRL enforcement.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.ecosystem_binding_missing",
+      "path": "runtime/binding/ecosystem_binding_missing",
+      "title": "runtime ecosystem binding missing from metadata",
+      "description": "The configured ecosystem binding selector is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.entity_missing",
+      "path": "runtime/binding/entity_missing",
+      "title": "runtime entity missing from metadata",
+      "description": "A runtime entity name is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.field_missing",
+      "path": "runtime/binding/field_missing",
+      "title": "runtime field missing from metadata",
+      "description": "A runtime field binding is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.filter_missing",
+      "path": "runtime/binding/filter_missing",
+      "title": "runtime filter missing from metadata",
+      "description": "A runtime filter binding is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.relationship_missing",
+      "path": "runtime/binding/relationship_missing",
+      "title": "runtime relationship missing from metadata",
+      "description": "A runtime relationship binding is absent from the metadata manifest.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.scope_missing",
+      "path": "runtime/binding/scope_missing",
+      "title": "runtime scope missing or invalid",
+      "description": "A runtime scope is missing or uses an unsupported shape.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.table_missing",
+      "path": "runtime/binding/table_missing",
+      "title": "runtime table missing",
+      "description": "A runtime entity references a table that is not configured.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "runtime.binding.unsupported_evidence_offering",
+      "path": "runtime/binding/unsupported_evidence_offering",
+      "title": "runtime evidence offering kind is unsupported",
+      "description": "An evidence offering is not an external Registry Notary offering.",
+      "category": "Runtime binding",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "schema.resource_unavailable",
+      "path": "schema/resource_unavailable",
+      "title": "resource unavailable",
+      "description": "The resource is configured but failed ingest or is mid-reload.",
+      "category": "Schema",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "schema.unknown_aggregate",
+      "path": "schema/unknown_aggregate",
+      "title": "unknown aggregate",
+      "description": "The aggregate id is not declared for the resource.",
+      "category": "Schema",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "schema.unknown_dataset",
+      "path": "schema/unknown_dataset",
+      "title": "unknown dataset",
+      "description": "The dataset id is not registered.",
+      "category": "Schema",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "schema.unknown_resource",
+      "path": "schema/unknown_resource",
+      "title": "unknown resource",
+      "description": "The resource id is not registered under the dataset.",
+      "category": "Schema",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spatial.bbox_invalid",
+      "path": "spatial/bbox_invalid",
+      "title": "spatial bbox invalid",
+      "description": "The bbox parameter is malformed, uses an unsupported shape, or crosses the antimeridian.",
+      "category": "Spatial",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spatial.crs_unsupported",
+      "path": "spatial/crs_unsupported",
+      "title": "spatial crs unsupported",
+      "description": "The requested coordinate reference system is not supported.",
+      "category": "Spatial",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spatial.filter_unsupported",
+      "path": "spatial/filter_unsupported",
+      "title": "spatial filter unsupported",
+      "description": "A supported parameter cannot be evaluated for the collection.",
+      "category": "Spatial",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spatial.geometry_invalid",
+      "path": "spatial/geometry_invalid",
+      "title": "spatial geometry invalid",
+      "description": "The geometry field is malformed.",
+      "category": "Spatial",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spatial.geometry_too_large",
+      "path": "spatial/geometry_too_large",
+      "title": "spatial geometry too large",
+      "description": "The geometry exceeds the configured vertex limit.",
+      "category": "Spatial",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.config.feature_disabled",
+      "path": "spdci/config/feature_disabled",
+      "title": "spdci api standards feature disabled",
+      "description": "SP DCI standards adapters were configured but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.config.mapping_feature_disabled",
+      "path": "spdci/config/mapping_feature_disabled",
+      "title": "spdci cel mapping feature disabled",
+      "description": "SP DCI response mapping was configured but the binary lacks the feature.",
+      "category": "Configuration",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.mapper.unavailable",
+      "path": "spdci/mapper/unavailable",
+      "title": "spdci response mapper unavailable",
+      "description": "Response mapping is configured but the mapper extension is not installed.",
+      "category": "SP DCI",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.request.invalid_header",
+      "path": "spdci/request/invalid_header",
+      "title": "invalid spdci header",
+      "description": "The request header is missing or omits a required SP DCI field.",
+      "category": "SP DCI",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.request.invalid_message",
+      "path": "spdci/request/invalid_message",
+      "title": "invalid spdci message",
+      "description": "The request message is missing or not an object.",
+      "category": "SP DCI",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    },
+    {
+      "product": "registry-relay",
+      "code": "spdci.request.missing_transaction_id",
+      "path": "spdci/request/missing_transaction_id",
+      "title": "missing transaction_id",
+      "description": "`message.transaction_id` is absent or empty.",
+      "category": "SP DCI",
+      "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    }
+  ]
+}

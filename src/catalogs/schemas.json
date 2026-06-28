@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "id": "registry-relay-entity-record-v1",
+      "uri": "https://id.registrystack.org/schemas/registry-relay/entity-record/v1.json",
+      "title": "Registry Relay EntityRecord v1 schema",
+      "description": "JSON Schema for Registry Relay EntityRecord credential subjects.",
+      "source": "src/schemas/registry-relay/entity-record/v1.json"
+    },
+    {
+      "id": "registry-relay-aggregate-result-v1",
+      "uri": "https://id.registrystack.org/schemas/registry-relay/aggregate-result/v1.json",
+      "title": "Registry Relay AggregateResult v1 schema",
+      "description": "JSON Schema for Registry Relay AggregateResult credential subjects.",
+      "source": "src/schemas/registry-relay/aggregate-result/v1.json"
+    }
+  ]
+}

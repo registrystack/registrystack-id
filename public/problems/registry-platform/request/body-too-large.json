@@ -1,0 +1,34 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-platform/request/body-too-large",
+  "type": "https://id.registrystack.org/problems/registry-platform/request/body-too-large",
+  "kind": "problem",
+  "product": "registry-platform",
+  "code": "request.body_too_large",
+  "title": "Payload Too Large",
+  "summary": "The request body exceeds the configured limit. Published as a problem `type` only: the platform HTTP-security layer does not attach a `code` member to this response.",
+  "description": "The request body exceeds the configured limit. Published as a problem `type` only: the platform HTTP-security layer does not attach a `code` member to this response.",
+  "category": null,
+  "http_statuses": null,
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  }
+}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>invalid spdci header | Registry Stack identifiers</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
+    main { display: grid; gap: 1rem; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+    h2 { margin-top: 2rem; }
+    p { margin-block: 0.5rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
+    a { color: LinkText; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
+    th { width: 12rem; }
+    .lede { font-size: 1.125rem; }
+    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>invalid spdci header</h1>
+    <p class="lede">The request header is missing or omits a required SP DCI field.</p>
+    <p><code>https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header</code></p>
+    <section class="notice" aria-labelledby="authority">
+      <h2 id="authority">Authority Boundary</h2>
+      <p>This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.</p>
+      <p>For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.</p>
+    </section>
+    <section aria-labelledby="facts">
+      <h2 id="facts">Defined Facts</h2>
+<table>
+      <tbody>
+        <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header</code></td></tr>
+        <tr><th>Kind</th><td>problem</td></tr>
+        <tr><th>Product</th><td>registry-relay</td></tr>
+        <tr><th>Code</th><td><code>spdci.request.invalid_header</code></td></tr>
+        <tr><th>Category</th><td>SP DCI</td></tr>
+        <tr><th>HTTP statuses</th><td>not published in this resolver record</td></tr>
+        <tr><th>Source</th><td>registry-stack/docs/site/src/content/docs/reference/errors.mdx</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <section aria-labelledby="documentation">
+      <h2 id="documentation">Documentation</h2>
+<ul>
+      <li><a href="https://docs.registrystack.org/reference/errors/">Error and status code reference</a></li>
+      <li><a href="https://docs.registrystack.org/products/registry-relay/">Registry Relay product docs</a></li>
+      <li><a href="https://docs.registrystack.org/reference/apis/registry-relay/">Registry Relay API overview</a></li>
+    </ul>
+    </section>
+    <section aria-labelledby="guidance">
+      <h2 id="guidance">Guidance</h2>
+<table>
+      <tbody>
+        <tr><th>Guidance status</th><td>not_published</td></tr>
+        <tr><th>Retryable</th><td>not published</td></tr>
+        <tr><th>Caller action</th><td>not published</td></tr>
+        <tr><th>Operator action</th><td>not published</td></tr>
+        <tr><th>Note</th><td>No per-identifier remediation guidance is published in this resolver record.</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <h2>Problem record</h2>
+    <pre><code>{
+  &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header&quot;,
+  &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header&quot;,
+  &quot;kind&quot;: &quot;problem&quot;,
+  &quot;product&quot;: &quot;registry-relay&quot;,
+  &quot;code&quot;: &quot;spdci.request.invalid_header&quot;,
+  &quot;title&quot;: &quot;invalid spdci header&quot;,
+  &quot;summary&quot;: &quot;The request header is missing or omits a required SP DCI field.&quot;,
+  &quot;description&quot;: &quot;The request header is missing or omits a required SP DCI field.&quot;,
+  &quot;category&quot;: &quot;SP DCI&quot;,
+  &quot;http_statuses&quot;: null,
+  &quot;guidance&quot;: {
+    &quot;status&quot;: &quot;not_published&quot;,
+    &quot;retryable&quot;: null,
+    &quot;caller_action&quot;: null,
+    &quot;operator_action&quot;: null,
+    &quot;note&quot;: &quot;No per-identifier remediation guidance is published in this resolver record.&quot;
+  },
+  &quot;documented_by&quot;: [
+    {
+      &quot;title&quot;: &quot;Error and status code reference&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/reference/errors/&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Registry Relay product docs&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/products/registry-relay/&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Registry Relay API overview&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/reference/apis/registry-relay/&quot;
+    }
+  ],
+  &quot;authority&quot;: {
+    &quot;scope&quot;: &quot;identifier metadata&quot;,
+    &quot;statement&quot;: &quot;This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.&quot;
+  },
+  &quot;identifier_policy&quot;: {
+    &quot;stability&quot;: &quot;stable&quot;,
+    &quot;programmatic_key&quot;: &quot;code&quot;,
+    &quot;parsing&quot;: &quot;Do not parse semantics from the URL path.&quot;
+  },
+  &quot;source&quot;: &quot;registry-stack/docs/site/src/content/docs/reference/errors.mdx&quot;,
+  &quot;source_reference&quot;: {
+    &quot;repository&quot;: &quot;registry-stack&quot;,
+    &quot;path&quot;: &quot;docs/site/src/content/docs/reference/errors.mdx&quot;,
+    &quot;label&quot;: &quot;registry-stack/docs/site/src/content/docs/reference/errors.mdx&quot;
+  }
+}</code></pre>
+    <p><a href="https://id.registrystack.org/problems/registry-relay/spdci/request/invalid_header.json">Machine-readable JSON</a></p>
+  </main>
+</body>
+</html>

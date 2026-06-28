@@ -1,0 +1,21 @@
+{
+  "id": "registry-manifest-v1",
+  "uri": "https://id.registrystack.org/ns/registry-manifest/v1#",
+  "title": "Registry Manifest v1 namespace",
+  "description": "JSON-LD namespace for Registry Manifest terms.",
+  "kind": "namespace",
+  "documented_by": [
+    {
+      "title": "Registry Manifest product docs",
+      "href": "https://docs.registrystack.org/products/registry-manifest/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior."
+  }
+}
