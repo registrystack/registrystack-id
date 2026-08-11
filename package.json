@@ -5,11 +5,13 @@
   "type": "module",
   "description": "Static identifier registry for id.registrystack.org.",
   "scripts": {
-    "import:problems": "node scripts/import-registry-stack-problems.mjs",
+    "import:catalog": "node scripts/import-registry-stack-catalog.mjs",
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
     "check:upstream": "node scripts/check-upstream-artifacts.mjs",
-    "test": "npm run check"
+    "report:catalog": "node scripts/report-catalog-change.mjs",
+    "smoke:live": "node scripts/smoke-live.mjs",
+    "test": "node --test scripts/*.test.mjs && npm run check"
   },
   "engines": {
     "node": ">=22.12.0"

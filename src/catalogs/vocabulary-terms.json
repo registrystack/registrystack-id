@@ -1,0 +1,64 @@
+{
+  "entries": [
+    {
+      "uri": "https://id.registrystack.org/vocab/codelist",
+      "title": "Codelist",
+      "description": "Relay V2 Registry Core predicate binding a controlled property to its codelist.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/coordinateReferenceSystem",
+      "title": "Coordinate reference system",
+      "description": "Relay V2 Registry Core predicate identifying a spatial property's coordinate reference system.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/geometryType",
+      "title": "Geometry type",
+      "description": "Relay V2 Registry Core predicate identifying a spatial property's geometry type.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/sourceRequired",
+      "title": "Source required",
+      "description": "Relay V2 Registry Core predicate indicating whether a source value is required.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      }
+    }
+  ]
+}

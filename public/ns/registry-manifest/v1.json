@@ -1,9 +1,18 @@
 {
-  "id": "registry-manifest-v1",
   "uri": "https://id.registrystack.org/ns/registry-manifest/v1#",
   "title": "Registry Manifest v1 namespace",
   "description": "JSON-LD namespace for Registry Manifest terms.",
   "kind": "namespace",
+  "status": "active",
+  "compatibility_line": "v1",
+  "owner": "registry-manifest",
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+    "path": "crates/registry-manifest-core/src/lib.rs",
+    "sha256": "ac1ef80a34aa0e477702fd5c5b61f715fd4f4cd8f4982c5e914ec8665ef6bf92"
+  },
+  "id": "https://id.registrystack.org/ns/registry-manifest/v1#",
   "documented_by": [
     {
       "title": "Contracts and machine identifiers",
@@ -20,6 +29,6 @@
   ],
   "authority": {
     "scope": "identifier metadata",
-    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior."
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
   }
 }

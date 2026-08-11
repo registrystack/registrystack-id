@@ -1,0 +1,148 @@
+name: Sync Registry Stack identifiers
+
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-registry-stack-identifiers
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Open active catalog update
+    runs-on: ubuntu-24.04
+    env:
+      SYNC_BRANCH: automation/registry-stack-identifiers
+      GH_TOKEN: ${{ secrets.REGISTRYSTACK_ID_SYNC_TOKEN }}
+    steps:
+      - name: Require the sync token
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${GH_TOKEN}" ]]; then
+            echo "REGISTRYSTACK_ID_SYNC_TOKEN is required" >&2
+            exit 1
+          fi
+
+      - name: Checkout publisher
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.REGISTRYSTACK_ID_SYNC_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "22.12.0"
+
+      - name: Checkout Registry Stack main
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          repository: registrystack/registry-stack
+          ref: main
+          path: _upstream/registry-stack
+          persist-credentials: false
+
+      - name: Protect the automation-owned branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin "${SYNC_BRANCH}" >/dev/null; then
+            git fetch --no-tags origin \
+              "+refs/heads/${SYNC_BRANCH}:refs/remotes/origin/${SYNC_BRANCH}"
+            while IFS= read -r commit; do
+              author_email="$(git show -s --format=%ae "${commit}")"
+              subject="$(git show -s --format=%s "${commit}")"
+              if [[ "${author_email}" != \
+                    "41898282+github-actions[bot]@users.noreply.github.com" ||
+                    "${subject}" != "chore: sync Registry Stack identifiers" ]]; then
+                echo "Automation branch contains a human or unexpected commit: ${commit}" >&2
+                exit 1
+              fi
+            done < <(git rev-list "origin/main..origin/${SYNC_BRANCH}")
+            merge_base="$(git merge-base origin/main "origin/${SYNC_BRANCH}")"
+            while IFS= read -r path; do
+              case "${path}" in
+                public/*|src/*) ;;
+                *)
+                  echo "Automation branch changes an unmanaged path: ${path}" >&2
+                  exit 1
+                  ;;
+              esac
+            done < <(git diff --name-only "${merge_base}" "origin/${SYNC_BRANCH}")
+          fi
+
+      - name: Import exact Registry Stack head
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="$(git -C _upstream/registry-stack rev-parse 'HEAD^{commit}')"
+          echo "sha=${source_sha}" >> "${GITHUB_OUTPUT}"
+          git switch -C "${SYNC_BRANCH}" origin/main
+          npm run import:catalog -- _upstream/registry-stack --source-revision "${source_sha}"
+          npm run build
+          npm run check:upstream -- _upstream/registry-stack
+          npm test
+
+      - name: Prepare review summary
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run report:catalog -- origin/main > "${RUNNER_TEMP}/catalog-summary.md"
+          git add public src
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "changed=true" >> "${GITHUB_OUTPUT}"
+            cat "${RUNNER_TEMP}/catalog-summary.md" >> "${GITHUB_STEP_SUMMARY}"
+          fi
+
+      - name: Commit and push update
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -s -m "chore: sync Registry Stack identifiers"
+          git push --force-with-lease origin "HEAD:${SYNC_BRANCH}"
+
+      - name: Open or update draft pull request
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="${RUNNER_TEMP}/pr-body.md"
+          {
+            echo "## Summary"
+            echo
+            echo "Synchronize the active identifier allowlist from Registry Stack commit \`${{ steps.source.outputs.sha }}\`."
+            echo
+            echo "This branch is automation-owned. Do not push human edits to it; change Registry Stack source or open a separate publisher PR instead."
+            echo
+            cat "${RUNNER_TEMP}/catalog-summary.md"
+            echo
+            echo "## Checks"
+            echo
+            echo "- \`npm run check:upstream -- _upstream/registry-stack\`"
+            echo "- \`npm test\`"
+            echo
+            echo "All checks ran before this branch was pushed."
+          } > "${body}"
+          number="$(gh pr list --head "${SYNC_BRANCH}" --base main --state open --json number --jq '.[0].number // empty')"
+          if [[ -n "${number}" ]]; then
+            gh pr edit "${number}" \
+              --title "chore: sync Registry Stack identifiers" \
+              --body-file "${body}"
+          else
+            gh pr create --draft --base main --head "${SYNC_BRANCH}" \
+              --title "chore: sync Registry Stack identifiers" \
+              --body-file "${body}"
+          fi

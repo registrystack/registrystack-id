@@ -1,0 +1,92 @@
+name: Identifier publisher CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: identifier-publisher-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ACTIONLINT_VERSION: "1.7.7"
+  ACTIONLINT_LINUX_X64_SHA256: "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757"
+
+jobs:
+  validate:
+    name: Validate active identifier publication
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout publisher
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "22.12.0"
+
+      - name: Read pinned Registry Stack source
+        id: source
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { appendFileSync, readFileSync } = require('node:fs');
+          const source = JSON.parse(readFileSync('src/upstream/source.json', 'utf8'));
+          if (!/^[0-9a-f]{40}$/.test(source.commit)) {
+            throw new Error('src/upstream/source.json does not pin a full commit');
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `commit=${source.commit}\n`);
+          NODE
+
+      - name: Checkout pinned Registry Stack source
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          repository: registrystack/registry-stack
+          ref: ${{ steps.source.outputs.commit }}
+          path: _upstream/registry-stack
+          persist-credentials: false
+
+      - name: Check source and generated output
+        run: |
+          npm run check:upstream -- _upstream/registry-stack
+          npm test
+
+      - name: Smoke generated site locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --directory public >"${RUNNER_TEMP}/identifier-server.log" 2>&1 &
+          server_pid="$!"
+          trap 'kill "${server_pid}"' EXIT
+          IDENTIFIER_BASE_URL=http://127.0.0.1:8765 npm run smoke:live
+
+      - name: Summarize catalog change
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: npm run report:catalog -- "origin/${BASE_REF}" >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Install pinned actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/bin"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error --location \
+            --output "${RUNNER_TEMP}/actionlint.tar.gz" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_LINUX_X64_SHA256}  ${RUNNER_TEMP}/actionlint.tar.gz" | \
+            sha256sum --check --strict
+          tar -xzf "${RUNNER_TEMP}/actionlint.tar.gz" -C "${RUNNER_TEMP}/bin" actionlint
+
+      - name: Lint workflows
+        shell: bash
+        run: |
+          "${RUNNER_TEMP}/bin/actionlint"

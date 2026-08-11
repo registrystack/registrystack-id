@@ -1,0 +1,30 @@
+{
+  "uri": "https://id.registrystack.org/vocab/sourceRequired",
+  "title": "Source required",
+  "description": "Relay V2 Registry Core predicate indicating whether a source value is required.",
+  "kind": "vocabulary-term",
+  "status": "active",
+  "compatibility_line": "relay-v2",
+  "owner": "relay-v2",
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+    "path": "crates/registry-relay-v2/src/semantics.rs",
+    "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+  },
+  "id": "https://id.registrystack.org/vocab/sourceRequired",
+  "documented_by": [
+    {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+  }
+}

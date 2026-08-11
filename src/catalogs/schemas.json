@@ -1,18 +1,76 @@
 {
   "entries": [
     {
-      "id": "registry-relay-entity-record-v1",
-      "uri": "https://id.registrystack.org/schemas/registry-relay/entity-record/v1.json",
-      "title": "Registry Relay EntityRecord v1 schema",
-      "description": "JSON Schema for Registry Relay EntityRecord credential subjects.",
-      "source": "src/schemas/registry-relay/entity-record/v1.json"
+      "uri": "https://id.registrystack.org/schemas/identifiers/catalog.v1.schema.json",
+      "title": "Registry Stack identifier catalog v1",
+      "description": "JSON Schema for the Registry Stack identifier catalog.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v1",
+      "owner": "identifiers",
+      "source": "src/artifacts/sha256/25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "products/identifiers/contracts/catalog.v1.schema.json",
+        "sha256": "25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01"
+      },
+      "artifact_sha256": "25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01.json"
     },
     {
-      "id": "registry-relay-aggregate-result-v1",
-      "uri": "https://id.registrystack.org/schemas/registry-relay/aggregate-result/v1.json",
-      "title": "Registry Relay AggregateResult v1 schema",
-      "description": "JSON Schema for Registry Relay AggregateResult credential subjects.",
-      "source": "src/schemas/registry-relay/aggregate-result/v1.json"
+      "uri": "https://id.registrystack.org/schemas/registry-relay/audit-event/v2alpha1",
+      "title": "Registry Relay value-free audit event",
+      "description": "Relay V2 generated public JSON Schema.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v2alpha1",
+      "owner": "relay-v2",
+      "source": "src/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relay-v2/src/artifacts.rs",
+        "sha256": "7ed7c76aa09ff3ffc2ee9f7fea17f8378f1246fc5855a10cda50a7920e711a1a"
+      },
+      "artifact_sha256": "e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json"
+    },
+    {
+      "uri": "https://id.registrystack.org/schemas/registry-relay/authoring/registry.v2alpha1.schema.json",
+      "title": "Relay V2 governed Registry contract",
+      "description": "Relay V2 authoring JSON Schema.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v2alpha1",
+      "owner": "relay-v2",
+      "source": "src/artifacts/sha256/caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relayctl/schemas/authoring/registry.schema.json",
+        "sha256": "caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186"
+      },
+      "artifact_sha256": "caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186.json"
+    },
+    {
+      "uri": "https://id.registrystack.org/schemas/registry-relay/authoring/runtime.v2alpha1.schema.json",
+      "title": "Relay V2 deployment binding",
+      "description": "Relay V2 authoring JSON Schema.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v2alpha1",
+      "owner": "relay-v2",
+      "source": "src/artifacts/sha256/add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "path": "crates/registry-relayctl/schemas/authoring/runtime.schema.json",
+        "sha256": "add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e"
+      },
+      "artifact_sha256": "add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e.json"
     }
   ]
 }
