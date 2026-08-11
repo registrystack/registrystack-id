@@ -10,7 +10,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
       },
@@ -45,7 +45,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "products/relay-v2/CONCEPT.md",
         "sha256": "4695621a27198e37c02f235484c8ac61dadc3497da3e0d14350f1fc5c93c558d"
       },
@@ -75,7 +75,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
       },
@@ -105,7 +105,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
       },
@@ -135,7 +135,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
       },
@@ -165,7 +165,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "558c3423c4cd20b73556653f80feb6a4a65dcbcc",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
       },
