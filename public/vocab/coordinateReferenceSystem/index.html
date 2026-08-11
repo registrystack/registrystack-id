@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coordinate reference system | Registry Stack identifiers</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
+    main { display: grid; gap: 1rem; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+    h2 { margin-top: 2rem; }
+    p { margin-block: 0.5rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
+    a { color: LinkText; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
+    th { width: 12rem; }
+    .lede { font-size: 1.125rem; }
+    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Coordinate reference system</h1>
+    <p><code>https://id.registrystack.org/vocab/coordinateReferenceSystem</code></p>
+    <p>Relay V2 Registry Core predicate identifying a spatial property's coordinate reference system.</p>
+    <section class="notice" aria-labelledby="authority">
+      <h2 id="authority">Authority Boundary</h2>
+      <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
+    </section>
+    <h2>Lifecycle</h2>
+<table>
+      <tbody>
+        <tr><th>Kind</th><td>vocabulary-term</td></tr>
+        <tr><th>Status</th><td>active</td></tr>
+        <tr><th>Compatibility line</th><td>relay-v2</td></tr>
+        <tr><th>Owner</th><td>relay-v2</td></tr>
+      </tbody>
+    </table>
+    <h2>Documentation</h2>
+<ul>
+      <li><a href="https://docs.registrystack.org/reference/contracts/">Contracts and machine identifiers</a></li>
+      <li><a href="https://docs.registrystack.org/">Registry Stack documentation</a></li>
+    </ul>
+    <h2>Identifier record</h2>
+    <pre><code>{
+  &quot;uri&quot;: &quot;https://id.registrystack.org/vocab/coordinateReferenceSystem&quot;,
+  &quot;title&quot;: &quot;Coordinate reference system&quot;,
+  &quot;description&quot;: &quot;Relay V2 Registry Core predicate identifying a spatial property's coordinate reference system.&quot;,
+  &quot;kind&quot;: &quot;vocabulary-term&quot;,
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;compatibility_line&quot;: &quot;relay-v2&quot;,
+  &quot;owner&quot;: &quot;relay-v2&quot;,
+  &quot;source_reference&quot;: {
+    &quot;repository&quot;: &quot;registry-stack&quot;,
+    &quot;commit&quot;: &quot;f688b4f2580e1feea409cd561647d9ad42770d6b&quot;,
+    &quot;path&quot;: &quot;crates/registry-relay-v2/src/semantics.rs&quot;,
+    &quot;sha256&quot;: &quot;5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218&quot;
+  },
+  &quot;id&quot;: &quot;https://id.registrystack.org/vocab/coordinateReferenceSystem&quot;,
+  &quot;documented_by&quot;: [
+    {
+      &quot;title&quot;: &quot;Contracts and machine identifiers&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/reference/contracts/&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Registry Stack documentation&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/&quot;
+    }
+  ],
+  &quot;authority&quot;: {
+    &quot;scope&quot;: &quot;identifier metadata&quot;,
+    &quot;statement&quot;: &quot;This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.&quot;
+  }
+}</code></pre>
+    <p><a href="https://id.registrystack.org/vocab/coordinateReferenceSystem.json">Machine-readable JSON</a></p>
+  </main>
+</body>
+</html>

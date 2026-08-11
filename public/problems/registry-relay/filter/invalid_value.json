@@ -2,13 +2,17 @@
   "id": "https://id.registrystack.org/problems/registry-relay/filter/invalid_value",
   "type": "https://id.registrystack.org/problems/registry-relay/filter/invalid_value",
   "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "filter.invalid_value",
-  "title": "invalid filter value",
-  "summary": "The value does not parse for the field's type.",
-  "description": "The value does not parse for the field's type.",
-  "category": "Filter",
-  "http_statuses": null,
+  "title": "Filter value is invalid",
+  "summary": "filter value is invalid",
+  "description": "filter value is invalid",
+  "category": null,
+  "http_statuses": [
+    400
+  ],
   "guidance": {
     "status": "not_published",
     "retryable": null,
@@ -32,17 +36,17 @@
   ],
   "authority": {
     "scope": "identifier metadata",
-    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
   },
   "identifier_policy": {
     "stability": "stable",
     "programmatic_key": "code",
     "parsing": "Do not parse semantics from the URL path."
   },
-  "source": "registry-stack/docs/site/src/content/docs/reference/errors.mdx",
   "source_reference": {
     "repository": "registry-stack",
-    "path": "docs/site/src/content/docs/reference/errors.mdx",
-    "label": "registry-stack/docs/site/src/content/docs/reference/errors.mdx"
+    "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+    "path": "crates/registry-relay-v2/src/problem.rs",
+    "sha256": "033b915ebbabad355fd7987fa82e7821ea0e148925e6d05eb6d6f0aa9c7729a1"
   }
 }

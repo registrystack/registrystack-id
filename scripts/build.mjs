@@ -13,7 +13,7 @@ const outputDir = resolve(repoRoot, process.env.OUTPUT_DIR ?? 'public');
 const baseUrl = 'https://id.registrystack.org';
 const docsBaseUrl = 'https://docs.registrystack.org';
 const resolverAuthorityStatement =
-  'This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.';
+  'This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.';
 const problemAuthorityStatement =
   'For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.';
 
@@ -38,14 +38,6 @@ const documentation = {
     title: 'Registry Relay API overview',
     href: `${docsBaseUrl}/reference/apis/registry-relay/`,
   },
-  notaryProduct: {
-    title: 'Registry Notary product docs',
-    href: `${docsBaseUrl}/products/registry-notary/`,
-  },
-  notaryApi: {
-    title: 'Registry Notary API overview',
-    href: `${docsBaseUrl}/reference/apis/registry-notary/`,
-  },
   manifestProduct: {
     title: 'Registry Manifest product docs',
     href: `${docsBaseUrl}/products/registry-manifest/`,
@@ -54,7 +46,6 @@ const documentation = {
 
 const productDocumentation = new Map([
   ['registry-relay', [documentation.relayProduct, documentation.relayApi]],
-  ['registry-notary', [documentation.notaryProduct, documentation.notaryApi]],
   ['registry-manifest', [documentation.manifestProduct]],
 ]);
 
@@ -153,6 +144,10 @@ function sourceReference(source) {
   return {
     label: source,
   };
+}
+
+function sourceReferenceForEntry(entry) {
+  return entry.source_reference ?? sourceReference(entry.source);
 }
 
 function publicDocSource(source) {
@@ -282,6 +277,8 @@ function problemRecord(entry) {
     id: uri,
     type: uri,
     kind: 'problem',
+    lifecycle_status: entry.status,
+    compatibility_line: entry.compatibility_line,
     product: entry.product,
     code: entry.code,
     title: entry.title,
@@ -298,7 +295,7 @@ function problemRecord(entry) {
       parsing: 'Do not parse semantics from the URL path.',
     },
     source,
-    source_reference: source ? sourceReference(source) : undefined,
+    source_reference: sourceReferenceForEntry(entry),
   };
 }
 
@@ -319,6 +316,8 @@ function writeProblem(entry) {
 ${renderFacts([
   { label: 'Canonical URI', html: `<code>${escapeHtml(uri)}</code>` },
   { label: 'Kind', value: 'problem' },
+  { label: 'Lifecycle status', value: entry.status },
+  { label: 'Compatibility line', value: entry.compatibility_line },
   { label: 'Product', value: entry.product },
   { label: 'Code', html: `<code>${escapeHtml(entry.code)}</code>` },
   { label: 'Category', value: entry.category ?? 'not published' },
@@ -346,7 +345,7 @@ function writeCatalogIndex(name, entries, makeUri) {
   const rows = entries
     .map((entry) => {
       const uri = makeUri(entry);
-      return `<tr><td><a href="${escapeHtml(uri)}">${escapeHtml(uri)}</a></td><td>${escapeHtml(entry.title)}</td></tr>`;
+      return `<tr><td><a href="${escapeHtml(uri)}">${escapeHtml(uri)}</a></td><td>${escapeHtml(entry.title)}</td><td>${escapeHtml(entry.status)}</td></tr>`;
     })
     .join('\n');
   const body = `    <h1>${escapeHtml(name)}</h1>
@@ -356,7 +355,7 @@ function writeCatalogIndex(name, entries, makeUri) {
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
     <table>
-      <thead><tr><th>Identifier</th><th>Title</th></tr></thead>
+      <thead><tr><th>Identifier</th><th>Title</th><th>Status</th></tr></thead>
       <tbody>
 ${rows}
       </tbody>
@@ -364,14 +363,29 @@ ${rows}
   writeOutput(`${name.toLowerCase().replaceAll(' ', '-')}/index.html`, page(name, body));
 }
 
-function writeNamespace(entry) {
-  const path = uriToPath(entry.uri);
+function identifierRecord(entry) {
   const record = {
     ...entry,
-    kind: 'namespace',
+    id: entry.id ?? entry.uri,
     documented_by: documentationForIdentifier(entry),
     authority: authorityRecord(),
+    source_reference: sourceReferenceForEntry(entry),
   };
+  if (entry.uri === `${baseUrl}/vocab/core/`) {
+    record.child_term_policy = {
+      ownership: 'adopter-defined',
+      registry_reviewed: false,
+      statement:
+        'Resolving a child URI under this vocabulary does not register or review that adopter-defined term.',
+    };
+  }
+  return record;
+}
+
+function writeIdentifier(entry) {
+  const path = uriToPath(entry.uri);
+  const recordPath = path.endsWith('/') ? `${path}index.json` : `${path}.json`;
+  const record = identifierRecord(entry);
   const body = `    <h1>${escapeHtml(entry.title)}</h1>
     <p><code>${escapeHtml(entry.uri)}</code></p>
     <p>${escapeHtml(entry.description)}</p>
@@ -379,18 +393,38 @@ function writeNamespace(entry) {
       <h2 id="authority">Authority Boundary</h2>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
+    <h2>Lifecycle</h2>
+${renderFacts([
+  { label: 'Kind', value: entry.kind },
+  { label: 'Status', value: entry.status },
+  { label: 'Compatibility line', value: entry.compatibility_line },
+  { label: 'Owner', value: entry.owner },
+  {
+    label: 'Child terms',
+    value:
+      record.child_term_policy?.ownership === 'adopter-defined'
+        ? 'Adopter-defined; successful resolution is not Registry Stack registration or review.'
+        : undefined,
+  },
+])}
     <h2>Documentation</h2>
 ${renderLinks(record.documented_by)}
-    <h2>Namespace record</h2>
+    <h2>Identifier record</h2>
     <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
-    <p><a href="${escapeHtml(`${baseUrl}/${path}.json`)}">Machine-readable JSON</a></p>`;
+    <p><a href="${escapeHtml(`${baseUrl}/${recordPath}`)}">Machine-readable JSON</a></p>`;
   writeOutput(`${path}/index.html`, page(entry.title, body));
-  writeOutput(`${path}.json`, json(record));
+  writeOutput(recordPath, json(record));
 }
 
 function writeSchema(entry) {
   const path = uriToPath(entry.uri);
+  const pagePath = path.endsWith('.json')
+    ? `${path.replace(/\.json$/, '')}/index.html`
+    : `${path}.html`;
   copyOutput(entry.source, path);
+  if (entry.immutable_uri) {
+    copyOutput(entry.source, uriToPath(entry.immutable_uri));
+  }
   const docs = documentationForIdentifier({ ...entry, product: entry.product ?? 'registry-relay' });
   const body = `    <h1>${escapeHtml(entry.title)}</h1>
     <p><code>${escapeHtml(entry.uri)}</code></p>
@@ -400,15 +434,26 @@ function writeSchema(entry) {
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
       <p>The canonical machine artifact at this URI is the JSON Schema itself.</p>
     </section>
+    <h2>Lifecycle</h2>
+${renderFacts([
+  { label: 'Status', value: entry.status },
+  { label: 'Compatibility line', value: entry.compatibility_line },
+  { label: 'Owner', value: entry.owner },
+  { label: 'Artifact SHA-256', html: entry.artifact_sha256 ? `<code>${escapeHtml(entry.artifact_sha256)}</code>` : undefined },
+  { label: 'Immutable artifact', html: entry.immutable_uri ? `<a href="${escapeHtml(entry.immutable_uri)}">${escapeHtml(entry.immutable_uri)}</a>` : undefined },
+])}
     <h2>Documentation</h2>
 ${renderLinks(docs)}
     <p><a href="${escapeHtml(entry.uri)}">JSON Schema</a></p>`;
-  writeOutput(`${path.replace(/\.json$/, '')}/index.html`, page(entry.title, body));
+  writeOutput(pagePath, page(entry.title, body));
 }
 
 function writeContext(entry) {
   const path = uriToPath(entry.uri);
   copyOutput(entry.source, path);
+  if (entry.immutable_uri) {
+    copyOutput(entry.source, uriToPath(entry.immutable_uri));
+  }
   const docs = documentationForIdentifier({ ...entry, product: entry.product ?? 'registry-relay' });
   const body = `    <h1>${escapeHtml(entry.title)}</h1>
     <p><code>${escapeHtml(entry.uri)}</code></p>
@@ -418,13 +463,21 @@ function writeContext(entry) {
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
       <p>The canonical machine artifact at this URI is the JSON-LD context itself.</p>
     </section>
+    <h2>Lifecycle</h2>
+${renderFacts([
+  { label: 'Status', value: entry.status },
+  { label: 'Compatibility line', value: entry.compatibility_line },
+  { label: 'Owner', value: entry.owner },
+  { label: 'Artifact SHA-256', html: entry.artifact_sha256 ? `<code>${escapeHtml(entry.artifact_sha256)}</code>` : undefined },
+  { label: 'Immutable artifact', html: entry.immutable_uri ? `<a href="${escapeHtml(entry.immutable_uri)}">${escapeHtml(entry.immutable_uri)}</a>` : undefined },
+])}
     <h2>Documentation</h2>
 ${renderLinks(docs)}
     <p><a href="${escapeHtml(entry.uri)}">JSON-LD context</a></p>`;
   writeOutput(`${path.replace(/\.jsonld$/, '')}/index.html`, page(entry.title, body));
 }
 
-function writeStaticControls() {
+function writeStaticControls(schemaEntries) {
   const machineHeaders = [
     {
       path: 'index.json',
@@ -433,6 +486,26 @@ function writeStaticControls() {
     },
     {
       path: 'problems/*.json',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=300',
+    },
+    {
+      path: 'namespaces/index.json',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=300',
+    },
+    {
+      path: 'contexts/index.json',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=300',
+    },
+    {
+      path: 'vocabularies/*.json',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=300',
+    },
+    {
+      path: 'vocab/*.json',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
     },
@@ -457,11 +530,26 @@ function writeStaticControls() {
       cache: 'public, max-age=86400',
     },
     {
+      path: 'artifacts/sha256/*',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=31536000, immutable',
+    },
+    {
       path: '.well-known/registrystack-identifiers',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
     },
   ];
+  for (const entry of schemaEntries) {
+    const path = uriToPath(entry.uri);
+    if (!path.endsWith('.json')) {
+      machineHeaders.push({
+        path,
+        contentType: 'application/schema+json; charset=utf-8',
+        cache: 'public, max-age=86400',
+      });
+    }
+  }
 
   const exactHeaders = machineHeaders
     .map((entry) => `/${entry.path}
@@ -477,6 +565,7 @@ function writeStaticControls() {
 ${exactHeaders}
 `);
   writeOutput('_redirects', `/problem-types/* /problems/:splat 301
+/vocab/core/* /vocabularies/core.json 200
 /.well-known/registrystack-identifiers /index.json 200
 `);
 }
@@ -488,18 +577,40 @@ const problems = readJson('src/catalogs/problems.json').entries;
 const namespaces = readJson('src/catalogs/namespaces.json').entries;
 const schemas = readJson('src/catalogs/schemas.json').entries;
 const contexts = readJson('src/catalogs/contexts.json').entries;
+const vocabularies = readJson('src/catalogs/vocabularies.json').entries;
+const vocabularyTerms = readJson('src/catalogs/vocabulary-terms.json').entries;
 
 for (const entry of problems) writeProblem(entry);
-for (const entry of namespaces) writeNamespace(entry);
+for (const entry of namespaces) writeIdentifier(entry);
 for (const entry of schemas) writeSchema(entry);
 for (const entry of contexts) writeContext(entry);
+for (const entry of vocabularies) writeIdentifier(entry);
+for (const entry of vocabularyTerms) writeIdentifier(entry);
 
 writeCatalogIndex('Problems', problems, problemUri);
 writeCatalogIndex('Namespaces', namespaces, (entry) => entry.uri.replace(/#$/, ''));
 writeCatalogIndex('Schemas', schemas, (entry) => entry.uri);
 writeCatalogIndex('Contexts', contexts, (entry) => entry.uri);
+writeCatalogIndex(
+  'Vocabularies',
+  [...vocabularies, ...vocabularyTerms],
+  (entry) => entry.uri,
+);
 
 writeOutput('problems/index.json', json({ entries: problems.map(problemRecord) }));
+writeOutput('namespaces/index.json', json({ entries: namespaces.map(identifierRecord) }));
+writeOutput('schemas/index.json', json({ entries: schemas.map(identifierRecord) }));
+writeOutput('contexts/index.json', json({ entries: contexts.map(identifierRecord) }));
+writeOutput('vocabularies/index.json', json({
+  entries: [...vocabularies, ...vocabularyTerms].map(identifierRecord),
+}));
+const coreVocabulary = vocabularies.find(
+  (entry) => entry.uri === `${baseUrl}/vocab/core/`,
+);
+if (!coreVocabulary) {
+  throw new Error('Registry Relay core vocabulary is missing');
+}
+writeOutput('vocabularies/core.json', json(identifierRecord(coreVocabulary)));
 writeOutput('index.json', json({
   base_url: baseUrl,
   authority: authorityRecord(),
@@ -511,13 +622,14 @@ writeOutput('index.json', json({
   },
   catalogs: {
     problems: `${baseUrl}/problems/index.json`,
-    namespaces: `${baseUrl}/namespaces/`,
-    schemas: `${baseUrl}/schemas/`,
-    contexts: `${baseUrl}/contexts/`,
+    namespaces: `${baseUrl}/namespaces/index.json`,
+    schemas: `${baseUrl}/schemas/index.json`,
+    contexts: `${baseUrl}/contexts/index.json`,
+    vocabularies: `${baseUrl}/vocabularies/index.json`,
   },
 }));
 writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry Stack identifiers</h1>
-    <p>Stable machine identifiers for Registry Stack problem types, namespaces, schemas, and contexts.</p>
+    <p>Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, and contexts.</p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
@@ -526,7 +638,9 @@ writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry S
       <li><a href="/problems/">Problem types</a></li>
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>    </ul>`));
+      <li><a href="/contexts/">Contexts</a></li>
+      <li><a href="/vocabularies/">Vocabularies</a></li>
+    </ul>`));
 writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not found</h1>
     <p class="lede">This path is not a registered Registry Stack identifier.</p>
     <section class="notice" aria-labelledby="authority">
@@ -538,12 +652,14 @@ writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not fou
       <li><a href="/problems/">Problem types</a></li>
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>    </ul>`));
+      <li><a href="/contexts/">Contexts</a></li>
+      <li><a href="/vocabularies/">Vocabularies</a></li>
+    </ul>`));
 writeOutput('llms.txt', `# Registry Stack identifier resolver
 
 Canonical host: ${baseUrl}/
 
-This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces, JSON Schemas, and JSON-LD contexts.
+This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces and vocabularies, JSON Schemas, and JSON-LD contexts.
 
 Authority boundary: ${resolverAuthorityStatement}
 
@@ -553,6 +669,10 @@ Machine catalogs:
 
 - ${baseUrl}/index.json
 - ${baseUrl}/problems/index.json
+- ${baseUrl}/schemas/index.json
+- ${baseUrl}/namespaces/index.json
+- ${baseUrl}/contexts/index.json
+- ${baseUrl}/vocabularies/index.json
 
 Public documentation:
 
@@ -561,6 +681,6 @@ Public documentation:
 - ${docsBaseUrl}/llms.txt
 - ${docsBaseUrl}/llms-full.txt
 `);
-writeStaticControls();
+writeStaticControls(schemas);
 
 console.log(`built ${relative(process.cwd(), outputDir)}`);

@@ -16,15 +16,56 @@ concurrency:
 jobs:
   deploy:
     name: Deploy to Cloudflare Workers
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: "22"
+          node-version: "22.12.0"
+
+      - name: Read pinned Registry Stack source
+        id: source
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { appendFileSync, readFileSync } = require('node:fs');
+          const source = JSON.parse(readFileSync('src/upstream/source.json', 'utf8'));
+          if (!/^[0-9a-f]{40}$/.test(source.commit)) {
+            throw new Error('src/upstream/source.json does not pin a full commit');
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `commit=${source.commit}\n`);
+          NODE
+
+      - name: Checkout pinned Registry Stack source
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          repository: registrystack/registry-stack
+          ref: ${{ steps.source.outputs.commit }}
+          fetch-depth: 0
+          path: _upstream/registry-stack
+          persist-credentials: false
+
+      - name: Require source provenance from Registry Stack main
+        env:
+          PINNED_SOURCE: ${{ steps.source.outputs.commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C _upstream/registry-stack fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main
+          if ! git -C _upstream/registry-stack merge-base --is-ancestor \
+            "${PINNED_SOURCE}" refs/remotes/origin/main; then
+            echo "Pinned Registry Stack commit is not in main history; re-import the exact merged commit" >&2
+            exit 1
+          fi
+
+      - name: Check pinned upstream catalog
+        run: npm run check:upstream -- _upstream/registry-stack
 
       - name: Check generated output
         run: npm test
@@ -33,10 +74,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4"
+          wranglerVersion: "4.120.1"
           command: deploy
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -28,21 +28,39 @@
     <p>JSON-LD namespace for Registry Manifest terms.</p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
-      <p>This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.</p>
+      <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
     </section>
+    <h2>Lifecycle</h2>
+<table>
+      <tbody>
+        <tr><th>Kind</th><td>namespace</td></tr>
+        <tr><th>Status</th><td>active</td></tr>
+        <tr><th>Compatibility line</th><td>v1</td></tr>
+        <tr><th>Owner</th><td>registry-manifest</td></tr>
+      </tbody>
+    </table>
     <h2>Documentation</h2>
 <ul>
       <li><a href="https://docs.registrystack.org/reference/contracts/">Contracts and machine identifiers</a></li>
       <li><a href="https://docs.registrystack.org/products/registry-manifest/">Registry Manifest product docs</a></li>
       <li><a href="https://docs.registrystack.org/">Registry Stack documentation</a></li>
     </ul>
-    <h2>Namespace record</h2>
+    <h2>Identifier record</h2>
     <pre><code>{
-  &quot;id&quot;: &quot;registry-manifest-v1&quot;,
   &quot;uri&quot;: &quot;https://id.registrystack.org/ns/registry-manifest/v1#&quot;,
   &quot;title&quot;: &quot;Registry Manifest v1 namespace&quot;,
   &quot;description&quot;: &quot;JSON-LD namespace for Registry Manifest terms.&quot;,
   &quot;kind&quot;: &quot;namespace&quot;,
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;compatibility_line&quot;: &quot;v1&quot;,
+  &quot;owner&quot;: &quot;registry-manifest&quot;,
+  &quot;source_reference&quot;: {
+    &quot;repository&quot;: &quot;registry-stack&quot;,
+    &quot;commit&quot;: &quot;f688b4f2580e1feea409cd561647d9ad42770d6b&quot;,
+    &quot;path&quot;: &quot;crates/registry-manifest-core/src/lib.rs&quot;,
+    &quot;sha256&quot;: &quot;ac1ef80a34aa0e477702fd5c5b61f715fd4f4cd8f4982c5e914ec8665ef6bf92&quot;
+  },
+  &quot;id&quot;: &quot;https://id.registrystack.org/ns/registry-manifest/v1#&quot;,
   &quot;documented_by&quot;: [
     {
       &quot;title&quot;: &quot;Contracts and machine identifiers&quot;,
@@ -59,7 +77,7 @@
   ],
   &quot;authority&quot;: {
     &quot;scope&quot;: &quot;identifier metadata&quot;,
-    &quot;statement&quot;: &quot;This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.&quot;
+    &quot;statement&quot;: &quot;This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.&quot;
   }
 }</code></pre>
     <p><a href="https://id.registrystack.org/ns/registry-manifest/v1.json">Machine-readable JSON</a></p>

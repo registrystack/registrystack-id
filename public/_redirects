@@ -1,2 +1,3 @@
 /problem-types/* /problems/:splat 301
+/vocab/core/* /vocabularies/core.json 200
 /.well-known/registrystack-identifiers /index.json 200

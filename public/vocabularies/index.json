@@ -1,0 +1,189 @@
+{
+  "entries": [
+    {
+      "uri": "https://id.registrystack.org/vocab/core/",
+      "title": "Registry Relay core vocabulary",
+      "description": "Vocabulary base for Relay V2 Registry Core semantic predicates.",
+      "kind": "vocabulary",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      },
+      "id": "https://id.registrystack.org/vocab/core/",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      },
+      "child_term_policy": {
+        "ownership": "adopter-defined",
+        "registry_reviewed": false,
+        "statement": "Resolving a child URI under this vocabulary does not register or review that adopter-defined term."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/handling",
+      "title": "Registry Relay handling vocabulary",
+      "description": "Ordered Relay V2 technical handling levels: public, internal, confidential, and restricted.",
+      "kind": "vocabulary",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "products/relay-v2/CONCEPT.md",
+        "sha256": "4695621a27198e37c02f235484c8ac61dadc3497da3e0d14350f1fc5c93c558d"
+      },
+      "id": "https://id.registrystack.org/vocab/handling",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/codelist",
+      "title": "Codelist",
+      "description": "Relay V2 Registry Core predicate binding a controlled property to its codelist.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      },
+      "id": "https://id.registrystack.org/vocab/codelist",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/coordinateReferenceSystem",
+      "title": "Coordinate reference system",
+      "description": "Relay V2 Registry Core predicate identifying a spatial property's coordinate reference system.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      },
+      "id": "https://id.registrystack.org/vocab/coordinateReferenceSystem",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/geometryType",
+      "title": "Geometry type",
+      "description": "Relay V2 Registry Core predicate identifying a spatial property's geometry type.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      },
+      "id": "https://id.registrystack.org/vocab/geometryType",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/sourceRequired",
+      "title": "Source required",
+      "description": "Relay V2 Registry Core predicate indicating whether a source value is required.",
+      "kind": "vocabulary-term",
+      "status": "active",
+      "compatibility_line": "relay-v2",
+      "owner": "relay-v2",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "path": "crates/registry-relay-v2/src/semantics.rs",
+        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+      },
+      "id": "https://id.registrystack.org/vocab/sourceRequired",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    }
+  ]
+}

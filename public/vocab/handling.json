@@ -1,0 +1,30 @@
+{
+  "uri": "https://id.registrystack.org/vocab/handling",
+  "title": "Registry Relay handling vocabulary",
+  "description": "Ordered Relay V2 technical handling levels: public, internal, confidential, and restricted.",
+  "kind": "vocabulary",
+  "status": "active",
+  "compatibility_line": "relay-v2",
+  "owner": "relay-v2",
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+    "path": "products/relay-v2/CONCEPT.md",
+    "sha256": "4695621a27198e37c02f235484c8ac61dadc3497da3e0d14350f1fc5c93c558d"
+  },
+  "id": "https://id.registrystack.org/vocab/handling",
+  "documented_by": [
+    {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+  }
+}

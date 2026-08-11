@@ -1,0 +1,52 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-relay/consultation/unresolved",
+  "type": "https://id.registrystack.org/problems/registry-relay/consultation/unresolved",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "relay-v2",
+  "product": "registry-relay",
+  "code": "consultation.unresolved",
+  "title": "Requested record was not resolved",
+  "summary": "the requested record was not resolved",
+  "description": "the requested record was not resolved",
+  "category": null,
+  "http_statuses": [
+    404
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    },
+    {
+      "title": "Registry Relay product docs",
+      "href": "https://docs.registrystack.org/products/registry-relay/"
+    },
+    {
+      "title": "Registry Relay API overview",
+      "href": "https://docs.registrystack.org/reference/apis/registry-relay/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+    "path": "crates/registry-relay-v2/src/problem.rs",
+    "sha256": "033b915ebbabad355fd7987fa82e7821ea0e148925e6d05eb6d6f0aa9c7729a1"
+  }
+}

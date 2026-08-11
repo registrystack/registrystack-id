@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>unknown field | Registry Stack identifiers</title>
+  <title>Filter is not declared | Registry Stack identifiers</title>
   <style>
     :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
@@ -23,12 +23,12 @@
 </head>
 <body>
   <main>
-    <h1>unknown field</h1>
-    <p class="lede">A query parameter references a field not in the resource schema.</p>
+    <h1>Filter is not declared</h1>
+    <p class="lede">filter is not declared for this operation</p>
     <p><code>https://id.registrystack.org/problems/registry-relay/filter/unknown_field</code></p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
-      <p>This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior.</p>
+      <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
       <p>For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.</p>
     </section>
     <section aria-labelledby="facts">
@@ -37,11 +37,12 @@
       <tbody>
         <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-relay/filter/unknown_field</code></td></tr>
         <tr><th>Kind</th><td>problem</td></tr>
+        <tr><th>Lifecycle status</th><td>active</td></tr>
+        <tr><th>Compatibility line</th><td>relay-v2</td></tr>
         <tr><th>Product</th><td>registry-relay</td></tr>
         <tr><th>Code</th><td><code>filter.unknown_field</code></td></tr>
-        <tr><th>Category</th><td>Filter</td></tr>
-        <tr><th>HTTP statuses</th><td>not published in this resolver record</td></tr>
-        <tr><th>Source</th><td>registry-stack/docs/site/src/content/docs/reference/errors.mdx</td></tr>
+        <tr><th>Category</th><td>not published</td></tr>
+        <tr><th>HTTP statuses</th><td>400</td></tr>
       </tbody>
     </table>
     </section>
@@ -70,13 +71,17 @@
   &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-relay/filter/unknown_field&quot;,
   &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-relay/filter/unknown_field&quot;,
   &quot;kind&quot;: &quot;problem&quot;,
+  &quot;lifecycle_status&quot;: &quot;active&quot;,
+  &quot;compatibility_line&quot;: &quot;relay-v2&quot;,
   &quot;product&quot;: &quot;registry-relay&quot;,
   &quot;code&quot;: &quot;filter.unknown_field&quot;,
-  &quot;title&quot;: &quot;unknown field&quot;,
-  &quot;summary&quot;: &quot;A query parameter references a field not in the resource schema.&quot;,
-  &quot;description&quot;: &quot;A query parameter references a field not in the resource schema.&quot;,
-  &quot;category&quot;: &quot;Filter&quot;,
-  &quot;http_statuses&quot;: null,
+  &quot;title&quot;: &quot;Filter is not declared&quot;,
+  &quot;summary&quot;: &quot;filter is not declared for this operation&quot;,
+  &quot;description&quot;: &quot;filter is not declared for this operation&quot;,
+  &quot;category&quot;: null,
+  &quot;http_statuses&quot;: [
+    400
+  ],
   &quot;guidance&quot;: {
     &quot;status&quot;: &quot;not_published&quot;,
     &quot;retryable&quot;: null,
@@ -100,18 +105,18 @@
   ],
   &quot;authority&quot;: {
     &quot;scope&quot;: &quot;identifier metadata&quot;,
-    &quot;statement&quot;: &quot;This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.&quot;
+    &quot;statement&quot;: &quot;This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.&quot;
   },
   &quot;identifier_policy&quot;: {
     &quot;stability&quot;: &quot;stable&quot;,
     &quot;programmatic_key&quot;: &quot;code&quot;,
     &quot;parsing&quot;: &quot;Do not parse semantics from the URL path.&quot;
   },
-  &quot;source&quot;: &quot;registry-stack/docs/site/src/content/docs/reference/errors.mdx&quot;,
   &quot;source_reference&quot;: {
     &quot;repository&quot;: &quot;registry-stack&quot;,
-    &quot;path&quot;: &quot;docs/site/src/content/docs/reference/errors.mdx&quot;,
-    &quot;label&quot;: &quot;registry-stack/docs/site/src/content/docs/reference/errors.mdx&quot;
+    &quot;commit&quot;: &quot;f688b4f2580e1feea409cd561647d9ad42770d6b&quot;,
+    &quot;path&quot;: &quot;crates/registry-relay-v2/src/problem.rs&quot;,
+    &quot;sha256&quot;: &quot;033b915ebbabad355fd7987fa82e7821ea0e148925e6d05eb6d6f0aa9c7729a1&quot;
   }
 }</code></pre>
     <p><a href="https://id.registrystack.org/problems/registry-relay/filter/unknown_field.json">Machine-readable JSON</a></p>

@@ -2,7 +2,7 @@
   "base_url": "https://id.registrystack.org",
   "authority": {
     "scope": "identifier metadata",
-    "statement": "This site identifies stable Registry Stack identifiers and links to public documentation. Product documentation, published schemas, and the actual service response remain authoritative for runtime behavior."
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
   },
   "documentation": {
     "home": "https://docs.registrystack.org/",
@@ -12,8 +12,9 @@
   },
   "catalogs": {
     "problems": "https://id.registrystack.org/problems/index.json",
-    "namespaces": "https://id.registrystack.org/namespaces/",
-    "schemas": "https://id.registrystack.org/schemas/",
-    "contexts": "https://id.registrystack.org/contexts/"
+    "namespaces": "https://id.registrystack.org/namespaces/index.json",
+    "schemas": "https://id.registrystack.org/schemas/index.json",
+    "contexts": "https://id.registrystack.org/contexts/index.json",
+    "vocabularies": "https://id.registrystack.org/vocabularies/index.json"
   }
 }
