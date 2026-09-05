@@ -483,8 +483,17 @@ ${renderLinks(docs)}
   writeOutput(artifactPagePath(path), page(entry.title, body));
 }
 
+// Cloudflare Pages `*` in a `_headers` path matches any run of characters,
+// including further path segments.
+function headerPathPattern(path) {
+  const escaped = path
+    .replace(/[.+^${}()|[\]\\]/g, '\\$&')
+    .replace(/\*/g, '.*');
+  return new RegExp(`^${escaped}$`);
+}
+
 function writeStaticControls(artifactEntries) {
-  const machineHeaders = [
+  const staticHeaders = [
     {
       path: 'index.json',
       contentType: 'application/json; charset=utf-8',
@@ -546,28 +555,46 @@ function writeStaticControls(artifactEntries) {
       cache: 'public, max-age=300',
     },
   ];
+  // Cloudflare Pages combines every rule that matches a path and joins
+  // repeated header values, so a path already covered by a static rule with
+  // the same headers must not also get an exact rule, or the response would
+  // carry that header twice (e.g. `Access-Control-Allow-Origin: *, *`).
+  function coveredByStaticRule(path, contentType, cache) {
+    return staticHeaders.some(
+      (rule) =>
+        rule.contentType === contentType &&
+        rule.cache === cache &&
+        headerPathPattern(rule.path).test(path),
+    );
+  }
+
+  const machineHeaders = [...staticHeaders];
   // Every published artifact names its own content type: the canonical URI
   // serves the kind's artifact, and the digest path serves the same bytes
   // forever, so neither can rely on a wildcard that assumes JSON.
   for (const entry of artifactEntries) {
-    machineHeaders.push({
-      path: uriToPath(entry.uri),
-      contentType: artifactKinds[entry.kind].contentType,
-      cache: 'public, max-age=86400',
-    });
+    const path = uriToPath(entry.uri);
+    const contentType = artifactKinds[entry.kind].contentType;
+    const cache = 'public, max-age=86400';
+    if (!coveredByStaticRule(path, contentType, cache)) {
+      machineHeaders.push({ path, contentType, cache });
+    }
     if (!entry.immutable_uri) {
       continue;
     }
     const immutablePath = uriToPath(entry.immutable_uri);
-    const contentType = artifactContentTypes[extname(immutablePath)];
-    if (!contentType) {
+    const immutableContentType = artifactContentTypes[extname(immutablePath)];
+    if (!immutableContentType) {
       throw new Error(`unsupported immutable artifact type: ${immutablePath}`);
     }
-    machineHeaders.push({
-      path: immutablePath,
-      contentType,
-      cache: 'public, max-age=31536000, immutable',
-    });
+    const immutableCache = 'public, max-age=31536000, immutable';
+    if (!coveredByStaticRule(immutablePath, immutableContentType, immutableCache)) {
+      machineHeaders.push({
+        path: immutablePath,
+        contentType: immutableContentType,
+        cache: immutableCache,
+      });
+    }
   }
 
   const exactHeaders = machineHeaders
