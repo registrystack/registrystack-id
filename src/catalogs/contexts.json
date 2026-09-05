@@ -1,3 +1,22 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "uri": "https://id.registrystack.org/contexts/registry-record/v1",
+      "title": "Registry Record v1 JSON-LD context",
+      "description": "Governed JSON-LD terms for the Registry Record v1 base response profile.",
+      "kind": "context",
+      "status": "active",
+      "compatibility_line": "v1",
+      "owner": "registry-record",
+      "source": "src/artifacts/sha256/9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71.jsonld",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
+        "path": "products/registry-record/profile/registry-record-v1.md",
+        "sha256": "f165e62044df2129b5cc533d3199cf81ae23d263617f39437ee37be87d3b37fe"
+      },
+      "artifact_sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71.jsonld"
+    }
+  ]
 }

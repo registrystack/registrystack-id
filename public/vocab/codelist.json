@@ -8,9 +8,9 @@
   "owner": "relay-v2",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+    "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
     "path": "crates/registry-relay-v2/src/semantics.rs",
-    "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+    "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
   },
   "id": "https://id.registrystack.org/vocab/codelist",
   "documented_by": [
