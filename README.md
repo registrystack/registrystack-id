@@ -130,6 +130,11 @@ these repository secrets before enabling it:
 The initial deployment, DNS record, and Worker route were created manually from
 the Cloudflare dashboard.
 
+After each deployment, the workflow runs `npm run smoke:problem-routes`, which
+fetches every active problem identifier from the same vendored catalog against
+the live host and fails the deployment if any of them does not return HTTP
+200.
+
 The `ci.yml` workflow checks every pull request against the exact pinned
 Registry Stack commit, rebuilds the site, runs a local availability smoke, and
 lints the workflows.
@@ -146,4 +151,6 @@ go to Registry Stack source or a separate publisher branch.
 The scheduled `smoke-live.yml` workflow checks representative active problem,
 schema, and vocabulary identifiers, plus the absence of one removed namespace.
 Availability is monitored after publication and is not a Registry Stack
-source-build gate.
+source-build gate. The post-deploy `smoke:problem-routes` step in
+`deploy-cloudflare-workers.yml` is narrower and exhaustive rather than
+representative: it checks every active problem identifier, every time.
