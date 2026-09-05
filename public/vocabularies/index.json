@@ -10,9 +10,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+        "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
       "id": "https://id.registrystack.org/vocab/core/",
       "documented_by": [
@@ -45,11 +45,41 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "products/relay-v2/CONCEPT.md",
-        "sha256": "9ffd47dc4e72770e924d050aa3e1d47225db3dc78bd762570a85a96f4a416799"
+        "sha256": "5a60dadc119db6869534f2087ca817fe68f86625d3a48510eb26f99774fd62ed"
       },
       "id": "https://id.registrystack.org/vocab/handling",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/vocab/registry-record/",
+      "title": "Registry Record vocabulary",
+      "description": "Vocabulary base for Registry Record v1 response-profile terms.",
+      "kind": "vocabulary",
+      "status": "active",
+      "compatibility_line": "v1",
+      "owner": "registry-record",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
+        "path": "products/registry-record/context/registry-record-v1.jsonld",
+        "sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71"
+      },
+      "id": "https://id.registrystack.org/vocab/registry-record/",
       "documented_by": [
         {
           "title": "Contracts and machine identifiers",
@@ -75,9 +105,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+        "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
       "id": "https://id.registrystack.org/vocab/codelist",
       "documented_by": [
@@ -105,9 +135,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+        "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
       "id": "https://id.registrystack.org/vocab/coordinateReferenceSystem",
       "documented_by": [
@@ -135,9 +165,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+        "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
       "id": "https://id.registrystack.org/vocab/geometryType",
       "documented_by": [
@@ -165,9 +195,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+        "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
+        "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
       "id": "https://id.registrystack.org/vocab/sourceRequired",
       "documented_by": [

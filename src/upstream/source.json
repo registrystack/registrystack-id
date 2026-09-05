@@ -1,7 +1,7 @@
 {
   "version": 1,
   "repository": "https://github.com/registrystack/registry-stack",
-  "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+  "commit": "48e4b1cfd92d26eec42784ac2a626b787de3f396",
   "catalog_path": "products/identifiers/generated/catalog.v1.json",
-  "catalog_sha256": "194b01f00eb0dbf721700b3c61adc3b32bff19f2a80557dac7bb4f6db66b7e0f"
+  "catalog_sha256": "3a957746f8808ea8d7c83830b2071c306aab686d78fd6caedefceb297336f8d9"
 }
