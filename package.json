@@ -9,9 +9,10 @@
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
     "check:upstream": "node scripts/check-upstream-artifacts.mjs",
+    "check:problem-routes": "node scripts/check-problem-routes.mjs",
     "report:catalog": "node scripts/report-catalog-change.mjs",
     "smoke:live": "node scripts/smoke-live.mjs",
-    "test": "node --test scripts/*.test.mjs && npm run check"
+    "test": "node --test scripts/*.test.mjs && npm run check && npm run check:problem-routes"
   },
   "engines": {
     "node": ">=22.12.0"

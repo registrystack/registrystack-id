@@ -77,6 +77,13 @@ npm run build
 npm test
 ```
 
+`npm test` also runs `npm run check:problem-routes`, which reads every
+`kind: "problem"` entry from the vendored `src/upstream/catalog.v1.json` and
+asserts that its canonical URI has a matching route under `public/`, with no
+live network dependency. That vendored copy is the one `npm run import:catalog`
+refreshes; there is no other check step here that talks to Registry Stack
+directly.
+
 `npm run report:catalog -- <base-ref>` renders the added, removed, metadata-
 updated, and artifact-updated identifier sets for review.
 
