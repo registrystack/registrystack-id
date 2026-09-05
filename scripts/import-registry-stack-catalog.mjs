@@ -53,6 +53,32 @@ function gitFile(stackRoot, revision, path) {
   return gitOutput(stackRoot, 'show', `${revision}:${path}`);
 }
 
+const catalogFiles = {
+  problem: 'src/catalogs/problems.json',
+  schema: 'src/catalogs/schemas.json',
+  context: 'src/catalogs/contexts.json',
+  profile: 'src/catalogs/profiles.json',
+  namespace: 'src/catalogs/namespaces.json',
+  vocabulary: 'src/catalogs/vocabularies.json',
+  'vocabulary-term': 'src/catalogs/vocabulary-terms.json',
+};
+
+/**
+ * Refuse a source catalog kind this publisher does not carry, so a new kind in
+ * Registry Stack is a deliberate publisher change rather than a silent drop.
+ */
+export function assertSupportedKind(kind) {
+  if (!Object.hasOwn(catalogFiles, kind)) {
+    throw new Error(`unsupported identifier kind: ${kind}`);
+  }
+  return kind;
+}
+
+/** The publisher catalog file that carries one identifier kind. */
+export function catalogFileForKind(kind) {
+  return catalogFiles[assertSupportedKind(kind)];
+}
+
 function uriForProblem(entry) {
   return `${baseUrl}/problems/${entry.product}/${entry.path}`;
 }
@@ -230,34 +256,18 @@ export function importCatalog(stackRoot, revision) {
   }
   validateSourceBindings(stackRoot, resolvedRevision, catalog.entries);
 
-  const previous = {
-    problem: readJson('src/catalogs/problems.json').entries,
-    schema: readJson('src/catalogs/schemas.json').entries,
-    context: readJson('src/catalogs/contexts.json').entries,
-    namespace: readJson('src/catalogs/namespaces.json').entries,
-    vocabulary: existsSync(resolve(repoRoot, 'src/catalogs/vocabularies.json'))
-      ? readJson('src/catalogs/vocabularies.json').entries
-      : [],
-    'vocabulary-term': existsSync(
-      resolve(repoRoot, 'src/catalogs/vocabulary-terms.json'),
-    )
-      ? readJson('src/catalogs/vocabulary-terms.json').entries
-      : [],
-  };
+  const previous = {};
+  const imported = {};
+  for (const [kind, file] of Object.entries(catalogFiles)) {
+    previous[kind] = existsSync(resolve(repoRoot, file))
+      ? readJson(file).entries
+      : [];
+    imported[kind] = [];
+  }
   assertKindsAreStable(previous, catalog.entries);
 
-  const imported = {
-    problem: [],
-    schema: [],
-    context: [],
-    namespace: [],
-    vocabulary: [],
-    'vocabulary-term': [],
-  };
   for (const entry of catalog.entries) {
-    if (!(entry.kind in imported)) {
-      throw new Error(`unsupported identifier kind: ${entry.kind}`);
-    }
+    assertSupportedKind(entry.kind);
     if (entry.kind === 'problem') {
       imported.problem.push(problemEntry(entry, resolvedRevision));
       continue;
@@ -278,34 +288,19 @@ export function importCatalog(stackRoot, revision) {
     ),
   );
 
-  writeJson('src/catalogs/problems.json', {
-    generated_from: `${sourceRepository}/blob/${resolvedRevision}/${catalogPath}`,
-    generated_at: new Date(0).toISOString(),
-    entries: mergeCatalog(previous.problem, imported.problem, 'problem'),
-  });
-  writeJson('src/catalogs/schemas.json', {
-    entries: mergeCatalog(previous.schema, imported.schema, 'schema'),
-  });
-  writeJson('src/catalogs/contexts.json', {
-    entries: mergeCatalog(previous.context, imported.context, 'context'),
-  });
-  writeJson('src/catalogs/namespaces.json', {
-    entries: mergeCatalog(previous.namespace, imported.namespace, 'namespace'),
-  });
-  writeJson('src/catalogs/vocabularies.json', {
-    entries: mergeCatalog(
-      previous.vocabulary,
-      imported.vocabulary,
-      'vocabulary',
-    ),
-  });
-  writeJson('src/catalogs/vocabulary-terms.json', {
-    entries: mergeCatalog(
-      previous['vocabulary-term'],
-      imported['vocabulary-term'],
-      'vocabulary-term',
-    ),
-  });
+  for (const [kind, file] of Object.entries(catalogFiles)) {
+    const entries = mergeCatalog(previous[kind], imported[kind], kind);
+    writeJson(
+      file,
+      kind === 'problem'
+        ? {
+            generated_from: `${sourceRepository}/blob/${resolvedRevision}/${catalogPath}`,
+            generated_at: new Date(0).toISOString(),
+            entries,
+          }
+        : { entries },
+    );
+  }
 
   const vendoredCatalog = resolve(repoRoot, 'src/upstream/catalog.v1.json');
   mkdirSync(dirname(vendoredCatalog), { recursive: true });

@@ -5,7 +5,7 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, relative, resolve } from 'node:path';
+import { dirname, extname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -48,6 +48,32 @@ const productDocumentation = new Map([
   ['registry-relay', [documentation.relayProduct, documentation.relayApi]],
   ['registry-manifest', [documentation.manifestProduct]],
 ]);
+
+// Identifiers that publish bytes at their canonical URI. The noun names the
+// artifact in prose, and the content type is what the resolver serves for that
+// URI.
+const artifactKinds = {
+  schema: {
+    noun: 'JSON Schema',
+    contentType: 'application/schema+json; charset=utf-8',
+  },
+  context: {
+    noun: 'JSON-LD context',
+    contentType: 'application/ld+json; charset=utf-8',
+  },
+  profile: {
+    noun: 'profile document',
+    contentType: 'text/markdown; charset=utf-8',
+  },
+};
+
+// The content type of an immutable copy under the digest path, read from the
+// extension the import gave it.
+const artifactContentTypes = {
+  '.json': 'application/json; charset=utf-8',
+  '.jsonld': 'application/ld+json; charset=utf-8',
+  '.md': 'text/markdown; charset=utf-8',
+};
 
 function readJson(path) {
   return JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
@@ -416,52 +442,32 @@ ${renderLinks(record.documented_by)}
   writeOutput(recordPath, json(record));
 }
 
-function writeSchema(entry) {
-  const path = uriToPath(entry.uri);
-  const pagePath = path.endsWith('.json')
-    ? `${path.replace(/\.json$/, '')}/index.html`
+// An identifier that carries a file extension publishes its artifact under that
+// name and its page as an index inside a directory beside it. One without an
+// extension keeps the bare path for the artifact and takes the .html path for
+// the page, so the two never claim the same name.
+function artifactPagePath(path) {
+  const extension = extname(path);
+  return extension
+    ? `${path.slice(0, -extension.length)}/index.html`
     : `${path}.html`;
-  copyOutput(entry.source, path);
-  if (entry.immutable_uri) {
-    copyOutput(entry.source, uriToPath(entry.immutable_uri));
-  }
-  const docs = documentationForIdentifier({ ...entry, product: entry.product ?? 'registry-relay' });
-  const body = `    <h1>${escapeHtml(entry.title)}</h1>
-    <p><code>${escapeHtml(entry.uri)}</code></p>
-    <p>${escapeHtml(entry.description)}</p>
-    <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
-      <p>${escapeHtml(resolverAuthorityStatement)}</p>
-      <p>The canonical machine artifact at this URI is the JSON Schema itself.</p>
-    </section>
-    <h2>Lifecycle</h2>
-${renderFacts([
-  { label: 'Status', value: entry.status },
-  { label: 'Compatibility line', value: entry.compatibility_line },
-  { label: 'Owner', value: entry.owner },
-  { label: 'Artifact SHA-256', html: entry.artifact_sha256 ? `<code>${escapeHtml(entry.artifact_sha256)}</code>` : undefined },
-  { label: 'Immutable artifact', html: entry.immutable_uri ? `<a href="${escapeHtml(entry.immutable_uri)}">${escapeHtml(entry.immutable_uri)}</a>` : undefined },
-])}
-    <h2>Documentation</h2>
-${renderLinks(docs)}
-    <p><a href="${escapeHtml(entry.uri)}">JSON Schema</a></p>`;
-  writeOutput(pagePath, page(entry.title, body));
 }
 
-function writeContext(entry) {
+function writeArtifactIdentifier(entry) {
+  const { noun } = artifactKinds[entry.kind];
   const path = uriToPath(entry.uri);
   copyOutput(entry.source, path);
   if (entry.immutable_uri) {
     copyOutput(entry.source, uriToPath(entry.immutable_uri));
   }
-  const docs = documentationForIdentifier({ ...entry, product: entry.product ?? 'registry-relay' });
+  const docs = documentationForIdentifier(entry);
   const body = `    <h1>${escapeHtml(entry.title)}</h1>
     <p><code>${escapeHtml(entry.uri)}</code></p>
     <p>${escapeHtml(entry.description)}</p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
-      <p>The canonical machine artifact at this URI is the JSON-LD context itself.</p>
+      <p>The canonical machine artifact at this URI is the ${escapeHtml(noun)} itself.</p>
     </section>
     <h2>Lifecycle</h2>
 ${renderFacts([
@@ -473,11 +479,11 @@ ${renderFacts([
 ])}
     <h2>Documentation</h2>
 ${renderLinks(docs)}
-    <p><a href="${escapeHtml(entry.uri)}">JSON-LD context</a></p>`;
-  writeOutput(`${path.replace(/\.jsonld$/, '')}/index.html`, page(entry.title, body));
+    <p><a href="${escapeHtml(entry.uri)}">${escapeHtml(noun)}</a></p>`;
+  writeOutput(artifactPagePath(path), page(entry.title, body));
 }
 
-function writeStaticControls(schemaEntries) {
+function writeStaticControls(artifactEntries) {
   const machineHeaders = [
     {
       path: 'index.json',
@@ -496,6 +502,11 @@ function writeStaticControls(schemaEntries) {
     },
     {
       path: 'contexts/index.json',
+      contentType: 'application/json; charset=utf-8',
+      cache: 'public, max-age=300',
+    },
+    {
+      path: 'profiles/index.json',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
     },
@@ -530,25 +541,33 @@ function writeStaticControls(schemaEntries) {
       cache: 'public, max-age=86400',
     },
     {
-      path: 'artifacts/sha256/*',
-      contentType: 'application/json; charset=utf-8',
-      cache: 'public, max-age=31536000, immutable',
-    },
-    {
       path: '.well-known/registrystack-identifiers',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
     },
   ];
-  for (const entry of schemaEntries) {
-    const path = uriToPath(entry.uri);
-    if (!path.endsWith('.json')) {
-      machineHeaders.push({
-        path,
-        contentType: 'application/schema+json; charset=utf-8',
-        cache: 'public, max-age=86400',
-      });
+  // Every published artifact names its own content type: the canonical URI
+  // serves the kind's artifact, and the digest path serves the same bytes
+  // forever, so neither can rely on a wildcard that assumes JSON.
+  for (const entry of artifactEntries) {
+    machineHeaders.push({
+      path: uriToPath(entry.uri),
+      contentType: artifactKinds[entry.kind].contentType,
+      cache: 'public, max-age=86400',
+    });
+    if (!entry.immutable_uri) {
+      continue;
     }
+    const immutablePath = uriToPath(entry.immutable_uri);
+    const contentType = artifactContentTypes[extname(immutablePath)];
+    if (!contentType) {
+      throw new Error(`unsupported immutable artifact type: ${immutablePath}`);
+    }
+    machineHeaders.push({
+      path: immutablePath,
+      contentType,
+      cache: 'public, max-age=31536000, immutable',
+    });
   }
 
   const exactHeaders = machineHeaders
@@ -577,13 +596,15 @@ const problems = readJson('src/catalogs/problems.json').entries;
 const namespaces = readJson('src/catalogs/namespaces.json').entries;
 const schemas = readJson('src/catalogs/schemas.json').entries;
 const contexts = readJson('src/catalogs/contexts.json').entries;
+const profiles = readJson('src/catalogs/profiles.json').entries;
 const vocabularies = readJson('src/catalogs/vocabularies.json').entries;
 const vocabularyTerms = readJson('src/catalogs/vocabulary-terms.json').entries;
 
+const artifactIdentifiers = [...schemas, ...contexts, ...profiles];
+
 for (const entry of problems) writeProblem(entry);
 for (const entry of namespaces) writeIdentifier(entry);
-for (const entry of schemas) writeSchema(entry);
-for (const entry of contexts) writeContext(entry);
+for (const entry of artifactIdentifiers) writeArtifactIdentifier(entry);
 for (const entry of vocabularies) writeIdentifier(entry);
 for (const entry of vocabularyTerms) writeIdentifier(entry);
 
@@ -591,6 +612,7 @@ writeCatalogIndex('Problems', problems, problemUri);
 writeCatalogIndex('Namespaces', namespaces, (entry) => entry.uri.replace(/#$/, ''));
 writeCatalogIndex('Schemas', schemas, (entry) => entry.uri);
 writeCatalogIndex('Contexts', contexts, (entry) => entry.uri);
+writeCatalogIndex('Profiles', profiles, (entry) => entry.uri);
 writeCatalogIndex(
   'Vocabularies',
   [...vocabularies, ...vocabularyTerms],
@@ -601,6 +623,7 @@ writeOutput('problems/index.json', json({ entries: problems.map(problemRecord) }
 writeOutput('namespaces/index.json', json({ entries: namespaces.map(identifierRecord) }));
 writeOutput('schemas/index.json', json({ entries: schemas.map(identifierRecord) }));
 writeOutput('contexts/index.json', json({ entries: contexts.map(identifierRecord) }));
+writeOutput('profiles/index.json', json({ entries: profiles.map(identifierRecord) }));
 writeOutput('vocabularies/index.json', json({
   entries: [...vocabularies, ...vocabularyTerms].map(identifierRecord),
 }));
@@ -625,11 +648,12 @@ writeOutput('index.json', json({
     namespaces: `${baseUrl}/namespaces/index.json`,
     schemas: `${baseUrl}/schemas/index.json`,
     contexts: `${baseUrl}/contexts/index.json`,
+    profiles: `${baseUrl}/profiles/index.json`,
     vocabularies: `${baseUrl}/vocabularies/index.json`,
   },
 }));
 writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry Stack identifiers</h1>
-    <p>Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, and contexts.</p>
+    <p>Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, contexts, and profiles.</p>
     <section class="notice" aria-labelledby="authority">
       <h2 id="authority">Authority Boundary</h2>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
@@ -639,6 +663,7 @@ writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry S
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
       <li><a href="/contexts/">Contexts</a></li>
+      <li><a href="/profiles/">Profiles</a></li>
       <li><a href="/vocabularies/">Vocabularies</a></li>
     </ul>`));
 writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not found</h1>
@@ -653,13 +678,14 @@ writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not fou
       <li><a href="/namespaces/">Namespaces</a></li>
       <li><a href="/schemas/">Schemas</a></li>
       <li><a href="/contexts/">Contexts</a></li>
+      <li><a href="/profiles/">Profiles</a></li>
       <li><a href="/vocabularies/">Vocabularies</a></li>
     </ul>`));
 writeOutput('llms.txt', `# Registry Stack identifier resolver
 
 Canonical host: ${baseUrl}/
 
-This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces and vocabularies, JSON Schemas, and JSON-LD contexts.
+This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces and vocabularies, JSON Schemas, JSON-LD contexts, and response profiles.
 
 Authority boundary: ${resolverAuthorityStatement}
 
@@ -672,6 +698,7 @@ Machine catalogs:
 - ${baseUrl}/schemas/index.json
 - ${baseUrl}/namespaces/index.json
 - ${baseUrl}/contexts/index.json
+- ${baseUrl}/profiles/index.json
 - ${baseUrl}/vocabularies/index.json
 
 Public documentation:
@@ -681,6 +708,6 @@ Public documentation:
 - ${docsBaseUrl}/llms.txt
 - ${docsBaseUrl}/llms-full.txt
 `);
-writeStaticControls(schemas);
+writeStaticControls(artifactIdentifiers);
 
 console.log(`built ${relative(process.cwd(), outputDir)}`);

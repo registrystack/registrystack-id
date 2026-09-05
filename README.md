@@ -2,7 +2,8 @@
 
 This repository prepares the static site for `https://id.registrystack.org/`.
 It hosts stable machine identifiers owned by Registry Stack: problem type URIs,
-JSON-LD namespaces and vocabularies, JSON Schemas, and JSON-LD contexts.
+JSON-LD namespaces and vocabularies, JSON Schemas, JSON-LD contexts, and
+response profiles.
 
 The authoritative current-source catalog lives in the `registry-stack`
 repository under `products/identifiers/`. This repository is the exact-source
@@ -30,8 +31,9 @@ Published identifiers are stable contracts.
 - Use `code` for programmatic branching in client code. Problem `type` URLs are
   identifiers and documentation pointers, not a parsing interface.
 - Keep generated static files in sync with `src/catalogs/`.
-- Publish imported schema bytes at their canonical URI and at an immutable
-  SHA-256 artifact URI.
+- Publish imported schema, context, and profile bytes at their canonical URI
+  and at an immutable SHA-256 artifact URI, each served with the content type
+  its kind defines.
 - Resolve Relay V2's authored `vocab/core/<field>` predicates to the governed
   core vocabulary record. The record states that child terms are adopter-owned
   and that resolution does not register or review a child term.
@@ -80,9 +82,11 @@ npm test
 `npm test` also runs `npm run check:problem-routes`, which reads every
 `kind: "problem"` entry from the vendored `src/upstream/catalog.v1.json` and
 asserts that its canonical URI has a matching route under `public/`, with no
-live network dependency. That vendored copy is the one `npm run import:catalog`
-refreshes; there is no other check step here that talks to Registry Stack
-directly.
+live network dependency. It checks every other entry that publishes bytes the
+same way: the artifact at its canonical URI, the page beside it, and the
+immutable copy under `artifacts/sha256/`. That vendored copy is the one
+`npm run import:catalog` refreshes; there is no other check step here that talks
+to Registry Stack directly.
 
 `npm run report:catalog -- <base-ref>` renders the added, removed, metadata-
 updated, and artifact-updated identifier sets for review.
