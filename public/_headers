@@ -62,40 +62,20 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
 
-/schemas/breg/authoring/registry-module.v1alpha1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
-
 /artifacts/sha256/581cd380fa3c33ed81d56ef4d88a514a34ee1e7665128f3b657a7f1124e182fc.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
-
-/schemas/breg/authoring/registry-project.v1alpha1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
 
 /artifacts/sha256/fbdcd49bfc04974e387dad5fbdbc450b7e12dca8e7b8168c7f227fb352bffb70.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
 
-/schemas/breg/runtime/runtime.v1alpha1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
-
 /artifacts/sha256/27e592e90e643a7fb58045deb716678d3740be17bc60f9fdb109bb28cd9b7f95.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
-
-/schemas/identifiers/catalog.v1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
 
 /artifacts/sha256/e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d.json
   Content-Type: application/json; charset=utf-8
@@ -122,20 +102,10 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
 
-/schemas/registry-relay/authoring/registry.v2alpha1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
-
 /artifacts/sha256/c030917d19b1f50c8d2b41fc7b2ef4fb07b803b5fa98ffd971f5c964f491f7e5.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
-
-/schemas/registry-relay/authoring/runtime.v2alpha1.schema.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400
 
 /artifacts/sha256/9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b.json
   Content-Type: application/json; charset=utf-8
