@@ -12,6 +12,7 @@
     "check:problem-routes": "node scripts/check-problem-routes.mjs",
     "report:catalog": "node scripts/report-catalog-change.mjs",
     "smoke:live": "node scripts/smoke-live.mjs",
+    "smoke:problem-routes": "node scripts/smoke-problem-routes.mjs",
     "test": "node --test scripts/*.test.mjs && npm run check && npm run check:problem-routes"
   },
   "engines": {
