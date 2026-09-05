@@ -2,7 +2,7 @@
 
 Canonical host: https://id.registrystack.org/
 
-This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces and vocabularies, JSON Schemas, and JSON-LD contexts.
+This host resolves stable Registry Stack identifiers for problem types, JSON-LD namespaces and vocabularies, JSON Schemas, JSON-LD contexts, and response profiles.
 
 Authority boundary: This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.
 
@@ -15,6 +15,7 @@ Machine catalogs:
 - https://id.registrystack.org/schemas/index.json
 - https://id.registrystack.org/namespaces/index.json
 - https://id.registrystack.org/contexts/index.json
+- https://id.registrystack.org/profiles/index.json
 - https://id.registrystack.org/vocabularies/index.json
 
 Public documentation:

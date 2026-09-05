@@ -15,6 +15,7 @@
     "namespaces": "https://id.registrystack.org/namespaces/index.json",
     "schemas": "https://id.registrystack.org/schemas/index.json",
     "contexts": "https://id.registrystack.org/contexts/index.json",
+    "profiles": "https://id.registrystack.org/profiles/index.json",
     "vocabularies": "https://id.registrystack.org/vocabularies/index.json"
   }
 }

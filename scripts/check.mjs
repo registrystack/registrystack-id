@@ -92,6 +92,7 @@ function checkCatalogBindings() {
     ['problem', readJson('src/catalogs/problems.json').entries],
     ['schema', readJson('src/catalogs/schemas.json').entries],
     ['context', readJson('src/catalogs/contexts.json').entries],
+    ['profile', readJson('src/catalogs/profiles.json').entries],
     ['namespace', readJson('src/catalogs/namespaces.json').entries],
     ['vocabulary', readJson('src/catalogs/vocabularies.json').entries],
     [

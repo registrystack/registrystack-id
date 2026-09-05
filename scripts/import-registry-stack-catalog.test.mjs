@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  assertSupportedKind,
+  catalogFileForKind,
   mergeCatalog,
   parseArguments,
 } from './import-registry-stack-catalog.mjs';
@@ -85,5 +87,32 @@ test('catalog merge rejects duplicate imported identifiers', () => {
   assert.throws(
     () => mergeCatalog([], [entry, entry], 'schema'),
     /duplicate imported/,
+  );
+});
+
+test('every source catalog kind has a publisher catalog file', () => {
+  assert.equal(catalogFileForKind('problem'), 'src/catalogs/problems.json');
+  assert.equal(catalogFileForKind('schema'), 'src/catalogs/schemas.json');
+  assert.equal(catalogFileForKind('context'), 'src/catalogs/contexts.json');
+  assert.equal(catalogFileForKind('profile'), 'src/catalogs/profiles.json');
+  assert.equal(catalogFileForKind('namespace'), 'src/catalogs/namespaces.json');
+  assert.equal(
+    catalogFileForKind('vocabulary'),
+    'src/catalogs/vocabularies.json',
+  );
+  assert.equal(
+    catalogFileForKind('vocabulary-term'),
+    'src/catalogs/vocabulary-terms.json',
+  );
+});
+
+test('an identifier kind the publisher does not carry is refused', () => {
+  assert.throws(
+    () => assertSupportedKind('credential'),
+    /unsupported identifier kind: credential/,
+  );
+  assert.throws(
+    () => catalogFileForKind('toString'),
+    /unsupported identifier kind/,
   );
 });

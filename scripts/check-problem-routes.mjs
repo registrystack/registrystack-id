@@ -1,6 +1,7 @@
-// Confirms every problem identifier in the vendored Registry Stack catalog
-// resolves to a route on the built site (public/), with no live network
-// dependency. This reads src/upstream/catalog.v1.json, the vendored,
+// Confirms every problem identifier in the vendored Registry Stack catalog, and
+// every artifact-backed identifier beside it, resolves to a route on the built
+// site (public/), with no live network dependency. This reads
+// src/upstream/catalog.v1.json, the vendored,
 // digest-bound copy of registry-stack's
 // products/identifiers/generated/catalog.v1.json pinned by
 // src/upstream/source.json. Refresh that vendored copy with:
@@ -14,7 +15,7 @@
 // the expected route straight from the vendored upstream catalog, so it does
 // not depend on that cross-check having already run.
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -32,6 +33,30 @@ export function problemProductAndPath(entry) {
     throw new Error(`invalid problem identifier in vendored catalog: ${entry.uri}`);
   }
   return { product: match[1], path: match[2] };
+}
+
+/**
+ * The routes an identifier that publishes bytes owns on the built site: the
+ * artifact at its canonical URI, the human page beside it, and the immutable
+ * copy under the digest path. An identifier whose URI carries a file extension
+ * keeps that extension for the artifact and takes an index page in a directory
+ * named after it, so the two never claim the same path.
+ */
+export function identifierRoutes(entry) {
+  if (!entry.uri.startsWith(`${baseUrl}/`)) {
+    throw new Error(`identifier outside the resolver host: ${entry.uri}`);
+  }
+  const artifact = entry.uri.slice(`${baseUrl}/`.length);
+  const extension = extname(artifact);
+  const page = extension
+    ? `${artifact.slice(0, -extension.length)}/index.html`
+    : `${artifact}.html`;
+  const artifactExtension = extname(entry.artifact.path) || '.bin';
+  return {
+    artifact,
+    page,
+    immutable: `artifacts/sha256/${entry.artifact.sha256}${artifactExtension}`,
+  };
 }
 
 export function sameHttpStatuses(published, upstream) {
@@ -83,6 +108,34 @@ export function checkProblemRoutes(publicDir) {
   return { total: problems.length, routesByProduct };
 }
 
+export function checkIdentifierRoutes(publicDir) {
+  const catalog = readJson('src/upstream/catalog.v1.json');
+  const identifiers = catalog.entries.filter(
+    (entry) => entry.kind !== 'problem' && entry.artifact,
+  );
+  const routesByKind = new Map();
+  for (const entry of identifiers) {
+    if (entry.status !== 'active') {
+      throw new Error(
+        `vendored upstream catalog contains a non-active identifier: ${entry.uri}`,
+      );
+    }
+    const routes = identifierRoutes(entry);
+    for (const route of [routes.artifact, routes.page, routes.immutable]) {
+      if (!existsSync(resolve(publicDir, route))) {
+        throw new Error(
+          `catalog identifier has no built route: ${entry.uri} (missing ${route})`,
+        );
+      }
+    }
+    if (!routesByKind.has(entry.kind)) {
+      routesByKind.set(entry.kind, []);
+    }
+    routesByKind.get(entry.kind).push(entry.uri);
+  }
+  return { total: identifiers.length, routesByKind };
+}
+
 const isMain =
   process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
@@ -99,5 +152,19 @@ if (isMain) {
   }
   console.log(
     `${total} catalog problem identifiers all resolve to routes on the built site`,
+  );
+
+  const identifiers = checkIdentifierRoutes(publicDir);
+  for (const [kind, uris] of [...identifiers.routesByKind.entries()].sort(
+    ([left], [right]) => left.localeCompare(right),
+  )) {
+    uris.sort((left, right) => left.localeCompare(right));
+    console.log(`${kind}: ${uris.length} artifact identifier(s) resolved`);
+    for (const uri of uris) {
+      console.log(`  ${uri}`);
+    }
+  }
+  console.log(
+    `${identifiers.total} catalog artifact identifiers all resolve to an artifact, a page, and an immutable copy`,
   );
 }
