@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "products/identifiers/contracts/catalog.v1.schema.json",
         "sha256": "25eb7b86185ab1d3aa5919752790c2600b5610b484397836eab17b82924e9d01"
       },
@@ -44,9 +44,9 @@
       "source": "src/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/artifacts.rs",
-        "sha256": "7ed7c76aa09ff3ffc2ee9f7fea17f8378f1246fc5855a10cda50a7920e711a1a"
+        "sha256": "11101d8c32539b21051940790c36d72a3fb2dddd6a4ad10796623b456a55431d"
       },
       "artifact_sha256": "e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json",
@@ -82,15 +82,15 @@
       "status": "active",
       "compatibility_line": "v2alpha1",
       "owner": "relay-v2",
-      "source": "src/artifacts/sha256/caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186.json",
+      "source": "src/artifacts/sha256/d7a3d7b6dc9c1904fc067f0779c941ff247b26feb3a62f8d391b04f463c5a2ca.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relayctl/schemas/authoring/registry.schema.json",
-        "sha256": "caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186"
+        "sha256": "d7a3d7b6dc9c1904fc067f0779c941ff247b26feb3a62f8d391b04f463c5a2ca"
       },
-      "artifact_sha256": "caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/caed080f4eef3c39d8728cb56722d8d7f5cad6342d46750a0046eb2c5defc186.json",
+      "artifact_sha256": "d7a3d7b6dc9c1904fc067f0779c941ff247b26feb3a62f8d391b04f463c5a2ca",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/d7a3d7b6dc9c1904fc067f0779c941ff247b26feb3a62f8d391b04f463c5a2ca.json",
       "id": "https://id.registrystack.org/schemas/registry-relay/authoring/registry.v2alpha1.schema.json",
       "documented_by": [
         {
@@ -123,15 +123,15 @@
       "status": "active",
       "compatibility_line": "v2alpha1",
       "owner": "relay-v2",
-      "source": "src/artifacts/sha256/add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e.json",
+      "source": "src/artifacts/sha256/9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relayctl/schemas/authoring/runtime.schema.json",
-        "sha256": "add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e"
+        "sha256": "9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b"
       },
-      "artifact_sha256": "add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/add5e2aeb746d5d58706180ef8d9173817dbb907de0305830ee4b3f03322120e.json",
+      "artifact_sha256": "9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b.json",
       "id": "https://id.registrystack.org/schemas/registry-relay/authoring/runtime.v2alpha1.schema.json",
       "documented_by": [
         {

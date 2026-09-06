@@ -10,9 +10,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
       },
       "id": "https://id.registrystack.org/vocab/core/",
       "documented_by": [
@@ -45,9 +45,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "products/relay-v2/CONCEPT.md",
-        "sha256": "4695621a27198e37c02f235484c8ac61dadc3497da3e0d14350f1fc5c93c558d"
+        "sha256": "9ffd47dc4e72770e924d050aa3e1d47225db3dc78bd762570a85a96f4a416799"
       },
       "id": "https://id.registrystack.org/vocab/handling",
       "documented_by": [
@@ -75,9 +75,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
       },
       "id": "https://id.registrystack.org/vocab/codelist",
       "documented_by": [
@@ -105,9 +105,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
       },
       "id": "https://id.registrystack.org/vocab/coordinateReferenceSystem",
       "documented_by": [
@@ -135,9 +135,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
       },
       "id": "https://id.registrystack.org/vocab/geometryType",
       "documented_by": [
@@ -165,9 +165,9 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "f688b4f2580e1feea409cd561647d9ad42770d6b",
+        "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
         "path": "crates/registry-relay-v2/src/semantics.rs",
-        "sha256": "5614126aba7d38bff956209b6e68823b142e9f2ddf3c294d2f279cec72938218"
+        "sha256": "bac9c3e6ca299349a4bcde2ad51b77decff32efa268278722f5d17d436a76b00"
       },
       "id": "https://id.registrystack.org/vocab/sourceRequired",
       "documented_by": [

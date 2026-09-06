@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-discovery/invalid-request",
+  "type": "https://id.registrystack.org/problems/registry-discovery/invalid-request",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-discovery",
+  "code": "invalid-request",
+  "title": "Invalid request",
+  "summary": "The Discovery request is invalid.",
+  "description": "The Discovery request is invalid.",
+  "category": null,
+  "http_statuses": [
+    400
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "9200b8403415a988e0dc1a06c73df2e018af8db9",
+    "path": "crates/registry-discovery/src/problem.rs",
+    "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
+  }
+}
