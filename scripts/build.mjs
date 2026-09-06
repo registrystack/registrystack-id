@@ -67,14 +67,6 @@ const artifactKinds = {
   },
 };
 
-// The content type of an immutable copy under the digest path, read from the
-// extension the import gave it.
-const artifactContentTypes = {
-  '.json': 'application/json; charset=utf-8',
-  '.jsonld': 'application/ld+json; charset=utf-8',
-  '.md': 'text/markdown; charset=utf-8',
-};
-
 function readJson(path) {
   return JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
 }
@@ -582,18 +574,12 @@ function writeStaticControls(artifactEntries) {
     if (!entry.immutable_uri) {
       continue;
     }
+    // The digest path serves the same bytes as the canonical URI, so it
+    // carries the same content type; the file extension only names the copy.
     const immutablePath = uriToPath(entry.immutable_uri);
-    const immutableContentType = artifactContentTypes[extname(immutablePath)];
-    if (!immutableContentType) {
-      throw new Error(`unsupported immutable artifact type: ${immutablePath}`);
-    }
     const immutableCache = 'public, max-age=31536000, immutable';
-    if (!coveredByStaticRule(immutablePath, immutableContentType, immutableCache)) {
-      machineHeaders.push({
-        path: immutablePath,
-        contentType: immutableContentType,
-        cache: immutableCache,
-      });
+    if (!coveredByStaticRule(immutablePath, contentType, immutableCache)) {
+      machineHeaders.push({ path: immutablePath, contentType, cache: immutableCache });
     }
   }
 

@@ -76,3 +76,30 @@ test('_headers rules do not set a duplicated header name for any concrete path',
     }
   }
 });
+
+// Returns the Content-Type that the `_headers` rules serve for one concrete
+// path. The duplicated-header test above guarantees a single matching value.
+function contentTypeFor(rules, path) {
+  const values = rules
+    .filter((rule) => patternToRegExp(rule.path).test(path))
+    .map((rule) => rule.headers.get('Content-Type'))
+    .filter((value) => value !== undefined);
+  assert.equal(values.length, 1, `expected one Content-Type rule for ${path}, got ${JSON.stringify(values)}`);
+  return values[0];
+}
+
+test('an immutable artifact copy serves the same content type as its canonical URI', () => {
+  const rules = parseRules(buildHeaders());
+  const catalogs = ['schemas', 'contexts', 'profiles'];
+  let checked = 0;
+  for (const catalog of catalogs) {
+    const { entries } = JSON.parse(readFileSync(join(repoRoot, 'src', 'catalogs', `${catalog}.json`), 'utf8'));
+    for (const entry of entries.filter((candidate) => candidate.immutable_uri)) {
+      const canonical = contentTypeFor(rules, new URL(entry.uri).pathname);
+      const immutable = contentTypeFor(rules, new URL(entry.immutable_uri).pathname);
+      assert.equal(immutable, canonical, `${entry.immutable_uri} must serve the ${entry.kind} content type`);
+      checked += 1;
+    }
+  }
+  assert.ok(checked > 0, 'expected at least one immutable artifact copy in the catalogs');
+});
