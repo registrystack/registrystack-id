@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unauthorized | Registry Stack identifiers</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
+    main { display: grid; gap: 1rem; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+    h2 { margin-top: 2rem; }
+    p { margin-block: 0.5rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
+    a { color: LinkText; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
+    th { width: 12rem; }
+    .lede { font-size: 1.125rem; }
+    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Unauthorized</h1>
+    <p class="lede">The bearer credential is missing or refused.</p>
+    <p><code>https://id.registrystack.org/problems/registry-breg/authentication/refused</code></p>
+    <section class="notice" aria-labelledby="authority">
+      <h2 id="authority">Authority Boundary</h2>
+      <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
+      <p>For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.</p>
+    </section>
+    <section aria-labelledby="facts">
+      <h2 id="facts">Defined Facts</h2>
+<table>
+      <tbody>
+        <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-breg/authentication/refused</code></td></tr>
+        <tr><th>Kind</th><td>problem</td></tr>
+        <tr><th>Lifecycle status</th><td>active</td></tr>
+        <tr><th>Compatibility line</th><td>v1alpha1</td></tr>
+        <tr><th>Product</th><td>registry-breg</td></tr>
+        <tr><th>Code</th><td><code>authentication.refused</code></td></tr>
+        <tr><th>Category</th><td>not published</td></tr>
+        <tr><th>HTTP statuses</th><td>401</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <section aria-labelledby="documentation">
+      <h2 id="documentation">Documentation</h2>
+<ul>
+      <li><a href="https://docs.registrystack.org/reference/errors/">Error and status code reference</a></li>
+    </ul>
+    </section>
+    <section aria-labelledby="guidance">
+      <h2 id="guidance">Guidance</h2>
+<table>
+      <tbody>
+        <tr><th>Guidance status</th><td>not_published</td></tr>
+        <tr><th>Retryable</th><td>not published</td></tr>
+        <tr><th>Caller action</th><td>not published</td></tr>
+        <tr><th>Operator action</th><td>not published</td></tr>
+        <tr><th>Note</th><td>No per-identifier remediation guidance is published in this resolver record.</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <h2>Problem record</h2>
+    <pre><code>{
+  &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-breg/authentication/refused&quot;,
+  &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-breg/authentication/refused&quot;,
+  &quot;kind&quot;: &quot;problem&quot;,
+  &quot;lifecycle_status&quot;: &quot;active&quot;,
+  &quot;compatibility_line&quot;: &quot;v1alpha1&quot;,
+  &quot;product&quot;: &quot;registry-breg&quot;,
+  &quot;code&quot;: &quot;authentication.refused&quot;,
+  &quot;title&quot;: &quot;Unauthorized&quot;,
+  &quot;summary&quot;: &quot;The bearer credential is missing or refused.&quot;,
+  &quot;description&quot;: &quot;The bearer credential is missing or refused.&quot;,
+  &quot;category&quot;: null,
+  &quot;http_statuses&quot;: [
+    401
+  ],
+  &quot;guidance&quot;: {
+    &quot;status&quot;: &quot;not_published&quot;,
+    &quot;retryable&quot;: null,
+    &quot;caller_action&quot;: null,
+    &quot;operator_action&quot;: null,
+    &quot;note&quot;: &quot;No per-identifier remediation guidance is published in this resolver record.&quot;
+  },
+  &quot;documented_by&quot;: [
+    {
+      &quot;title&quot;: &quot;Error and status code reference&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/reference/errors/&quot;
+    }
+  ],
+  &quot;authority&quot;: {
+    &quot;scope&quot;: &quot;identifier metadata&quot;,
+    &quot;statement&quot;: &quot;This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.&quot;
+  },
+  &quot;identifier_policy&quot;: {
+    &quot;stability&quot;: &quot;stable&quot;,
+    &quot;programmatic_key&quot;: &quot;code&quot;,
+    &quot;parsing&quot;: &quot;Do not parse semantics from the URL path.&quot;
+  },
+  &quot;source_reference&quot;: {
+    &quot;repository&quot;: &quot;registry-stack&quot;,
+    &quot;commit&quot;: &quot;3a1e05d886eb2a738f5be3154664b806b7388c54&quot;,
+    &quot;path&quot;: &quot;crates/registry-breg/src/problem.rs&quot;,
+    &quot;sha256&quot;: &quot;dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2&quot;
+  }
+}</code></pre>
+    <p><a href="https://id.registrystack.org/problems/registry-breg/authentication/refused.json">Machine-readable JSON</a></p>
+  </main>
+</body>
+</html>

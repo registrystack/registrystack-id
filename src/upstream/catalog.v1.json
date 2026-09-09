@@ -30,7 +30,368 @@
       "description": "JSON-LD namespace for Registry Manifest terms.",
       "source": {
         "path": "crates/registry-manifest-core/src/lib.rs",
-        "sha256": "daf88b30e1fb8d98a3989f5e26ed4511fa5d1c1fab48787997cd3dabf0b03fae"
+        "sha256": "a8d8c58eb9f2eb10db68b26c9e285a11fa3f531d98bab19ecab52e2a37e4b17f"
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/action/evidence_failed",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Service Unavailable",
+      "description": "The declared Evidence dependency could not be accepted.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "action.evidence_failed",
+        "httpStatuses": [
+          503
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/action/handler_failed",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Internal Server Error",
+      "description": "The action handler could not produce an accepted result.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "action.handler_failed",
+        "httpStatuses": [
+          500
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/action/refused",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Unprocessable Entity",
+      "description": "The action was refused by a declared business rule.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "action.refused",
+        "httpStatuses": [
+          422
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/authentication/refused",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Unauthorized",
+      "description": "The bearer credential is missing or refused.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "authentication.refused",
+        "httpStatuses": [
+          401
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/idempotency/conflict",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Conflict",
+      "description": "The idempotency key is bound to another request.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "idempotency.conflict",
+        "httpStatuses": [
+          409
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/lookup/unresolved",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Not Found",
+      "description": "The lookup did not resolve exactly one record.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "lookup.unresolved",
+        "httpStatuses": [
+          404
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/mutation/conflict",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Conflict",
+      "description": "The mutation conflicts with current state.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "mutation.conflict",
+        "httpStatuses": [
+          409
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/precondition/failed",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Precondition Failed",
+      "description": "The mutation precondition failed.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "precondition.failed",
+        "httpStatuses": [
+          412
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/precondition/required",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Precondition Required",
+      "description": "The mutation precondition is required.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "precondition.required",
+        "httpStatuses": [
+          428
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/query/cursor_invalid",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Bad Request",
+      "description": "The query cursor is invalid.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "query.cursor_invalid",
+        "httpStatuses": [
+          400
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/query/invalid",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Bad Request",
+      "description": "The query request is invalid.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "query.invalid",
+        "httpStatuses": [
+          400
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/request/invalid",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Bad Request",
+      "description": "The request is invalid.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "request.invalid",
+        "httpStatuses": [
+          400
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/request/plan_refused",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Bad Request",
+      "description": "The change-request planner refused the submission, naming the failure kind.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "request.plan_refused",
+        "httpStatuses": [
+          400
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/request/timeout",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Gateway Timeout",
+      "description": "The request timed out.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "request.timeout",
+        "httpStatuses": [
+          504
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/resource/not_found",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Not Found",
+      "description": "The requested resource was not found.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "resource.not_found",
+        "httpStatuses": [
+          404
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/runtime/not_ready",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Service Unavailable",
+      "description": "Registry runtime is not ready.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "runtime.not_ready",
+        "httpStatuses": [
+          503
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/service/unavailable",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Service Unavailable",
+      "description": "The Registry mutation service is unavailable.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "service.unavailable",
+        "httpStatuses": [
+          503
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/source/unavailable",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Service Unavailable",
+      "description": "The Registry data service is unavailable.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "source.unavailable",
+        "httpStatuses": [
+          503
+        ]
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/problems/registry-breg/unsupported/media_type",
+      "kind": "problem",
+      "status": "active",
+      "compatibilityLine": "v1alpha1",
+      "owner": "breg",
+      "title": "Unsupported Media Type",
+      "description": "The request media type is not supported.",
+      "source": {
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      },
+      "problem": {
+        "code": "unsupported.media_type",
+        "httpStatuses": [
+          415
+        ]
       }
     },
     {
@@ -821,11 +1182,11 @@
       "description": "Base Registry Engine project authoring JSON Schema.",
       "source": {
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "e8e9f7a5d45b432df798d268d292094f518ace7124be8d2268d4f51a081508c7"
+        "sha256": "c6ed94a5503a4c6a7c5426add44846346873132065200dd09525b6b0cd2fb8ee"
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-module.schema.json",
-        "sha256": "581cd380fa3c33ed81d56ef4d88a514a34ee1e7665128f3b657a7f1124e182fc",
+        "sha256": "6b660ca268062996a138839051ba35b306673f1720256b40419f48a7abb1c44f",
         "mediaType": "application/schema+json"
       }
     },
@@ -839,11 +1200,11 @@
       "description": "Base Registry Engine project authoring JSON Schema.",
       "source": {
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "e8e9f7a5d45b432df798d268d292094f518ace7124be8d2268d4f51a081508c7"
+        "sha256": "c6ed94a5503a4c6a7c5426add44846346873132065200dd09525b6b0cd2fb8ee"
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-project.schema.json",
-        "sha256": "fbdcd49bfc04974e387dad5fbdbc450b7e12dca8e7b8168c7f227fb352bffb70",
+        "sha256": "f9724862a5922f80ae7b5ea9b87082697274cf79df29c950b2f2221c941f9a9e",
         "mediaType": "application/schema+json"
       }
     },
@@ -857,11 +1218,11 @@
       "description": "Base Registry Engine runtime configuration JSON Schema.",
       "source": {
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "e8e9f7a5d45b432df798d268d292094f518ace7124be8d2268d4f51a081508c7"
+        "sha256": "c6ed94a5503a4c6a7c5426add44846346873132065200dd09525b6b0cd2fb8ee"
       },
       "artifact": {
         "path": "products/breg/generated/runtime/runtime.schema.json",
-        "sha256": "27e592e90e643a7fb58045deb716678d3740be17bc60f9fdb109bb28cd9b7f95",
+        "sha256": "76bab2f49eef78995b5df8cf21d45a179cdfc9842041a0d7f0b291fc6d632c1d",
         "mediaType": "application/schema+json"
       }
     },

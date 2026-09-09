@@ -62,17 +62,17 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
 
-/artifacts/sha256/581cd380fa3c33ed81d56ef4d88a514a34ee1e7665128f3b657a7f1124e182fc.json
+/artifacts/sha256/6b660ca268062996a138839051ba35b306673f1720256b40419f48a7abb1c44f.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
 
-/artifacts/sha256/fbdcd49bfc04974e387dad5fbdbc450b7e12dca8e7b8168c7f227fb352bffb70.json
+/artifacts/sha256/f9724862a5922f80ae7b5ea9b87082697274cf79df29c950b2f2221c941f9a9e.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
 
-/artifacts/sha256/27e592e90e643a7fb58045deb716678d3740be17bc60f9fdb109bb28cd9b7f95.json
+/artifacts/sha256/76bab2f49eef78995b5df8cf21d45a179cdfc9842041a0d7f0b291fc6d632c1d.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
