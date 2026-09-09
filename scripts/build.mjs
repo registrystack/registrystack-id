@@ -358,7 +358,9 @@ function page(title, { description, current, body }) {
 </head>
 <body>
 ${siteHeader(current)}
+<main>
 ${body}
+</main>
 ${siteFooter()}
 </body>
 </html>
@@ -517,9 +519,22 @@ function identifierRecord(entry) {
   return record;
 }
 
+// Detail pages live under their canonical path prefix, which is not always
+// the catalog's own name: namespaces publish under /ns/ and vocabulary terms
+// under /vocab/. Both still tick their logical catalog in the masthead.
+const routePrefixCatalogKeys = new Map([
+  ['problems', 'problems'],
+  ['namespaces', 'namespaces'],
+  ['ns', 'namespaces'],
+  ['schemas', 'schemas'],
+  ['contexts', 'contexts'],
+  ['profiles', 'profiles'],
+  ['vocabularies', 'vocabularies'],
+  ['vocab', 'vocabularies'],
+]);
+
 function catalogKeyForUri(uri) {
-  const segment = uriToPath(uri).split('/')[0];
-  return siteCatalogs.some((catalog) => catalog.key === segment) ? segment : undefined;
+  return routePrefixCatalogKeys.get(uriToPath(uri).split('/')[0]);
 }
 
 function writeIdentifier(entry) {
