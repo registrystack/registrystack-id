@@ -1,6 +1,8 @@
+import { createHash } from 'node:crypto';
 import {
   cpSync,
   mkdirSync,
+  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
@@ -66,6 +68,33 @@ const artifactKinds = {
     contentType: 'text/markdown; charset=utf-8',
   },
 };
+
+const kindLabels = {
+  problem: 'Problem type',
+  namespace: 'Namespace',
+  schema: 'JSON Schema',
+  context: 'JSON-LD context',
+  profile: 'Response profile',
+  vocabulary: 'Vocabulary',
+  'vocabulary-term': 'Vocabulary term',
+};
+
+// The catalogs are this site's primary navigation, in masthead and footer.
+const siteCatalogs = [
+  { key: 'problems', href: '/problems/', label: 'Problems', title: 'Problem types' },
+  { key: 'namespaces', href: '/namespaces/', label: 'Namespaces', title: 'Namespaces' },
+  { key: 'schemas', href: '/schemas/', label: 'Schemas', title: 'Schemas' },
+  { key: 'contexts', href: '/contexts/', label: 'Contexts', title: 'Contexts' },
+  { key: 'profiles', href: '/profiles/', label: 'Profiles', title: 'Profiles' },
+  { key: 'vocabularies', href: '/vocabularies/', label: 'Vocabularies', title: 'Vocabularies' },
+];
+
+// Presentational assets are publisher-owned machinery, not identifiers. The
+// stylesheet is served under a content-hashed name so it can cache like the
+// immutable artifacts while the HTML that references it stays exact-source.
+const siteAssetsDir = 'src/assets';
+const siteCss = readFileSync(resolve(repoRoot, siteAssetsDir, 'site.css'));
+const siteCssPath = `assets/site.${createHash('sha256').update(siteCss).digest('hex').slice(0, 16)}.css`;
 
 function readJson(path) {
   return JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
@@ -198,9 +227,9 @@ function problemGuidance(entry) {
 
 function renderLinks(links) {
   if (!links.length) {
-    return '<p>No public documentation link is published for this identifier yet.</p>';
+    return '<p class="muted">No public documentation link is published for this identifier yet.</p>';
   }
-  return `<ul>
+  return `<ul class="doc-list">
 ${links
   .map(
     (link) =>
@@ -210,8 +239,12 @@ ${links
     </ul>`;
 }
 
+function notPublished() {
+  return '<span class="muted">not published</span>';
+}
+
 function renderFacts(items) {
-  return `<table>
+  return `<table class="facts">
       <tbody>
 ${items
   .filter((item) => {
@@ -230,15 +263,86 @@ ${items
 function renderGuidance(guidance) {
   const rows = [
     { label: 'Guidance status', value: guidance.status },
-    { label: 'Retryable', value: guidance.retryable === null ? 'not published' : String(guidance.retryable) },
-    { label: 'Caller action', value: guidance.caller_action ?? 'not published' },
-    { label: 'Operator action', value: guidance.operator_action ?? 'not published' },
+    { label: 'Retryable', html: guidance.retryable === null ? notPublished() : String(guidance.retryable) },
+    { label: 'Caller action', html: guidance.caller_action ? escapeHtml(guidance.caller_action) : notPublished() },
+    { label: 'Operator action', html: guidance.operator_action ? escapeHtml(guidance.operator_action) : notPublished() },
     { label: 'Note', value: guidance.note },
   ];
   return renderFacts(rows);
 }
 
-function page(title, body) {
+function statusChip(status) {
+  return `<span class="status">${escapeHtml(status)}</span>`;
+}
+
+function siteHeader(current) {
+  const nav = siteCatalogs
+    .map(
+      (catalog) =>
+        `    <a href="${catalog.href}"${current === catalog.key ? ' aria-current="page"' : ''}>${catalog.label}</a>`,
+    )
+    .join('\n');
+  return `<header class="site-header">
+  <a class="brand" href="https://registrystack.org/">
+    <span class="brand-mark" aria-hidden="true">RS</span>
+    <span>Registry Stack<span class="brand-site">Identifiers</span></span>
+  </a>
+  <nav class="top-nav" aria-label="Identifier catalogs">
+${nav}
+    <a class="nav-emphasis" href="${documentation.docsHome.href}">Documentation</a>
+  </nav>
+</header>`;
+}
+
+function siteFooter() {
+  const catalogLinks = siteCatalogs
+    .map(
+      (catalog) =>
+        `        <li><a href="${catalog.href}">${catalog.title}</a></li>`,
+    )
+    .join('\n');
+  return `<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="footer-brand-name" href="https://registrystack.org/">Registry Stack</a>
+      <p>Stable machine identifiers for Registry Stack products, published from a digest-bound source catalog.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <p class="footer-col-title">Catalogs</p>
+        <ul>
+${catalogLinks}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Registry Stack</p>
+        <ul>
+          <li><a href="https://registrystack.org/">Main website</a></li>
+          <li><a href="${documentation.docsHome.href}">Documentation</a></li>
+          <li><a href="https://github.com/registrystack/registry-stack">GitHub</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer-base">
+    <p>Machine index: <a href="/index.json">index.json</a> &middot; <a href="/llms.txt">llms.txt</a></p>
+    <p><a href="https://registrystack.org/">registrystack.org</a></p>
+  </div>
+</footer>`;
+}
+
+function hero({ eyebrow, title, lede, uri }) {
+  const uriChip = uri ? `\n    <p><code class="hero-uri">${escapeHtml(uri)}</code></p>` : '';
+  return `<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">${escapeHtml(eyebrow)}</p>
+    <h1>${escapeHtml(title)}</h1>
+    <p class="hero-lead">${escapeHtml(lede)}</p>${uriChip}
+  </div>
+</section>`;
+}
+
+function page(title, { description, current, body }) {
   const siteName = 'Registry Stack identifiers';
   const fullTitle = title === siteName ? siteName : `${title} | ${siteName}`;
   return `<!doctype html>
@@ -247,27 +351,14 @@ function page(title, body) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(fullTitle)}</title>
-  <style>
-    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
-    main { display: grid; gap: 1rem; }
-    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
-    h2 { margin-top: 2rem; }
-    p { margin-block: 0.5rem; }
-    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
-    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
-    a { color: LinkText; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
-    th { width: 12rem; }
-    .lede { font-size: 1.125rem; }
-    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
-  </style>
+  <meta name="description" content="${escapeHtml(description)}">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/${siteCssPath}">
 </head>
 <body>
-  <main>
+${siteHeader(current)}
 ${body}
-  </main>
+${siteFooter()}
 </body>
 </html>
 `;
@@ -321,24 +412,28 @@ function writeProblem(entry) {
   const uri = problemUri(entry);
   const record = problemRecord(entry);
   const docs = documentationForProblem(entry);
-  const body = `    <h1>${escapeHtml(entry.title)}</h1>
-    <p class="lede">${escapeHtml(entry.description)}</p>
-    <p><code>${escapeHtml(uri)}</code></p>
+  const body = `${hero({
+      eyebrow: `Problem type · ${entry.product}`,
+      title: entry.title,
+      lede: entry.description,
+      uri,
+    })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
       <p>${escapeHtml(problemAuthorityStatement)}</p>
     </section>
     <section aria-labelledby="facts">
-      <h2 id="facts">Defined Facts</h2>
+      <h2 id="facts">Defined facts</h2>
 ${renderFacts([
   { label: 'Canonical URI', html: `<code>${escapeHtml(uri)}</code>` },
   { label: 'Kind', value: 'problem' },
-  { label: 'Lifecycle status', value: entry.status },
+  { label: 'Lifecycle status', html: statusChip(entry.status) },
   { label: 'Compatibility line', value: entry.compatibility_line },
   { label: 'Product', value: entry.product },
   { label: 'Code', html: `<code>${escapeHtml(entry.code)}</code>` },
-  { label: 'Category', value: entry.category ?? 'not published' },
+  { label: 'Category', html: entry.category ? escapeHtml(entry.category) : notPublished() },
   { label: 'HTTP statuses', value: entry.http_statuses?.join(', ') ?? 'not published in this resolver record' },
   { label: 'Source', value: publicDocSource(entry.source) },
 ])}
@@ -351,11 +446,17 @@ ${renderLinks(docs)}
       <h2 id="guidance">Guidance</h2>
 ${renderGuidance(record.guidance)}
     </section>
-    <h2>Problem record</h2>
-    <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
-    <p><a href="${escapeHtml(uri)}.json">Machine-readable JSON</a></p>`;
+    <section aria-labelledby="record">
+      <h2 id="record">Problem record</h2>
+      <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
+      <p class="machine-link"><a href="${escapeHtml(uri)}.json">Machine-readable JSON</a></p>
+    </section>
+</div>`;
 
-  writeOutput(`problems/${entry.product}/${entry.path}/index.html`, page(entry.title, body));
+  writeOutput(
+    `problems/${entry.product}/${entry.path}/index.html`,
+    page(entry.title, { description: entry.description, current: 'problems', body }),
+  );
   writeOutput(`problems/${entry.product}/${entry.path}.json`, json(record));
 }
 
@@ -363,22 +464,37 @@ function writeCatalogIndex(name, entries, makeUri) {
   const rows = entries
     .map((entry) => {
       const uri = makeUri(entry);
-      return `<tr><td><a href="${escapeHtml(uri)}">${escapeHtml(uri)}</a></td><td>${escapeHtml(entry.title)}</td><td>${escapeHtml(entry.status)}</td></tr>`;
+      return `<tr><td class="cell-uri"><a href="${escapeHtml(uri)}">${escapeHtml(uri)}</a></td><td>${escapeHtml(entry.title)}</td><td>${statusChip(entry.status)}</td></tr>`;
     })
     .join('\n');
-  const body = `    <h1>${escapeHtml(name)}</h1>
-    <p>Stable Registry Stack identifiers.</p>
+  const body = `${hero({
+      eyebrow: 'Catalog',
+      title: name,
+      lede: 'Stable Registry Stack identifiers.',
+    })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
-    <table>
+    <section aria-labelledby="catalog">
+      <h2 id="catalog">${entries.length} published identifiers</h2>
+      <table class="catalog">
       <thead><tr><th>Identifier</th><th>Title</th><th>Status</th></tr></thead>
       <tbody>
 ${rows}
       </tbody>
-    </table>`;
-  writeOutput(`${name.toLowerCase().replaceAll(' ', '-')}/index.html`, page(name, body));
+    </table>
+    </section>
+</div>`;
+  writeOutput(
+    `${name.toLowerCase().replaceAll(' ', '-')}/index.html`,
+    page(name, {
+      description: `Stable Registry Stack ${name.toLowerCase()} identifiers.`,
+      current: name.toLowerCase().replaceAll(' ', '-'),
+      body,
+    }),
+  );
 }
 
 function identifierRecord(entry) {
@@ -400,21 +516,31 @@ function identifierRecord(entry) {
   return record;
 }
 
+function catalogKeyForUri(uri) {
+  const segment = uriToPath(uri).split('/')[0];
+  return siteCatalogs.some((catalog) => catalog.key === segment) ? segment : undefined;
+}
+
 function writeIdentifier(entry) {
   const path = uriToPath(entry.uri);
   const recordPath = path.endsWith('/') ? `${path}index.json` : `${path}.json`;
   const record = identifierRecord(entry);
-  const body = `    <h1>${escapeHtml(entry.title)}</h1>
-    <p><code>${escapeHtml(entry.uri)}</code></p>
-    <p>${escapeHtml(entry.description)}</p>
+  const body = `${hero({
+      eyebrow: kindLabels[entry.kind] ?? entry.kind,
+      title: entry.title,
+      lede: entry.description,
+      uri: entry.uri,
+    })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
-    <h2>Lifecycle</h2>
+    <section aria-labelledby="lifecycle">
+      <h2 id="lifecycle">Lifecycle</h2>
 ${renderFacts([
-  { label: 'Kind', value: entry.kind },
-  { label: 'Status', value: entry.status },
+  { label: 'Kind', value: kindLabels[entry.kind] ?? entry.kind },
+  { label: 'Status', html: statusChip(entry.status) },
   { label: 'Compatibility line', value: entry.compatibility_line },
   { label: 'Owner', value: entry.owner },
   {
@@ -425,12 +551,25 @@ ${renderFacts([
         : undefined,
   },
 ])}
-    <h2>Documentation</h2>
+    </section>
+    <section aria-labelledby="documentation">
+      <h2 id="documentation">Documentation</h2>
 ${renderLinks(record.documented_by)}
-    <h2>Identifier record</h2>
-    <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
-    <p><a href="${escapeHtml(`${baseUrl}/${recordPath}`)}">Machine-readable JSON</a></p>`;
-  writeOutput(`${path}/index.html`, page(entry.title, body));
+    </section>
+    <section aria-labelledby="record">
+      <h2 id="record">Identifier record</h2>
+      <pre><code>${escapeHtml(JSON.stringify(record, null, 2))}</code></pre>
+      <p class="machine-link"><a href="${escapeHtml(`${baseUrl}/${recordPath}`)}">Machine-readable JSON</a></p>
+    </section>
+</div>`;
+  writeOutput(
+    `${path}/index.html`,
+    page(entry.title, {
+      description: entry.description,
+      current: catalogKeyForUri(entry.uri),
+      body,
+    }),
+  );
   writeOutput(recordPath, json(record));
 }
 
@@ -453,26 +592,42 @@ function writeArtifactIdentifier(entry) {
     copyOutput(entry.source, uriToPath(entry.immutable_uri));
   }
   const docs = documentationForIdentifier(entry);
-  const body = `    <h1>${escapeHtml(entry.title)}</h1>
-    <p><code>${escapeHtml(entry.uri)}</code></p>
-    <p>${escapeHtml(entry.description)}</p>
+  const body = `${hero({
+      eyebrow: kindLabels[entry.kind] ?? entry.kind,
+      title: entry.title,
+      lede: entry.description,
+      uri: entry.uri,
+    })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
       <p>The canonical machine artifact at this URI is the ${escapeHtml(noun)} itself.</p>
     </section>
-    <h2>Lifecycle</h2>
+    <section aria-labelledby="lifecycle">
+      <h2 id="lifecycle">Lifecycle</h2>
 ${renderFacts([
-  { label: 'Status', value: entry.status },
+  { label: 'Status', html: statusChip(entry.status) },
   { label: 'Compatibility line', value: entry.compatibility_line },
   { label: 'Owner', value: entry.owner },
   { label: 'Artifact SHA-256', html: entry.artifact_sha256 ? `<code>${escapeHtml(entry.artifact_sha256)}</code>` : undefined },
   { label: 'Immutable artifact', html: entry.immutable_uri ? `<a href="${escapeHtml(entry.immutable_uri)}">${escapeHtml(entry.immutable_uri)}</a>` : undefined },
 ])}
-    <h2>Documentation</h2>
+    </section>
+    <section aria-labelledby="documentation">
+      <h2 id="documentation">Documentation</h2>
 ${renderLinks(docs)}
-    <p><a href="${escapeHtml(entry.uri)}">${escapeHtml(noun)}</a></p>`;
-  writeOutput(artifactPagePath(path), page(entry.title, body));
+      <p class="machine-link"><a href="${escapeHtml(entry.uri)}">${escapeHtml(noun)}</a></p>
+    </section>
+</div>`;
+  writeOutput(
+    artifactPagePath(path),
+    page(entry.title, {
+      description: entry.description,
+      current: catalogKeyForUri(entry.uri),
+      body,
+    }),
+  );
 }
 
 // Cloudflare Pages `*` in a `_headers` path matches any run of characters,
@@ -594,6 +749,9 @@ function writeStaticControls(artifactEntries) {
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
 
+/assets/*
+  Cache-Control: public, max-age=86400
+
 ${exactHeaders}
 `);
   writeOutput('_redirects', `/problem-types/* /problems/:splat 301
@@ -665,35 +823,95 @@ writeOutput('index.json', json({
     vocabularies: `${baseUrl}/vocabularies/index.json`,
   },
 }));
-writeOutput('index.html', page('Registry Stack identifiers', `    <h1>Registry Stack identifiers</h1>
-    <p>Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, contexts, and profiles.</p>
+function writeSiteAssets() {
+  writeOutput(siteCssPath, siteCss);
+  copyOutput(`${siteAssetsDir}/favicon.svg`, 'assets/favicon.svg');
+  // The OFL license texts stay in the repository beside the fonts they cover;
+  // only the font binaries are served.
+  const fontsDir = resolve(repoRoot, siteAssetsDir, 'fonts');
+  for (const name of readdirSync(fontsDir).sort()) {
+    if (name.endsWith('.woff2')) {
+      copyOutput(`${siteAssetsDir}/fonts/${name}`, `assets/fonts/${name}`);
+    }
+  }
+}
+
+const catalogBlurbs = {
+  problems: 'RFC 9457 problem type URIs with a stable code for programmatic branching.',
+  namespaces: 'JSON-LD namespace declarations.',
+  schemas: 'JSON Schema documents, published at their canonical URI.',
+  contexts: 'JSON-LD contexts, published at their canonical URI.',
+  profiles: 'Response profile documents, published at their canonical URI.',
+  vocabularies: 'Governed vocabularies and their vocabulary terms.',
+};
+
+const catalogCounts = {
+  problems: problems.length,
+  namespaces: namespaces.length,
+  schemas: schemas.length,
+  contexts: contexts.length,
+  profiles: profiles.length,
+  vocabularies: vocabularies.length + vocabularyTerms.length,
+};
+
+const homeBody = `${hero({
+    eyebrow: 'id.registrystack.org',
+    title: 'Registry Stack identifiers',
+    lede: 'Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, contexts, and profiles.',
+  })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
-    <ul>
-      <li><a href="/problems/">Problem types</a></li>
-      <li><a href="/namespaces/">Namespaces</a></li>
-      <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>
-      <li><a href="/profiles/">Profiles</a></li>
-      <li><a href="/vocabularies/">Vocabularies</a></li>
-    </ul>`));
-writeOutput('404.html', page('Identifier not found', `    <h1>Identifier not found</h1>
-    <p class="lede">This path is not a registered Registry Stack identifier.</p>
+    <section aria-labelledby="catalogs">
+      <h2 id="catalogs">Catalogs</h2>
+      <div class="catalog-grid">
+${siteCatalogs
+  .map(
+    (catalog) => `        <article>
+          <h3><a href="${catalog.href}">${catalog.title}</a></h3>
+          <p class="catalog-count">${catalogCounts[catalog.key]} identifiers</p>
+          <p>${escapeHtml(catalogBlurbs[catalog.key])}</p>
+        </article>`,
+  )
+  .join('\n')}
+      </div>
+    </section>
+</div>`;
+writeOutput(
+  'index.html',
+  page('Registry Stack identifiers', {
+    description:
+      'Stable machine identifiers for Registry Stack problem types, namespaces, vocabularies, schemas, contexts, and profiles.',
+    body: homeBody,
+  }),
+);
+writeOutput('404.html', page('Identifier not found', {
+  description: 'This path is not a registered Registry Stack identifier.',
+  body: `${hero({
+      eyebrow: 'Not found',
+      title: 'Identifier not found',
+      lede: 'This path is not a registered Registry Stack identifier.',
+    })}
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>${escapeHtml(resolverAuthorityStatement)}</p>
     </section>
-    <p>Browse the published identifiers:</p>
-    <ul>
-      <li><a href="/problems/">Problem types</a></li>
-      <li><a href="/namespaces/">Namespaces</a></li>
-      <li><a href="/schemas/">Schemas</a></li>
-      <li><a href="/contexts/">Contexts</a></li>
-      <li><a href="/profiles/">Profiles</a></li>
-      <li><a href="/vocabularies/">Vocabularies</a></li>
-    </ul>`));
+    <section aria-labelledby="catalogs">
+      <h2 id="catalogs">Browse the published identifiers</h2>
+      <ul class="doc-list">
+${siteCatalogs
+  .map(
+    (catalog) =>
+      `        <li><a href="${catalog.href}">${catalog.title}</a></li>`,
+  )
+  .join('\n')}
+      </ul>
+    </section>
+</div>`,
+}));
 writeOutput('llms.txt', `# Registry Stack identifier resolver
 
 Canonical host: ${baseUrl}/
@@ -721,6 +939,7 @@ Public documentation:
 - ${docsBaseUrl}/llms.txt
 - ${docsBaseUrl}/llms-full.txt
 `);
+writeSiteAssets();
 writeStaticControls(artifactIdentifiers);
 
 console.log(`built ${relative(process.cwd(), outputDir)}`);

@@ -2,6 +2,9 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
 
+/assets/*
+  Cache-Control: public, max-age=86400
+
 /index.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *

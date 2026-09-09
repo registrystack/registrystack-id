@@ -4,95 +4,138 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Problems | Registry Stack identifiers</title>
-  <style>
-    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
-    main { display: grid; gap: 1rem; }
-    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
-    h2 { margin-top: 2rem; }
-    p { margin-block: 0.5rem; }
-    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
-    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
-    a { color: LinkText; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
-    th { width: 12rem; }
-    .lede { font-size: 1.125rem; }
-    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
-  </style>
+  <meta name="description" content="Stable Registry Stack problems identifiers.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.af73d05e9347816d.css">
 </head>
 <body>
-  <main>
+<header class="site-header">
+  <a class="brand" href="https://registrystack.org/">
+    <span class="brand-mark" aria-hidden="true">RS</span>
+    <span>Registry Stack<span class="brand-site">Identifiers</span></span>
+  </a>
+  <nav class="top-nav" aria-label="Identifier catalogs">
+    <a href="/problems/" aria-current="page">Problems</a>
+    <a href="/namespaces/">Namespaces</a>
+    <a href="/schemas/">Schemas</a>
+    <a href="/contexts/">Contexts</a>
+    <a href="/profiles/">Profiles</a>
+    <a href="/vocabularies/">Vocabularies</a>
+    <a class="nav-emphasis" href="https://docs.registrystack.org/">Documentation</a>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Catalog</p>
     <h1>Problems</h1>
-    <p>Stable Registry Stack identifiers.</p>
+    <p class="hero-lead">Stable Registry Stack identifiers.</p>
+  </div>
+</section>
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
     </section>
-    <table>
+    <section aria-labelledby="catalog">
+      <h2 id="catalog">59 published identifiers</h2>
+      <table class="catalog">
       <thead><tr><th>Identifier</th><th>Title</th><th>Status</th></tr></thead>
       <tbody>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/action/evidence_failed">https://id.registrystack.org/problems/registry-breg/action/evidence_failed</a></td><td>Service Unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/action/handler_failed">https://id.registrystack.org/problems/registry-breg/action/handler_failed</a></td><td>Internal Server Error</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/action/refused">https://id.registrystack.org/problems/registry-breg/action/refused</a></td><td>Unprocessable Entity</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/authentication/refused">https://id.registrystack.org/problems/registry-breg/authentication/refused</a></td><td>Unauthorized</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/idempotency/conflict">https://id.registrystack.org/problems/registry-breg/idempotency/conflict</a></td><td>Conflict</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/lookup/unresolved">https://id.registrystack.org/problems/registry-breg/lookup/unresolved</a></td><td>Not Found</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/mutation/conflict">https://id.registrystack.org/problems/registry-breg/mutation/conflict</a></td><td>Conflict</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/precondition/failed">https://id.registrystack.org/problems/registry-breg/precondition/failed</a></td><td>Precondition Failed</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/precondition/required">https://id.registrystack.org/problems/registry-breg/precondition/required</a></td><td>Precondition Required</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/query/cursor_invalid">https://id.registrystack.org/problems/registry-breg/query/cursor_invalid</a></td><td>Bad Request</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/query/invalid">https://id.registrystack.org/problems/registry-breg/query/invalid</a></td><td>Bad Request</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/request/invalid">https://id.registrystack.org/problems/registry-breg/request/invalid</a></td><td>Bad Request</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/request/plan_refused">https://id.registrystack.org/problems/registry-breg/request/plan_refused</a></td><td>Bad Request</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/request/timeout">https://id.registrystack.org/problems/registry-breg/request/timeout</a></td><td>Gateway Timeout</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/resource/not_found">https://id.registrystack.org/problems/registry-breg/resource/not_found</a></td><td>Not Found</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/runtime/not_ready">https://id.registrystack.org/problems/registry-breg/runtime/not_ready</a></td><td>Service Unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/service/unavailable">https://id.registrystack.org/problems/registry-breg/service/unavailable</a></td><td>Service Unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/source/unavailable">https://id.registrystack.org/problems/registry-breg/source/unavailable</a></td><td>Service Unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-breg/unsupported/media_type">https://id.registrystack.org/problems/registry-breg/unsupported/media_type</a></td><td>Unsupported Media Type</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-discovery/invalid-request">https://id.registrystack.org/problems/registry-discovery/invalid-request</a></td><td>Invalid request</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-discovery/not-found">https://id.registrystack.org/problems/registry-discovery/not-found</a></td><td>Not found</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-discovery/result-bound-exceeded">https://id.registrystack.org/problems/registry-discovery/result-bound-exceeded</a></td><td>Result bound exceeded</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-discovery/unavailable">https://id.registrystack.org/problems/registry-discovery/unavailable</a></td><td>Unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/auth/invalid_credential">https://id.registrystack.org/problems/registry-evidence/auth/invalid_credential</a></td><td>Bearer access token is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/evidence/denied">https://id.registrystack.org/problems/registry-evidence/evidence/denied</a></td><td>Evidence request is not permitted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request">https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request</a></td><td>Evidence request is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited">https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited</a></td><td>Evidence request rate is exhausted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/evidence/unavailable">https://id.registrystack.org/problems/registry-evidence/evidence/unavailable</a></td><td>Evidence could not be produced</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/format/unsupported">https://id.registrystack.org/problems/registry-evidence/format/unsupported</a></td><td>Requested format is not supported</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/request/selector_invalid">https://id.registrystack.org/problems/registry-evidence/request/selector_invalid</a></td><td>Selector is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/resource/not_found">https://id.registrystack.org/problems/registry-evidence/resource/not_found</a></td><td>Requested resource was not found</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/service/unavailable">https://id.registrystack.org/problems/registry-evidence/service/unavailable</a></td><td>Service is unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-evidence/source/unavailable">https://id.registrystack.org/problems/registry-evidence/source/unavailable</a></td><td>Authoritative source is unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/denied">https://id.registrystack.org/problems/registry-relay/aggregate-data/denied</a></td><td>Aggregate data access is not permitted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/invalid_request">https://id.registrystack.org/problems/registry-relay/aggregate-data/invalid_request</a></td><td>Aggregate data request is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/rate_limited">https://id.registrystack.org/problems/registry-relay/aggregate-data/rate_limited</a></td><td>Aggregate data quota is exhausted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large">https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large</a></td><td>Aggregate data request is too broad</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/audit/unavailable">https://id.registrystack.org/problems/registry-relay/audit/unavailable</a></td><td>Required audit is unavailable</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/invalid_credential">https://id.registrystack.org/problems/registry-relay/auth/invalid_credential</a></td><td>Bearer access token is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/auth/missing_credential">https://id.registrystack.org/problems/registry-relay/auth/missing_credential</a></td><td>Bearer access token is required</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/consultation/denied">https://id.registrystack.org/problems/registry-relay/consultation/denied</a></td><td>Consultation is not permitted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/consultation/invalid_request">https://id.registrystack.org/problems/registry-relay/consultation/invalid_request</a></td><td>Consultation request is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/consultation/rate_limited">https://id.registrystack.org/problems/registry-relay/consultation/rate_limited</a></td><td>Consultation quota is exhausted</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/consultation/response_too_large">https://id.registrystack.org/problems/registry-relay/consultation/response_too_large</a></td><td>Consultation response is too large</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/consultation/unresolved">https://id.registrystack.org/problems/registry-relay/consultation/unresolved</a></td><td>Requested record was not resolved</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/invalid_value">https://id.registrystack.org/problems/registry-relay/filter/invalid_value</a></td><td>Filter value is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/filter/unknown_field">https://id.registrystack.org/problems/registry-relay/filter/unknown_field</a></td><td>Filter is not declared</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/format/unsupported">https://id.registrystack.org/problems/registry-relay/format/unsupported</a></td><td>Requested format is not supported</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/payload_too_large">https://id.registrystack.org/problems/registry-relay/internal/payload_too_large</a></td><td>Request body is too large</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/timeout">https://id.registrystack.org/problems/registry-relay/internal/timeout</a></td><td>Request timed out</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/unhandled">https://id.registrystack.org/problems/registry-relay/internal/unhandled</a></td><td>Request could not be served</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/internal/uri_too_long">https://id.registrystack.org/problems/registry-relay/internal/uri_too_long</a></td><td>Request URI is too long</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/query/cursor_invalid">https://id.registrystack.org/problems/registry-relay/query/cursor_invalid</a></td><td>Cursor is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid">https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid</a></td><td>Access profile selection is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/request/fields_invalid">https://id.registrystack.org/problems/registry-relay/request/fields_invalid</a></td><td>Field selection is invalid</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/request/media_type_unsupported">https://id.registrystack.org/problems/registry-relay/request/media_type_unsupported</a></td><td>Request media type is not supported</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/resource/not_found">https://id.registrystack.org/problems/registry-relay/resource/not_found</a></td><td>Requested resource was not found</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/service/not_ready">https://id.registrystack.org/problems/registry-relay/service/not_ready</a></td><td>Service is not ready</td><td>active</td></tr>
-<tr><td><a href="https://id.registrystack.org/problems/registry-relay/source/unavailable">https://id.registrystack.org/problems/registry-relay/source/unavailable</a></td><td>Authoritative source is unavailable</td><td>active</td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/action/evidence_failed">https://id.registrystack.org/problems/registry-breg/action/evidence_failed</a></td><td>Service Unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/action/handler_failed">https://id.registrystack.org/problems/registry-breg/action/handler_failed</a></td><td>Internal Server Error</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/action/refused">https://id.registrystack.org/problems/registry-breg/action/refused</a></td><td>Unprocessable Entity</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/authentication/refused">https://id.registrystack.org/problems/registry-breg/authentication/refused</a></td><td>Unauthorized</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/idempotency/conflict">https://id.registrystack.org/problems/registry-breg/idempotency/conflict</a></td><td>Conflict</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/lookup/unresolved">https://id.registrystack.org/problems/registry-breg/lookup/unresolved</a></td><td>Not Found</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/mutation/conflict">https://id.registrystack.org/problems/registry-breg/mutation/conflict</a></td><td>Conflict</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/precondition/failed">https://id.registrystack.org/problems/registry-breg/precondition/failed</a></td><td>Precondition Failed</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/precondition/required">https://id.registrystack.org/problems/registry-breg/precondition/required</a></td><td>Precondition Required</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/query/cursor_invalid">https://id.registrystack.org/problems/registry-breg/query/cursor_invalid</a></td><td>Bad Request</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/query/invalid">https://id.registrystack.org/problems/registry-breg/query/invalid</a></td><td>Bad Request</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/request/invalid">https://id.registrystack.org/problems/registry-breg/request/invalid</a></td><td>Bad Request</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/request/plan_refused">https://id.registrystack.org/problems/registry-breg/request/plan_refused</a></td><td>Bad Request</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/request/timeout">https://id.registrystack.org/problems/registry-breg/request/timeout</a></td><td>Gateway Timeout</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/resource/not_found">https://id.registrystack.org/problems/registry-breg/resource/not_found</a></td><td>Not Found</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/runtime/not_ready">https://id.registrystack.org/problems/registry-breg/runtime/not_ready</a></td><td>Service Unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/service/unavailable">https://id.registrystack.org/problems/registry-breg/service/unavailable</a></td><td>Service Unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/source/unavailable">https://id.registrystack.org/problems/registry-breg/source/unavailable</a></td><td>Service Unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-breg/unsupported/media_type">https://id.registrystack.org/problems/registry-breg/unsupported/media_type</a></td><td>Unsupported Media Type</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-discovery/invalid-request">https://id.registrystack.org/problems/registry-discovery/invalid-request</a></td><td>Invalid request</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-discovery/not-found">https://id.registrystack.org/problems/registry-discovery/not-found</a></td><td>Not found</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-discovery/result-bound-exceeded">https://id.registrystack.org/problems/registry-discovery/result-bound-exceeded</a></td><td>Result bound exceeded</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-discovery/unavailable">https://id.registrystack.org/problems/registry-discovery/unavailable</a></td><td>Unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/auth/invalid_credential">https://id.registrystack.org/problems/registry-evidence/auth/invalid_credential</a></td><td>Bearer access token is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/evidence/denied">https://id.registrystack.org/problems/registry-evidence/evidence/denied</a></td><td>Evidence request is not permitted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request">https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request</a></td><td>Evidence request is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited">https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited</a></td><td>Evidence request rate is exhausted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/evidence/unavailable">https://id.registrystack.org/problems/registry-evidence/evidence/unavailable</a></td><td>Evidence could not be produced</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/format/unsupported">https://id.registrystack.org/problems/registry-evidence/format/unsupported</a></td><td>Requested format is not supported</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/request/selector_invalid">https://id.registrystack.org/problems/registry-evidence/request/selector_invalid</a></td><td>Selector is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/resource/not_found">https://id.registrystack.org/problems/registry-evidence/resource/not_found</a></td><td>Requested resource was not found</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/service/unavailable">https://id.registrystack.org/problems/registry-evidence/service/unavailable</a></td><td>Service is unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-evidence/source/unavailable">https://id.registrystack.org/problems/registry-evidence/source/unavailable</a></td><td>Authoritative source is unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/denied">https://id.registrystack.org/problems/registry-relay/aggregate-data/denied</a></td><td>Aggregate data access is not permitted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/invalid_request">https://id.registrystack.org/problems/registry-relay/aggregate-data/invalid_request</a></td><td>Aggregate data request is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/rate_limited">https://id.registrystack.org/problems/registry-relay/aggregate-data/rate_limited</a></td><td>Aggregate data quota is exhausted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large">https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large</a></td><td>Aggregate data request is too broad</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/audit/unavailable">https://id.registrystack.org/problems/registry-relay/audit/unavailable</a></td><td>Required audit is unavailable</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/auth/invalid_credential">https://id.registrystack.org/problems/registry-relay/auth/invalid_credential</a></td><td>Bearer access token is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/auth/missing_credential">https://id.registrystack.org/problems/registry-relay/auth/missing_credential</a></td><td>Bearer access token is required</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/consultation/denied">https://id.registrystack.org/problems/registry-relay/consultation/denied</a></td><td>Consultation is not permitted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/consultation/invalid_request">https://id.registrystack.org/problems/registry-relay/consultation/invalid_request</a></td><td>Consultation request is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/consultation/rate_limited">https://id.registrystack.org/problems/registry-relay/consultation/rate_limited</a></td><td>Consultation quota is exhausted</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/consultation/response_too_large">https://id.registrystack.org/problems/registry-relay/consultation/response_too_large</a></td><td>Consultation response is too large</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/consultation/unresolved">https://id.registrystack.org/problems/registry-relay/consultation/unresolved</a></td><td>Requested record was not resolved</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/filter/invalid_value">https://id.registrystack.org/problems/registry-relay/filter/invalid_value</a></td><td>Filter value is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/filter/unknown_field">https://id.registrystack.org/problems/registry-relay/filter/unknown_field</a></td><td>Filter is not declared</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/format/unsupported">https://id.registrystack.org/problems/registry-relay/format/unsupported</a></td><td>Requested format is not supported</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/internal/payload_too_large">https://id.registrystack.org/problems/registry-relay/internal/payload_too_large</a></td><td>Request body is too large</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/internal/timeout">https://id.registrystack.org/problems/registry-relay/internal/timeout</a></td><td>Request timed out</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/internal/unhandled">https://id.registrystack.org/problems/registry-relay/internal/unhandled</a></td><td>Request could not be served</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/internal/uri_too_long">https://id.registrystack.org/problems/registry-relay/internal/uri_too_long</a></td><td>Request URI is too long</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/query/cursor_invalid">https://id.registrystack.org/problems/registry-relay/query/cursor_invalid</a></td><td>Cursor is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid">https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid</a></td><td>Access profile selection is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/request/fields_invalid">https://id.registrystack.org/problems/registry-relay/request/fields_invalid</a></td><td>Field selection is invalid</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/request/media_type_unsupported">https://id.registrystack.org/problems/registry-relay/request/media_type_unsupported</a></td><td>Request media type is not supported</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/resource/not_found">https://id.registrystack.org/problems/registry-relay/resource/not_found</a></td><td>Requested resource was not found</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/service/not_ready">https://id.registrystack.org/problems/registry-relay/service/not_ready</a></td><td>Service is not ready</td><td><span class="status">active</span></td></tr>
+<tr><td class="cell-uri"><a href="https://id.registrystack.org/problems/registry-relay/source/unavailable">https://id.registrystack.org/problems/registry-relay/source/unavailable</a></td><td>Authoritative source is unavailable</td><td><span class="status">active</span></td></tr>
       </tbody>
     </table>
-  </main>
+    </section>
+</div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="footer-brand-name" href="https://registrystack.org/">Registry Stack</a>
+      <p>Stable machine identifiers for Registry Stack products, published from a digest-bound source catalog.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <p class="footer-col-title">Catalogs</p>
+        <ul>
+        <li><a href="/problems/">Problem types</a></li>
+        <li><a href="/namespaces/">Namespaces</a></li>
+        <li><a href="/schemas/">Schemas</a></li>
+        <li><a href="/contexts/">Contexts</a></li>
+        <li><a href="/profiles/">Profiles</a></li>
+        <li><a href="/vocabularies/">Vocabularies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Registry Stack</p>
+        <ul>
+          <li><a href="https://registrystack.org/">Main website</a></li>
+          <li><a href="https://docs.registrystack.org/">Documentation</a></li>
+          <li><a href="https://github.com/registrystack/registry-stack">GitHub</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer-base">
+    <p>Machine index: <a href="/index.json">index.json</a> &middot; <a href="/llms.txt">llms.txt</a></p>
+    <p><a href="https://registrystack.org/">registrystack.org</a></p>
+  </div>
+</footer>
 </body>
 </html>

@@ -1,0 +1,604 @@
+/* Registry Stack identifier resolver.
+   Civic-print design system shared with registrystack.org: same palette,
+   Public Sans / IBM Plex Mono pairing, masthead rule, ledger tables, and ink
+   footer, trimmed to what these record pages need. Fonts are self-hosted OFL
+   subsets; licenses live beside them in src/assets/fonts/. */
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/public-sans-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/public-sans-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/public-sans-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/ibm-plex-mono-latin-700-normal.woff2') format('woff2');
+}
+
+:root {
+  color-scheme: light;
+  --registry-blue: #173b7a;
+  --registry-blue-dark: #102a56;
+  --registry-ink: #161616;
+  --registry-body: #3a3a3a;
+  --registry-muted: #6a6a6a;
+  --registry-rule: #e5e5e5;
+  --registry-active: #eef3ff;
+  --registry-code-bg: #f3f4f6;
+  /* Civic-print palette: quiet ledger-green paper, ink bands, a stamp red used
+     sparingly for the authority boundary and the open catalog mark. */
+  --registry-paper: #eef2ec;
+  --registry-stamp: #9d2c1d;
+  --registry-brass: #d4af4e;
+  --registry-max: 1120px;
+  --registry-font: 'Public Sans', system-ui, sans-serif;
+  --registry-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #ffffff;
+  color: var(--registry-body);
+  font-family: var(--registry-font);
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.58;
+  margin: 0;
+}
+
+::selection {
+  background: var(--registry-blue);
+  color: #ffffff;
+}
+
+a {
+  color: var(--registry-blue);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--registry-blue);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+/* Masthead rule: the broadsheet nameplate border shared with registrystack.org. */
+.site-header {
+  align-items: center;
+  backdrop-filter: blur(8px) saturate(1.4);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 2px solid var(--registry-ink);
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  padding: 14px clamp(16px, 4vw, 42px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  align-items: center;
+  color: var(--registry-ink);
+  display: inline-flex;
+  font-size: 17px;
+  font-weight: 700;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand-mark {
+  align-items: center;
+  background: var(--registry-blue);
+  color: #ffffff;
+  display: inline-flex;
+  font-family: var(--registry-mono);
+  font-size: 13px;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.brand-site {
+  border-left: 1px solid var(--registry-rule);
+  color: var(--registry-muted);
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 2px;
+  padding-left: 12px;
+}
+
+.top-nav {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2vw, 22px);
+  justify-content: flex-end;
+}
+
+.top-nav a {
+  align-items: center;
+  color: var(--registry-muted);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: center;
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.top-nav a:hover {
+  color: var(--registry-ink);
+}
+
+/* The open catalog is ticked in the register: ink text, stamp-red underline. */
+.top-nav a[aria-current='page'] {
+  box-shadow: inset 0 -2px 0 var(--registry-stamp);
+  color: var(--registry-ink);
+}
+
+.top-nav .nav-emphasis {
+  color: var(--registry-blue);
+}
+
+/* Every record opens on quiet, unruled paper, like the site heroes. */
+.hero {
+  background-color: var(--registry-paper);
+  border-bottom: 1px solid var(--registry-rule);
+}
+
+.hero-inner {
+  margin: 0 auto;
+  max-width: var(--registry-max);
+  padding: clamp(36px, 5vw, 60px) clamp(16px, 4vw, 42px) clamp(32px, 4vw, 52px);
+}
+
+.eyebrow {
+  color: var(--registry-blue);
+  font-family: var(--registry-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: var(--registry-ink);
+  font-size: clamp(30px, 4.5vw, 46px);
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin-bottom: 16px;
+  max-width: 880px;
+  text-wrap: balance;
+}
+
+.hero-lead {
+  color: var(--registry-body);
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.45;
+  margin-bottom: 20px;
+  max-width: 760px;
+}
+
+/* The canonical URI sits on the hero as a stamped chip. */
+.hero-uri {
+  background: #ffffff;
+  border: 1px solid var(--registry-rule);
+  color: var(--registry-ink);
+  display: inline-block;
+  font-family: var(--registry-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 9px 12px;
+}
+
+.record {
+  margin: 0 auto;
+  max-width: 920px;
+  padding: clamp(28px, 5vw, 48px) clamp(16px, 4vw, 42px) clamp(56px, 8vw, 84px);
+}
+
+/* Section headings carry the strong ink rule, in the manner of the article
+   body on registrystack.org. */
+.record h2 {
+  border-top: 2px solid var(--registry-ink);
+  color: var(--registry-ink);
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 44px 0 16px;
+  padding-top: 16px;
+  scroll-margin-top: 84px;
+}
+
+/* The authority boundary reads as a stamped marginal note. */
+.notice {
+  background: var(--registry-paper);
+  border-left: 4px solid var(--registry-stamp);
+  padding: 16px 20px;
+}
+
+.notice-title {
+  color: var(--registry-ink);
+  font-family: var(--registry-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.notice p {
+  color: var(--registry-body);
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+
+.notice p:last-child {
+  margin-bottom: 0;
+}
+
+/* Ledger tables: ruled cells, paper column heads in mono. */
+table {
+  background: #ffffff;
+  border-collapse: collapse;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid var(--registry-rule);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--registry-paper);
+  color: var(--registry-ink);
+  font-family: var(--registry-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.facts th {
+  white-space: nowrap;
+  width: 180px;
+}
+
+.cell-uri {
+  font-family: var(--registry-mono);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* Catalog tables give the URI room to wrap while titles and status keep
+   readable columns. */
+.catalog th:nth-child(1),
+.catalog td:nth-child(1) {
+  width: 56%;
+}
+
+.catalog th:nth-child(2),
+.catalog td:nth-child(2) {
+  width: 30%;
+}
+
+.catalog th:nth-child(3),
+.catalog td:nth-child(3) {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.status {
+  background: var(--registry-active);
+  color: var(--registry-blue);
+  display: inline-block;
+  font-family: var(--registry-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--registry-muted);
+}
+
+/* Documentation links read as ruled ledger rows. */
+.doc-list {
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc-list li {
+  border-top: 1px solid var(--registry-rule);
+  padding: 10px 0;
+}
+
+.doc-list a {
+  font-weight: 600;
+}
+
+code {
+  font-family: var(--registry-mono);
+  font-size: 13px;
+}
+
+.record :not(pre) > code {
+  background: var(--registry-code-bg);
+  color: var(--registry-ink);
+  overflow-wrap: anywhere;
+  padding: 2px 6px;
+}
+
+/* The machine record prints as an ink band, like the article code blocks. */
+pre {
+  background: var(--registry-ink);
+  color: #ffffff;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.machine-link {
+  font-family: var(--registry-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 16px 0 0;
+  text-transform: uppercase;
+}
+
+/* The home catalog reads as ledger column headings, not boxed cards. */
+.catalog-grid {
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 36px;
+}
+
+.catalog-grid article {
+  border-top: 2px solid var(--registry-ink);
+  min-width: 0;
+  padding: 14px 0 0;
+}
+
+.catalog-grid h3 {
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.catalog-grid h3 a {
+  color: var(--registry-ink);
+}
+
+.catalog-grid h3 a:hover {
+  color: var(--registry-blue);
+  text-decoration: none;
+}
+
+.catalog-count {
+  color: var(--registry-blue);
+  font-family: var(--registry-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.catalog-grid p {
+  color: var(--registry-body);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* The footer is a deep ink band, bookending the paper hero. */
+.site-footer {
+  background: var(--registry-ink);
+  color: #ffffff;
+}
+
+.site-footer-inner {
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  grid-template-columns: minmax(220px, 1fr) 2.4fr;
+  margin: 0 auto;
+  max-width: var(--registry-max);
+  padding: 44px clamp(16px, 4vw, 42px) 28px;
+}
+
+.footer-brand-name {
+  color: var(--registry-brass);
+  display: inline-block;
+  font-family: var(--registry-mono);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 10px 0 0;
+  max-width: 360px;
+}
+
+.footer-nav {
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.footer-col-title {
+  color: var(--registry-brass);
+  font-family: var(--registry-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  display: grid;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col a {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.86);
+  display: flex;
+  font-size: 14px;
+  min-height: 32px;
+}
+
+.footer-col a:hover {
+  color: #ffffff;
+}
+
+.site-footer-base {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: var(--registry-max);
+  padding: 16px clamp(16px, 4vw, 42px) 28px;
+}
+
+.site-footer-base p {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  margin: 0;
+}
+
+.site-footer-base a {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer :focus-visible {
+  outline-color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  /* On small screens the header gives the space back and scrolls away. */
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px;
+    position: static;
+  }
+
+  .top-nav {
+    gap: 2px 18px;
+    justify-content: flex-start;
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .hero h1 {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .record h2 {
+    margin-top: 36px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer-base {
+    flex-direction: column;
+  }
+}

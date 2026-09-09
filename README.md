@@ -57,6 +57,16 @@ Problem records deliberately leave `http_statuses`, `retryable`,
 curated value. Clients should use the RFC 9457 response body, especially
 `code`, `status`, and `detail`, for request-specific behavior.
 
+## Site design
+
+Human pages share one stylesheet and self-hosted font subsets (Public Sans,
+IBM Plex Mono) kept in `src/assets/`, following the registrystack.org design
+system. They are publisher-owned presentational machinery, not identifiers:
+`npm run import:catalog` never touches them, the build copies them to
+`public/assets/`, and the stylesheet is served under a content-hashed
+filename so it can cache safely. The OFL font licenses are kept beside the
+fonts in `src/assets/fonts/`.
+
 ## Local workflow
 
 Import the catalog and artifacts from an exact Registry Stack commit:
