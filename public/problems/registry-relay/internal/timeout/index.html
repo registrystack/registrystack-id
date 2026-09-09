@@ -4,51 +4,60 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Request timed out | Registry Stack identifiers</title>
-  <style>
-    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; padding: 2rem; line-height: 1.55; max-width: 62rem; }
-    main { display: grid; gap: 1rem; }
-    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
-    h2 { margin-top: 2rem; }
-    p { margin-block: 0.5rem; }
-    code { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
-    pre { overflow: auto; padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
-    a { color: LinkText; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); padding: 0.5rem; text-align: left; vertical-align: top; }
-    th { width: 12rem; }
-    .lede { font-size: 1.125rem; }
-    .notice { border-inline-start: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent); padding: 0.75rem 1rem; background: color-mix(in srgb, currentColor 6%, transparent); }
-  </style>
+  <meta name="description" content="request exceeded the configured timeout">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.af73d05e9347816d.css">
 </head>
 <body>
-  <main>
+<header class="site-header">
+  <a class="brand" href="https://registrystack.org/">
+    <span class="brand-mark" aria-hidden="true">RS</span>
+    <span>Registry Stack<span class="brand-site">Identifiers</span></span>
+  </a>
+  <nav class="top-nav" aria-label="Identifier catalogs">
+    <a href="/problems/" aria-current="page">Problems</a>
+    <a href="/namespaces/">Namespaces</a>
+    <a href="/schemas/">Schemas</a>
+    <a href="/contexts/">Contexts</a>
+    <a href="/profiles/">Profiles</a>
+    <a href="/vocabularies/">Vocabularies</a>
+    <a class="nav-emphasis" href="https://docs.registrystack.org/">Documentation</a>
+  </nav>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Problem type · registry-relay</p>
     <h1>Request timed out</h1>
-    <p class="lede">request exceeded the configured timeout</p>
-    <p><code>https://id.registrystack.org/problems/registry-relay/internal/timeout</code></p>
+    <p class="hero-lead">request exceeded the configured timeout</p>
+    <p><code class="hero-uri">https://id.registrystack.org/problems/registry-relay/internal/timeout</code></p>
+  </div>
+</section>
+<div class="record">
     <section class="notice" aria-labelledby="authority">
-      <h2 id="authority">Authority Boundary</h2>
+      <p class="notice-title" id="authority">Authority boundary</p>
       <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
       <p>For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.</p>
     </section>
     <section aria-labelledby="facts">
-      <h2 id="facts">Defined Facts</h2>
-<table>
+      <h2 id="facts">Defined facts</h2>
+<table class="facts">
       <tbody>
         <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-relay/internal/timeout</code></td></tr>
         <tr><th>Kind</th><td>problem</td></tr>
-        <tr><th>Lifecycle status</th><td>active</td></tr>
+        <tr><th>Lifecycle status</th><td><span class="status">active</span></td></tr>
         <tr><th>Compatibility line</th><td>relay-v2</td></tr>
         <tr><th>Product</th><td>registry-relay</td></tr>
         <tr><th>Code</th><td><code>internal.timeout</code></td></tr>
-        <tr><th>Category</th><td>not published</td></tr>
+        <tr><th>Category</th><td><span class="muted">not published</span></td></tr>
         <tr><th>HTTP statuses</th><td>504</td></tr>
       </tbody>
     </table>
     </section>
     <section aria-labelledby="documentation">
       <h2 id="documentation">Documentation</h2>
-<ul>
+<ul class="doc-list">
       <li><a href="https://docs.registrystack.org/reference/errors/">Error and status code reference</a></li>
       <li><a href="https://docs.registrystack.org/products/registry-relay/">Registry Relay product docs</a></li>
       <li><a href="https://docs.registrystack.org/reference/apis/registry-relay/">Registry Relay API overview</a></li>
@@ -56,18 +65,19 @@
     </section>
     <section aria-labelledby="guidance">
       <h2 id="guidance">Guidance</h2>
-<table>
+<table class="facts">
       <tbody>
         <tr><th>Guidance status</th><td>not_published</td></tr>
-        <tr><th>Retryable</th><td>not published</td></tr>
-        <tr><th>Caller action</th><td>not published</td></tr>
-        <tr><th>Operator action</th><td>not published</td></tr>
+        <tr><th>Retryable</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>Caller action</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>Operator action</th><td><span class="muted">not published</span></td></tr>
         <tr><th>Note</th><td>No per-identifier remediation guidance is published in this resolver record.</td></tr>
       </tbody>
     </table>
     </section>
-    <h2>Problem record</h2>
-    <pre><code>{
+    <section aria-labelledby="record">
+      <h2 id="record">Problem record</h2>
+      <pre><code>{
   &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-relay/internal/timeout&quot;,
   &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-relay/internal/timeout&quot;,
   &quot;kind&quot;: &quot;problem&quot;,
@@ -119,7 +129,42 @@
     &quot;sha256&quot;: &quot;9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4&quot;
   }
 }</code></pre>
-    <p><a href="https://id.registrystack.org/problems/registry-relay/internal/timeout.json">Machine-readable JSON</a></p>
-  </main>
+      <p class="machine-link"><a href="https://id.registrystack.org/problems/registry-relay/internal/timeout.json">Machine-readable JSON</a></p>
+    </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="footer-brand-name" href="https://registrystack.org/">Registry Stack</a>
+      <p>Stable machine identifiers for Registry Stack products, published from a digest-bound source catalog.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <p class="footer-col-title">Catalogs</p>
+        <ul>
+        <li><a href="/problems/">Problem types</a></li>
+        <li><a href="/namespaces/">Namespaces</a></li>
+        <li><a href="/schemas/">Schemas</a></li>
+        <li><a href="/contexts/">Contexts</a></li>
+        <li><a href="/profiles/">Profiles</a></li>
+        <li><a href="/vocabularies/">Vocabularies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Registry Stack</p>
+        <ul>
+          <li><a href="https://registrystack.org/">Main website</a></li>
+          <li><a href="https://docs.registrystack.org/">Documentation</a></li>
+          <li><a href="https://github.com/registrystack/registry-stack">GitHub</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer-base">
+    <p>Machine index: <a href="/index.json">index.json</a> &middot; <a href="/llms.txt">llms.txt</a></p>
+    <p><a href="https://registrystack.org/">registrystack.org</a></p>
+  </div>
+</footer>
 </body>
 </html>
