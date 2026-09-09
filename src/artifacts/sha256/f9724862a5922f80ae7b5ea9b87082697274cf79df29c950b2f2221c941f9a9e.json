@@ -115,6 +115,127 @@
       ],
       "type": "object"
     },
+    "ActionEvidenceSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "maximumObservationAgeSeconds": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "outputs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "subjects": {
+          "additionalProperties": {
+            "$ref": "#/$defs/EvidenceSubjectSource"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "requirement",
+        "subjects",
+        "outputs",
+        "maximumObservationAgeSeconds"
+      ],
+      "type": "object"
+    },
+    "ActionHandlerRefusalSource": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "label"
+      ],
+      "type": "object"
+    },
+    "ActionHandlerSource": {
+      "additionalProperties": false,
+      "properties": {
+        "abi": {
+          "enum": [
+            "registry.action-handler/v1",
+            "registry.action-handler/v2"
+          ],
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/RhaiScriptKindSource"
+        },
+        "refusals": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ActionHandlerRefusalSource"
+          },
+          "type": "array"
+        },
+        "script": {
+          "type": "string"
+        },
+        "writes": {
+          "items": {
+            "$ref": "#/$defs/ActionHandlerWriteSource"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "script",
+        "abi",
+        "writes"
+      ],
+      "type": "object"
+    },
+    "ActionHandlerWriteSource": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "operation": {
+          "$ref": "#/$defs/Operation"
+        },
+        "target": {
+          "$ref": "#/$defs/ActionTargetSource"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "operation",
+        "fields"
+      ],
+      "type": "object"
+    },
     "ActionInputSource": {
       "oneOf": [
         {
@@ -375,6 +496,24 @@
       "type": "object",
       "unevaluatedProperties": false
     },
+    "ActionRequirementSource": {
+      "additionalProperties": false,
+      "properties": {
+        "equals": true,
+        "field": {
+          "type": "string"
+        },
+        "input": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "input",
+        "field",
+        "equals"
+      ],
+      "type": "object"
+    },
     "ActionSource": {
       "additionalProperties": false,
       "properties": {
@@ -385,6 +524,22 @@
           },
           "type": "array"
         },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/ActionEvidenceSource"
+          },
+          "type": "array"
+        },
+        "handler": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ActionHandlerSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "id": {
           "type": "string"
         },
@@ -392,6 +547,13 @@
           "default": [],
           "items": {
             "$ref": "#/$defs/ActionInputSource"
+          },
+          "type": "array"
+        },
+        "requires": {
+          "description": "Acceptance-time checks over exact existing reference inputs, combined with AND.",
+          "items": {
+            "$ref": "#/$defs/ActionRequirementSource"
           },
           "type": "array"
         }
@@ -408,7 +570,7 @@
           "type": "string"
         },
         "rowBoundaries": {
-          "default": [],
+          "description": "Explicit row reach; an empty array intentionally permits all rows.",
           "items": {
             "$ref": "#/$defs/RowBoundarySource"
           },
@@ -416,7 +578,8 @@
         }
       },
       "required": [
-        "entity"
+        "entity",
+        "rowBoundaries"
       ],
       "type": "object"
     },
@@ -463,7 +626,7 @@
           "type": "string"
         },
         "rowBoundaries": {
-          "default": [],
+          "description": "Explicit row reach; an empty array intentionally permits all rows.",
           "items": {
             "$ref": "#/$defs/RowBoundarySource"
           },
@@ -471,7 +634,41 @@
         }
       },
       "required": [
-        "entity"
+        "entity",
+        "rowBoundaries"
+      ],
+      "type": "object"
+    },
+    "AttachmentSlotSource": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "$ref": "#/$defs/Classification"
+        },
+        "contentTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "maximumBytes": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "required",
+        "maximumBytes",
+        "contentTypes",
+        "classification"
       ],
       "type": "object"
     },
@@ -640,12 +837,6 @@
       ],
       "type": "object"
     },
-    "ChangeRequestPlannerKindSource": {
-      "enum": [
-        "rhai"
-      ],
-      "type": "string"
-    },
     "ChangeRequestPlannerSource": {
       "additionalProperties": false,
       "properties": {
@@ -653,7 +844,7 @@
           "type": "string"
         },
         "kind": {
-          "$ref": "#/$defs/ChangeRequestPlannerKindSource"
+          "$ref": "#/$defs/RhaiScriptKindSource"
         },
         "requestFields": {
           "default": [],
@@ -775,6 +966,11 @@
           "maximum": 65535,
           "minimum": 0,
           "type": "integer"
+        },
+        "excludePreviousReviewers": {
+          "default": false,
+          "description": "Refuse an actor who already decided another stage of this proposal version.",
+          "type": "boolean"
         },
         "excludeSubmitter": {
           "default": false,
@@ -1611,6 +1807,13 @@
           },
           "type": "array"
         },
+        "membershipBoundaries": {
+          "description": "Current active membership required for each stored reference key.",
+          "items": {
+            "$ref": "#/$defs/MembershipBoundarySource"
+          },
+          "type": "array"
+        },
         "operations": {
           "items": {
             "$ref": "#/$defs/Operation"
@@ -1629,6 +1832,14 @@
           "default": [],
           "items": {
             "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "readableRequestFields": {
+          "description": "Readable change-request decision detail. Anonymous profiles never receive reason text.",
+          "items": {
+            "$ref": "#/$defs/RequestMetadataFieldSource"
           },
           "type": "array",
           "uniqueItems": true
@@ -1663,7 +1874,6 @@
           "type": "boolean"
         },
         "rowBoundaries": {
-          "default": [],
           "items": {
             "$ref": "#/$defs/RowBoundarySource"
           },
@@ -1688,6 +1898,13 @@
           ],
           "default": null
         },
+        "submitterTargets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
         "writableFields": {
           "default": [],
           "items": {
@@ -1699,7 +1916,8 @@
       },
       "required": [
         "entity",
-        "operations"
+        "operations",
+        "rowBoundaries"
       ],
       "type": "object"
     },
@@ -1716,6 +1934,13 @@
             }
           ],
           "description": "Mandatory request-access requirements checked against every profile, including module contributions."
+        },
+        "attachments": {
+          "description": "Governed binary slots on change-request entities, projected under their exact IDs.",
+          "items": {
+            "$ref": "#/$defs/AttachmentSlotSource"
+          },
+          "type": "array"
         },
         "batch": {
           "anyOf": [
@@ -1998,6 +2223,44 @@
         "request_lifecycle"
       ],
       "type": "string"
+    },
+    "EvidenceProviderSource": {
+      "additionalProperties": false,
+      "properties": {
+        "contracts": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "subjectResolution": {
+          "$ref": "#/$defs/EvidenceSubjectResolution"
+        }
+      },
+      "required": [
+        "id",
+        "contracts",
+        "subjectResolution"
+      ],
+      "type": "object"
+    },
+    "EvidenceSubjectResolution": {
+      "enum": [
+        "trusted-provider-exact-selector"
+      ],
+      "type": "string"
+    },
+    "EvidenceSubjectSource": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "profile"
+      ],
+      "type": "object"
     },
     "FieldSource": {
       "anyOf": [
@@ -2758,6 +3021,35 @@
       ],
       "type": "object"
     },
+    "MembershipBoundarySource": {
+      "additionalProperties": false,
+      "description": "A one-hop current membership requirement, combined with every other row boundary.\nThe root field and membership key must reference the same entity. The active\nfield is Boolean, and principalField matches the profile's verified principal.",
+      "properties": {
+        "activeField": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "membershipEntity": {
+          "type": "string"
+        },
+        "membershipKeyField": {
+          "type": "string"
+        },
+        "principalField": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "membershipEntity",
+        "membershipKeyField",
+        "principalField",
+        "activeField"
+      ],
+      "type": "object"
+    },
     "ModuleLockSource": {
       "additionalProperties": false,
       "properties": {
@@ -3038,6 +3330,13 @@
       ],
       "type": "object"
     },
+    "RequestMetadataFieldSource": {
+      "description": "Fields of request decision metadata governed separately from stored record fields.",
+      "enum": [
+        "reason"
+      ],
+      "type": "string"
+    },
     "RequestPresenceGrantSource": {
       "additionalProperties": false,
       "properties": {
@@ -3045,7 +3344,7 @@
           "type": "string"
         },
         "rowBoundaries": {
-          "default": [],
+          "description": "Explicit row reach; an empty array intentionally permits all rows.",
           "items": {
             "$ref": "#/$defs/RowBoundarySource"
           },
@@ -3053,7 +3352,8 @@
         }
       },
       "required": [
-        "requestType"
+        "requestType",
+        "rowBoundaries"
       ],
       "type": "object"
     },
@@ -3100,7 +3400,7 @@
           "uniqueItems": true
         },
         "rowBoundaries": {
-          "default": [],
+          "description": "Explicit row reach; an empty array intentionally permits all rows.",
           "items": {
             "$ref": "#/$defs/RowBoundarySource"
           },
@@ -3108,9 +3408,16 @@
         }
       },
       "required": [
-        "entity"
+        "entity",
+        "rowBoundaries"
       ],
       "type": "object"
+    },
+    "RhaiScriptKindSource": {
+      "enum": [
+        "rhai"
+      ],
+      "type": "string"
     },
     "RowBoundarySource": {
       "additionalProperties": false,
@@ -3215,6 +3522,13 @@
           "format": "uint32",
           "minimum": 0,
           "type": "integer"
+        },
+        "pattern": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "required": {
           "default": false,
@@ -3348,6 +3662,13 @@
           "format": "uint32",
           "minimum": 0,
           "type": "integer"
+        },
+        "pattern": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "required": {
           "default": false,
@@ -3666,6 +3987,12 @@
       "default": [],
       "items": {
         "$ref": "#/$defs/EntitySource"
+      },
+      "type": "array"
+    },
+    "evidenceProviders": {
+      "items": {
+        "$ref": "#/$defs/EvidenceProviderSource"
       },
       "type": "array"
     },

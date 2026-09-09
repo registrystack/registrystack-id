@@ -144,13 +144,17 @@ Registry Stack commit, rebuilds the site, runs a local availability smoke, and
 lints the workflows.
 
 The `sync-registry-stack.yml` workflow checks Registry Stack `main` each day and
-on manual dispatch. Configure `REGISTRYSTACK_ID_SYNC_TOKEN` as a fine-grained
-token scoped only to this repository with Contents and Pull requests read/write
-permissions. The workflow imports the exact merged commit, verifies it, and
-opens or updates a draft synchronization pull request. The token is separate
-from the Cloudflare deployment credentials and grants no deployment or DNS
-authority. The synchronization branch is automation-owned; human changes must
-go to Registry Stack source or a separate publisher branch.
+on manual dispatch. Enable **Allow GitHub Actions to create and approve pull
+requests** in this repository's Actions workflow permissions. The sync job uses
+GitHub's temporary repository token with Contents, Pull requests, and Actions
+write permissions; no separate synchronization secret is required. It imports
+the exact merged commit, verifies it, and opens or updates a draft synchronization
+pull request. Because token-created pushes do not trigger CI and pull-request
+runs may require approval, it explicitly dispatches publisher CI on the
+synchronization branch.
+The job does not approve or merge its pull request and grants no Cloudflare or
+DNS authority. The synchronization branch is automation-owned; human changes
+must go to Registry Stack source or a separate publisher branch.
 
 The scheduled `smoke-live.yml` workflow checks representative active problem,
 schema, and vocabulary identifiers, plus the absence of one removed namespace.

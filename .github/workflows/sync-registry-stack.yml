@@ -16,24 +16,18 @@ jobs:
   sync:
     name: Open active catalog update
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
     env:
       SYNC_BRANCH: automation/registry-stack-identifiers
-      GH_TOKEN: ${{ secrets.REGISTRYSTACK_ID_SYNC_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Require the sync token
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ -z "${GH_TOKEN}" ]]; then
-            echo "REGISTRYSTACK_ID_SYNC_TOKEN is required" >&2
-            exit 1
-          fi
-
       - name: Checkout publisher
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
-          token: ${{ secrets.REGISTRYSTACK_ID_SYNC_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -146,3 +140,9 @@ jobs:
               --title "chore: sync Registry Stack identifiers" \
               --body-file "${body}"
           fi
+
+      # Token-created pushes do not trigger CI; PR runs may require approval.
+      # Explicit dispatch validates the same branch without a standing PAT.
+      - name: Validate the synchronization branch
+        if: steps.changes.outputs.changed == 'true'
+        run: gh workflow run ci.yml --ref "${SYNC_BRANCH}"
