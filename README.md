@@ -67,6 +67,11 @@ system. They are publisher-owned presentational machinery, not identifiers:
 filename so it can cache safely. The OFL font licenses are kept beside the
 fonts in `src/assets/fonts/`.
 
+HTML pages carry `noindex`: the resolver is reached by following identifiers
+from responses and documentation, not by search, and human explanations stay
+with the product docs. Machine artifacts, catalogs, and `llms.txt` are
+unaffected.
+
 ## Local workflow
 
 Import the catalog and artifacts from an exact Registry Stack commit:
