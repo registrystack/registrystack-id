@@ -1,5 +1,5 @@
 {
-  "generated_from": "https://github.com/registrystack/registry-stack/blob/a33853f270193de7b1a98e542c9d09913c367aaa/products/identifiers/generated/catalog.v1.json",
+  "generated_from": "https://github.com/registrystack/registry-stack/blob/6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d/products/identifiers/generated/catalog.v1.json",
   "generated_at": "1970-01-01T00:00:00.000Z",
   "entries": [
     {
@@ -18,7 +18,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -39,7 +39,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -60,7 +60,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -81,7 +81,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -102,7 +102,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -123,7 +123,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -144,7 +144,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -165,7 +165,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -186,7 +186,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -207,7 +207,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -228,7 +228,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -249,7 +249,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -270,7 +270,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -291,7 +291,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -312,7 +312,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -333,7 +333,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -354,7 +354,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -375,7 +375,7 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
       }
@@ -396,9 +396,723 @@
       "source": "registry-stack/crates/registry-breg/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "absence.cover-cycle",
+      "path": "absence/cover-cycle",
+      "title": "Absence cover cycle",
+      "description": "Choose cover assignments that do not return to an earlier person during a shared period.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        422
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "absence.invalid-period",
+      "path": "absence/invalid-period",
+      "title": "Invalid absence period",
+      "description": "Set until later than from.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        422
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "absence.overlap",
+      "path": "absence/overlap",
+      "title": "Absence period overlaps",
+      "description": "Adjust the period so this person has no overlapping absence.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        422
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "absence.self-cover",
+      "path": "absence/self-cover",
+      "title": "Absence self-cover not allowed",
+      "description": "Choose a different staff member as cover.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        422
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "authentication.refused",
+      "path": "authentication/refused",
+      "title": "Authentication refused",
+      "description": "The bearer credential is missing, invalid, or expired. Sign in again.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        401
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "clock.recompute-preview-expired",
+      "path": "clock/recompute-preview-expired",
+      "title": "Clock recompute preview expired",
+      "description": "Create a new recompute preview and review it before applying.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        410
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "cursor.expired",
+      "path": "cursor/expired",
+      "title": "Cursor expired",
+      "description": "This cursor has expired. Start again without a cursor and deduplicate entries by eventId.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        410
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "cursor.invalid",
+      "path": "cursor/invalid",
+      "title": "Cursor invalid",
+      "description": "The cursor is invalid for this request.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        400
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "idempotency.expired",
+      "path": "idempotency/expired",
+      "title": "Idempotency window expired",
+      "description": "The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        410
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "idempotency.key-reused",
+      "path": "idempotency/key-reused",
+      "title": "Idempotency key reused",
+      "description": "This idempotency key was used for a different request.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "operation.not-authorized",
+      "path": "operation/not-authorized",
+      "title": "Operation not authorized",
+      "description": "Your current Casework authority does not allow this operation.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        403
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "precondition.failed",
+      "path": "precondition/failed",
+      "title": "Precondition failed",
+      "description": "The item or directory changed since you loaded it. Reload and try again.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        412
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "precondition.required",
+      "path": "precondition/required",
+      "title": "Precondition required",
+      "description": "This mutation requires the revision that you loaded.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        428
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "profile.not-authorized",
+      "path": "profile/not-authorized",
+      "title": "Profile not authorized",
+      "description": "The selected Casework profile does not authorize this request.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        403
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "profile.not-human",
+      "path": "profile/not-human",
+      "title": "Human session required",
+      "description": "This action is reserved for a human session.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        403
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.body-too-large",
+      "path": "request/body-too-large",
+      "title": "Request body too large",
+      "description": "The request body exceeds the one MiB limit.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        413
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.invalid",
+      "path": "request/invalid",
+      "title": "Invalid request",
+      "description": "The Casework request is invalid.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        400
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.method-not-allowed",
+      "path": "request/method-not-allowed",
+      "title": "Method not allowed",
+      "description": "This route does not accept that HTTP method.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        405
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.not-found",
+      "path": "request/not-found",
+      "title": "Route not found",
+      "description": "The requested Casework route does not exist.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        404
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.unprocessable",
+      "path": "request/unprocessable",
+      "title": "Request could not be processed",
+      "description": "The request body does not match the Casework contract.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        422
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "request.unsupported-media-type",
+      "path": "request/unsupported-media-type",
+      "title": "Unsupported media type",
+      "description": "Send a JSON request body with Content-Type application/json.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        415
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "runtime.failure",
+      "path": "runtime/failure",
+      "title": "Casework runtime failure",
+      "description": "Casework could not complete the request.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        500
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "service.unavailable",
+      "path": "service/unavailable",
+      "title": "Casework service unavailable",
+      "description": "Casework storage is unavailable. Try again after the service recovers.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        503
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "source.bad-gateway",
+      "path": "source/bad-gateway",
+      "title": "Invalid source response",
+      "description": "The source returned a response that does not match its registered contract.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        502
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "source.not-found",
+      "path": "source/not-found",
+      "title": "Source not found",
+      "description": "The requested source is not registered.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        404
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "source.signature-invalid",
+      "path": "source/signature-invalid",
+      "title": "Source signature invalid",
+      "description": "The event's signature did not verify.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        400
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.already-claimed",
+      "path": "work-item/already-claimed",
+      "title": "Work item already claimed",
+      "description": "Someone else claimed this item a moment ago.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.not-holder",
+      "path": "work-item/not-holder",
+      "title": "Work item held by another person",
+      "description": "You do not hold this item. Claim it first, or ask a supervisor.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.not-offered",
+      "path": "work-item/not-offered",
+      "title": "Work item action not offered",
+      "description": "The registry did not offer this action to you. Refresh to check again.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.not-visible",
+      "path": "work-item/not-visible",
+      "title": "Work item not visible",
+      "description": "The registry did not show you this request, so Casework cannot show you the item.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        404
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.proposal-changed",
+      "path": "work-item/proposal-changed",
+      "title": "Work item proposal changed",
+      "description": "The proposal changed since you read it. Your private draft is retained.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.recovery-pending",
+      "path": "work-item/recovery-pending",
+      "title": "Work item recovery pending",
+      "description": "We could not confirm the result of your last action. Recover the original attempt; do not decide again.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.source-unavailable",
+      "path": "work-item/source-unavailable",
+      "title": "Work item source unavailable",
+      "description": "The registry is not answering. We cannot confirm the current item or its actions. Your private draft is retained.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        503
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
+      }
+    },
+    {
+      "product": "registry-casework",
+      "code": "work-item.superseded",
+      "path": "work-item/superseded",
+      "title": "Work item superseded",
+      "description": "A revised proposal replaced this item. Open the current one.",
+      "kind": "problem",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "casework",
+      "http_statuses": [
+        409
+      ],
+      "source": "registry-stack/crates/registry-casework/src/problem.rs",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69"
       }
     },
     {
@@ -417,7 +1131,7 @@
       "source": "registry-stack/crates/registry-discovery/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -438,7 +1152,7 @@
       "source": "registry-stack/crates/registry-discovery/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -459,7 +1173,7 @@
       "source": "registry-stack/crates/registry-discovery/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -480,7 +1194,7 @@
       "source": "registry-stack/crates/registry-discovery/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -501,7 +1215,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -522,7 +1236,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -543,7 +1257,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -564,7 +1278,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -585,7 +1299,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -606,7 +1320,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -627,7 +1341,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -648,7 +1362,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -669,7 +1383,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -690,7 +1404,7 @@
       "source": "registry-stack/crates/registry-evidence/src/problem.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -711,7 +1425,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -732,7 +1446,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -753,7 +1467,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -774,7 +1488,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -795,7 +1509,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -816,7 +1530,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -837,7 +1551,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -858,7 +1572,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -879,7 +1593,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -900,7 +1614,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -921,7 +1635,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -942,7 +1656,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -963,7 +1677,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -984,7 +1698,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1005,7 +1719,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1026,7 +1740,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1047,7 +1761,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1068,7 +1782,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1089,7 +1803,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1110,7 +1824,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1131,7 +1845,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1152,7 +1866,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1173,7 +1887,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1194,7 +1908,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1215,7 +1929,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -1236,7 +1950,7 @@
       "source": "registry-stack/crates/registry-relay-http-contract/src/lib.rs",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
