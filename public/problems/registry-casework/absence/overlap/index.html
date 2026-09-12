@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Absence period overlaps | Registry Stack identifiers</title>
+  <meta name="description" content="Adjust the period so this person has no overlapping absence.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.af73d05e9347816d.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="https://registrystack.org/">
+    <span class="brand-mark" aria-hidden="true">RS</span>
+    <span>Registry Stack<span class="brand-site">Identifiers</span></span>
+  </a>
+  <nav class="top-nav" aria-label="Identifier catalogs">
+    <a href="/problems/" aria-current="page">Problems</a>
+    <a href="/namespaces/">Namespaces</a>
+    <a href="/schemas/">Schemas</a>
+    <a href="/contexts/">Contexts</a>
+    <a href="/profiles/">Profiles</a>
+    <a href="/vocabularies/">Vocabularies</a>
+    <a class="nav-emphasis" href="https://docs.registrystack.org/">Documentation</a>
+  </nav>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Problem type · registry-casework</p>
+    <h1>Absence period overlaps</h1>
+    <p class="hero-lead">Adjust the period so this person has no overlapping absence.</p>
+    <p><code class="hero-uri">https://id.registrystack.org/problems/registry-casework/absence/overlap</code></p>
+  </div>
+</section>
+<div class="record">
+    <section class="notice" aria-labelledby="authority">
+      <p class="notice-title" id="authority">Authority boundary</p>
+      <p>This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior.</p>
+      <p>For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.</p>
+    </section>
+    <section aria-labelledby="facts">
+      <h2 id="facts">Defined facts</h2>
+<table class="facts">
+      <tbody>
+        <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-casework/absence/overlap</code></td></tr>
+        <tr><th>Kind</th><td>problem</td></tr>
+        <tr><th>Lifecycle status</th><td><span class="status">active</span></td></tr>
+        <tr><th>Compatibility line</th><td>v1alpha1</td></tr>
+        <tr><th>Product</th><td>registry-casework</td></tr>
+        <tr><th>Code</th><td><code>absence.overlap</code></td></tr>
+        <tr><th>Category</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>HTTP statuses</th><td>422</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <section aria-labelledby="documentation">
+      <h2 id="documentation">Documentation</h2>
+<ul class="doc-list">
+      <li><a href="https://docs.registrystack.org/reference/errors/">Error and status code reference</a></li>
+    </ul>
+    </section>
+    <section aria-labelledby="guidance">
+      <h2 id="guidance">Guidance</h2>
+<table class="facts">
+      <tbody>
+        <tr><th>Guidance status</th><td>not_published</td></tr>
+        <tr><th>Retryable</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>Caller action</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>Operator action</th><td><span class="muted">not published</span></td></tr>
+        <tr><th>Note</th><td>No per-identifier remediation guidance is published in this resolver record.</td></tr>
+      </tbody>
+    </table>
+    </section>
+    <section aria-labelledby="record">
+      <h2 id="record">Problem record</h2>
+      <pre><code>{
+  &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-casework/absence/overlap&quot;,
+  &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-casework/absence/overlap&quot;,
+  &quot;kind&quot;: &quot;problem&quot;,
+  &quot;lifecycle_status&quot;: &quot;active&quot;,
+  &quot;compatibility_line&quot;: &quot;v1alpha1&quot;,
+  &quot;product&quot;: &quot;registry-casework&quot;,
+  &quot;code&quot;: &quot;absence.overlap&quot;,
+  &quot;title&quot;: &quot;Absence period overlaps&quot;,
+  &quot;summary&quot;: &quot;Adjust the period so this person has no overlapping absence.&quot;,
+  &quot;description&quot;: &quot;Adjust the period so this person has no overlapping absence.&quot;,
+  &quot;category&quot;: null,
+  &quot;http_statuses&quot;: [
+    422
+  ],
+  &quot;guidance&quot;: {
+    &quot;status&quot;: &quot;not_published&quot;,
+    &quot;retryable&quot;: null,
+    &quot;caller_action&quot;: null,
+    &quot;operator_action&quot;: null,
+    &quot;note&quot;: &quot;No per-identifier remediation guidance is published in this resolver record.&quot;
+  },
+  &quot;documented_by&quot;: [
+    {
+      &quot;title&quot;: &quot;Error and status code reference&quot;,
+      &quot;href&quot;: &quot;https://docs.registrystack.org/reference/errors/&quot;
+    }
+  ],
+  &quot;authority&quot;: {
+    &quot;scope&quot;: &quot;identifier metadata&quot;,
+    &quot;statement&quot;: &quot;This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic.&quot;
+  },
+  &quot;identifier_policy&quot;: {
+    &quot;stability&quot;: &quot;stable&quot;,
+    &quot;programmatic_key&quot;: &quot;code&quot;,
+    &quot;parsing&quot;: &quot;Do not parse semantics from the URL path.&quot;
+  },
+  &quot;source_reference&quot;: {
+    &quot;repository&quot;: &quot;registry-stack&quot;,
+    &quot;commit&quot;: &quot;6a3bff6efcc89e0d53d0bc37ebcbe7cd62dc0c0d&quot;,
+    &quot;path&quot;: &quot;crates/registry-casework/src/problem.rs&quot;,
+    &quot;sha256&quot;: &quot;ac10545b13870fe6ed8fbcea5cbf6c25d824b4336ff4c41400bba8b4ee11fb69&quot;
+  }
+}</code></pre>
+      <p class="machine-link"><a href="https://id.registrystack.org/problems/registry-casework/absence/overlap.json">Machine-readable JSON</a></p>
+    </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="footer-brand-name" href="https://registrystack.org/">Registry Stack</a>
+      <p>Stable machine identifiers for Registry Stack products, published from a digest-bound source catalog.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <p class="footer-col-title">Catalogs</p>
+        <ul>
+        <li><a href="/problems/">Problem types</a></li>
+        <li><a href="/namespaces/">Namespaces</a></li>
+        <li><a href="/schemas/">Schemas</a></li>
+        <li><a href="/contexts/">Contexts</a></li>
+        <li><a href="/profiles/">Profiles</a></li>
+        <li><a href="/vocabularies/">Vocabularies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Registry Stack</p>
+        <ul>
+          <li><a href="https://registrystack.org/">Main website</a></li>
+          <li><a href="https://docs.registrystack.org/">Documentation</a></li>
+          <li><a href="https://github.com/registrystack/registry-stack">GitHub</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer-base">
+    <p>Machine index: <a href="/index.json">index.json</a> &middot; <a href="/llms.txt">llms.txt</a></p>
+    <p><a href="https://registrystack.org/">registrystack.org</a></p>
+  </div>
+</footer>
+</body>
+</html>
