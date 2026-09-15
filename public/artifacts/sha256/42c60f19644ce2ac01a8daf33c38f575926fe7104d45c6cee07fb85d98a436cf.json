@@ -1,15 +1,5 @@
 {
   "$defs": {
-    "AccessGrantSource": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/EntityAccessGrantSourceSchema"
-        },
-        {
-          "$ref": "#/$defs/ActionAccessGrantSourceSchema"
-        }
-      ]
-    },
     "AccessRequirementsSource": {
       "additionalProperties": false,
       "description": "Compile-time requirements, not grants. Profiles must explicitly satisfy them.",
@@ -41,41 +31,6 @@
           "type": "array"
         }
       },
-      "type": "object"
-    },
-    "ActionAccessGrantSourceSchema": {
-      "additionalProperties": false,
-      "properties": {
-        "action": {
-          "type": "string"
-        },
-        "operations": {
-          "items": {
-            "$ref": "#/$defs/Operation"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "results": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "targets": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ActionTargetGrantSource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "action",
-        "operations"
-      ],
       "type": "object"
     },
     "ActionEffectSource": {
@@ -500,6 +455,12 @@
       "additionalProperties": false,
       "properties": {
         "equals": true,
+        "equalsInput": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "field": {
           "type": "string"
         },
@@ -509,8 +470,7 @@
       },
       "required": [
         "input",
-        "field",
-        "equals"
+        "field"
       ],
       "type": "object"
     },
@@ -563,26 +523,6 @@
       ],
       "type": "object"
     },
-    "ActionTargetGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "entity": {
-          "type": "string"
-        },
-        "rowBoundaries": {
-          "description": "Explicit row reach; an empty array intentionally permits all rows.",
-          "items": {
-            "$ref": "#/$defs/RowBoundarySource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "entity",
-        "rowBoundaries"
-      ],
-      "type": "object"
-    },
     "ActionTargetSource": {
       "additionalProperties": false,
       "properties": {
@@ -617,26 +557,6 @@
           ]
         }
       },
-      "type": "object"
-    },
-    "ApplyTargetGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "entity": {
-          "type": "string"
-        },
-        "rowBoundaries": {
-          "description": "Explicit row reach; an empty array intentionally permits all rows.",
-          "items": {
-            "$ref": "#/$defs/RowBoundarySource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "entity",
-        "rowBoundaries"
-      ],
       "type": "object"
     },
     "AttachmentSlotSource": {
@@ -784,6 +704,9 @@
           "$ref": "#/$defs/ChangeRequestApplicationModeSource",
           "default": "manual"
         },
+        "preconditions": {
+          "$ref": "#/$defs/ChangeRequestPreconditionsSource"
+        },
         "queueReasons": {
           "additionalProperties": {
             "type": "string"
@@ -792,6 +715,13 @@
         }
       },
       "type": "object"
+    },
+    "ChangeRequestCurrentDatePredicateSource": {
+      "enum": [
+        "on_or_after",
+        "on_or_before"
+      ],
+      "type": "string"
     },
     "ChangeRequestDispositionSource": {
       "enum": [
@@ -834,6 +764,126 @@
       "required": [
         "target",
         "operation"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceRequirementSource": {
+      "additionalProperties": false,
+      "properties": {
+        "atLeast": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "atMost": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "equals": true,
+        "equalsFromRequestField": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "maximumObservationAgeSeconds": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "requires": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ChangeRequestEvidenceRequirementSource"
+          },
+          "type": "array"
+        },
+        "subjects": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ChangeRequestEvidenceSubjectSource"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "requirement",
+        "subjects",
+        "maximumObservationAgeSeconds"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceSubjectSource": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "selectors": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ChangeRequestSelectorSource"
+          },
+          "description": "Exact governed selector-profile field map. Every profile field must be\npresent exactly once and no undeclared field is admitted.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "profile",
+        "selectors"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestGuardTargetSource": {
+      "additionalProperties": false,
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "fromField": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "requires": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ChangeRequestPredicateSource"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "entity",
+        "fromField"
       ],
       "type": "object"
     },
@@ -912,6 +962,76 @@
       ],
       "type": "object"
     },
+    "ChangeRequestPreconditionsSource": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "description": "Governed Evidence acquisitions required immediately before application.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestEvidenceSource"
+          },
+          "type": "array"
+        },
+        "request": {
+          "description": "Predicates over the frozen request intake itself.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestPredicateSource"
+          },
+          "type": "array"
+        },
+        "targets": {
+          "description": "Existing records read and revision-bound at proposal preparation.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestGuardTargetSource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ChangeRequestPredicateSource": {
+      "additionalProperties": false,
+      "properties": {
+        "atLeast": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "atMost": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "currentDate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChangeRequestCurrentDatePredicateSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "equals": true,
+        "equalsFromRequestField": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "field"
+      ],
+      "type": "object"
+    },
     "ChangeRequestRetentionModeSource": {
       "enum": [
         "retain",
@@ -985,6 +1105,48 @@
         "approvals"
       ],
       "type": "object"
+    },
+    "ChangeRequestSelectorSource": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "source": {
+              "const": "request_field",
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "source": {
+              "const": "target_field",
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "target",
+            "field"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "ChangeRequestSource": {
       "additionalProperties": false,
@@ -1771,153 +1933,102 @@
       ],
       "type": "object"
     },
-    "EntityAccessGrantSourceSchema": {
+    "EntityExtensionSource": {
       "additionalProperties": false,
       "properties": {
-        "allowCount": {
-          "default": false,
-          "type": "boolean"
+        "accessRequirements": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AccessRequirementsSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Add mandatory requirements only when the entity has none; replacing them is refused."
         },
-        "allowDataExport": {
-          "default": false,
-          "type": "boolean"
+        "changeControl": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChangeControlSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
-        "applyTargets": {
+        "changeRequest": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChangeRequestSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "constraints": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ApplyTargetGrantSource"
+            "$ref": "#/$defs/ConstraintSource"
+          },
+          "type": "array"
+        },
+        "derived": {
+          "items": {
+            "$ref": "#/$defs/DerivedSource"
           },
           "type": "array"
         },
         "entity": {
           "type": "string"
         },
-        "filterableFields": {
+        "events": {
           "default": [],
           "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "lookups": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/LookupGrantSource"
+            "$ref": "#/$defs/EventSource"
           },
           "type": "array"
         },
-        "membershipBoundaries": {
-          "description": "Current active membership required for each stored reference key.",
+        "fields": {
+          "default": [],
           "items": {
-            "$ref": "#/$defs/MembershipBoundarySource"
+            "$ref": "#/$defs/FieldSource"
           },
           "type": "array"
         },
-        "operations": {
+        "geojson": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeoJsonSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "indexes": {
+          "default": [],
           "items": {
-            "$ref": "#/$defs/Operation"
+            "$ref": "#/$defs/IndexSource"
           },
-          "type": "array",
-          "uniqueItems": true
+          "type": "array"
         },
         "readPaths": {
-          "default": [],
           "items": {
-            "$ref": "#/$defs/ReadPathGrantSource"
+            "$ref": "#/$defs/ReadPathSource"
           },
           "type": "array"
         },
-        "readableFields": {
-          "default": [],
+        "selectorProfiles": {
           "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "readableRequestFields": {
-          "description": "Readable change-request decision detail. Anonymous profiles never receive reason text.",
-          "items": {
-            "$ref": "#/$defs/RequestMetadataFieldSource"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requestPresence": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/RequestPresenceGrantSource"
+            "$ref": "#/$defs/SelectorProfileSource"
           },
           "type": "array"
-        },
-        "requestVisibility": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/RequestVisibilitySource"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "reviewStages": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ReviewStageGrantSource"
-          },
-          "type": "array"
-        },
-        "revisionAccess": {
-          "default": false,
-          "type": "boolean"
-        },
-        "rowBoundaries": {
-          "items": {
-            "$ref": "#/$defs/RowBoundarySource"
-          },
-          "type": "array"
-        },
-        "sortableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "spatialQueries": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/SpatialQueryGrantSource"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "submitterTargets": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "writableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
         }
       },
       "required": [
-        "entity",
-        "operations",
-        "rowBoundaries"
+        "entity"
       ],
       "type": "object"
     },
@@ -2224,32 +2335,6 @@
       ],
       "type": "string"
     },
-    "EvidenceProviderSource": {
-      "additionalProperties": false,
-      "properties": {
-        "contracts": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "subjectResolution": {
-          "$ref": "#/$defs/EvidenceSubjectResolution"
-        }
-      },
-      "required": [
-        "id",
-        "contracts",
-        "subjectResolution"
-      ],
-      "type": "object"
-    },
-    "EvidenceSubjectResolution": {
-      "enum": [
-        "trusted-provider-exact-selector"
-      ],
-      "type": "string"
-    },
     "EvidenceSubjectSource": {
       "additionalProperties": false,
       "properties": {
@@ -2381,698 +2466,6 @@
       ],
       "type": "object"
     },
-    "LookupGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "claimMapping": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "default": {},
-          "type": "object"
-        },
-        "selector": {
-          "type": "string"
-        },
-        "valueOrigin": {
-          "$ref": "#/$defs/LookupValueOrigin"
-        }
-      },
-      "required": [
-        "selector",
-        "valueOrigin"
-      ],
-      "type": "object"
-    },
-    "LookupValueOrigin": {
-      "enum": [
-        "request",
-        "verified_claim"
-      ],
-      "type": "string"
-    },
-    "ManifestProjectionApplicationProfileSource": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "version"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionCatalogSource": {
-      "additionalProperties": false,
-      "properties": {
-        "applicationProfiles": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionApplicationProfileSource"
-          },
-          "type": "array"
-        },
-        "baseUrl": {
-          "type": "string"
-        },
-        "conformsTo": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "participantId": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "publisher": {
-          "$ref": "#/$defs/ManifestProjectionPublisherSource"
-        },
-        "standards": {
-          "$ref": "#/$defs/ManifestProjectionStandardsSource",
-          "default": {}
-        },
-        "title": {
-          "$ref": "#/$defs/ManifestProjectionTextSource"
-        }
-      },
-      "required": [
-        "baseUrl",
-        "title",
-        "publisher"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionDataServiceSource": {
-      "additionalProperties": false,
-      "properties": {
-        "conformsTo": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "endpointDescription": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "endpointUrl": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "iri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "servesDatasets": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "title": {
-          "$ref": "#/$defs/ManifestProjectionTextSource"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "endpointUrl",
-        "servesDatasets"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionDatasetSource": {
-      "additionalProperties": false,
-      "properties": {
-        "accessProfile": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "applicableLegislation": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "classificationCeiling": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/Classification"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "conformsTo": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "id": {
-          "type": "string"
-        },
-        "iri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "owner": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "spatialCoverage": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "status": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionDatasetStatus"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "title": {
-          "$ref": "#/$defs/ManifestProjectionTextSource"
-        },
-        "version": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "title"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionDatasetStatus": {
-      "enum": [
-        "under_development",
-        "active",
-        "completed",
-        "deprecated",
-        "withdrawn"
-      ],
-      "type": "string"
-    },
-    "ManifestProjectionDistributionSource": {
-      "additionalProperties": false,
-      "properties": {
-        "accessService": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "accessUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "dataset": {
-          "type": "string"
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "downloadUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "format": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "id": {
-          "type": "string"
-        },
-        "iri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "mediaType": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "title": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "dataset"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionEntitySource": {
-      "additionalProperties": false,
-      "properties": {
-        "conceptUri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "fields": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionFieldSource"
-          },
-          "type": "array"
-        },
-        "id": {
-          "type": "string"
-        },
-        "identifiers": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionIdentifierSource"
-          },
-          "type": "array"
-        },
-        "title": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionFieldSource": {
-      "additionalProperties": false,
-      "properties": {
-        "concepts": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "id": {
-          "type": "string"
-        },
-        "language": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "relationshipConceptUri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "relationshipRole": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "unit": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionIdentifierSource": {
-      "additionalProperties": false,
-      "properties": {
-        "field": {
-          "type": "string"
-        },
-        "kind": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "field",
-        "kind"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionPublicServiceSource": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "$ref": "#/$defs/ManifestProjectionTextSource"
-        }
-      },
-      "required": [
-        "id",
-        "title"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionPublisherSource": {
-      "additionalProperties": false,
-      "properties": {
-        "authorityType": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "id": {
-          "type": "string"
-        },
-        "iri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "name"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionSource": {
-      "additionalProperties": false,
-      "properties": {
-        "accessProfile": {
-          "type": "string"
-        },
-        "catalog": {
-          "$ref": "#/$defs/ManifestProjectionCatalogSource"
-        },
-        "classificationCeiling": {
-          "$ref": "#/$defs/Classification"
-        },
-        "dataServices": {
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionDataServiceSource"
-          },
-          "type": "array"
-        },
-        "datasets": {
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionDatasetSource"
-          },
-          "type": "array"
-        },
-        "distributions": {
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionDistributionSource"
-          },
-          "type": "array"
-        },
-        "entities": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionEntitySource"
-          },
-          "type": "array"
-        },
-        "publicService": {
-          "$ref": "#/$defs/ManifestProjectionPublicServiceSource"
-        },
-        "vocabularies": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionVocabularySource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "accessProfile",
-        "classificationCeiling",
-        "catalog",
-        "publicService",
-        "datasets",
-        "dataServices"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionStandardsSource": {
-      "additionalProperties": false,
-      "properties": {
-        "dcat": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "jsonSchema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "shacl": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "type": "object"
-    },
-    "ManifestProjectionTextSource": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object"
-        }
-      ]
-    },
-    "ManifestProjectionVocabularyConceptSource": {
-      "additionalProperties": false,
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "iri": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "label": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ManifestProjectionTextSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "code"
-      ],
-      "type": "object"
-    },
-    "ManifestProjectionVocabularySource": {
-      "additionalProperties": false,
-      "properties": {
-        "concepts": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ManifestProjectionVocabularyConceptSource"
-          },
-          "type": "array"
-        },
-        "externalRef": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "id": {
-          "type": "string"
-        },
-        "schemeIri": {
-          "type": "string"
-        },
-        "version": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "schemeIri"
-      ],
-      "type": "object"
-    },
-    "MembershipBoundarySource": {
-      "additionalProperties": false,
-      "description": "A one-hop current membership requirement, combined with every other row boundary.\nThe root field and membership key must reference the same entity. The active\nfield is Boolean, and principalField matches the profile's verified principal.",
-      "properties": {
-        "activeField": {
-          "type": "string"
-        },
-        "field": {
-          "type": "string"
-        },
-        "membershipEntity": {
-          "type": "string"
-        },
-        "membershipKeyField": {
-          "type": "string"
-        },
-        "principalField": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "field",
-        "membershipEntity",
-        "membershipKeyField",
-        "principalField",
-        "activeField"
-      ],
-      "type": "object"
-    },
-    "ModuleLockSource": {
-      "additionalProperties": false,
-      "properties": {
-        "digest": {
-          "default": null,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "id": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "version"
-      ],
-      "type": "object"
-    },
     "MutationMode": {
       "enum": [
         "mutable",
@@ -3101,124 +2494,6 @@
         "invoke"
       ],
       "type": "string"
-    },
-    "PackageIdentitySource": {
-      "additionalProperties": false,
-      "properties": {
-        "environment": {
-          "type": "string"
-        },
-        "instanceId": {
-          "type": "string"
-        },
-        "sequence": {
-          "format": "uint64",
-          "minimum": 0,
-          "type": "integer"
-        },
-        "sourceRevision": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "environment",
-        "instanceId",
-        "sequence",
-        "sourceRevision"
-      ],
-      "type": "object"
-    },
-    "ProjectAccessProfileSource": {
-      "additionalProperties": false,
-      "properties": {
-        "anonymous": {
-          "default": false,
-          "type": "boolean"
-        },
-        "default": {
-          "default": false,
-          "type": "boolean"
-        },
-        "grants": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/AccessGrantSource"
-          },
-          "type": "array"
-        },
-        "id": {
-          "type": "string"
-        },
-        "principalClaim": {
-          "default": null,
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "requiredPurposes": {
-          "default": [],
-          "description": "The verified token's purpose must match one listed value. Empty means no purpose restriction.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requiredScopes": {
-          "default": [],
-          "description": "All listed scopes must be present in the verified token.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "type": "object"
-    },
-    "ReadPathGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "allowCount": {
-          "default": false,
-          "type": "boolean"
-        },
-        "filterableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "path": {
-          "type": "string"
-        },
-        "readableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "sortableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "path"
-      ],
-      "type": "object"
     },
     "ReadPathSource": {
       "additionalProperties": false,
@@ -3306,113 +2581,6 @@
       ],
       "type": "object"
     },
-    "RegistryIdentitySource": {
-      "additionalProperties": false,
-      "properties": {
-        "canonicalBaseIri": {
-          "type": "string"
-        },
-        "defaultLanguage": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "version",
-        "defaultLanguage",
-        "canonicalBaseIri"
-      ],
-      "type": "object"
-    },
-    "RequestMetadataFieldSource": {
-      "description": "Fields of request decision metadata governed separately from stored record fields.",
-      "enum": [
-        "reason"
-      ],
-      "type": "string"
-    },
-    "RequestPresenceGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "requestType": {
-          "type": "string"
-        },
-        "rowBoundaries": {
-          "description": "Explicit row reach; an empty array intentionally permits all rows.",
-          "items": {
-            "$ref": "#/$defs/RowBoundarySource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "requestType",
-        "rowBoundaries"
-      ],
-      "type": "object"
-    },
-    "RequestVisibilitySource": {
-      "oneOf": [
-        {
-          "const": "owner",
-          "description": "Expose only requests created by the current authenticated principal.",
-          "type": "string"
-        }
-      ]
-    },
-    "ReviewStageGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "stage": {
-          "type": "string"
-        },
-        "targets": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ReviewStageTargetGrantSource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "stage"
-      ],
-      "type": "object"
-    },
-    "ReviewStageTargetGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "entity": {
-          "type": "string"
-        },
-        "readableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "rowBoundaries": {
-          "description": "Explicit row reach; an empty array intentionally permits all rows.",
-          "items": {
-            "$ref": "#/$defs/RowBoundarySource"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "entity",
-        "rowBoundaries"
-      ],
-      "type": "object"
-    },
     "RhaiScriptKindSource": {
       "enum": [
         "rhai"
@@ -3456,38 +2624,6 @@
         "id",
         "fields"
       ],
-      "type": "object"
-    },
-    "SpatialBboxGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "maximumLatitudeSpanDegrees": {
-          "type": "number"
-        },
-        "maximumLongitudeSpanDegrees": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "maximumLongitudeSpanDegrees",
-        "maximumLatitudeSpanDegrees"
-      ],
-      "type": "object"
-    },
-    "SpatialQueryGrantSource": {
-      "additionalProperties": false,
-      "properties": {
-        "bbox": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/SpatialBboxGrantSource"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
       "type": "object"
     },
     "StringFieldKindSchema": {
@@ -3929,25 +3065,6 @@
       ],
       "type": "object"
     },
-    "VocabularySource": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "values": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "id",
-        "values"
-      ],
-      "type": "object"
-    },
     "WebhookSource": {
       "additionalProperties": false,
       "description": "Governed, destination-neutral webhook subscription.\n\nDeployment configuration may bind `destination_id` to transport details\nand tighten these bounds, but cannot supply or widen this authority.",
@@ -3963,87 +3080,54 @@
       "type": "object"
     }
   },
-  "$id": "https://id.registrystack.org/schemas/breg/authoring/registry-project.v1alpha1.schema.json",
+  "$id": "https://id.registrystack.org/schemas/breg/authoring/registry-module.v1alpha1.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
-    "accessProfiles": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/ProjectAccessProfileSource"
-      },
-      "type": "array"
-    },
     "actions": {
+      "description": "Named immediate actions introduced by this module.",
       "items": {
         "$ref": "#/$defs/ActionSource"
       },
       "type": "array"
     },
-    "apiVersion": {
-      "type": "string"
+    "dependencies": {
+      "default": [],
+      "description": "Identifiers of modules that must be applied before this module.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     },
     "entities": {
       "default": [],
+      "description": "Entities introduced by this module.",
       "items": {
         "$ref": "#/$defs/EntitySource"
       },
       "type": "array"
     },
-    "evidenceProviders": {
+    "extendEntities": {
+      "default": [],
+      "description": "Additive contributions to entities already declared by the project or another module.",
       "items": {
-        "$ref": "#/$defs/EvidenceProviderSource"
+        "$ref": "#/$defs/EntityExtensionSource"
       },
       "type": "array"
     },
-    "kind": {
+    "id": {
+      "description": "Stable module identifier, referenced by the project's module lock.",
       "type": "string"
     },
-    "manifestProjection": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/ManifestProjectionSource"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null
-    },
-    "modules": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/ModuleLockSource"
-      },
-      "type": "array"
-    },
-    "package": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/PackageIdentitySource"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null
-    },
-    "registry": {
-      "$ref": "#/$defs/RegistryIdentitySource"
-    },
-    "vocabularies": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/VocabularySource"
-      },
-      "type": "array"
+    "version": {
+      "description": "Module version recorded alongside its content digest in the project.",
+      "type": "string"
     }
   },
   "required": [
-    "apiVersion",
-    "kind",
-    "registry"
+    "id",
+    "version"
   ],
-  "title": "Base Registry Engine authored project",
+  "title": "Base Registry Engine authored module",
   "type": "object"
 }
