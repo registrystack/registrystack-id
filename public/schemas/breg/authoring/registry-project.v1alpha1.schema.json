@@ -1,12 +1,12 @@
 {
   "$defs": {
-    "AccessGrantSource": {
+    "AccessPermissionSource": {
       "anyOf": [
         {
-          "$ref": "#/$defs/EntityAccessGrantSourceSchema"
+          "$ref": "#/$defs/EntityAccessPermissionSourceSchema"
         },
         {
-          "$ref": "#/$defs/ActionAccessGrantSourceSchema"
+          "$ref": "#/$defs/ActionAccessPermissionSourceSchema"
         }
       ]
     },
@@ -43,7 +43,7 @@
       },
       "type": "object"
     },
-    "ActionAccessGrantSourceSchema": {
+    "ActionAccessPermissionSourceSchema": {
       "additionalProperties": false,
       "properties": {
         "action": {
@@ -67,7 +67,7 @@
         "targets": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ActionTargetGrantSource"
+            "$ref": "#/$defs/ActionTargetPermissionSource"
           },
           "type": "array"
         }
@@ -500,6 +500,12 @@
       "additionalProperties": false,
       "properties": {
         "equals": true,
+        "equalsInput": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "field": {
           "type": "string"
         },
@@ -509,8 +515,7 @@
       },
       "required": [
         "input",
-        "field",
-        "equals"
+        "field"
       ],
       "type": "object"
     },
@@ -563,7 +568,7 @@
       ],
       "type": "object"
     },
-    "ActionTargetGrantSource": {
+    "ActionTargetPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "entity": {
@@ -619,7 +624,15 @@
       },
       "type": "object"
     },
-    "ApplyTargetGrantSource": {
+    "ActorKindSource": {
+      "enum": [
+        "human",
+        "agent",
+        "service"
+      ],
+      "type": "string"
+    },
+    "ApplyTargetPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "entity": {
@@ -784,6 +797,9 @@
           "$ref": "#/$defs/ChangeRequestApplicationModeSource",
           "default": "manual"
         },
+        "preconditions": {
+          "$ref": "#/$defs/ChangeRequestPreconditionsSource"
+        },
         "queueReasons": {
           "additionalProperties": {
             "type": "string"
@@ -792,6 +808,13 @@
         }
       },
       "type": "object"
+    },
+    "ChangeRequestCurrentDatePredicateSource": {
+      "enum": [
+        "on_or_after",
+        "on_or_before"
+      ],
+      "type": "string"
     },
     "ChangeRequestDispositionSource": {
       "enum": [
@@ -834,6 +857,126 @@
       "required": [
         "target",
         "operation"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceRequirementSource": {
+      "additionalProperties": false,
+      "properties": {
+        "atLeast": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "atMost": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "equals": true,
+        "equalsFromRequestField": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "maximumObservationAgeSeconds": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "requires": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ChangeRequestEvidenceRequirementSource"
+          },
+          "type": "array"
+        },
+        "subjects": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ChangeRequestEvidenceSubjectSource"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "requirement",
+        "subjects",
+        "maximumObservationAgeSeconds"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestEvidenceSubjectSource": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "selectors": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ChangeRequestSelectorSource"
+          },
+          "description": "Exact governed selector-profile field map. Every profile field must be\npresent exactly once and no undeclared field is admitted.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "profile",
+        "selectors"
+      ],
+      "type": "object"
+    },
+    "ChangeRequestGuardTargetSource": {
+      "additionalProperties": false,
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "fromField": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "requires": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ChangeRequestPredicateSource"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "entity",
+        "fromField"
       ],
       "type": "object"
     },
@@ -912,6 +1055,76 @@
       ],
       "type": "object"
     },
+    "ChangeRequestPreconditionsSource": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "description": "Governed Evidence acquisitions required immediately before application.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestEvidenceSource"
+          },
+          "type": "array"
+        },
+        "request": {
+          "description": "Predicates over the frozen request intake itself.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestPredicateSource"
+          },
+          "type": "array"
+        },
+        "targets": {
+          "description": "Existing records read and revision-bound at proposal preparation.",
+          "items": {
+            "$ref": "#/$defs/ChangeRequestGuardTargetSource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ChangeRequestPredicateSource": {
+      "additionalProperties": false,
+      "properties": {
+        "atLeast": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "atMost": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "currentDate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChangeRequestCurrentDatePredicateSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "equals": true,
+        "equalsFromRequestField": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "field"
+      ],
+      "type": "object"
+    },
     "ChangeRequestRetentionModeSource": {
       "enum": [
         "retain",
@@ -985,6 +1198,48 @@
         "approvals"
       ],
       "type": "object"
+    },
+    "ChangeRequestSelectorSource": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "source": {
+              "const": "request_field",
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "source": {
+              "const": "target_field",
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "target",
+            "field"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "ChangeRequestSource": {
       "additionalProperties": false,
@@ -1771,7 +2026,7 @@
       ],
       "type": "object"
     },
-    "EntityAccessGrantSourceSchema": {
+    "EntityAccessPermissionSourceSchema": {
       "additionalProperties": false,
       "properties": {
         "allowCount": {
@@ -1785,7 +2040,7 @@
         "applyTargets": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ApplyTargetGrantSource"
+            "$ref": "#/$defs/ApplyTargetPermissionSource"
           },
           "type": "array"
         },
@@ -1803,7 +2058,7 @@
         "lookups": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/LookupGrantSource"
+            "$ref": "#/$defs/LookupPermissionSource"
           },
           "type": "array"
         },
@@ -1824,7 +2079,7 @@
         "readPaths": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ReadPathGrantSource"
+            "$ref": "#/$defs/ReadPathPermissionSource"
           },
           "type": "array"
         },
@@ -1847,7 +2102,7 @@
         "requestPresence": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/RequestPresenceGrantSource"
+            "$ref": "#/$defs/RequestPresencePermissionSource"
           },
           "type": "array"
         },
@@ -1865,7 +2120,7 @@
         "reviewStages": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ReviewStageGrantSource"
+            "$ref": "#/$defs/ReviewStagePermissionSource"
           },
           "type": "array"
         },
@@ -1890,7 +2145,7 @@
         "spatialQueries": {
           "anyOf": [
             {
-              "$ref": "#/$defs/SpatialQueryGrantSource"
+              "$ref": "#/$defs/SpatialQueryPermissionSource"
             },
             {
               "type": "null"
@@ -2381,7 +2636,7 @@
       ],
       "type": "object"
     },
-    "LookupGrantSource": {
+    "LookupPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "claimMapping": {
@@ -3131,6 +3386,16 @@
     "ProjectAccessProfileSource": {
       "additionalProperties": false,
       "properties": {
+        "actorKind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ActorKindSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "anonymous": {
           "default": false,
           "type": "boolean"
@@ -3139,15 +3404,15 @@
           "default": false,
           "type": "boolean"
         },
-        "grants": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/AccessGrantSource"
-          },
-          "type": "array"
-        },
         "id": {
           "type": "string"
+        },
+        "permissions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AccessPermissionSource"
+          },
+          "type": "array"
         },
         "principalClaim": {
           "default": null,
@@ -3155,6 +3420,13 @@
             "string",
             "null"
           ]
+        },
+        "requesterClients": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
         },
         "requiredPurposes": {
           "default": [],
@@ -3173,6 +3445,16 @@
           },
           "type": "array",
           "uniqueItems": true
+        },
+        "taskGrant": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TaskGrantSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -3180,7 +3462,7 @@
       ],
       "type": "object"
     },
-    "ReadPathGrantSource": {
+    "ReadPathPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "allowCount": {
@@ -3333,11 +3615,13 @@
     "RequestMetadataFieldSource": {
       "description": "Fields of request decision metadata governed separately from stored record fields.",
       "enum": [
-        "reason"
+        "actor_reference",
+        "reason",
+        "review_state"
       ],
       "type": "string"
     },
-    "RequestPresenceGrantSource": {
+    "RequestPresencePermissionSource": {
       "additionalProperties": false,
       "properties": {
         "requestType": {
@@ -3366,7 +3650,7 @@
         }
       ]
     },
-    "ReviewStageGrantSource": {
+    "ReviewStagePermissionSource": {
       "additionalProperties": false,
       "properties": {
         "stage": {
@@ -3375,7 +3659,7 @@
         "targets": {
           "default": [],
           "items": {
-            "$ref": "#/$defs/ReviewStageTargetGrantSource"
+            "$ref": "#/$defs/ReviewStageTargetPermissionSource"
           },
           "type": "array"
         }
@@ -3385,7 +3669,7 @@
       ],
       "type": "object"
     },
-    "ReviewStageTargetGrantSource": {
+    "ReviewStageTargetPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "entity": {
@@ -3458,7 +3742,7 @@
       ],
       "type": "object"
     },
-    "SpatialBboxGrantSource": {
+    "SpatialBboxPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "maximumLatitudeSpanDegrees": {
@@ -3474,13 +3758,13 @@
       ],
       "type": "object"
     },
-    "SpatialQueryGrantSource": {
+    "SpatialQueryPermissionSource": {
       "additionalProperties": false,
       "properties": {
         "bbox": {
           "anyOf": [
             {
-              "$ref": "#/$defs/SpatialBboxGrantSource"
+              "$ref": "#/$defs/SpatialBboxPermissionSource"
             },
             {
               "type": "null"
@@ -3610,6 +3894,18 @@
         "classification",
         "maxBytes",
         "schema"
+      ],
+      "type": "object"
+    },
+    "TaskGrantSource": {
+      "additionalProperties": false,
+      "properties": {
+        "sourceIssuer": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceIssuer"
       ],
       "type": "object"
     },
