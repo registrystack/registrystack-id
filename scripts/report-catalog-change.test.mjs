@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  catalogKinds,
   renderMarkdown,
   summarizeCatalogs,
 } from './report-catalog-change.mjs';
@@ -16,6 +17,18 @@ function entry(uri, values = {}) {
     ...values,
   };
 }
+
+test('catalog change summary includes every published identifier kind', () => {
+  assert.deepEqual(catalogKinds, [
+    'problem',
+    'schema',
+    'context',
+    'profile',
+    'namespace',
+    'vocabulary',
+    'vocabulary-term',
+  ]);
+});
 
 test('catalog change summary classifies additions, removals, and updates', () => {
   const summary = summarizeCatalogs(

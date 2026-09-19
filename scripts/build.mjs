@@ -713,6 +713,21 @@ function writeStaticControls(artifactEntries) {
       cache: 'public, max-age=86400',
     },
     {
+      path: 'artifacts/sha256/*.json',
+      contentType: 'application/schema+json; charset=utf-8',
+      cache: 'public, max-age=31536000, immutable',
+    },
+    {
+      path: 'artifacts/sha256/*.jsonld',
+      contentType: 'application/ld+json; charset=utf-8',
+      cache: 'public, max-age=31536000, immutable',
+    },
+    {
+      path: 'artifacts/sha256/*.md',
+      contentType: 'text/markdown; charset=utf-8',
+      cache: 'public, max-age=31536000, immutable',
+    },
+    {
       path: '.well-known/registrystack-identifiers',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
@@ -741,16 +756,6 @@ function writeStaticControls(artifactEntries) {
     const cache = 'public, max-age=86400';
     if (!coveredByStaticRule(path, contentType, cache)) {
       machineHeaders.push({ path, contentType, cache });
-    }
-    if (!entry.immutable_uri) {
-      continue;
-    }
-    // The digest path serves the same bytes as the canonical URI, so it
-    // carries the same content type; the file extension only names the copy.
-    const immutablePath = uriToPath(entry.immutable_uri);
-    const immutableCache = 'public, max-age=31536000, immutable';
-    if (!coveredByStaticRule(immutablePath, contentType, immutableCache)) {
-      machineHeaders.push({ path: immutablePath, contentType, cache: immutableCache });
     }
   }
 
@@ -794,6 +799,11 @@ for (const entry of namespaces) writeIdentifier(entry);
 for (const entry of artifactIdentifiers) writeArtifactIdentifier(entry);
 for (const entry of vocabularies) writeIdentifier(entry);
 for (const entry of vocabularyTerms) writeIdentifier(entry);
+cpSync(
+  resolve(repoRoot, 'src/artifacts/sha256'),
+  resolve(outputDir, 'artifacts/sha256'),
+  { recursive: true },
+);
 
 writeCatalogIndex('Problems', problems, problemUri);
 writeCatalogIndex('Namespaces', namespaces, (entry) => entry.uri.replace(/#$/, ''));

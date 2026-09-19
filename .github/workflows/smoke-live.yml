@@ -27,5 +27,7 @@ jobs:
         with:
           node-version: "22.12.0"
 
-      - name: Check representative live identifiers
-        run: npm run smoke:live
+      - name: Check the published catalog and compatibility routes
+        run: |
+          npm run smoke:catalog
+          npm run smoke:live

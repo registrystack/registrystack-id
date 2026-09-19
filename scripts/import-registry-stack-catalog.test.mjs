@@ -22,7 +22,7 @@ test('catalog import requires an explicit full source commit', () => {
   assert.equal(parsed.revision, 'a'.repeat(40));
 });
 
-test('catalog merge drops identifiers absent from the current source catalog', () => {
+test('catalog merge preserves identifiers absent from the current source catalog', () => {
   const result = mergeCatalog(
     [
       {
@@ -35,7 +35,34 @@ test('catalog merge drops identifiers absent from the current source catalog', (
     [],
     'problem',
   );
-  assert.deepEqual(result, []);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].path, 'legacy/problem');
+  assert.equal(result[0].status, 'deprecated');
+});
+
+test('catalog merge restores a historical identifier when it becomes active again', () => {
+  const result = mergeCatalog(
+    [
+      {
+        uri: 'https://id.registrystack.org/ns/example/v1#',
+        title: 'Historical title',
+        kind: 'namespace',
+        status: 'deprecated',
+      },
+    ],
+    [
+      {
+        uri: 'https://id.registrystack.org/ns/example/v1#',
+        title: 'Current title',
+        kind: 'namespace',
+        status: 'active',
+      },
+    ],
+    'namespace',
+  );
+  assert.equal(result.length, 1);
+  assert.equal(result[0].title, 'Current title');
+  assert.equal(result[0].status, 'active');
 });
 
 test('catalog merge replaces historical fields with exact current metadata', () => {

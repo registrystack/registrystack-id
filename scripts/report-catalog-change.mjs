@@ -9,10 +9,13 @@ const catalogs = [
   ['problem', 'src/catalogs/problems.json'],
   ['schema', 'src/catalogs/schemas.json'],
   ['context', 'src/catalogs/contexts.json'],
+  ['profile', 'src/catalogs/profiles.json'],
   ['namespace', 'src/catalogs/namespaces.json'],
   ['vocabulary', 'src/catalogs/vocabularies.json'],
   ['vocabulary-term', 'src/catalogs/vocabulary-terms.json'],
 ];
+
+export const catalogKinds = catalogs.map(([kind]) => kind);
 
 function problemUri(entry) {
   return `${baseUrl}/problems/${entry.product}/${entry.path}`;

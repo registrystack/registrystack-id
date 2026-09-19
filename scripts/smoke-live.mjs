@@ -14,15 +14,6 @@ async function readJson(path) {
   return response.json();
 }
 
-async function expectNotFound(path) {
-  const response = await fetch(`${baseUrl}${path}`, {
-    signal: AbortSignal.timeout(15_000),
-  });
-  if (response.status !== 404) {
-    throw new Error(`${path} returned HTTP ${response.status}, expected 404`);
-  }
-}
-
 const index = await readJson('/index.json');
 if (index.base_url !== canonicalBaseUrl || !index.catalogs?.vocabularies) {
   throw new Error('root catalog does not describe the current resolver');
@@ -37,6 +28,15 @@ if (
   !problem.http_statuses?.includes(401)
 ) {
   throw new Error('representative Relay V2 problem record is stale');
+}
+
+const namespace = await readJson('/ns/registry-manifest/v1.json');
+if (
+  namespace.id !== 'https://id.registrystack.org/ns/registry-manifest/v1#' ||
+  namespace.kind !== 'namespace' ||
+  namespace.status !== 'active'
+) {
+  throw new Error('Registry Manifest namespace record is stale');
 }
 
 const schema = await readJson(
@@ -93,6 +93,13 @@ if (baseUrl === canonicalBaseUrl) {
   }
 }
 
-await expectNotFound('/ns/registry-relay/v1.json');
+const historicalNamespace = await readJson('/ns/registry-relay/v1.json');
+if (
+  historicalNamespace.id !== 'https://id.registrystack.org/ns/registry-relay/v1#' ||
+  historicalNamespace.kind !== 'namespace' ||
+  historicalNamespace.status !== 'deprecated'
+) {
+  throw new Error('historical Registry Relay namespace was not preserved');
+}
 
 console.log(`identifier availability smoke passed for ${baseUrl}`);
