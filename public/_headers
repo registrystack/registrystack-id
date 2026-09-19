@@ -60,77 +60,42 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/artifacts/sha256/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/artifacts/sha256/*.jsonld
+  Content-Type: application/ld+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/artifacts/sha256/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
 /.well-known/registrystack-identifiers
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
-
-/artifacts/sha256/6b660ca268062996a138839051ba35b306673f1720256b40419f48a7abb1c44f.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
-/artifacts/sha256/f9724862a5922f80ae7b5ea9b87082697274cf79df29c950b2f2221c941f9a9e.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
-/artifacts/sha256/76bab2f49eef78995b5df8cf21d45a179cdfc9842041a0d7f0b291fc6d632c1d.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
-/artifacts/sha256/e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
 
 /schemas/registry-record/v1
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
-/artifacts/sha256/31cae7de9e84904e300d0d77ffbfdfc7a1de6127719a0ccbb3f6a88d7306510e.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
 /schemas/registry-relay/audit-event/v2alpha1
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
-
-/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
-/artifacts/sha256/c030917d19b1f50c8d2b41fc7b2ef4fb07b803b5fa98ffd971f5c964f491f7e5.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
-/artifacts/sha256/9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b.json
-  Content-Type: application/schema+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
 
 /contexts/registry-record/v1
   Content-Type: application/ld+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
-/artifacts/sha256/9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71.jsonld
-  Content-Type: application/ld+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable
-
 /profiles/registry-record/v1
   Content-Type: text/markdown; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
-
-/artifacts/sha256/f165e62044df2129b5cc533d3199cf81ae23d263617f39437ee37be87d3b37fe.md
-  Content-Type: text/markdown; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=31536000, immutable

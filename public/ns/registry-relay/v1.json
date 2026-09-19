@@ -1,0 +1,38 @@
+{
+  "uri": "https://id.registrystack.org/ns/registry-relay/v1#",
+  "title": "Registry Relay v1 namespace",
+  "description": "JSON-LD namespace for Registry Relay metadata terms.",
+  "kind": "namespace",
+  "status": "deprecated",
+  "compatibility_line": "legacy",
+  "owner": "registry-relay",
+  "source_reference": {
+    "repository": "registrystack-id",
+    "commit": "41f0c7a300e54e047e83964bf1f05e43fb463882",
+    "path": "src/catalogs/namespaces.json",
+    "sha256": "bde12ac7cf13d432fcc61a428d03788d12ad2fef72f7f8e6aeafea1f8419caeb"
+  },
+  "id": "https://id.registrystack.org/ns/registry-relay/v1#",
+  "documented_by": [
+    {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
+      "title": "Registry Relay product docs",
+      "href": "https://docs.registrystack.org/products/registry-relay/"
+    },
+    {
+      "title": "Registry Relay API overview",
+      "href": "https://docs.registrystack.org/reference/apis/registry-relay/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "uri": "https://id.registrystack.org/ns/registry-notary/v1#",
+  "title": "Registry Notary v1 namespace",
+  "description": "JSON-LD namespace for Registry Notary metadata terms.",
+  "kind": "namespace",
+  "status": "deprecated",
+  "compatibility_line": "legacy",
+  "owner": "registry-notary",
+  "source_reference": {
+    "repository": "registrystack-id",
+    "commit": "437113edfd7e922cf44ef81ff0d6732fa4d207ca",
+    "path": "src/catalogs/namespaces.json",
+    "sha256": "6680e28c21f5c01872d20d3cd73bb09e8dda00cbb1b5b0cb7c2d022eabc1179d"
+  },
+  "id": "https://id.registrystack.org/ns/registry-notary/v1#",
+  "documented_by": [
+    {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+  }
+}

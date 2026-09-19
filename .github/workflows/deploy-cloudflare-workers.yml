@@ -1,9 +1,25 @@
 name: Deploy Cloudflare Workers
+run-name: Publish Registry Stack identifiers ${{ inputs.released_tag }} (${{ inputs.request_id }})
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      released_tag:
+        description: Exact released Registry Stack tag
+        required: true
+        type: string
+      source_sha:
+        description: Exact released Registry Stack source commit
+        required: true
+        type: string
+      catalog_sha256:
+        description: SHA-256 of the exact released identifier catalog
+        required: true
+        type: string
+      request_id:
+        description: Registry Stack release publication correlation ID
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -30,15 +46,40 @@ jobs:
 
       - name: Read pinned Registry Stack source
         id: source
+        env:
+          INPUT_CATALOG_SHA256: ${{ inputs.catalog_sha256 }}
+          INPUT_RELEASED_TAG: ${{ inputs.released_tag }}
+          INPUT_REQUEST_ID: ${{ inputs.request_id }}
+          INPUT_SOURCE_SHA: ${{ inputs.source_sha }}
         shell: bash
         run: |
           node <<'NODE'
           const { appendFileSync, readFileSync } = require('node:fs');
           const source = JSON.parse(readFileSync('src/upstream/source.json', 'utf8'));
-          if (!/^[0-9a-f]{40}$/.test(source.commit)) {
-            throw new Error('src/upstream/source.json does not pin a full commit');
+          const commit = process.env.INPUT_SOURCE_SHA;
+          const catalog = process.env.INPUT_CATALOG_SHA256;
+          const tag = process.env.INPUT_RELEASED_TAG;
+          const request = process.env.INPUT_REQUEST_ID;
+          if (!/^[0-9a-f]{40}$/.test(commit)) {
+            throw new Error('identifier publication does not name a full source commit');
           }
-          appendFileSync(process.env.GITHUB_OUTPUT, `commit=${source.commit}\n`);
+          if (!/^[0-9a-f]{64}$/.test(catalog)) {
+            throw new Error('identifier publication does not name a catalog SHA-256');
+          }
+          if (!/^v0\.[0-9]+\.[0-9]+$/.test(tag)) {
+            throw new Error('released_tag must be a canonical v0.x.y tag');
+          }
+          if (!/^[A-Za-z0-9._-]{1,128}$/.test(request)) {
+            throw new Error('request_id contains unsupported characters');
+          }
+          if (source.commit !== commit || source.catalog_sha256 !== catalog) {
+            throw new Error(
+              'release publication inputs do not match the reviewed publisher bundle',
+            );
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `commit=${commit}\n`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `catalog_sha256=${catalog}\n`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `released_tag=${tag}\n`);
           NODE
 
       - name: Checkout pinned Registry Stack source
@@ -52,7 +93,9 @@ jobs:
 
       - name: Require source provenance from Registry Stack main
         env:
+          EXPECTED_CATALOG_SHA256: ${{ steps.source.outputs.catalog_sha256 }}
           PINNED_SOURCE: ${{ steps.source.outputs.commit }}
+          RELEASED_TAG: ${{ steps.source.outputs.released_tag }}
         shell: bash
         run: |
           set -euo pipefail
@@ -64,11 +107,26 @@ jobs:
             exit 1
           fi
 
-      - name: Check pinned upstream catalog
-        run: npm run check:upstream -- _upstream/registry-stack
+          git -C _upstream/registry-stack fetch origin \
+            "refs/tags/${RELEASED_TAG}:refs/tags/${RELEASED_TAG}"
+          if [[ "$(git -C _upstream/registry-stack cat-file -t "refs/tags/${RELEASED_TAG}")" != tag ]]; then
+            echo "Released Registry Stack tag must be annotated" >&2
+            exit 1
+          fi
+          test "$(git -C _upstream/registry-stack rev-parse "refs/tags/${RELEASED_TAG}^{}")" = \
+            "${PINNED_SOURCE}"
 
-      - name: Check generated output
-        run: npm test
+          actual_catalog_sha256="$(
+            git -C _upstream/registry-stack show \
+              "${PINNED_SOURCE}:products/identifiers/generated/catalog.v1.json" \
+              | sha256sum | awk '{print $1}'
+          )"
+          test "${actual_catalog_sha256}" = "${EXPECTED_CATALOG_SHA256}"
+
+      - name: Check exact source and generated output
+        run: |
+          npm run check:upstream -- _upstream/registry-stack
+          npm test
 
       - name: Build static site
         run: npm run build
@@ -82,5 +140,7 @@ jobs:
           command: deploy
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Smoke every catalog problem URI on the live host
-        run: npm run smoke:problem-routes
+      - name: Smoke the exact catalog and compatibility routes on the live host
+        run: |
+          npm run smoke:catalog
+          npm run smoke:live

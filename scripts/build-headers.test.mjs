@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { extname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
@@ -102,4 +102,54 @@ test('an immutable artifact copy serves the same content type as its canonical U
     }
   }
   assert.ok(checked > 0, 'expected at least one immutable artifact copy in the catalogs');
+});
+
+test('the build retains every digest-addressed artifact in source history', () => {
+  const outputDir = mkdtempSync(join(tmpdir(), 'registrystack-id-build-'));
+  try {
+    execFileSync('node', ['scripts/build.mjs'], {
+      cwd: repoRoot,
+      env: { ...process.env, OUTPUT_DIR: outputDir },
+      stdio: 'pipe',
+    });
+    const sourceArtifacts = readdirSync(
+      join(repoRoot, 'src', 'artifacts', 'sha256'),
+    ).sort();
+    const catalogFiles = ['schemas.json', 'contexts.json', 'profiles.json'];
+    const historicalArtifacts = new Set();
+    for (const catalogFile of catalogFiles) {
+      const path = `src/catalogs/${catalogFile}`;
+      const commits = execFileSync(
+        'git',
+        ['log', '--format=%H', '--', path],
+        { cwd: repoRoot, encoding: 'utf8' },
+      ).trim().split('\n').filter(Boolean);
+      for (const commit of commits) {
+        const document = JSON.parse(execFileSync(
+          'git',
+          ['show', `${commit}:${path}`],
+          { cwd: repoRoot, encoding: 'utf8' },
+        ));
+        for (const entry of document.entries ?? []) {
+          if (entry.artifact_sha256 && entry.source) {
+            historicalArtifacts.add(
+              `${entry.artifact_sha256}${extname(entry.source) || '.bin'}`,
+            );
+          }
+        }
+      }
+    }
+    for (const artifact of historicalArtifacts) {
+      assert.ok(
+        sourceArtifacts.includes(artifact),
+        `historically published artifact is missing from source: ${artifact}`,
+      );
+    }
+    const builtArtifacts = readdirSync(
+      join(outputDir, 'artifacts', 'sha256'),
+    ).sort();
+    assert.deepEqual(builtArtifacts, sourceArtifacts);
+  } finally {
+    rmSync(outputDir, { recursive: true, force: true });
+  }
 });

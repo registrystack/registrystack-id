@@ -7,7 +7,7 @@ import {
   statSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { extname, join, relative, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
@@ -119,7 +119,6 @@ function checkCatalogBindings() {
   }
 
   const upstreamUris = new Set();
-  const expectedArtifactNames = new Set();
   for (const entry of upstream.entries) {
     upstreamUris.add(entry.uri);
     if (entry.status !== 'active') {
@@ -140,9 +139,6 @@ function checkCatalogBindings() {
       throw new Error(`published source binding differs for ${entry.uri}`);
     }
     if (entry.artifact) {
-      expectedArtifactNames.add(
-        `${entry.artifact.sha256}${extname(entry.artifact.path) || '.bin'}`,
-      );
       if (
         !current.source ||
         digest(resolve(repoRoot, current.source)) !== entry.artifact.sha256
@@ -151,18 +147,38 @@ function checkCatalogBindings() {
       }
     }
   }
-  for (const uri of published.keys()) {
+  for (const [uri, entry] of published.entries()) {
+    if (!upstreamUris.has(uri) && entry.status !== 'deprecated') {
+      throw new Error(`historical identifier is not marked deprecated: ${uri}`);
+    }
     if (!upstreamUris.has(uri)) {
-      throw new Error(`publisher contains an identifier absent from upstream: ${uri}`);
+      if (!/^[0-9a-f]{40}$/.test(entry.source_reference?.commit ?? '')) {
+        throw new Error(`historical identifier has no exact source commit: ${uri}`);
+      }
+      if (
+        entry.artifact_sha256 &&
+        (!entry.source ||
+          digest(resolve(repoRoot, entry.source)) !== entry.artifact_sha256)
+      ) {
+        throw new Error(`historical artifact digest differs for ${uri}`);
+      }
     }
   }
   const artifactNames = readdirSync(resolve(repoRoot, 'src/artifacts/sha256'));
   for (const name of artifactNames) {
-    if (!expectedArtifactNames.has(name)) {
-      throw new Error(`publisher contains an unreferenced immutable artifact: ${name}`);
+    const expectedDigest = name.split('.', 1)[0];
+    if (!/^[0-9a-f]{64}$/.test(expectedDigest)) {
+      throw new Error(`immutable artifact has an invalid digest name: ${name}`);
+    }
+    const actualDigest = digest(resolve(repoRoot, 'src/artifacts/sha256', name));
+    if (actualDigest !== expectedDigest) {
+      throw new Error(`immutable artifact bytes do not match their digest path: ${name}`);
     }
   }
-  console.log(`source catalogs exactly publish ${published.size} active identifiers`);
+  console.log(
+    `source catalogs publish ${upstreamUris.size} active identifiers and preserve ` +
+      `${published.size - upstreamUris.size} historical identifiers`,
+  );
 }
 
 try {

@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71.jsonld",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "a33853f270193de7b1a98e542c9d09913c367aaa",
+        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
         "path": "products/registry-record/profile/registry-record-v1.md",
         "sha256": "f165e62044df2129b5cc533d3199cf81ae23d263617f39437ee37be87d3b37fe"
       },
@@ -22,6 +22,47 @@
         {
           "title": "Contracts and machine identifiers",
           "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Stack documentation",
+          "href": "https://docs.registrystack.org/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+      }
+    },
+    {
+      "uri": "https://id.registrystack.org/contexts/registry-relay/provenance/v1.jsonld",
+      "title": "Registry Relay provenance v1 context",
+      "description": "JSON-LD context for Registry Relay provenance credential subjects.",
+      "kind": "context",
+      "status": "deprecated",
+      "compatibility_line": "legacy",
+      "owner": "registry-relay",
+      "source_reference": {
+        "repository": "registrystack-id",
+        "commit": "437113edfd7e922cf44ef81ff0d6732fa4d207ca",
+        "path": "src/catalogs/contexts.json",
+        "sha256": "c3437558da424e44d0fd8feb954b28b9640a3db3aa5001311506eb03c51c8433"
+      },
+      "source": "src/artifacts/sha256/c8e9096a02c4a93ef4a8e7884eb9d5f05b9d544c3549d060d313a32fdedc1b1c.jsonld",
+      "artifact_sha256": "c8e9096a02c4a93ef4a8e7884eb9d5f05b9d544c3549d060d313a32fdedc1b1c",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/c8e9096a02c4a93ef4a8e7884eb9d5f05b9d544c3549d060d313a32fdedc1b1c.jsonld",
+      "id": "https://id.registrystack.org/contexts/registry-relay/provenance/v1.jsonld",
+      "documented_by": [
+        {
+          "title": "Contracts and machine identifiers",
+          "href": "https://docs.registrystack.org/reference/contracts/"
+        },
+        {
+          "title": "Registry Relay product docs",
+          "href": "https://docs.registrystack.org/products/registry-relay/"
+        },
+        {
+          "title": "Registry Relay API overview",
+          "href": "https://docs.registrystack.org/reference/apis/registry-relay/"
         },
         {
           "title": "Registry Stack documentation",

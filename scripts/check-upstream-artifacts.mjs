@@ -134,7 +134,6 @@ for (const [kind, entries] of catalogs) {
 }
 
 const upstreamUris = new Set();
-const expectedArtifactNames = new Set();
 for (const entry of upstreamCatalog.entries) {
   upstreamUris.add(entry.uri);
   if (entry.status !== 'active') {
@@ -177,7 +176,6 @@ for (const entry of upstreamCatalog.entries) {
     const extension = extname(entry.artifact.path) || '.bin';
     const expectedSource =
       `src/artifacts/sha256/${entry.artifact.sha256}${extension}`;
-    expectedArtifactNames.add(`${entry.artifact.sha256}${extension}`);
     if (
       publisherEntry.source !== expectedSource ||
       publisherEntry.artifact_sha256 !== entry.artifact.sha256 ||
@@ -194,17 +192,38 @@ for (const entry of upstreamCatalog.entries) {
   }
 }
 
-for (const uri of published.keys()) {
+for (const [uri, entry] of published.entries()) {
+  if (!upstreamUris.has(uri) && entry.status !== 'deprecated') {
+    fail(`historical identifier is not marked deprecated: ${uri}`);
+  }
   if (!upstreamUris.has(uri)) {
-    fail(`publisher contains an identifier absent from upstream: ${uri}`);
+    if (!/^[0-9a-f]{40}$/.test(entry.source_reference?.commit ?? '')) {
+      fail(`historical identifier has no exact source commit: ${uri}`);
+    }
+    if (
+      entry.artifact_sha256 &&
+      (!entry.source ||
+        sha256(readFileSync(resolve(repoRoot, entry.source))) !==
+          entry.artifact_sha256)
+    ) {
+      fail(`historical artifact digest differs for ${uri}`);
+    }
   }
 }
 const actualArtifactNames = new Set(
   readdirSync(resolve(repoRoot, 'src/artifacts/sha256')),
 );
 for (const name of actualArtifactNames) {
-  if (!expectedArtifactNames.has(name)) {
-    fail(`publisher contains an unreferenced immutable artifact: ${name}`);
+  const expectedDigest = name.split('.', 1)[0];
+  if (!/^[0-9a-f]{64}$/.test(expectedDigest)) {
+    fail(`immutable artifact has an invalid digest name: ${name}`);
+    continue;
+  }
+  if (
+    sha256(readFileSync(resolve(repoRoot, 'src/artifacts/sha256', name))) !==
+    expectedDigest
+  ) {
+    fail(`immutable artifact bytes do not match their digest path: ${name}`);
   }
 }
 
@@ -212,6 +231,7 @@ if (process.exitCode) {
   console.error('upstream catalog check failed');
 } else {
   console.log(
-    `pinned upstream catalog and ${upstreamCatalog.entries.length} identifiers are in sync`,
+    `pinned upstream catalog and ${upstreamCatalog.entries.length} active identifiers are in sync; ` +
+      `${published.size - upstreamUris.size} historical identifiers are preserved`,
   );
 }

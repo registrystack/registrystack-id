@@ -67,6 +67,7 @@ jobs:
           python3 -m http.server 8765 --directory public >"${RUNNER_TEMP}/identifier-server.log" 2>&1 &
           server_pid="$!"
           trap 'kill "${server_pid}"' EXIT
+          IDENTIFIER_BASE_URL=http://127.0.0.1:8765 npm run smoke:catalog
           IDENTIFIER_BASE_URL=http://127.0.0.1:8765 npm run smoke:live
 
       - name: Summarize catalog change

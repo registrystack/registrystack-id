@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-casework/request/unprocessable",
+  "type": "https://id.registrystack.org/problems/registry-casework/request/unprocessable",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-casework",
+  "code": "request.unprocessable",
+  "title": "Request could not be processed",
+  "summary": "The request body does not match the Casework contract.",
+  "description": "The request body does not match the Casework contract.",
+  "category": null,
+  "http_statuses": [
+    422
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+    "path": "crates/registry-casework/src/problem.rs",
+    "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+  }
+}

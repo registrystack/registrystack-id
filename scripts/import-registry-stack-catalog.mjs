@@ -3,9 +3,7 @@ import { execFileSync } from 'node:child_process';
 import {
   existsSync,
   mkdirSync,
-  readdirSync,
   readFileSync,
-  rmSync,
   writeFileSync,
 } from 'node:fs';
 import { dirname, extname, resolve } from 'node:path';
@@ -87,6 +85,140 @@ function uriForEntry(entry, kind) {
   return kind === 'problem' ? uriForProblem(entry) : entry.uri;
 }
 
+function historicalOwner(entry) {
+  if (entry.owner) return entry.owner;
+  if (entry.product) return entry.product;
+  const match = entry.uri?.match(/registry-(manifest|notary|relay|record)/);
+  return match ? `registry-${match[1]}` : 'registry-stack';
+}
+
+function historicalSourceReference(entry, commit, catalogFile, catalogBytes) {
+  const reference = entry.source_reference;
+  if (
+    reference &&
+    typeof reference.repository === 'string' &&
+    /^[0-9a-f]{40}$/.test(reference.commit ?? '') &&
+    typeof reference.path === 'string' &&
+    /^[0-9a-f]{64}$/.test(reference.sha256 ?? '')
+  ) {
+    return reference;
+  }
+  return {
+    repository: 'registrystack-id',
+    commit,
+    path: catalogFile,
+    sha256: sha256(catalogBytes),
+  };
+}
+
+function retainHistoricalArtifact(entry, commit) {
+  if (!entry.source) return undefined;
+  let bytes;
+  try {
+    bytes = gitFile(repoRoot, commit, entry.source);
+  } catch {
+    return undefined;
+  }
+  const digest = entry.artifact_sha256 ?? sha256(bytes);
+  if (sha256(bytes) !== digest) {
+    throw new Error(`historical artifact digest does not match: ${entry.source}`);
+  }
+  const extension = extname(entry.source) || '.bin';
+  const source = `src/artifacts/sha256/${digest}${extension}`;
+  const target = resolve(repoRoot, source);
+  mkdirSync(dirname(target), { recursive: true });
+  if (existsSync(target)) {
+    if (sha256(readFileSync(target)) !== digest) {
+      throw new Error(`immutable artifact path contains different bytes: ${source}`);
+    }
+  } else {
+    writeFileSync(target, bytes);
+  }
+  return { source, digest };
+}
+
+function normalizeHistoricalEntry(kind, entry, commit, catalogFile, catalogBytes) {
+  const sourceReference = historicalSourceReference(
+    entry,
+    commit,
+    catalogFile,
+    catalogBytes,
+  );
+  if (kind === 'problem') {
+    return {
+      product: entry.product,
+      code: entry.code,
+      path: entry.path,
+      title: entry.title,
+      description: entry.description ?? entry.title,
+      kind,
+      status: 'deprecated',
+      compatibility_line: entry.compatibility_line ?? 'legacy',
+      owner: historicalOwner(entry),
+      http_statuses: entry.http_statuses ?? null,
+      source: entry.source ?? `registrystack-id/${catalogFile}`,
+      source_reference: sourceReference,
+    };
+  }
+
+  const retained = retainHistoricalArtifact(entry, commit);
+  const normalized = {
+    uri: entry.uri,
+    title: entry.title,
+    description: entry.description ?? entry.title,
+    kind,
+    status: 'deprecated',
+    compatibility_line: entry.compatibility_line ?? 'legacy',
+    owner: historicalOwner(entry),
+    source_reference: sourceReference,
+  };
+  if (retained) {
+    normalized.source = retained.source;
+    normalized.artifact_sha256 = retained.digest;
+    normalized.immutable_uri =
+      `${baseUrl}/${retained.source.replace(/^src\//, '')}`;
+  }
+  return normalized;
+}
+
+function publishedHistory(kind, catalogFile) {
+  let commits;
+  try {
+    commits = gitText(repoRoot, 'log', '--format=%H', '--', catalogFile)
+      .split('\n')
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+  const entries = new Map();
+  for (const commit of commits) {
+    let catalogBytes;
+    try {
+      catalogBytes = gitFile(repoRoot, commit, catalogFile);
+    } catch {
+      continue;
+    }
+    const document = JSON.parse(catalogBytes.toString('utf8'));
+    for (const entry of document.entries ?? []) {
+      const uri = uriForEntry(entry, kind);
+      // Normalize every historical revision before URI deduplication so every
+      // digest-addressed artifact ever published for an advancing canonical
+      // URI is restored. The newest record still supplies deprecated metadata.
+      const normalized = normalizeHistoricalEntry(
+        kind,
+        entry,
+        commit,
+        catalogFile,
+        catalogBytes,
+      );
+      if (!entries.has(uri)) {
+        entries.set(uri, normalized);
+      }
+    }
+  }
+  return [...entries.values()];
+}
+
 export function mergeCatalog(previous, incoming, kind) {
   const oldByUri = new Map();
   for (const entry of previous) {
@@ -112,10 +244,18 @@ export function mergeCatalog(previous, incoming, kind) {
     currentByUri.set(uri, entry);
   }
 
-  const merged = [...currentByUri.values()].map((current) => ({
+  const active = [...currentByUri.values()].map((current) => ({
     ...current,
     kind,
   }));
+  const historical = [...oldByUri.entries()]
+    .filter(([uri]) => !currentByUri.has(uri))
+    .map(([, previousEntry]) => ({
+      ...previousEntry,
+      kind,
+      status: 'deprecated',
+    }));
+  const merged = [...active, ...historical];
   return merged.sort((left, right) =>
     uriForEntry(left, kind).localeCompare(uriForEntry(right, kind), 'en'),
   );
@@ -202,19 +342,6 @@ function validateSourceBindings(stackRoot, revision, entries) {
   }
 }
 
-function pruneArtifacts(referencedSources) {
-  const artifactRoot = resolve(repoRoot, 'src/artifacts/sha256');
-  if (!existsSync(artifactRoot)) {
-    return;
-  }
-  for (const name of readdirSync(artifactRoot)) {
-    const source = `src/artifacts/sha256/${name}`;
-    if (!referencedSources.has(source)) {
-      rmSync(resolve(artifactRoot, name));
-    }
-  }
-}
-
 function assertKindsAreStable(catalogs, imported) {
   const historicalKinds = new Map();
   for (const [kind, entries] of Object.entries(catalogs)) {
@@ -259,9 +386,15 @@ export function importCatalog(stackRoot, revision) {
   const previous = {};
   const imported = {};
   for (const [kind, file] of Object.entries(catalogFiles)) {
-    previous[kind] = existsSync(resolve(repoRoot, file))
+    const current = existsSync(resolve(repoRoot, file))
       ? readJson(file).entries
       : [];
+    const byUri = new Map(current.map((entry) => [uriForEntry(entry, kind), entry]));
+    for (const historical of publishedHistory(kind, file)) {
+      const uri = uriForEntry(historical, kind);
+      if (!byUri.has(uri)) byUri.set(uri, historical);
+    }
+    previous[kind] = [...byUri.values()];
     imported[kind] = [];
   }
   assertKindsAreStable(previous, catalog.entries);
@@ -279,15 +412,6 @@ export function importCatalog(stackRoot, revision) {
       identifierEntry(entry, resolvedRevision, artifactSource),
     );
   }
-  pruneArtifacts(
-    new Set(
-      Object.values(imported)
-        .flat()
-        .map((entry) => entry.source)
-        .filter((source) => source?.startsWith('src/artifacts/sha256/')),
-    ),
-  );
-
   for (const [kind, file] of Object.entries(catalogFiles)) {
     const entries = mergeCatalog(previous[kind], imported[kind], kind);
     writeJson(
