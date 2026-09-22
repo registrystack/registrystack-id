@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/854b21e032afa992504c6b1f3d87c368665b4273da4addb5d137517e771289d6.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "da421a45c81d34a937235fa085261c51554e14302362c9a9ed9dd025329b40f7"
       },
@@ -44,7 +44,7 @@
       "source": "src/artifacts/sha256/fe1d27a6cfd66a26baca59e7dd3eea9dcb17e8ecff0469479894f6c2d1dc2eda.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "da421a45c81d34a937235fa085261c51554e14302362c9a9ed9dd025329b40f7"
       },
@@ -77,7 +77,7 @@
       "source": "src/artifacts/sha256/4e1226cffe6761f035aebde2c1f07f88a35251b537725aab532dbf4500e8ed30.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "da421a45c81d34a937235fa085261c51554e14302362c9a9ed9dd025329b40f7"
       },
@@ -110,7 +110,7 @@
       "source": "src/artifacts/sha256/d22b5b87ad806e397b83ad2197dc9c1bc033ae8d497c6a2383f892cd019b7b02.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-casework/src/schema.rs",
         "sha256": "299f015779102505df7270f30de94ac96268f1c0736cdad566ec1e1920b842f9"
       },
@@ -143,7 +143,7 @@
       "source": "src/artifacts/sha256/e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "products/identifiers/contracts/catalog.v1.schema.json",
         "sha256": "e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d"
       },
@@ -176,7 +176,7 @@
       "source": "src/artifacts/sha256/31cae7de9e84904e300d0d77ffbfdfc7a1de6127719a0ccbb3f6a88d7306510e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "products/registry-record/schema/registry-record-v1.schema.json",
         "sha256": "31cae7de9e84904e300d0d77ffbfdfc7a1de6127719a0ccbb3f6a88d7306510e"
       },
@@ -250,7 +250,7 @@
       "source": "src/artifacts/sha256/e2b2be3baabb1c5f147a4095eade0d85702d814ec93049b62208fdd7ab1265b8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-relay-v2/src/artifacts.rs",
         "sha256": "7feb222632ac997903c8809e190fa0c008bf17790e39fa075fc10c3fd3e0bec1"
       },
@@ -291,7 +291,7 @@
       "source": "src/artifacts/sha256/c030917d19b1f50c8d2b41fc7b2ef4fb07b803b5fa98ffd971f5c964f491f7e5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-relayctl/schemas/authoring/registry.schema.json",
         "sha256": "c030917d19b1f50c8d2b41fc7b2ef4fb07b803b5fa98ffd971f5c964f491f7e5"
       },
@@ -332,7 +332,7 @@
       "source": "src/artifacts/sha256/9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-relayctl/schemas/authoring/runtime.schema.json",
         "sha256": "9beeda053e86d8ffa67755e91883efd0d2205026ee7d0aa7f38cecef7a6f781b"
       },
@@ -414,7 +414,7 @@
       "source": "src/artifacts/sha256/2158f213b60c1da4498818dc6ac456d937ac965984552a0007ad6bd5dfba4938.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
         "path": "crates/registry-scheduling/src/schema.rs",
         "sha256": "99d43221904847661cf4331d1d5b4fd7c936bbb60ead987509bcb6c3f83b61c5"
       },
