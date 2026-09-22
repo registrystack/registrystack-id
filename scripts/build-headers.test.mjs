@@ -153,3 +153,46 @@ test('the build retains every digest-addressed artifact in source history', () =
     rmSync(outputDir, { recursive: true, force: true });
   }
 });
+
+// Lists every built HTML page (except the 404 page, which the platform serves
+// at arbitrary paths) with the request path it is served at: `dir/index.html`
+// at `/dir/` and `page.html` at `/page.html`.
+function htmlRoutes(outputDir, dir = '') {
+  return readdirSync(join(outputDir, dir), { withFileTypes: true }).flatMap(
+    (item) => {
+      const path = dir ? `${dir}/${item.name}` : item.name;
+      if (item.isDirectory()) return htmlRoutes(outputDir, path);
+      if (!item.name.endsWith('.html') || path === '404.html') return [];
+      return item.name === 'index.html'
+        ? [`/${dir ? `${dir}/` : ''}`]
+        : [`/${path}`];
+    },
+  );
+}
+
+// The catalog smoke compares published pages byte for byte, and the
+// Cloudflare proxy rewrites HTML (for example to inject the Web Analytics
+// beacon) unless the response forbids transformation.
+test('every HTML page forbids proxy transformation', () => {
+  const outputDir = mkdtempSync(join(tmpdir(), 'registrystack-id-build-'));
+  try {
+    execFileSync('node', ['scripts/build.mjs'], {
+      cwd: repoRoot,
+      env: { ...process.env, OUTPUT_DIR: outputDir },
+      stdio: 'pipe',
+    });
+    const rules = parseRules(readFileSync(join(outputDir, '_headers'), 'utf8'));
+    const routes = htmlRoutes(outputDir);
+    assert.ok(routes.length > 0, 'expected built HTML pages');
+    for (const route of routes) {
+      const values = rules
+        .filter((rule) => patternToRegExp(rule.path).test(route))
+        .map((rule) => rule.headers.get('Cache-Control'))
+        .filter((value) => value !== undefined);
+      assert.equal(values.length, 1, `expected one Cache-Control rule for ${route}, got ${JSON.stringify(values)}`);
+      assert.match(values[0], /(^|, )no-transform(,|$)/, `${route} must forbid transformation`);
+    }
+  } finally {
+    rmSync(outputDir, { recursive: true, force: true });
+  }
+});
