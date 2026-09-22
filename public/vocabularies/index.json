@@ -10,7 +10,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
@@ -45,7 +45,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "products/relay-v2/CONCEPT.md",
         "sha256": "96445c1c324519d02890b5c24a46d5b66dfa2e17fcc23b33e0978bf8f5ab3a4e"
       },
@@ -75,7 +75,7 @@
       "owner": "registry-record",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "products/registry-record/context/registry-record-v1.jsonld",
         "sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71"
       },
@@ -105,7 +105,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
@@ -135,7 +135,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
@@ -165,7 +165,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
@@ -195,7 +195,7 @@
       "owner": "relay-v2",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
+        "commit": "1f6facb57e9d142652019e8065dc093fc9f0dd12",
         "path": "crates/registry-relay-v2/src/semantics.rs",
         "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
       },
