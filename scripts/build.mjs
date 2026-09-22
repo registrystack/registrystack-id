@@ -766,12 +766,25 @@ function writeStaticControls(artifactEntries) {
   Cache-Control: ${entry.cache}`)
     .join('\n\n');
 
+  // HTML pages keep the Workers static-asset default caching and add
+  // `no-transform`, so the Cloudflare proxy serves the built bytes instead of
+  // rewriting them (for example to inject the Web Analytics beacon).
+  const htmlCache = 'public, max-age=0, must-revalidate, no-transform';
   writeOutput('_headers', `/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
 
 /assets/*
   Cache-Control: public, max-age=86400
+
+/
+  Cache-Control: ${htmlCache}
+
+/*/
+  Cache-Control: ${htmlCache}
+
+/*.html
+  Cache-Control: ${htmlCache}
 
 ${exactHeaders}
 `);
