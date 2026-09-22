@@ -8,7 +8,7 @@
   "owner": "registry-manifest",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+    "commit": "125f67b37b424ae7a43d8760c33fb73d4be8b8a1",
     "path": "crates/registry-manifest-core/src/lib.rs",
     "sha256": "a8d8c58eb9f2eb10db68b26c9e285a11fa3f531d98bab19ecab52e2a37e4b17f"
   },
