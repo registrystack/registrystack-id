@@ -83,8 +83,9 @@ async function fetchExact(url, expectedPath, expectedMediaType) {
   }
 }
 
-// `_redirects` rewrites (status 200) run before static assets, so an
-// identifier page under a rewrite source serves the rewrite destination.
+// On the Cloudflare host, `_redirects` rewrites (status 200) run before
+// static assets, so an identifier page under a rewrite source serves the
+// rewrite destination. A plain static server serves the page itself.
 const rewrites = readFileSync(resolve(repoRoot, 'public/_redirects'), 'utf8')
   .split('\n')
   .map((line) => line.trim().split(/\s+/))
@@ -97,6 +98,7 @@ const rewrites = readFileSync(resolve(repoRoot, 'public/_redirects'), 'utf8')
   }));
 
 function rewriteFor(path) {
+  if (baseUrl !== canonicalBaseUrl) return undefined;
   return rewrites.find((rewrite) => rewrite.pattern.test(`/${path}`));
 }
 
