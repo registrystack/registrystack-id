@@ -39,9 +39,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -83,9 +83,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -127,9 +127,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -171,9 +171,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -215,9 +215,229 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/ingestion/chunk_mismatch",
+      "type": "https://id.registrystack.org/problems/registry-breg/ingestion/chunk_mismatch",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "ingestion.chunk_mismatch",
+      "title": "Conflict",
+      "summary": "The chunk does not match the expected next chunk.",
+      "description": "The chunk does not match the expected next chunk.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/ingestion/profile_mismatch",
+      "type": "https://id.registrystack.org/problems/registry-breg/ingestion/profile_mismatch",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "ingestion.profile_mismatch",
+      "title": "Forbidden",
+      "summary": "The selected access profile does not match the run's bound profile.",
+      "description": "The selected access profile does not match the run's bound profile.",
+      "category": null,
+      "http_statuses": [
+        403
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/ingestion/receipt_erased",
+      "type": "https://id.registrystack.org/problems/registry-breg/ingestion/receipt_erased",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "ingestion.receipt_erased",
+      "title": "Gone",
+      "summary": "The stored receipt of the chunk was erased.",
+      "description": "The stored receipt of the chunk was erased.",
+      "category": null,
+      "http_statuses": [
+        410
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/ingestion/run_blocked",
+      "type": "https://id.registrystack.org/problems/registry-breg/ingestion/run_blocked",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "ingestion.run_blocked",
+      "title": "Conflict",
+      "summary": "The active package no longer matches the run binding.",
+      "description": "The active package no longer matches the run binding.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/ingestion/run_not_open",
+      "type": "https://id.registrystack.org/problems/registry-breg/ingestion/run_not_open",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "ingestion.run_not_open",
+      "title": "Conflict",
+      "summary": "The ingestion run is not open for this transition.",
+      "description": "The ingestion run is not open for this transition.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -259,9 +479,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -303,9 +523,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -347,9 +567,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -391,9 +611,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -435,9 +655,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -479,9 +699,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -523,9 +743,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -567,9 +787,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -611,9 +831,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -655,9 +875,53 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-breg/runtime/field_encryption/unavailable",
+      "type": "https://id.registrystack.org/problems/registry-breg/runtime/field_encryption/unavailable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-breg",
+      "code": "runtime.field_encryption.unavailable",
+      "title": "Service Unavailable",
+      "summary": "The Registry field-encryption service is unavailable.",
+      "description": "The Registry field-encryption service is unavailable.",
+      "category": null,
+      "http_statuses": [
+        503
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-breg/src/problem.rs",
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -699,9 +963,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -743,9 +1007,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -787,9 +1051,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -831,9 +1095,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-breg/src/problem.rs",
-        "sha256": "dedb9f77024ef14dea56ea84c7da433bebbc4748e4d2672410a0c8bd5f087fc2"
+        "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
       }
     },
     {
@@ -875,9 +1139,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -919,9 +1183,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -963,9 +1227,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1007,9 +1271,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1051,9 +1315,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1095,9 +1359,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1139,9 +1403,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1183,9 +1447,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1227,9 +1491,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1271,9 +1535,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1315,9 +1579,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1359,9 +1623,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1403,9 +1667,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1447,9 +1711,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1491,9 +1755,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1535,9 +1799,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1579,9 +1843,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1623,9 +1887,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1667,9 +1931,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1711,9 +1975,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1755,9 +2019,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1799,9 +2063,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1843,9 +2107,141 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-casework/review/result-expired",
+      "type": "https://id.registrystack.org/problems/registry-casework/review/result-expired",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-casework",
+      "code": "review.result-expired",
+      "title": "Review result expired",
+      "summary": "The retained review result is no longer available. Reconcile through the producer's retained source correlation.",
+      "description": "The retained review result is no longer available. Reconcile through the producer's retained source correlation.",
+      "category": null,
+      "http_statuses": [
+        410
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-casework/review/submission-conflict",
+      "type": "https://id.registrystack.org/problems/registry-casework/review/submission-conflict",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-casework",
+      "code": "review.submission-conflict",
+      "title": "Review submission conflict",
+      "summary": "The same producer, source subject, version, and policy were already submitted with different canonical content.",
+      "description": "The same producer, source subject, version, and policy were already submitted with different canonical content.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-casework/review/task-not-held",
+      "type": "https://id.registrystack.org/problems/registry-casework/review/task-not-held",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-casework",
+      "code": "review.task-not-held",
+      "title": "Review task not held",
+      "summary": "Claim the review task before deciding it, and decide only while the claim remains current.",
+      "description": "Claim the review task before deciding it, and decide only while the claim remains current.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-casework/src/problem.rs",
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1887,9 +2283,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1931,9 +2327,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -1975,9 +2371,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2019,9 +2415,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2063,9 +2459,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2107,9 +2503,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2151,9 +2547,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2195,9 +2591,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2239,9 +2635,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2283,9 +2679,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2327,9 +2723,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2371,9 +2767,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2415,9 +2811,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2459,9 +2855,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2503,9 +2899,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2547,9 +2943,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2591,9 +2987,9 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-casework/src/problem.rs",
-        "sha256": "5a878f27b795429a31eabc4d2d9552f5a9c26096c253891afa4ff9ff77facf9b"
+        "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
       }
     },
     {
@@ -2635,7 +3031,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -2679,7 +3075,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -2723,7 +3119,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -2767,7 +3163,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -2811,7 +3207,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -2855,7 +3251,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -2899,7 +3295,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -2943,7 +3339,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -2987,7 +3383,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -3031,7 +3427,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -3075,7 +3471,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -3119,7 +3515,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -3163,7 +3559,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -3207,7 +3603,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "46c3ce311600915b57c09bad2a45caaf67d63f84656f5e863795a8ef0372ba9c"
       }
@@ -6454,7 +6850,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -6506,7 +6902,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -6558,7 +6954,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -6610,7 +7006,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -6917,7 +7313,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -7173,7 +7569,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -7429,7 +7825,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -7991,7 +8387,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8043,7 +8439,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8095,7 +8491,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8147,7 +8543,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8199,7 +8595,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8353,7 +8749,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8609,7 +9005,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -8712,7 +9108,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -9070,7 +9466,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -9122,7 +9518,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -9174,7 +9570,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -9226,7 +9622,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -11165,7 +11561,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -11217,7 +11613,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -11269,7 +11665,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -11321,7 +11717,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -11373,7 +11769,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -12139,7 +12535,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -12191,7 +12587,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "22ea92286036f28a59cfbe5d7c835f4738d62074",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
         "path": "crates/registry-relay-http-contract/src/lib.rs",
         "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
       }
@@ -12755,6 +13151,1414 @@
         "commit": "e683cb7c12e4607f6db483d15046e1fba91efd96",
         "path": "src/catalogs/problems.json",
         "sha256": "86880457d705bca7bdc2ed2a7110a7995700d25e2507d670c85821a8aa426989"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/authentication/refused",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/authentication/refused",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "authentication.refused",
+      "title": "Authentication refused",
+      "summary": "The bearer credential is missing, invalid, or expired. Sign in again.",
+      "description": "The bearer credential is missing, invalid, or expired. Sign in again.",
+      "category": null,
+      "http_statuses": [
+        401
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/booking/duplicate-active",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/booking/duplicate-active",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "booking.duplicate-active",
+      "title": "Duplicate active booking",
+      "summary": "An active booking already holds this party's duplicate key. Cancel it, or wait until it has passed, before booking again.",
+      "description": "An active booking already holds this party's duplicate key. Cancel it, or wait until it has passed, before booking again.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/cancellation/cutoff-passed",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/cancellation/cutoff-passed",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "cancellation.cutoff-passed",
+      "title": "Cancellation cutoff passed",
+      "summary": "The cancellation cutoff for this appointment has passed, so it can no longer be cancelled.",
+      "description": "The cancellation cutoff for this appointment has passed, so it can no longer be cancelled.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/capability/unmatched",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/capability/unmatched",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "capability.unmatched",
+      "title": "Capability unmatched",
+      "summary": "The party or backing supply does not carry every capability this offering requires.",
+      "description": "The party or backing supply does not carry every capability this offering requires.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/capacity/exhausted",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/capacity/exhausted",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "capacity.exhausted",
+      "title": "Capacity exhausted",
+      "summary": "The supply is fully committed for the requested interval. Choose another time.",
+      "description": "The supply is fully committed for the requested interval. Choose another time.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/cursor/expired",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/cursor/expired",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "cursor.expired",
+      "title": "Cursor expired",
+      "summary": "This cursor has expired. Start again without a cursor and deduplicate entries by id.",
+      "description": "This cursor has expired. Start again without a cursor and deduplicate entries by id.",
+      "category": null,
+      "http_statuses": [
+        410
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/cursor/invalid",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/cursor/invalid",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "cursor.invalid",
+      "title": "Cursor invalid",
+      "summary": "The cursor is invalid for this request.",
+      "description": "The cursor is invalid for this request.",
+      "category": null,
+      "http_statuses": [
+        400
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/eligibility/unavailable",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/eligibility/unavailable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "eligibility.unavailable",
+      "title": "Eligibility unavailable",
+      "summary": "A required eligibility check could not run. Retry; do not treat this as permission.",
+      "description": "A required eligibility check could not run. Retry; do not treat this as permission.",
+      "category": null,
+      "http_statuses": [
+        503
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/hold/expired",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/hold/expired",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "hold.expired",
+      "title": "Hold expired",
+      "summary": "The hold expired before confirmation. Its capacity is bookable again; start a new request.",
+      "description": "The hold expired before confirmation. Its capacity is bookable again; start a new request.",
+      "category": null,
+      "http_statuses": [
+        410
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/hold/released",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/hold/released",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "hold.released",
+      "title": "Hold released",
+      "summary": "The claim is not an active hold. It may already be confirmed or released.",
+      "description": "The claim is not an active hold. It may already be confirmed or released.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/hook/unavailable",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/hook/unavailable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "hook.unavailable",
+      "title": "Hook unavailable",
+      "summary": "A required lifecycle hook could not run, so the request was refused rather than half-applied.",
+      "description": "A required lifecycle hook could not run, so the request was refused rather than half-applied.",
+      "category": null,
+      "http_statuses": [
+        503
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/horizon/outside",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/horizon/outside",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "horizon.outside",
+      "title": "Start outside the booking horizon",
+      "summary": "The requested start is earlier than the lead time allows or further ahead than the horizon allows.",
+      "description": "The requested start is earlier than the lead time allows or further ahead than the horizon allows.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/idempotency/expired",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/idempotency/expired",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "idempotency.expired",
+      "title": "Idempotency window expired",
+      "summary": "The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.",
+      "description": "The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.",
+      "category": null,
+      "http_statuses": [
+        410
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/idempotency/key-reused",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/idempotency/key-reused",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "idempotency.key-reused",
+      "title": "Idempotency key reused",
+      "summary": "This idempotency key was used for a different request.",
+      "description": "This idempotency key was used for a different request.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/location/closed",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/location/closed",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "location.closed",
+      "title": "Location closed",
+      "summary": "A closure covers the requested start. Choose a start outside the closure.",
+      "description": "A closure covers the requested start. Choose a start outside the closure.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/operation/not-authorized",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/operation/not-authorized",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "operation.not-authorized",
+      "title": "Operation not authorized",
+      "summary": "Your current Scheduling authority does not allow this operation.",
+      "description": "Your current Scheduling authority does not allow this operation.",
+      "category": null,
+      "http_statuses": [
+        403
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/party/capacity-inadequate",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/party/capacity-inadequate",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "party.capacity-inadequate",
+      "title": "Party capacity inadequate",
+      "summary": "The party is larger than this offering can ever serve, or its size falls outside the published units.",
+      "description": "The party is larger than this offering can ever serve, or its size falls outside the published units.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/policy/changed",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/policy/changed",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "policy.changed",
+      "title": "Policy changed",
+      "summary": "The policy revision changed before the request committed. Reload the catalogue and try again with the current revision.",
+      "description": "The policy revision changed before the request committed. Reload the catalogue and try again with the current revision.",
+      "category": null,
+      "http_statuses": [
+        412
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/precondition/failed",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/precondition/failed",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "precondition.failed",
+      "title": "Precondition failed",
+      "summary": "The appointment changed since you loaded it. Reload and try again.",
+      "description": "The appointment changed since you loaded it. Reload and try again.",
+      "category": null,
+      "http_statuses": [
+        412
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/precondition/required",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/precondition/required",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "precondition.required",
+      "title": "Precondition required",
+      "summary": "This mutation requires the revision you loaded, or the duplicate key this offering keys on.",
+      "description": "This mutation requires the revision you loaded, or the duplicate key this offering keys on.",
+      "category": null,
+      "http_statuses": [
+        428
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/prerequisite/missing",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/prerequisite/missing",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "prerequisite.missing",
+      "title": "Prerequisite missing",
+      "summary": "The party is missing a prerequisite this offering requires.",
+      "description": "The party is missing a prerequisite this offering requires.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/profile/not-authorized",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/profile/not-authorized",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "profile.not-authorized",
+      "title": "Profile not authorized",
+      "summary": "The selected Scheduling profile does not authorize this request.",
+      "description": "The selected Scheduling profile does not authorize this request.",
+      "category": null,
+      "http_statuses": [
+        403
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/body-too-large",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/body-too-large",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.body-too-large",
+      "title": "Payload too large",
+      "summary": "The request body exceeds the accepted size.",
+      "description": "The request body exceeds the accepted size.",
+      "category": null,
+      "http_statuses": [
+        413
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/invalid",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/invalid",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.invalid",
+      "title": "Request invalid",
+      "summary": "The request could not be read as a Scheduling request.",
+      "description": "The request could not be read as a Scheduling request.",
+      "category": null,
+      "http_statuses": [
+        400
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/method-not-allowed",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/method-not-allowed",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.method-not-allowed",
+      "title": "Method not allowed",
+      "summary": "The route exists but not for this method.",
+      "description": "The route exists but not for this method.",
+      "category": null,
+      "http_statuses": [
+        405
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/not-found",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/not-found",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.not-found",
+      "title": "Route not found",
+      "summary": "The requested route does not exist.",
+      "description": "The requested route does not exist.",
+      "category": null,
+      "http_statuses": [
+        404
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/unprocessable",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/unprocessable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.unprocessable",
+      "title": "Request unprocessable",
+      "summary": "The request body could not be processed.",
+      "description": "The request body could not be processed.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/request/unsupported-media-type",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/request/unsupported-media-type",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "request.unsupported-media-type",
+      "title": "Unsupported media type",
+      "summary": "The request body is not JSON.",
+      "description": "The request body is not JSON.",
+      "category": null,
+      "http_statuses": [
+        415
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/resource/unavailable",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/resource/unavailable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "resource.unavailable",
+      "title": "Resource unavailable",
+      "summary": "Every capable member is unavailable for this interval.",
+      "description": "Every capable member is unavailable for this interval.",
+      "category": null,
+      "http_statuses": [
+        409
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/revision/mismatch",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/revision/mismatch",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "revision.mismatch",
+      "title": "Revision mismatch",
+      "summary": "The window revision changed before the request committed. Reload the catalogue and try again.",
+      "description": "The window revision changed before the request committed. Reload the catalogue and try again.",
+      "category": null,
+      "http_statuses": [
+        412
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/schedule/unpublished",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/schedule/unpublished",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "schedule.unpublished",
+      "title": "Schedule unpublished",
+      "summary": "No published schedule serves that start. Choose a start on the published grid.",
+      "description": "No published schedule serves that start. Choose a start on the published grid.",
+      "category": null,
+      "http_statuses": [
+        422
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+      }
+    },
+    {
+      "id": "https://id.registrystack.org/problems/registry-scheduling/service/unavailable",
+      "type": "https://id.registrystack.org/problems/registry-scheduling/service/unavailable",
+      "kind": "problem",
+      "lifecycle_status": "active",
+      "compatibility_line": "v1alpha1",
+      "product": "registry-scheduling",
+      "code": "service.unavailable",
+      "title": "Scheduling service unavailable",
+      "summary": "Scheduling storage is unavailable. Try again after the service recovers.",
+      "description": "Scheduling storage is unavailable. Try again after the service recovers.",
+      "category": null,
+      "http_statuses": [
+        503
+      ],
+      "guidance": {
+        "status": "not_published",
+        "retryable": null,
+        "caller_action": null,
+        "operator_action": null,
+        "note": "No per-identifier remediation guidance is published in this resolver record."
+      },
+      "documented_by": [
+        {
+          "title": "Error and status code reference",
+          "href": "https://docs.registrystack.org/reference/errors/"
+        }
+      ],
+      "authority": {
+        "scope": "identifier metadata",
+        "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+      },
+      "identifier_policy": {
+        "stability": "stable",
+        "programmatic_key": "code",
+        "parsing": "Do not parse semantics from the URL path."
+      },
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+        "path": "crates/registry-scheduling-core/src/problem.rs",
+        "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
       }
     }
   ]
