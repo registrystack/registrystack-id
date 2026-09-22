@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-casework/review/result-expired",
+  "type": "https://id.registrystack.org/problems/registry-casework/review/result-expired",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-casework",
+  "code": "review.result-expired",
+  "title": "Review result expired",
+  "summary": "The retained review result is no longer available. Reconcile through the producer's retained source correlation.",
+  "description": "The retained review result is no longer available. Reconcile through the producer's retained source correlation.",
+  "category": null,
+  "http_statuses": [
+    410
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "60b0c2b02dced96544e18efcad7d8d1c489b949c",
+    "path": "crates/registry-casework/src/problem.rs",
+    "sha256": "3c2f35f05719141e82364e23482933c0fb0493eeccd70ed5765fc4077927db67"
+  }
+}
