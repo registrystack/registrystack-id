@@ -83,25 +83,6 @@ async function fetchExact(url, expectedPath, expectedMediaType) {
   }
 }
 
-// On the Cloudflare host, `_redirects` rewrites (status 200) run before
-// static assets, so an identifier page under a rewrite source serves the
-// rewrite destination. A plain static server serves the page itself.
-const rewrites = readFileSync(resolve(repoRoot, 'public/_redirects'), 'utf8')
-  .split('\n')
-  .map((line) => line.trim().split(/\s+/))
-  .filter(([source, , status]) => source && !source.startsWith('#') && status === '200')
-  .map(([source, destination]) => ({
-    pattern: new RegExp(
-      `^${source.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*')}$`,
-    ),
-    destination: destination.replace(/^\//, ''),
-  }));
-
-function rewriteFor(path) {
-  if (baseUrl !== canonicalBaseUrl) return undefined;
-  return rewrites.find((rewrite) => rewrite.pattern.test(`/${path}`));
-}
-
 async function checkEntry(entry) {
   const uri = entryUri(entry);
   const path = uriPath(uri);
@@ -119,13 +100,8 @@ async function checkEntry(entry) {
     return;
   }
 
-  const rewrite = rewriteFor(path);
-  if (rewrite) {
-    await fetchExact(localUrl(uri), rewrite.destination, 'application/json');
-  } else {
-    const pagePath = `${path.replace(/\/$/, '')}/index.html`;
-    await fetchExact(localUrl(uri), pagePath, 'text/html');
-  }
+  const pagePath = `${path.replace(/\/$/, '')}/index.html`;
+  await fetchExact(localUrl(uri), pagePath, 'text/html');
   const recordPath = entry.kind === 'problem'
     ? `${path}.json`
     : path.endsWith('/')
