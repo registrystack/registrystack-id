@@ -196,3 +196,66 @@ test('every HTML page forbids proxy transformation', () => {
     rmSync(outputDir, { recursive: true, force: true });
   }
 });
+
+// Cloudflare `_redirects` sources: a splat matches any run of characters,
+// including none, and a placeholder matches one or more characters within a
+// path segment.
+function redirectSourceToRegExp(source) {
+  const escaped = source
+    .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+    .replace(/\*/g, '.*')
+    .replace(/:[A-Za-z]\w*/g, '[^/]+');
+  return new RegExp(`^${escaped}$`);
+}
+
+// Redirects run before static assets, so a rule whose source matches a page
+// route would hide that page.
+test('no redirect rule shadows a built HTML page', () => {
+  const outputDir = mkdtempSync(join(tmpdir(), 'registrystack-id-build-'));
+  try {
+    execFileSync('node', ['scripts/build.mjs'], {
+      cwd: repoRoot,
+      env: { ...process.env, OUTPUT_DIR: outputDir },
+      stdio: 'pipe',
+    });
+    const sources = readFileSync(join(outputDir, '_redirects'), 'utf8')
+      .split('\n')
+      .map((line) => line.trim().split(/\s+/)[0])
+      .filter((source) => source && !source.startsWith('#'));
+    for (const route of htmlRoutes(outputDir)) {
+      for (const source of sources) {
+        assert.ok(
+          !redirectSourceToRegExp(source).test(route),
+          `${source} shadows the page at ${route}`,
+        );
+      }
+    }
+  } finally {
+    rmSync(outputDir, { recursive: true, force: true });
+  }
+});
+
+const analyticsScript = '<script defer src="https://stats.registrystack.org/script.js" data-website-id="2a290fef-1670-4361-9d1e-d8961e9df5aa"></script>';
+
+test('every HTML page loads the site analytics script once in its head', () => {
+  const outputDir = mkdtempSync(join(tmpdir(), 'registrystack-id-build-'));
+  try {
+    execFileSync('node', ['scripts/build.mjs'], {
+      cwd: repoRoot,
+      env: { ...process.env, OUTPUT_DIR: outputDir },
+      stdio: 'pipe',
+    });
+    const pages = htmlRoutes(outputDir).map((route) =>
+      route.endsWith('/') ? `${route}index.html` : route,
+    );
+    pages.push('/404.html');
+    for (const page of pages) {
+      const html = readFileSync(join(outputDir, page), 'utf8');
+      const head = html.slice(0, html.indexOf('</head>'));
+      assert.equal(html.split(analyticsScript).length - 1, 1, `${page} must load analytics once`);
+      assert.ok(head.includes(analyticsScript), `${page} must load analytics in its head`);
+    }
+  } finally {
+    rmSync(outputDir, { recursive: true, force: true });
+  }
+});

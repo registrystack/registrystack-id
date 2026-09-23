@@ -355,6 +355,7 @@ function page(title, { description, current, body }) {
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/${siteCssPath}">
+  <script defer src="https://stats.registrystack.org/script.js" data-website-id="2a290fef-1670-4361-9d1e-d8961e9df5aa"></script>
 </head>
 <body>
 ${siteHeader(current)}
@@ -789,7 +790,7 @@ function writeStaticControls(artifactEntries) {
 ${exactHeaders}
 `);
   writeOutput('_redirects', `/problem-types/* /problems/:splat 301
-/vocab/core/* /vocabularies/core.json 200
+/vocab/core/:term /vocabularies/core.json 200
 /.well-known/registrystack-identifiers /index.json 200
 `);
 }
