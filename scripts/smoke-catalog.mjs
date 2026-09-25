@@ -77,10 +77,13 @@ function expectedArtifactMediaType(path) {
   }
 }
 
-async function fetchExact(url, expectedPath, expectedMediaType) {
+async function fetchExact(url, expectedPath, expectedMediaType, retrySignal) {
+  const requestSignal = retrySignal
+    ? AbortSignal.any([retrySignal, AbortSignal.timeout(15_000)])
+    : AbortSignal.timeout(15_000);
   const response = await fetch(url, {
     headers: expectedMediaType ? { accept: expectedMediaType } : undefined,
-    signal: AbortSignal.timeout(15_000),
+    signal: requestSignal,
   });
   const actual = Buffer.from(await response.arrayBuffer());
   if (!response.ok) {
@@ -103,12 +106,12 @@ async function fetchExact(url, expectedPath, expectedMediaType) {
   }
 }
 
-async function checkEntry(entry) {
+async function checkEntry(entry, retrySignal) {
   const uri = entryUri(entry);
   const path = uriPath(uri);
   if (entry.artifact_sha256) {
     const expectedMediaType = expectedArtifactMediaType(entry.source);
-    await fetchExact(localUrl(uri), path, expectedMediaType);
+    await fetchExact(localUrl(uri), path, expectedMediaType, retrySignal);
     if (!entry.immutable_uri) {
       throw new Error(`${uri} does not name an immutable artifact URI`);
     }
@@ -116,35 +119,45 @@ async function checkEntry(entry) {
       localUrl(entry.immutable_uri),
       uriPath(entry.immutable_uri),
       expectedMediaType,
+      retrySignal,
     );
     return;
   }
 
   const pagePath = `${path.replace(/\/$/, '')}/index.html`;
-  await fetchExact(localUrl(uri), pagePath, 'text/html');
+  await fetchExact(localUrl(uri), pagePath, 'text/html', retrySignal);
   const recordPath = entry.kind === 'problem'
     ? `${path}.json`
     : path.endsWith('/')
       ? `${path}index.json`
       : `${path}.json`;
-  await fetchExact(`${baseUrl}/${recordPath}`, recordPath, 'application/json');
+  await fetchExact(
+    `${baseUrl}/${recordPath}`,
+    recordPath,
+    'application/json',
+    retrySignal,
+  );
 }
 
-// Runs every check in `checksToRun` with bounded concurrency and returns a
-// same-length array of `{ status: 'fulfilled' }` or
-// `{ status: 'rejected', reason }` results, in the original order.
-async function runAll(checksToRun) {
+// Runs checks with bounded concurrency. A retry deadline stops new checks and
+// marks work it aborts so the caller can retain the last completed failure.
+async function runAll(checksToRun, { signal } = {}) {
   let nextIndex = 0;
   const results = new Array(checksToRun.length);
   async function worker() {
     while (nextIndex < checksToRun.length) {
+      if (signal?.aborted) {
+        break;
+      }
       const index = nextIndex;
       nextIndex += 1;
       try {
-        await checksToRun[index].run();
+        await checksToRun[index].run(signal);
         results[index] = { status: 'fulfilled' };
       } catch (reason) {
-        results[index] = { status: 'rejected', reason };
+        results[index] = signal?.aborted
+          ? { status: 'deadline-exceeded' }
+          : { status: 'rejected', reason };
       }
     }
   }
@@ -172,6 +185,8 @@ export async function runChecksWithRetry(
     retryWindowMs = DEFAULT_RETRY_WINDOW_MS,
     sleep: sleepFn = sleep,
     now: nowFn = () => performance.now(),
+    deadlineSignal: deadlineSignalFn = (remainingMs) =>
+      AbortSignal.timeout(Math.max(1, Math.ceil(remainingMs))),
   } = {},
 ) {
   const deadlineMs = nowFn() + retryWindowMs;
@@ -188,11 +203,27 @@ export async function runChecksWithRetry(
     );
     await sleepFn(delay);
     attempt += 1;
-    const retried = await runAll(pending.map((index) => checks[index]));
+    const remainingMs = deadlineMs - nowFn();
+    if (remainingMs <= 0) {
+      break;
+    }
+    const deadlineSignal = deadlineSignalFn(remainingMs);
+    const retried = await runAll(
+      pending.map((index) => checks[index]),
+      { signal: deadlineSignal },
+    );
     pending.forEach((index, position) => {
-      results[index] = retried[position];
+      if (
+        retried[position] &&
+        retried[position].status !== 'deadline-exceeded'
+      ) {
+        results[index] = retried[position];
+      }
     });
     pending = rejectedIndexes(results);
+    if (deadlineSignal.aborted) {
+      break;
+    }
   }
   return results;
 }
@@ -207,16 +238,17 @@ if (isMain) {
     .sort()
     .map((name) => ({
       name,
-      run: () => fetchExact(
+      run: (signal) => fetchExact(
         `${baseUrl}/artifacts/sha256/${name}`,
         `artifacts/sha256/${name}`,
         expectedArtifactMediaType(name),
+        signal,
       ),
     }));
   const checks = [
     ...entries.map((entry) => ({
       name: entryUri(entry),
-      run: () => checkEntry(entry),
+      run: (signal) => checkEntry(entry, signal),
     })),
     ...digestArtifacts.map((artifact) => ({
       name: `${canonicalBaseUrl}/artifacts/sha256/${artifact.name}`,

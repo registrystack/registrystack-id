@@ -11,8 +11,8 @@ import {
 function makeCheck(url) {
   return {
     name: url,
-    run: async () => {
-      const response = await fetch(url);
+    run: async (signal) => {
+      const response = await fetch(url, { signal });
       const body = await response.text();
       if (body !== 'fresh') {
         throw new Error(`${url} saw stale bytes`);
@@ -147,4 +147,41 @@ test('check execution time consumes the retry window', async () => {
   assert.equal(results[0].status, 'rejected');
   assert.equal(calls, 1);
   assert.equal(sleeps, 0);
+});
+
+test('the deadline cancels in-flight retries and stops pending checks', async () => {
+  const calls = Array.from({ length: 10 }, () => 0);
+  const checks = calls.map((_, index) => ({
+    name: `check ${index}`,
+    run: async (signal) => {
+      calls[index] += 1;
+      if (calls[index] === 1) {
+        throw new Error(`stale ${index}`);
+      }
+      await new Promise((_, reject) => {
+        signal.addEventListener('abort', () => reject(signal.reason), {
+          once: true,
+        });
+      });
+    },
+  }));
+
+  const results = await runChecksWithRetry(checks, {
+    retryDelaysMs: [0],
+    retryWindowMs: 10,
+    sleep: async () => {},
+    now: () => 0,
+    deadlineSignal: (remainingMs) => {
+      assert.equal(remainingMs, 10);
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(new Error('deadline elapsed')), 5);
+      return controller.signal;
+    },
+  });
+
+  assert.equal(calls.reduce((total, count) => total + count, 0), 18);
+  assert.deepEqual(
+    results.map(({ status, reason }) => [status, reason.message]),
+    calls.map((_, index) => ['rejected', `stale ${index}`]),
+  );
 });
