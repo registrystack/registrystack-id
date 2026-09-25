@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { extname, resolve } from 'node:path';
+import { performance } from 'node:perf_hooks';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -25,6 +26,16 @@ const catalogFiles = [
 // fails once the window elapses.
 export const DEFAULT_RETRY_DELAYS_MS = [5_000, 10_000, 20_000, 30_000];
 export const DEFAULT_RETRY_WINDOW_MS = 180_000;
+
+export function parseRetryWindowMs(value) {
+  const retryWindowMs = Number(value ?? DEFAULT_RETRY_WINDOW_MS);
+  if (!Number.isFinite(retryWindowMs) || retryWindowMs < 0) {
+    throw new Error(
+      'IDENTIFIER_SMOKE_RETRY_WINDOW_MS must be a finite, nonnegative number',
+    );
+  }
+  return retryWindowMs;
+}
 
 function readJson(path) {
   return JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
@@ -160,22 +171,22 @@ export async function runChecksWithRetry(
     retryDelaysMs = DEFAULT_RETRY_DELAYS_MS,
     retryWindowMs = DEFAULT_RETRY_WINDOW_MS,
     sleep: sleepFn = sleep,
+    now: nowFn = () => performance.now(),
   } = {},
 ) {
+  const deadlineMs = nowFn() + retryWindowMs;
   const results = await runAll(checks);
   let pending = rejectedIndexes(results);
-  let elapsedMs = 0;
   let attempt = 0;
   while (pending.length > 0) {
     const delay = retryDelaysMs[Math.min(attempt, retryDelaysMs.length - 1)];
-    if (elapsedMs + delay > retryWindowMs) {
+    if (nowFn() + delay > deadlineMs) {
       break;
     }
     console.warn(
       `${pending.length} of ${checks.length} check(s) saw stale content; retrying in ${delay}ms`,
     );
     await sleepFn(delay);
-    elapsedMs += delay;
     attempt += 1;
     const retried = await runAll(pending.map((index) => checks[index]));
     pending.forEach((index, position) => {
@@ -213,8 +224,8 @@ if (isMain) {
     })),
   ];
 
-  const retryWindowMs = Number(
-    process.env.IDENTIFIER_SMOKE_RETRY_WINDOW_MS ?? DEFAULT_RETRY_WINDOW_MS,
+  const retryWindowMs = parseRetryWindowMs(
+    process.env.IDENTIFIER_SMOKE_RETRY_WINDOW_MS,
   );
   const results = await runChecksWithRetry(checks, { retryWindowMs });
   const failures = results
