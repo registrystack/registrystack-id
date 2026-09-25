@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { extname, resolve } from 'node:path';
+import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -16,6 +17,14 @@ const catalogFiles = [
   'vocabularies.json',
   'vocabulary-terms.json',
 ];
+
+// Cloudflare's edge can take a short while to finish propagating a deploy.
+// A check retries with backoff (capped at the schedule's last step) for a
+// bounded window before it is treated as a failure, so a routine publish
+// does not fail on bytes that are still in flight; a genuine mismatch still
+// fails once the window elapses.
+export const DEFAULT_RETRY_DELAYS_MS = [5_000, 10_000, 20_000, 30_000];
+export const DEFAULT_RETRY_WINDOW_MS = 180_000;
 
 function readJson(path) {
   return JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
@@ -110,56 +119,116 @@ async function checkEntry(entry) {
   await fetchExact(`${baseUrl}/${recordPath}`, recordPath, 'application/json');
 }
 
-const entries = catalogFiles.flatMap(
-  (path) => readJson(`src/catalogs/${path}`).entries,
-);
-const digestArtifacts = readdirSync(resolve(repoRoot, 'src/artifacts/sha256'))
-  .sort()
-  .map((name) => ({
-    name,
-    run: () => fetchExact(
-      `${baseUrl}/artifacts/sha256/${name}`,
-      `artifacts/sha256/${name}`,
-      expectedArtifactMediaType(name),
-    ),
-  }));
-const checks = [
-  ...entries.map((entry) => ({
-    name: entryUri(entry),
-    run: () => checkEntry(entry),
-  })),
-  ...digestArtifacts.map((artifact) => ({
-    name: `${canonicalBaseUrl}/artifacts/sha256/${artifact.name}`,
-    run: artifact.run,
-  })),
-];
-
-let nextIndex = 0;
-const results = new Array(checks.length);
-async function worker() {
-  while (nextIndex < checks.length) {
-    const index = nextIndex;
-    nextIndex += 1;
-    try {
-      await checks[index].run();
-      results[index] = { status: 'fulfilled' };
-    } catch (reason) {
-      results[index] = { status: 'rejected', reason };
+// Runs every check in `checksToRun` with bounded concurrency and returns a
+// same-length array of `{ status: 'fulfilled' }` or
+// `{ status: 'rejected', reason }` results, in the original order.
+async function runAll(checksToRun) {
+  let nextIndex = 0;
+  const results = new Array(checksToRun.length);
+  async function worker() {
+    while (nextIndex < checksToRun.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      try {
+        await checksToRun[index].run();
+        results[index] = { status: 'fulfilled' };
+      } catch (reason) {
+        results[index] = { status: 'rejected', reason };
+      }
     }
   }
+  await Promise.all(
+    Array.from({ length: Math.min(8, checksToRun.length) }, worker),
+  );
+  return results;
 }
-await Promise.all(Array.from({ length: Math.min(8, checks.length) }, worker));
-const failures = results
-  .map((result, index) => ({ result, check: checks[index] }))
-  .filter(({ result }) => result.status === 'rejected');
-for (const { result, check } of failures) {
-  console.error(`${check.name}: ${result.reason.message}`);
-}
-if (failures.length > 0) {
-  throw new Error(
-    `${failures.length} of ${checks.length} catalog and immutable artifact checks failed on ${baseUrl}`,
+
+function rejectedIndexes(results) {
+  return results.reduce(
+    (indexes, result, index) =>
+      result.status === 'rejected' ? [...indexes, index] : indexes,
+    [],
   );
 }
-console.log(
-  `all ${entries.length} active and deprecated identifiers plus ${digestArtifacts.length} retained immutable artifacts passed exact-byte checks on ${baseUrl}`,
-);
+
+// Runs every check, then retries only the checks that failed with backoff
+// until every check passes or the bounded retry window elapses. Returns
+// results in the original order, matching `runAll`'s result shape.
+export async function runChecksWithRetry(
+  checks,
+  {
+    retryDelaysMs = DEFAULT_RETRY_DELAYS_MS,
+    retryWindowMs = DEFAULT_RETRY_WINDOW_MS,
+    sleep: sleepFn = sleep,
+  } = {},
+) {
+  const results = await runAll(checks);
+  let pending = rejectedIndexes(results);
+  let elapsedMs = 0;
+  let attempt = 0;
+  while (pending.length > 0) {
+    const delay = retryDelaysMs[Math.min(attempt, retryDelaysMs.length - 1)];
+    if (elapsedMs + delay > retryWindowMs) {
+      break;
+    }
+    console.warn(
+      `${pending.length} of ${checks.length} check(s) saw stale content; retrying in ${delay}ms`,
+    );
+    await sleepFn(delay);
+    elapsedMs += delay;
+    attempt += 1;
+    const retried = await runAll(pending.map((index) => checks[index]));
+    pending.forEach((index, position) => {
+      results[index] = retried[position];
+    });
+    pending = rejectedIndexes(results);
+  }
+  return results;
+}
+
+const isMain =
+  process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMain) {
+  const entries = catalogFiles.flatMap(
+    (path) => readJson(`src/catalogs/${path}`).entries,
+  );
+  const digestArtifacts = readdirSync(resolve(repoRoot, 'src/artifacts/sha256'))
+    .sort()
+    .map((name) => ({
+      name,
+      run: () => fetchExact(
+        `${baseUrl}/artifacts/sha256/${name}`,
+        `artifacts/sha256/${name}`,
+        expectedArtifactMediaType(name),
+      ),
+    }));
+  const checks = [
+    ...entries.map((entry) => ({
+      name: entryUri(entry),
+      run: () => checkEntry(entry),
+    })),
+    ...digestArtifacts.map((artifact) => ({
+      name: `${canonicalBaseUrl}/artifacts/sha256/${artifact.name}`,
+      run: artifact.run,
+    })),
+  ];
+
+  const retryWindowMs = Number(
+    process.env.IDENTIFIER_SMOKE_RETRY_WINDOW_MS ?? DEFAULT_RETRY_WINDOW_MS,
+  );
+  const results = await runChecksWithRetry(checks, { retryWindowMs });
+  const failures = results
+    .map((result, index) => ({ result, check: checks[index] }))
+    .filter(({ result }) => result.status === 'rejected');
+  for (const { result, check } of failures) {
+    console.error(`${check.name}: ${result.reason.message}`);
+  }
+  if (failures.length > 0) {
+    throw new Error(
+      `${failures.length} of ${checks.length} catalog and immutable artifact checks failed on ${baseUrl}`,
+    );
+  }
+  console.log(
+    `all ${entries.length} active and deprecated identifiers plus ${digestArtifacts.length} retained immutable artifacts passed exact-byte checks on ${baseUrl}`,
+  );
+}
