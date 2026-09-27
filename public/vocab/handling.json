@@ -8,9 +8,9 @@
   "owner": "relay-v2",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "73e49d1a8256badbf8536f24aad995e9cb6074a1",
+    "commit": "d6304d1ebbc6f746663daafee4235e6b51ff64cc",
     "path": "products/relay-v2/CONCEPT.md",
-    "sha256": "96445c1c324519d02890b5c24a46d5b66dfa2e17fcc23b33e0978bf8f5ab3a4e"
+    "sha256": "ee3a1f88f87331e3601469ae7f23ecd0c3249168d2f6d199de8250892b24dccc"
   },
   "id": "https://id.registrystack.org/vocab/handling",
   "documented_by": [
