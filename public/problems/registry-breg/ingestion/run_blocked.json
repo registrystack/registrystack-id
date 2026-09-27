@@ -7,8 +7,8 @@
   "product": "registry-breg",
   "code": "ingestion.run_blocked",
   "title": "Conflict",
-  "summary": "The active package no longer matches the run binding.",
-  "description": "The active package no longer matches the run binding.",
+  "summary": "The ingestion run is blocked and refuses further chunks.",
+  "description": "The ingestion run is blocked and refuses further chunks.",
   "category": null,
   "http_statuses": [
     409
@@ -37,8 +37,8 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "73e49d1a8256badbf8536f24aad995e9cb6074a1",
+    "commit": "d6304d1ebbc6f746663daafee4235e6b51ff64cc",
     "path": "crates/registry-breg/src/problem.rs",
-    "sha256": "1103252370b62dfc248689f7baf08f0479e4d7dd762a491ceafbd8341816b540"
+    "sha256": "a1a1640628a5fdf95767f82c347f90bf38af9c30867882ad0bdd18eb3601a28a"
   }
 }
