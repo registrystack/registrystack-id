@@ -45,7 +45,7 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "0b9b6a7ce5ccc2c8022ea78f881691c3c512e6cf",
+    "commit": "96fa6c9b9d704b101a0d0ab0587b022d170a91c8",
     "path": "crates/registry-relay-http-contract/src/lib.rs",
     "sha256": "9ea2dfbcd06be6f5c81bd2a09811f420df9120ee9133f03f95b07a65f99483d4"
   }
