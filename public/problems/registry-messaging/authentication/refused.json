@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-messaging/authentication/refused",
+  "type": "https://id.registrystack.org/problems/registry-messaging/authentication/refused",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-messaging",
+  "code": "authentication.refused",
+  "title": "Authentication refused",
+  "summary": "The bearer credential is missing, invalid, or expired. Sign in again.",
+  "description": "The bearer credential is missing, invalid, or expired. Sign in again.",
+  "category": null,
+  "http_statuses": [
+    401
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "96fa6c9b9d704b101a0d0ab0587b022d170a91c8",
+    "path": "crates/registry-messaging-core/src/problem.rs",
+    "sha256": "debf21ffbfc35916067d15f4cee489e502876297a74924035fe96f38475cb98c"
+  }
+}
