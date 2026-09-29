@@ -8,7 +8,7 @@
   "owner": "relay-v2",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "96fa6c9b9d704b101a0d0ab0587b022d170a91c8",
+    "commit": "ba1c88e84290fc886683be61afaeb0d59c1323ff",
     "path": "crates/registry-relay-v2/src/semantics.rs",
     "sha256": "563740f4b7d7582a8c1f80756d52137915b85cd349e19ce5ab272d1d791234ca"
   },
