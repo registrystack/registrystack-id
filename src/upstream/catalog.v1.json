@@ -3276,7 +3276,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-module.schema.json",
-        "sha256": "532f2e49816a38ac82595c32d1cff93c53bfce72edb7f84ce2012d580e883338",
+        "sha256": "5f3fd780bccddb5d203bd51e9bc6d404b4c2f37a054dad1a5bd96265841cfdda",
         "mediaType": "application/schema+json"
       }
     },
@@ -3294,7 +3294,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-project.schema.json",
-        "sha256": "ab22f032a73aea122021286a735b78bc942831a371eefe100a124e658a03e0e5",
+        "sha256": "e0fc372a81dec402834eb63e7e19e14bbd285a2f859f89403cfacee2c27daefd",
         "mediaType": "application/schema+json"
       }
     },
@@ -3312,7 +3312,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/runtime/runtime.schema.json",
-        "sha256": "dbf039efa295506c2b9fb793e5141329b7947cc69571a81d8372219858228574",
+        "sha256": "c85881c80936e4cd405ccde25dabdab4a266dc0c6ad8ad851012e200ca18dfd8",
         "mediaType": "application/schema+json"
       }
     },
@@ -3366,7 +3366,7 @@
       },
       "artifact": {
         "path": "products/messaging/generated/runtime/runtime.schema.json",
-        "sha256": "d814589772d9b5956b67c54aaa0e1f43f2e7869fbd75c02fb8fe5dee37b5710f",
+        "sha256": "39e0445aa4e04afa8fb237d123d3e5f5540cad0740ec4683a00812501069a419",
         "mediaType": "application/schema+json"
       }
     },
