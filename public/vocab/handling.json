@@ -8,7 +8,7 @@
   "owner": "relay-v2",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "ba1c88e84290fc886683be61afaeb0d59c1323ff",
+    "commit": "a88e3fc024d94582f0e93316970b0c0975df4509",
     "path": "products/relay-v2/CONCEPT.md",
     "sha256": "ee3a1f88f87331e3601469ae7f23ecd0c3249168d2f6d199de8250892b24dccc"
   },
