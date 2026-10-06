@@ -24,7 +24,7 @@ const problem = await readJson(
 );
 if (
   problem.code !== 'auth.missing_credential' ||
-  problem.lifecycle_status !== 'active' ||
+  problem.lifecycle_status !== 'deprecated' ||
   !problem.http_statuses?.includes(401)
 ) {
   throw new Error('representative Relay V2 problem record is stale');
@@ -62,7 +62,7 @@ if (
 const vocabulary = await readJson('/vocab/sourceRequired.json');
 if (
   vocabulary.kind !== 'vocabulary-term' ||
-  vocabulary.status !== 'active'
+  vocabulary.status !== 'deprecated'
 ) {
   throw new Error('representative Relay V2 vocabulary term is stale');
 }
@@ -70,7 +70,7 @@ if (
 const coreVocabulary = await readJson('/vocabularies/core.json');
 if (
   coreVocabulary.kind !== 'vocabulary' ||
-  coreVocabulary.status !== 'active' ||
+  coreVocabulary.status !== 'deprecated' ||
   coreVocabulary.child_term_policy?.ownership !== 'adopter-defined' ||
   coreVocabulary.child_term_policy?.registry_reviewed !== false
 ) {
@@ -83,7 +83,7 @@ if (baseUrl === canonicalBaseUrl) {
   const dynamicVocabulary = await readJson('/vocab/core/exampleField');
   if (
     dynamicVocabulary.kind !== 'vocabulary' ||
-    dynamicVocabulary.status !== 'active' ||
+    dynamicVocabulary.status !== 'deprecated' ||
     dynamicVocabulary.child_term_policy?.ownership !== 'adopter-defined' ||
     dynamicVocabulary.child_term_policy?.registry_reviewed !== false
   ) {
