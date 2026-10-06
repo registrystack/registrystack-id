@@ -3,7 +3,7 @@
   "title": "Registry Relay handling vocabulary",
   "description": "Ordered Relay V2 technical handling levels: public, internal, confidential, and restricted.",
   "kind": "vocabulary",
-  "status": "active",
+  "status": "deprecated",
   "compatibility_line": "relay-v2",
   "owner": "relay-v2",
   "source_reference": {

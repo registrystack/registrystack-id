@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-breg/statistical_dataset/release_refused",
+  "type": "https://id.registrystack.org/problems/registry-breg/statistical_dataset/release_refused",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-breg",
+  "code": "statistical_dataset.release_refused",
+  "title": "Unprocessable Entity",
+  "summary": "The statistical dataset release operation is not eligible.",
+  "description": "The statistical dataset release operation is not eligible.",
+  "category": null,
+  "http_statuses": [
+    422
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+    "path": "crates/registry-breg/src/problem.rs",
+    "sha256": "ce905a19ebaf14d4a6fe63677e8bbce7b48fe8a5e517896ea08af2fd006cff13"
+  }
+}

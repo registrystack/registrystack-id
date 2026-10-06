@@ -3,7 +3,7 @@
   "title": "Registry Relay core vocabulary",
   "description": "Vocabulary base for Relay V2 Registry Core semantic predicates.",
   "kind": "vocabulary",
-  "status": "active",
+  "status": "deprecated",
   "compatibility_line": "relay-v2",
   "owner": "relay-v2",
   "source_reference": {

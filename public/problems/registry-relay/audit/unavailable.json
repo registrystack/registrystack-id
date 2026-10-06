@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/audit/unavailable",
   "type": "https://id.registrystack.org/problems/registry-relay/audit/unavailable",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "audit.unavailable",

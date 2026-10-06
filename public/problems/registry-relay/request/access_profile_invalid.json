@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid",
   "type": "https://id.registrystack.org/problems/registry-relay/request/access_profile_invalid",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "request.access_profile_invalid",

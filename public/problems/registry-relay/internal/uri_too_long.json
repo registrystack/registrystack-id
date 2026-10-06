@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/internal/uri_too_long",
   "type": "https://id.registrystack.org/problems/registry-relay/internal/uri_too_long",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "internal.uri_too_long",

@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large",
   "type": "https://id.registrystack.org/problems/registry-relay/aggregate-data/too_large",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "aggregate-data.too_large",
