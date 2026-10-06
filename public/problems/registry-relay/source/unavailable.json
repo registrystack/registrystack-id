@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/source/unavailable",
   "type": "https://id.registrystack.org/problems/registry-relay/source/unavailable",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "source.unavailable",

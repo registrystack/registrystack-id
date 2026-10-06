@@ -3,7 +3,7 @@
   "title": "Source required",
   "description": "Relay V2 Registry Core predicate indicating whether a source value is required.",
   "kind": "vocabulary-term",
-  "status": "active",
+  "status": "deprecated",
   "compatibility_line": "relay-v2",
   "owner": "relay-v2",
   "source_reference": {

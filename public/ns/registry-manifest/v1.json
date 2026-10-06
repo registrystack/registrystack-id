@@ -8,9 +8,9 @@
   "owner": "registry-manifest",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "a88e3fc024d94582f0e93316970b0c0975df4509",
+    "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
     "path": "crates/registry-manifest-core/src/lib.rs",
-    "sha256": "a8d8c58eb9f2eb10db68b26c9e285a11fa3f531d98bab19ecab52e2a37e4b17f"
+    "sha256": "a3f450f6903b1d00818c05818c5276c04f0996e0df8f5a65bc11437b820a7c28"
   },
   "id": "https://id.registrystack.org/ns/registry-manifest/v1#",
   "documented_by": [

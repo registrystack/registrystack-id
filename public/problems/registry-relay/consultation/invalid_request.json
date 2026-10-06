@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-relay/consultation/invalid_request",
   "type": "https://id.registrystack.org/problems/registry-relay/consultation/invalid_request",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "relay-v2",
   "product": "registry-relay",
   "code": "consultation.invalid_request",

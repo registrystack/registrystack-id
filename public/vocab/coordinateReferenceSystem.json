@@ -3,7 +3,7 @@
   "title": "Coordinate reference system",
   "description": "Relay V2 Registry Core predicate identifying a spatial property's coordinate reference system.",
   "kind": "vocabulary-term",
-  "status": "active",
+  "status": "deprecated",
   "compatibility_line": "relay-v2",
   "owner": "relay-v2",
   "source_reference": {
