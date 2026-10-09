@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Idempotency window expired | Registry Stack identifiers</title>
-  <meta name="description" content="The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.">
+  <meta name="description" content="The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.af73d05e9347816d.css">
@@ -31,7 +31,7 @@
   <div class="hero-inner">
     <p class="eyebrow">Problem type · registry-scheduling</p>
     <h1>Idempotency window expired</h1>
-    <p class="hero-lead">The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.</p>
+    <p class="hero-lead">The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.</p>
     <p><code class="hero-uri">https://id.registrystack.org/problems/registry-scheduling/idempotency/expired</code></p>
   </div>
 </section>
@@ -85,8 +85,8 @@
   &quot;product&quot;: &quot;registry-scheduling&quot;,
   &quot;code&quot;: &quot;idempotency.expired&quot;,
   &quot;title&quot;: &quot;Idempotency window expired&quot;,
-  &quot;summary&quot;: &quot;The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.&quot;,
-  &quot;description&quot;: &quot;The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.&quot;,
+  &quot;summary&quot;: &quot;The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.&quot;,
+  &quot;description&quot;: &quot;The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.&quot;,
   &quot;category&quot;: null,
   &quot;http_statuses&quot;: [
     410
@@ -115,9 +115,9 @@
   },
   &quot;source_reference&quot;: {
     &quot;repository&quot;: &quot;registry-stack&quot;,
-    &quot;commit&quot;: &quot;9635578979a67d26a776d6a1248b214fa3f5bf75&quot;,
+    &quot;commit&quot;: &quot;bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48&quot;,
     &quot;path&quot;: &quot;crates/registry-scheduling-core/src/problem.rs&quot;,
-    &quot;sha256&quot;: &quot;58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b&quot;
+    &quot;sha256&quot;: &quot;5ce5a4507c1e778ece0e58a44f59976ba543df23a12d484e9cd381b50cf97d68&quot;
   }
 }</code></pre>
       <p class="machine-link"><a href="https://id.registrystack.org/problems/registry-scheduling/idempotency/expired.json">Machine-readable JSON</a></p>

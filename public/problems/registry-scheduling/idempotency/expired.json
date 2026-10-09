@@ -7,8 +7,8 @@
   "product": "registry-scheduling",
   "code": "idempotency.expired",
   "title": "Idempotency window expired",
-  "summary": "The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.",
-  "description": "The stored response for this idempotency key has expired. Reconcile the original operation before choosing a new key.",
+  "summary": "The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.",
+  "description": "The stored response for this idempotency key has expired. For an appointment command, read the appointment by its external reference or its identifier to learn the original outcome before choosing a new key. A hold cannot be read and expires on its own, so start a new request.",
   "category": null,
   "http_statuses": [
     410
@@ -37,8 +37,8 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+    "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
     "path": "crates/registry-scheduling-core/src/problem.rs",
-    "sha256": "58f980f92c75d7bcc6d0fc41bb9945cb69609fe4af9efc570f936240bdb8244b"
+    "sha256": "5ce5a4507c1e778ece0e58a44f59976ba543df23a12d484e9cd381b50cf97d68"
   }
 }

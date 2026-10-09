@@ -11,9 +11,9 @@
       "source": "src/artifacts/sha256/5f3fd780bccddb5d203bd51e9bc6d404b4c2f37a054dad1a5bd96265841cfdda.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "da4017ec0f39bcd84b56093c7ff64078c0a0ab216af5085da034e2c09e6f4114"
+        "sha256": "9974f5f9348329f7395acaf2975306714a335c7a24fd926ea01337d8e4bb5ae7"
       },
       "artifact_sha256": "5f3fd780bccddb5d203bd51e9bc6d404b4c2f37a054dad1a5bd96265841cfdda",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/5f3fd780bccddb5d203bd51e9bc6d404b4c2f37a054dad1a5bd96265841cfdda.json",
@@ -44,9 +44,9 @@
       "source": "src/artifacts/sha256/4bd456164cf5fa48ed3d9cd1922d23961034c8f834f2ed8ebefccdb8c8bcce6c.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "da4017ec0f39bcd84b56093c7ff64078c0a0ab216af5085da034e2c09e6f4114"
+        "sha256": "9974f5f9348329f7395acaf2975306714a335c7a24fd926ea01337d8e4bb5ae7"
       },
       "artifact_sha256": "4bd456164cf5fa48ed3d9cd1922d23961034c8f834f2ed8ebefccdb8c8bcce6c",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/4bd456164cf5fa48ed3d9cd1922d23961034c8f834f2ed8ebefccdb8c8bcce6c.json",
@@ -74,15 +74,15 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "breg",
-      "source": "src/artifacts/sha256/c85881c80936e4cd405ccde25dabdab4a266dc0c6ad8ad851012e200ca18dfd8.json",
+      "source": "src/artifacts/sha256/9cac7eccc4311044b2149aa323c2bd079a84f03d345abea17e1c38e42461aadd.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-breg/src/schema.rs",
-        "sha256": "da4017ec0f39bcd84b56093c7ff64078c0a0ab216af5085da034e2c09e6f4114"
+        "sha256": "9974f5f9348329f7395acaf2975306714a335c7a24fd926ea01337d8e4bb5ae7"
       },
-      "artifact_sha256": "c85881c80936e4cd405ccde25dabdab4a266dc0c6ad8ad851012e200ca18dfd8",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/c85881c80936e4cd405ccde25dabdab4a266dc0c6ad8ad851012e200ca18dfd8.json",
+      "artifact_sha256": "9cac7eccc4311044b2149aa323c2bd079a84f03d345abea17e1c38e42461aadd",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/9cac7eccc4311044b2149aa323c2bd079a84f03d345abea17e1c38e42461aadd.json",
       "id": "https://id.registrystack.org/schemas/breg/runtime/runtime.v1alpha1.schema.json",
       "documented_by": [
         {
@@ -110,7 +110,7 @@
       "source": "src/artifacts/sha256/5dcd8e3823c7ee8ecd6c38ba54dce5d8c69f8aa39ce00ba20b8fa18ea2541f13.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-casework/src/schema.rs",
         "sha256": "d0800b2abf13736c2836ffe54b7e94b4d3c5605d178e6b7e28d4b239937c32e3"
       },
@@ -143,7 +143,7 @@
       "source": "src/artifacts/sha256/e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "products/identifiers/contracts/catalog.v1.schema.json",
         "sha256": "e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d"
       },
@@ -176,9 +176,9 @@
       "source": "src/artifacts/sha256/39e0445aa4e04afa8fb237d123d3e5f5540cad0740ec4683a00812501069a419.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-messaging/src/schema.rs",
-        "sha256": "c46f7ab05ff765053e37e6fafb2699f78061dfc8a8adc07406819b1a538ef6f4"
+        "sha256": "98c66fb7fe12020300c9c8df16d349931fa33e268498fc321d35ff7258a57931"
       },
       "artifact_sha256": "39e0445aa4e04afa8fb237d123d3e5f5540cad0740ec4683a00812501069a419",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/39e0445aa4e04afa8fb237d123d3e5f5540cad0740ec4683a00812501069a419.json",
@@ -209,7 +209,7 @@
       "source": "src/artifacts/sha256/31cae7de9e84904e300d0d77ffbfdfc7a1de6127719a0ccbb3f6a88d7306510e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "products/registry-record/schema/registry-record-v1.schema.json",
         "sha256": "31cae7de9e84904e300d0d77ffbfdfc7a1de6127719a0ccbb3f6a88d7306510e"
       },
@@ -485,15 +485,15 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "scheduling",
-      "source": "src/artifacts/sha256/cd8d9a96ed1067f14b6f76f50281dea19461142b81eb8c9508b6537447d93a46.json",
+      "source": "src/artifacts/sha256/ad86e21e01ad9d48260f318a5f934437e4f855f685b4e965805f821c0f349216.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "9635578979a67d26a776d6a1248b214fa3f5bf75",
+        "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
         "path": "crates/registry-scheduling/src/schema.rs",
-        "sha256": "32cfad59de573591d03d3d99931a4d2f817a5083f3967d109891a63134c3063c"
+        "sha256": "e64a5b454b5caf6d2e190715f8c1d7cee0f9b27b633e1c3eed728ef76867d986"
       },
-      "artifact_sha256": "cd8d9a96ed1067f14b6f76f50281dea19461142b81eb8c9508b6537447d93a46",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/cd8d9a96ed1067f14b6f76f50281dea19461142b81eb8c9508b6537447d93a46.json",
+      "artifact_sha256": "ad86e21e01ad9d48260f318a5f934437e4f855f685b4e965805f821c0f349216",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/ad86e21e01ad9d48260f318a5f934437e4f855f685b4e965805f821c0f349216.json",
       "id": "https://id.registrystack.org/schemas/scheduling/runtime/runtime.v1alpha1.schema.json",
       "documented_by": [
         {
