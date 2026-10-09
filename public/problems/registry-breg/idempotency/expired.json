@@ -1,17 +1,17 @@
 {
-  "id": "https://id.registrystack.org/problems/registry-scheduling/cancellation/cutoff-passed",
-  "type": "https://id.registrystack.org/problems/registry-scheduling/cancellation/cutoff-passed",
+  "id": "https://id.registrystack.org/problems/registry-breg/idempotency/expired",
+  "type": "https://id.registrystack.org/problems/registry-breg/idempotency/expired",
   "kind": "problem",
   "lifecycle_status": "active",
   "compatibility_line": "v1alpha1",
-  "product": "registry-scheduling",
-  "code": "cancellation.cutoff-passed",
-  "title": "Cancellation cutoff passed",
-  "summary": "The cancellation cutoff for this appointment has passed, so it can no longer be cancelled.",
-  "description": "The cancellation cutoff for this appointment has passed, so it can no longer be cancelled.",
+  "product": "registry-breg",
+  "code": "idempotency.expired",
+  "title": "Gone",
+  "summary": "The held response of the idempotency key expired; the key stays spent.",
+  "description": "The held response of the idempotency key expired; the key stays spent.",
   "category": null,
   "http_statuses": [
-    409
+    410
   ],
   "guidance": {
     "status": "not_published",
@@ -38,7 +38,7 @@
   "source_reference": {
     "repository": "registry-stack",
     "commit": "bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48",
-    "path": "crates/registry-scheduling-core/src/problem.rs",
-    "sha256": "5ce5a4507c1e778ece0e58a44f59976ba543df23a12d484e9cd381b50cf97d68"
+    "path": "crates/registry-breg/src/problem.rs",
+    "sha256": "3a84ff66d0da16980512526675d323f1c732fb8fed4ded48f399656e8d850403"
   }
 }

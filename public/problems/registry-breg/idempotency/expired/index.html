@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Source signature invalid | Registry Stack identifiers</title>
-  <meta name="description" content="The event's signature did not verify.">
+  <title>Gone | Registry Stack identifiers</title>
+  <meta name="description" content="The held response of the idempotency key expired; the key stays spent.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.af73d05e9347816d.css">
@@ -29,10 +29,10 @@
 <main>
 <section class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Problem type · registry-casework</p>
-    <h1>Source signature invalid</h1>
-    <p class="hero-lead">The event's signature did not verify.</p>
-    <p><code class="hero-uri">https://id.registrystack.org/problems/registry-casework/source/signature-invalid</code></p>
+    <p class="eyebrow">Problem type · registry-breg</p>
+    <h1>Gone</h1>
+    <p class="hero-lead">The held response of the idempotency key expired; the key stays spent.</p>
+    <p><code class="hero-uri">https://id.registrystack.org/problems/registry-breg/idempotency/expired</code></p>
   </div>
 </section>
 <div class="record">
@@ -45,14 +45,14 @@
       <h2 id="facts">Defined facts</h2>
 <table class="facts">
       <tbody>
-        <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-casework/source/signature-invalid</code></td></tr>
+        <tr><th>Canonical URI</th><td><code>https://id.registrystack.org/problems/registry-breg/idempotency/expired</code></td></tr>
         <tr><th>Kind</th><td>problem</td></tr>
         <tr><th>Lifecycle status</th><td><span class="status">active</span></td></tr>
         <tr><th>Compatibility line</th><td>v1alpha1</td></tr>
-        <tr><th>Product</th><td>registry-casework</td></tr>
-        <tr><th>Code</th><td><code>source.signature-invalid</code></td></tr>
+        <tr><th>Product</th><td>registry-breg</td></tr>
+        <tr><th>Code</th><td><code>idempotency.expired</code></td></tr>
         <tr><th>Category</th><td><span class="muted">not published</span></td></tr>
-        <tr><th>HTTP statuses</th><td>400</td></tr>
+        <tr><th>HTTP statuses</th><td>410</td></tr>
       </tbody>
     </table>
     </section>
@@ -77,19 +77,19 @@
     <section aria-labelledby="record">
       <h2 id="record">Problem record</h2>
       <pre><code>{
-  &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-casework/source/signature-invalid&quot;,
-  &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-casework/source/signature-invalid&quot;,
+  &quot;id&quot;: &quot;https://id.registrystack.org/problems/registry-breg/idempotency/expired&quot;,
+  &quot;type&quot;: &quot;https://id.registrystack.org/problems/registry-breg/idempotency/expired&quot;,
   &quot;kind&quot;: &quot;problem&quot;,
   &quot;lifecycle_status&quot;: &quot;active&quot;,
   &quot;compatibility_line&quot;: &quot;v1alpha1&quot;,
-  &quot;product&quot;: &quot;registry-casework&quot;,
-  &quot;code&quot;: &quot;source.signature-invalid&quot;,
-  &quot;title&quot;: &quot;Source signature invalid&quot;,
-  &quot;summary&quot;: &quot;The event's signature did not verify.&quot;,
-  &quot;description&quot;: &quot;The event's signature did not verify.&quot;,
+  &quot;product&quot;: &quot;registry-breg&quot;,
+  &quot;code&quot;: &quot;idempotency.expired&quot;,
+  &quot;title&quot;: &quot;Gone&quot;,
+  &quot;summary&quot;: &quot;The held response of the idempotency key expired; the key stays spent.&quot;,
+  &quot;description&quot;: &quot;The held response of the idempotency key expired; the key stays spent.&quot;,
   &quot;category&quot;: null,
   &quot;http_statuses&quot;: [
-    400
+    410
   ],
   &quot;guidance&quot;: {
     &quot;status&quot;: &quot;not_published&quot;,
@@ -116,11 +116,11 @@
   &quot;source_reference&quot;: {
     &quot;repository&quot;: &quot;registry-stack&quot;,
     &quot;commit&quot;: &quot;bc3cca7b3a10715d580e64adc7a1bd4bc0e3fc48&quot;,
-    &quot;path&quot;: &quot;crates/registry-casework/src/problem.rs&quot;,
-    &quot;sha256&quot;: &quot;9e90f5a56d86bd2ddb69c97ed3be979065e7d54f95943dd43a6f4d6c3e5fc70a&quot;
+    &quot;path&quot;: &quot;crates/registry-breg/src/problem.rs&quot;,
+    &quot;sha256&quot;: &quot;3a84ff66d0da16980512526675d323f1c732fb8fed4ded48f399656e8d850403&quot;
   }
 }</code></pre>
-      <p class="machine-link"><a href="https://id.registrystack.org/problems/registry-casework/source/signature-invalid.json">Machine-readable JSON</a></p>
+      <p class="machine-link"><a href="https://id.registrystack.org/problems/registry-breg/idempotency/expired.json">Machine-readable JSON</a></p>
     </section>
 </div>
 </main>
