@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request",
   "type": "https://id.registrystack.org/problems/registry-evidence/evidence/invalid_request",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1",
   "product": "registry-evidence",
   "code": "evidence.invalid_request",

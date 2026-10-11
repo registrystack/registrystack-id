@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "Code": {
+      "description": "A code of 1 to 128 ASCII letters, digits, `.`, `_`, `:`, or `-`, starting with a letter or digit.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+      "type": "string"
+    },
+    "CodelistUri": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ExternalId"
+        }
+      ],
+      "description": "An absolute URI of at most 512 characters, with no whitespace or control character, such as urn:example:codelist:regions.",
+      "format": "uri",
+      "pattern": "^[^\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+$"
+    },
+    "CodelistVersion": {
+      "description": "A version of 1 to 128 characters without control characters, such as '2026-01'.",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    },
+    "ExternalId": {
+      "description": "An identifier another system issues, written exactly as its issuer gives it.",
+      "maxLength": 512,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/evidence/codelist/codelist.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A codelist file as written. The `type` member names its form.",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "description": "An exact code set.",
+      "properties": {
+        "apiVersion": {
+          "const": "id.registrystack.org/formats/evidence/codelist/v1alpha1"
+        },
+        "codes": {
+          "description": "The exact code set.",
+          "items": {
+            "$ref": "#/$defs/Code"
+          },
+          "maxItems": 4096,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "const": "EvidenceCodelist"
+        },
+        "type": {
+          "const": "code-list",
+          "type": "string"
+        },
+        "uri": {
+          "$ref": "#/$defs/CodelistUri",
+          "description": "The absolute URI identifying the codelist; a bucket concept's\n`bucketScheme` names it."
+        },
+        "version": {
+          "$ref": "#/$defs/CodelistVersion",
+          "description": "The codelist version; a referencing concept's `codelistVersion`\nor `schemeVersion` repeats it exactly."
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "type",
+        "uri",
+        "version",
+        "codes"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "description": "An exact mapping from source codes to output codes.",
+      "properties": {
+        "allowedOutputs": {
+          "description": "The output codes the mapping may produce; every `entries` output\nis one of them.",
+          "items": {
+            "$ref": "#/$defs/Code"
+          },
+          "maxItems": 4096,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "apiVersion": {
+          "const": "id.registrystack.org/formats/evidence/codelist/v1alpha1"
+        },
+        "entries": {
+          "additionalProperties": false,
+          "description": "The exact source-to-output mapping.",
+          "maxProperties": 4096,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$": {
+              "$ref": "#/$defs/Code"
+            }
+          },
+          "propertyNames": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/ExternalId"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              }
+            ]
+          },
+          "type": "object"
+        },
+        "kind": {
+          "const": "EvidenceCodelist"
+        },
+        "type": {
+          "const": "mapping",
+          "type": "string"
+        },
+        "uri": {
+          "$ref": "#/$defs/CodelistUri",
+          "description": "The absolute URI identifying the codelist."
+        },
+        "version": {
+          "$ref": "#/$defs/CodelistVersion",
+          "description": "The codelist version; a referencing concept's `codelistVersion`\nrepeats it exactly."
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "type",
+        "uri",
+        "version",
+        "entries",
+        "allowedOutputs"
+      ],
+      "type": "object"
+    }
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/evidence/codelist/v1alpha1"
+    },
+    "kind": {
+      "const": "EvidenceCodelist"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind"
+  ],
+  "title": "Evidence code list",
+  "type": "object",
+  "unevaluatedProperties": false
+}

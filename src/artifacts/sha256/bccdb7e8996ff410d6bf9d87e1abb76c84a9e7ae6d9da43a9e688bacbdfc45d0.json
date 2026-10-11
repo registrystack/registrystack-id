@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/routes-explanation/routes-explanation.v1alpha4.schema.json",
+  "title": "RoutesExplanation",
+  "description": "Wire shape of `explanation` for `bregctl explain routes`. `routes` mixes two record shapes with no shared field beyond the injected `type` discriminator: an entity-route half, which is a passthrough of the compiled route table (CompiledRoute) with `type` injected after serialization, and an action-route half, which bregctl reconstructs field by field. Only the injected `type` and the action half are pinned in full; the entity half's other fields are outside this contract version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "routes"],
+  "$defs": {
+    "DerivedId": {
+      "description": "An identifier the compiler derives from local identifiers: two or more local identifiers joined by `.`. It is never authored.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}(\\.[a-z][a-z0-9_-]{0,63})+$",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/routes-explanation/v1alpha4"
+    },
+    "kind": {
+      "const": "BRegRoutesExplanation"
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Entity route. Passthrough of the compiled route table plus the injected `type`; fields beyond `type` follow CompiledRoute and are outside this contract version.",
+            "x-registry-passthrough": "bregctl writes each entity route as the engine holds it plus the injected type; only type is pinned, and its other members follow CompiledRoute and are outside this contract version.",
+            "additionalProperties": true,
+            "required": ["type"],
+            "properties": {
+              "type": { "const": "entity" }
+            }
+          },
+          {
+            "type": "object",
+            "description": "Action route. Reconstructed field by field by bregctl.",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "id",
+              "actionId",
+              "actionRouteKind",
+              "method",
+              "path",
+              "operation",
+              "accessProfiles",
+              "defaultAccessProfile",
+              "requiresIdempotencyKey"
+            ],
+            "properties": {
+              "type": { "const": "action" },
+              "id": { "$ref": "#/$defs/DerivedId" },
+              "actionId": { "type": "string" },
+              "actionRouteKind": { "enum": ["invoke", "target-conditions"] },
+              "method": { "enum": ["DELETE", "GET", "PATCH", "POST"] },
+              "path": { "type": "string" },
+              "operation": {
+                "enum": [
+                  "create", "get", "lookup", "list", "patch", "tombstone", "batch",
+                  "revisions", "snapshot", "submit-request", "revise-request",
+                  "cancel-request", "apply-request", "invoke"
+                ]
+              },
+              "accessProfiles": { "type": "array", "items": { "type": "string" } },
+              "defaultAccessProfile": { "type": ["string", "null"] },
+              "requiresIdempotencyKey": { "type": "boolean" }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

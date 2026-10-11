@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-evidence/request/selector_invalid",
   "type": "https://id.registrystack.org/problems/registry-evidence/request/selector_invalid",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1",
   "product": "registry-evidence",
   "code": "request.selector_invalid",
