@@ -4,6 +4,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { artifactMediaType } from './artifact-media-types.mjs';
+
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const upstreamArg =
   process.argv[2] ?? process.env.REGISTRY_STACK_DIR ?? '../registry-stack';
@@ -65,6 +67,7 @@ function expectedEntryFields(kind, entry) {
   ];
   if (entry.source) {
     fields.push('artifact_sha256', 'immutable_uri', 'source');
+    if (entry.artifact_media_type) fields.push('artifact_media_type');
   }
   return fields.sort();
 }
@@ -179,6 +182,7 @@ for (const entry of upstreamCatalog.entries) {
     if (
       publisherEntry.source !== expectedSource ||
       publisherEntry.artifact_sha256 !== entry.artifact.sha256 ||
+      artifactMediaType(publisherEntry) !== entry.artifact.mediaType ||
       publisherEntry.immutable_uri !==
         `${baseUrl}/artifacts/sha256/${entry.artifact.sha256}${extension}`
     ) {

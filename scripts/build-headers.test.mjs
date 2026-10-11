@@ -6,6 +6,8 @@ import { extname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
+import { artifactContentType } from './artifact-media-types.mjs';
+
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 
 // Runs the real build into a scratch output directory and returns the
@@ -97,6 +99,7 @@ test('an immutable artifact copy serves the same content type as its canonical U
     for (const entry of entries.filter((candidate) => candidate.immutable_uri)) {
       const canonical = contentTypeFor(rules, new URL(entry.uri).pathname);
       const immutable = contentTypeFor(rules, new URL(entry.immutable_uri).pathname);
+      assert.equal(canonical, artifactContentType(entry));
       assert.equal(immutable, canonical, `${entry.immutable_uri} must serve the ${entry.kind} content type`);
       checked += 1;
     }

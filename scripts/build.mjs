@@ -1,14 +1,24 @@
 import { createHash } from 'node:crypto';
 import {
   cpSync,
+  existsSync,
   mkdirSync,
   readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, extname, relative, resolve } from 'node:path';
+import { basename, dirname, extname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import {
+  artifactContentType,
+  artifactMediaType,
+  bindArtifactMediaType,
+  contentTypeForMediaType,
+  immutableArtifactHeaderRules,
+  parseArtifactMediaTypeBindings,
+} from './artifact-media-types.mjs';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = resolve(repoRoot, process.env.OUTPUT_DIR ?? 'public');
@@ -57,15 +67,12 @@ const productDocumentation = new Map([
 const artifactKinds = {
   schema: {
     noun: 'JSON Schema',
-    contentType: 'application/schema+json; charset=utf-8',
   },
   context: {
     noun: 'JSON-LD context',
-    contentType: 'application/ld+json; charset=utf-8',
   },
   profile: {
     noun: 'profile document',
-    contentType: 'text/markdown; charset=utf-8',
   },
 };
 
@@ -647,15 +654,6 @@ ${renderLinks(docs)}
   );
 }
 
-// Cloudflare Pages `*` in a `_headers` path matches any run of characters,
-// including further path segments.
-function headerPathPattern(path) {
-  const escaped = path
-    .replace(/[.+^${}()|[\]\\]/g, '\\$&')
-    .replace(/\*/g, '.*');
-  return new RegExp(`^${escaped}$`);
-}
-
 function writeStaticControls(artifactEntries) {
   const staticHeaders = [
     {
@@ -704,59 +702,77 @@ function writeStaticControls(artifactEntries) {
       cache: 'public, max-age=86400',
     },
     {
-      path: 'schemas/*.json',
-      contentType: 'application/schema+json; charset=utf-8',
-      cache: 'public, max-age=86400',
-    },
-    {
-      path: 'contexts/*.jsonld',
-      contentType: 'application/ld+json; charset=utf-8',
-      cache: 'public, max-age=86400',
-    },
-    {
-      path: 'artifacts/sha256/*.json',
-      contentType: 'application/schema+json; charset=utf-8',
-      cache: 'public, max-age=31536000, immutable',
-    },
-    {
-      path: 'artifacts/sha256/*.jsonld',
-      contentType: 'application/ld+json; charset=utf-8',
-      cache: 'public, max-age=31536000, immutable',
-    },
-    {
-      path: 'artifacts/sha256/*.md',
-      contentType: 'text/markdown; charset=utf-8',
-      cache: 'public, max-age=31536000, immutable',
-    },
-    {
       path: '.well-known/registrystack-identifiers',
       contentType: 'application/json; charset=utf-8',
       cache: 'public, max-age=300',
     },
   ];
-  // Cloudflare Pages combines every rule that matches a path and joins
-  // repeated header values, so a path already covered by a static rule with
-  // the same headers must not also get an exact rule, or the response would
-  // carry that header twice (e.g. `Access-Control-Allow-Origin: *, *`).
-  function coveredByStaticRule(path, contentType, cache) {
-    return staticHeaders.some(
-      (rule) =>
-        rule.contentType === contentType &&
-        rule.cache === cache &&
-        headerPathPattern(rule.path).test(path),
+  const machineHeaders = [...staticHeaders];
+  const artifactMediaTypesPath = resolve(
+    repoRoot,
+    'src/artifacts/media-types.json',
+  );
+  const immutableMediaTypes = existsSync(artifactMediaTypesPath)
+    ? parseArtifactMediaTypeBindings(
+        JSON.parse(readFileSync(artifactMediaTypesPath, 'utf8')),
+      )
+    : new Map();
+  for (const entry of artifactEntries) {
+    if (!entry.immutable_uri) {
+      continue;
+    }
+    const name = basename(uriToPath(entry.immutable_uri));
+    bindArtifactMediaType(
+      immutableMediaTypes,
+      name,
+      artifactMediaType(entry),
     );
   }
+  machineHeaders.push(
+    ...immutableArtifactHeaderRules(
+      readdirSync(resolve(repoRoot, 'src/artifacts/sha256')),
+      new Map(
+        [...immutableMediaTypes].map(([name, mediaType]) => [
+          name,
+          contentTypeForMediaType(mediaType),
+        ]),
+      ),
+    ),
+  );
 
-  const machineHeaders = [...staticHeaders];
-  // Every published artifact names its own content type: the canonical URI
-  // serves the kind's artifact, and the digest path serves the same bytes
-  // forever, so neither can rely on a wildcard that assumes JSON.
+  // Group canonical file-shaped identifiers only when their product prefix,
+  // extension, content type, and cache policy agree. A mixed group such as
+  // Evidence's JSON and YAML schemas stays exact so neither type shadows the
+  // other, while the grouped rules keep `_headers` comfortably bounded.
+  const canonicalCache = 'public, max-age=86400';
+  const canonicalGroups = new Map();
   for (const entry of artifactEntries) {
     const path = uriToPath(entry.uri);
-    const contentType = artifactKinds[entry.kind].contentType;
-    const cache = 'public, max-age=86400';
-    if (!coveredByStaticRule(path, contentType, cache)) {
-      machineHeaders.push({ path, contentType, cache });
+    const extension = extname(path);
+    const segments = path.split('/');
+    const groupPath = extension && segments.length > 2
+      ? `${segments[0]}/${segments[1]}/*${extension}`
+      : path;
+    const group = canonicalGroups.get(groupPath) ?? [];
+    group.push({ path, contentType: artifactContentType(entry) });
+    canonicalGroups.set(groupPath, group);
+  }
+  for (const [groupPath, entries] of canonicalGroups) {
+    const contentTypes = new Set(entries.map((entry) => entry.contentType));
+    if (contentTypes.size === 1 && groupPath.includes('*')) {
+      machineHeaders.push({
+        path: groupPath,
+        contentType: entries[0].contentType,
+        cache: canonicalCache,
+      });
+      continue;
+    }
+    for (const entry of entries) {
+      machineHeaders.push({
+        path: entry.path,
+        contentType: entry.contentType,
+        cache: canonicalCache,
+      });
     }
   }
 

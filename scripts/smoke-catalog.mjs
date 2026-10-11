@@ -1,8 +1,15 @@
-import { readdirSync, readFileSync } from 'node:fs';
-import { extname, resolve } from 'node:path';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
+
+import {
+  artifactMediaType,
+  artifactMediaTypeForPath,
+  baseMediaType,
+  parseArtifactMediaTypeBindings,
+} from './artifact-media-types.mjs';
 
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const canonicalBaseUrl = 'https://id.registrystack.org';
@@ -62,21 +69,6 @@ function localUrl(uri) {
   return `${baseUrl}${parsed.pathname}${parsed.search}`;
 }
 
-function mediaType(contentType) {
-  return contentType?.split(';', 1)[0].trim().toLowerCase() ?? '';
-}
-
-function expectedArtifactMediaType(path) {
-  switch (extname(path)) {
-    case '.jsonld':
-      return 'application/ld+json';
-    case '.md':
-      return 'text/markdown';
-    default:
-      return 'application/schema+json';
-  }
-}
-
 async function fetchExact(url, expectedPath, expectedMediaType, retrySignal) {
   const requestSignal = retrySignal
     ? AbortSignal.any([retrySignal, AbortSignal.timeout(15_000)])
@@ -98,7 +90,8 @@ async function fetchExact(url, expectedPath, expectedMediaType, retrySignal) {
   if (
     baseUrl === canonicalBaseUrl &&
     expectedMediaType &&
-    mediaType(response.headers.get('content-type')) !== expectedMediaType
+    baseMediaType(response.headers.get('content-type') ?? '') !==
+      baseMediaType(expectedMediaType)
   ) {
     throw new Error(
       `${url} returned ${response.headers.get('content-type')}, expected ${expectedMediaType}`,
@@ -110,7 +103,7 @@ async function checkEntry(entry, retrySignal) {
   const uri = entryUri(entry);
   const path = uriPath(uri);
   if (entry.artifact_sha256) {
-    const expectedMediaType = expectedArtifactMediaType(entry.source);
+    const expectedMediaType = artifactMediaType(entry);
     await fetchExact(localUrl(uri), path, expectedMediaType, retrySignal);
     if (!entry.immutable_uri) {
       throw new Error(`${uri} does not name an immutable artifact URI`);
@@ -234,6 +227,15 @@ if (isMain) {
   const entries = catalogFiles.flatMap(
     (path) => readJson(`src/catalogs/${path}`).entries,
   );
+  const artifactMediaTypesPath = resolve(
+    repoRoot,
+    'src/artifacts/media-types.json',
+  );
+  const artifactMediaTypes = existsSync(artifactMediaTypesPath)
+    ? parseArtifactMediaTypeBindings(
+        JSON.parse(readFileSync(artifactMediaTypesPath, 'utf8')),
+      )
+    : new Map();
   const digestArtifacts = readdirSync(resolve(repoRoot, 'src/artifacts/sha256'))
     .sort()
     .map((name) => ({
@@ -241,7 +243,7 @@ if (isMain) {
       run: (signal) => fetchExact(
         `${baseUrl}/artifacts/sha256/${name}`,
         `artifacts/sha256/${name}`,
-        expectedArtifactMediaType(name),
+        artifactMediaTypes.get(name) ?? artifactMediaTypeForPath(name),
         signal,
       ),
     }));
