@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited",
   "type": "https://id.registrystack.org/problems/registry-evidence/evidence/rate_limited",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1",
   "product": "registry-evidence",
   "code": "evidence.rate_limited",

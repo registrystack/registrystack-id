@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-evidence/evidence/rate-limited",
+  "type": "https://id.registrystack.org/problems/registry-evidence/evidence/rate-limited",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1",
+  "product": "registry-evidence",
+  "code": "evidence.rate-limited",
+  "title": "Evidence request rate is exhausted",
+  "summary": "the Evidence request rate is exhausted",
+  "description": "the Evidence request rate is exhausted",
+  "category": null,
+  "http_statuses": [
+    429
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "e11c0b6d4538b8df2e4b506d49e335fe522c5c74",
+    "path": "crates/registry-evidence/src/problem.rs",
+    "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
+  }
+}

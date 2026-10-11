@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/access-preview/access-preview.v1alpha4.schema.json",
+  "title": "AccessPreview",
+  "description": "Wire shape of `explanation` for `bregctl explain access --scenario <file>`. The offline synthetic-admission result is a small hand-written struct and is pinned in full, except `effectiveProfile`, which is a passthrough of a compiled access profile and is declared opaque.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "mode",
+    "admitted",
+    "reason",
+    "recordAccess",
+    "credentialsVerified",
+    "authorityIssued",
+    "rowValuesDisclosed",
+    "effectiveProfile",
+    "recipients"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/access-preview/v1alpha4"
+    },
+    "kind": {
+      "const": "BRegAccessPreview"
+    },
+    "mode": { "const": "offline-synthetic" },
+    "admitted": { "type": "boolean" },
+    "reason": { "type": "string" },
+    "recordAccess": { "const": "not-evaluated" },
+    "credentialsVerified": { "type": "boolean" },
+    "authorityIssued": { "type": "boolean" },
+    "rowValuesDisclosed": { "type": "boolean" },
+    "effectiveProfile": {
+      "type": ["object", "null"],
+      "description": "Passthrough of the compiled access profile the scenario resolved to, or null when no profile matched. Shape follows AccessProfileSource and is outside this contract version.",
+      "x-registry-passthrough": "bregctl writes the resolved access profile as the engine holds it; its shape follows AccessProfileSource and is outside this contract version."
+    },
+    "recipients": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "The consent recipients the scenario's requesterClient acts for: its organization plus every group containing it. Empty for an absent or unmapped client, which fails every consent check closed."
+    }
+  }
+}

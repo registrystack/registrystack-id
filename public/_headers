@@ -99,12 +99,122 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/discovery/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/access-client/access-client.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/access-policy/access-policy.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/authoring-project/authoring-project.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/bundle/bundle.v1.schema.json
+  Content-Type: application/yaml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/client-contracts/client-contracts.v1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/client-profile/client-profile.v1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/codelist/codelist.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/fixture/fixture.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/holder-bound-verification-policy/holder-bound-verification-policy.v1.schema.json
+  Content-Type: application/yaml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/mock-plan/mock-plan.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/oid4vci-runtime/oid4vci-runtime.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/question/question.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/runtime/runtime.v1alpha1.schema.json
+  Content-Type: application/yaml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/selector/selector.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/source-resolution/source-resolution.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/source/source.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/target-governance/target-governance.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/target-settings/target-settings.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/verification-policy/verification-policy.v1.schema.json
+  Content-Type: application/yaml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/identifiers/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/manifest/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/messaging/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/platform/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
@@ -125,6 +235,11 @@
   Cache-Control: public, max-age=86400
 
 /schemas/registry-relay/audit-event/v2alpha2
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/render/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400

@@ -1,0 +1,1621 @@
+{
+  "$defs": {
+    "AllowedClients": {
+      "anyOf": [
+        {
+          "const": "unrestricted",
+          "description": "Accept a token from every client.",
+          "type": "string"
+        },
+        {
+          "description": "Accept a token only from a listed client.",
+          "items": {
+            "maxLength": 512,
+            "minLength": 1,
+            "pattern": "^[^\\x00-\\x20\\x7F]+$",
+            "type": "string"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      ],
+      "description": "The OAuth clients whose tokens a runtime accepts: the keyword\n`unrestricted`, or a list of at least one client."
+    },
+    "AuditDestinationKind": {
+      "description": "The configured audit destination kind, as written in product configuration.",
+      "oneOf": [
+        {
+          "const": "file",
+          "description": "Durable, rotated JSON Lines file.",
+          "type": "string"
+        },
+        {
+          "const": "stdout",
+          "description": "One JSON line per entry on standard output, flushed per entry.",
+          "type": "string"
+        }
+      ]
+    },
+    "ClaimName": {
+      "description": "The name of one top-level claim of an access token. The reader accepts any\ntext; the runtime then refuses a name that is not a valid claim name, one\nthat repeats another contextual name, and one that is a registered or\nauthentication claim.",
+      "type": "string"
+    },
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "restricted"
+      ],
+      "type": "string"
+    },
+    "Digest": {
+      "description": "A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "EnvironmentSecretProviderConfig": {
+      "additionalProperties": false,
+      "description": "The environment secret provider. It takes no settings.",
+      "type": "object"
+    },
+    "EventDestinationDnsFamily": {
+      "enum": [
+        "dual-stack-strict",
+        "ipv4-only"
+      ],
+      "type": "string"
+    },
+    "EventDestinationNetworkProfile": {
+      "enum": [
+        "production-https",
+        "loopback-development-http"
+      ],
+      "type": "string"
+    },
+    "EvidencePrivateKeyJwtConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "assertionAudience": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "privateKeyRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "scopes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tokenEndpoint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tokenEndpoint",
+        "clientId",
+        "privateKeyRef"
+      ],
+      "type": "object"
+    },
+    "EvidenceProviderConfig": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "tokenRef"
+          ]
+        },
+        {
+          "required": [
+            "privateKeyJwt"
+          ]
+        }
+      ],
+      "properties": {
+        "baseUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "The Evidence service's base URL. It is `https`; `http` is accepted\nonly for a loopback host, for local development."
+        },
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "PEM CA bundle for the Evidence service and its token endpoint.\nOmitted, the platform's trusted roots verify them."
+        },
+        "privateKeyJwt": {
+          "$ref": "#/$defs/EvidencePrivateKeyJwtConfig",
+          "description": "The refreshing credential: a private-key JWT client exchange.\nExactly one of `tokenRef` and `privateKeyJwt` is written."
+        },
+        "revokedKeyIds": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tokenRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Compatibility path for a pre-issued token. Long-running providers\nshould configure `privateKeyJwt` so expiry triggers a fresh exchange.\nExactly one of `tokenRef` and `privateKeyJwt` is written."
+        },
+        "trustBindingId": {
+          "type": "string"
+        },
+        "trustedJwksRef": {
+          "$ref": "#/$defs/SecretReference"
+        }
+      },
+      "required": [
+        "baseUrl",
+        "trustBindingId",
+        "trustedJwksRef"
+      ],
+      "type": "object"
+    },
+    "ExternalId": {
+      "description": "An identifier another system issues, written exactly as its issuer gives it.",
+      "maxLength": 512,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    },
+    "FileSecretProviderConfig": {
+      "additionalProperties": false,
+      "description": "The file secret provider.",
+      "properties": {
+        "root": {
+          "description": "Absolute directory holding one file per secret. Each file must be a\nregular file owned by the runtime user, mode 0400 or 0600, with exactly\none hard link.",
+          "pattern": "^/",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root"
+      ],
+      "type": "object"
+    },
+    "JwksSource": {
+      "description": "Where a runtime obtains the OIDC issuer's signing keys.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "Read `jwks_uri` from the issuer's OpenID Connect discovery document.",
+          "properties": {
+            "type": {
+              "const": "discovery",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.",
+          "properties": {
+            "type": {
+              "const": "uri",
+              "type": "string"
+            },
+            "uri": {
+              "$ref": "#/$defs/Url"
+            }
+          },
+          "required": [
+            "type",
+            "uri"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Read the key set from a secret, for deployments without network access\nto the issuer.",
+          "properties": {
+            "documentRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "type": {
+              "const": "static",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "documentRef"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "ListenerBind": {
+      "description": "Socket address the runtime listens on, written host:port with an IP address host ([addr]:port for IPv6).",
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "OidcAlgorithm": {
+      "enum": [
+        "EdDSA",
+        "ES256",
+        "ES384",
+        "RS256",
+        "RS384"
+      ],
+      "type": "string"
+    },
+    "RawAttachmentStorageConfig": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "database",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "accessKeyIdRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "attemptTimeoutMilliseconds": {
+              "default": 10000,
+              "format": "uint64",
+              "maximum": 60000,
+              "minimum": 100,
+              "type": "integer"
+            },
+            "bucket": {
+              "maxLength": 63,
+              "minLength": 3,
+              "type": "string"
+            },
+            "caBundleRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "endpoint": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "pathStyle": {
+              "default": true,
+              "type": "boolean"
+            },
+            "region": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secretAccessKeyRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "sessionTokenRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "type": {
+              "const": "s3",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "endpoint",
+            "bucket",
+            "region",
+            "accessKeyIdRef",
+            "secretAccessKeyRef"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "RawAttachmentVerificationConfig": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "disabled",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "attemptTimeoutMilliseconds": {
+              "default": 10000,
+              "format": "uint64",
+              "maximum": 60000,
+              "minimum": 100,
+              "type": "integer"
+            },
+            "authorizationRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "endpoint": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "policyId": {
+              "description": "Non-secret identity of the external scanner and rules generation.",
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x7E]+$",
+              "type": "string"
+            },
+            "type": {
+              "const": "http",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "endpoint",
+            "authorizationRef",
+            "policyId"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "RawAuditConfig": {
+      "additionalProperties": false,
+      "description": "The key for the keyed references an audit record carries in place of raw\nidentifiers, written `audit.hashKeyRef` beside the product's own audit\nsettings.",
+      "else": {
+        "properties": {
+          "path": {
+            "pattern": "^/+(?:(?:[^/.][^/]*|\\.(?:[^/.][^/]*|\\.[^/]+)?)/+)*(?:[^/.][^/]*|\\.(?:[^/.][^/]*|\\.[^/]+))$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "if": {
+        "properties": {
+          "destination": {
+            "const": "stdout"
+          }
+        },
+        "required": [
+          "destination"
+        ]
+      },
+      "properties": {
+        "destination": {
+          "$ref": "#/$defs/AuditDestinationKind",
+          "default": "file",
+          "description": "`file` (the default) writes a durable, rotated JSON Lines file at\n`path`; `stdout` writes one JSON line per entry to standard output."
+        },
+        "hashKeyRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the audit hash key."
+        },
+        "path": {
+          "description": "Absolute path of the active audit file. Required for, and accepted\nonly with, the `file` destination; omitted with `stdout`.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "description": "Days a rotated file is retained, accepted only with the `file`\ndestination. Omitted, a rotated file is retained for 90 days.",
+          "format": "uint32",
+          "maximum": 36500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rotateBytes": {
+          "description": "Size in bytes at which the active file rotates, accepted only with the\n`file` destination. Omitted, the file rotates at 100 MiB.",
+          "format": "uint64",
+          "maximum": 4294967295,
+          "minimum": 1048576,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "hashKeyRef"
+      ],
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "path"
+              ]
+            },
+            {
+              "required": [
+                "rotateBytes"
+              ]
+            },
+            {
+              "required": [
+                "retentionDays"
+              ]
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "RawAuthenticationConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "authorityClaims": {
+          "$ref": "#/$defs/RawAuthorityClaimsConfig"
+        },
+        "oidc": {
+          "$ref": "#/$defs/RawOidcVerifierConfig"
+        }
+      },
+      "required": [
+        "oidc",
+        "authorityClaims"
+      ],
+      "type": "object"
+    },
+    "RawAuthorityClaimsConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "contextual": {
+          "$ref": "#/$defs/RawContextualClaimNames",
+          "default": {
+            "actorKind": "registry_actor_kind",
+            "approver": "registry_approver",
+            "grantBounds": "registry_grant_bounds",
+            "grantClient": "registry_grant_client",
+            "grantExp": "registry_grant_exp",
+            "grantId": "registry_grant_id",
+            "grantResource": "registry_grant_resource",
+            "grantSourceIssuer": "registry_grant_source_issuer",
+            "purpose": "registry_purpose"
+          },
+          "description": "The claim names that carry delegated-authority context. Each name\ndefaults to its `registry_` claim; written, every name is given."
+        },
+        "principal": {
+          "maxLength": 128,
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "iss",
+              "aud",
+              "exp",
+              "iat",
+              "nbf",
+              "client_id",
+              "azp",
+              "jti",
+              "cnf"
+            ]
+          },
+          "pattern": "^[\\x21-\\x7E]+$",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 128,
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "iss",
+              "aud",
+              "exp",
+              "iat",
+              "nbf",
+              "sub",
+              "client_id",
+              "azp",
+              "jti",
+              "cnf"
+            ]
+          },
+          "pattern": "^[\\x21-\\x7E]+$",
+          "type": "string"
+        },
+        "trustedActors": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "propertyNames": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "principal"
+      ],
+      "type": "object"
+    },
+    "RawContextualClaimNames": {
+      "additionalProperties": false,
+      "properties": {
+        "actorKind": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "approver": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantBounds": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantClient": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantExp": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantId": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantResource": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "grantSourceIssuer": {
+          "$ref": "#/$defs/ClaimName"
+        },
+        "purpose": {
+          "$ref": "#/$defs/ClaimName"
+        }
+      },
+      "required": [
+        "actorKind",
+        "purpose",
+        "grantId",
+        "grantSourceIssuer",
+        "grantClient",
+        "grantResource",
+        "grantExp",
+        "grantBounds",
+        "approver"
+      ],
+      "type": "object"
+    },
+    "RawCursorConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "maximumAgeSeconds": {
+          "default": 300,
+          "description": "Defaults to the bounded cursor validity lifetime.",
+          "format": "uint64",
+          "maximum": 86400,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "secretRef": {
+          "$ref": "#/$defs/SecretReference"
+        }
+      },
+      "required": [
+        "secretRef"
+      ],
+      "type": "object"
+    },
+    "RawDeploymentIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "databaseId": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1F\\x7F](?:[^\\x00-\\x1F\\x7F]*[^\\s\\x00-\\x1F\\x7F])?$",
+          "type": "string"
+        },
+        "databaseInitializationEnvironment": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1F\\x7F](?:[^\\x00-\\x1F\\x7F]*[^\\s\\x00-\\x1F\\x7F])?$",
+          "type": "string"
+        },
+        "environment": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1F\\x7F](?:[^\\x00-\\x1F\\x7F]*[^\\s\\x00-\\x1F\\x7F])?$",
+          "type": "string"
+        },
+        "instanceId": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "environment",
+        "instanceId",
+        "databaseId",
+        "databaseInitializationEnvironment"
+      ],
+      "type": "object"
+    },
+    "RawEventDeliveryConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "payloadRetentionDays": {
+          "default": 7,
+          "description": "Defaults to the bounded retained payload lifetime for pending or dead-letter webhook work.",
+          "format": "uint32",
+          "maximum": 30,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RawEventDestinationConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "allowedPrivateCidrs": {
+          "description": "Explicitly allowed private network ranges in canonical CIDR notation.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "classificationCeiling": {
+          "$ref": "#/$defs/Classification",
+          "description": "Highest permitted classification, including fields used only in event conditions."
+        },
+        "deliveryCeilings": {
+          "$ref": "#/$defs/RawEventDestinationDeliveryCeilings",
+          "description": "Per-destination limits that may tighten, but never increase, the compiled delivery limits."
+        },
+        "dnsFamily": {
+          "$ref": "#/$defs/EventDestinationDnsFamily",
+          "description": "Address families to validate when resolving the destination."
+        },
+        "hmacSha256KeyRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Runtime secret reference for the receiver's shared HMAC-SHA-256 key."
+        },
+        "networkProfile": {
+          "$ref": "#/$defs/EventDestinationNetworkProfile",
+          "description": "HTTPS for production, or explicit loopback-only HTTP for local development."
+        },
+        "origin": {
+          "description": "Receiver origin without a path or query, such as `https://receiver.example.com`.",
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "description": "Absolute request path on the configured origin, such as `/events`.",
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^/[\\x20-\\x22\\x24\\x26-\\x3E\\x40-\\x5B\\x5D-\\x7E]*$",
+          "type": "string"
+        },
+        "tls": {
+          "$ref": "#/$defs/RawEventDestinationTlsConfig",
+          "description": "Optional private CA and client identity secret references for HTTPS."
+        }
+      },
+      "required": [
+        "origin",
+        "path",
+        "networkProfile",
+        "dnsFamily",
+        "allowedPrivateCidrs",
+        "hmacSha256KeyRef",
+        "classificationCeiling",
+        "deliveryCeilings"
+      ],
+      "type": "object"
+    },
+    "RawEventDestinationDeliveryCeilings": {
+      "additionalProperties": false,
+      "properties": {
+        "attemptTimeoutMilliseconds": {
+          "description": "Maximum time allowed for one attempt, in milliseconds.",
+          "format": "uint32",
+          "maximum": 5000,
+          "minimum": 100,
+          "type": "integer"
+        },
+        "maximumAttempts": {
+          "description": "Maximum total attempts in one delivery generation, including the first attempt.",
+          "format": "uint32",
+          "maximum": 5,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "attemptTimeoutMilliseconds",
+        "maximumAttempts"
+      ],
+      "type": "object"
+    },
+    "RawEventDestinationTlsConfig": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "caBundleRef"
+          ]
+        },
+        {
+          "required": [
+            "clientIdentityRef"
+          ]
+        }
+      ],
+      "properties": {
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "PEM CA bundle secret reference, when the receiver uses a private\ncertificate authority. Omitted, the platform's trusted roots verify\nthe receiver. At least one of `caBundleRef` and `clientIdentityRef`\nis written."
+        },
+        "clientIdentityRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "PEM client identity secret reference for mutual TLS. Omitted, the\nregistry presents no client certificate."
+        }
+      },
+      "type": "object"
+    },
+    "RawFieldEncryptionConfig": {
+      "additionalProperties": false,
+      "description": "Raw `fieldEncryption` deployment block, absent by default.",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/RawFieldEncryptionProvider"
+        }
+      },
+      "type": "object"
+    },
+    "RawFieldEncryptionProvider": {
+      "description": "Raw provider binding; the `type` member selects the custodian.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "attemptTimeoutMilliseconds": {
+              "default": 5000,
+              "format": "uint64",
+              "maximum": 30000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "keyName": {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            "mount": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": {
+              "const": "transit",
+              "type": "string"
+            },
+            "unixSocketPath": {
+              "maxLength": 4096,
+              "minLength": 2,
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "unixSocketPath",
+            "mount",
+            "keyName"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "dekRef": {
+              "$ref": "#/$defs/SecretReference",
+              "description": "The data encryption key, named by a `secret:file/NAME` reference;\nan environment reference is refused."
+            },
+            "type": {
+              "const": "local-file",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "dekRef"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "RawIdempotencyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "receiptRetentionDays": {
+          "default": 7,
+          "description": "Days a held response is kept after its commit. A retry after it is\nrefused as expired and never executed; the key stays spent.",
+          "format": "uint32",
+          "maximum": 365,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RawJwksCacheConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "attemptTimeoutMilliseconds": {
+          "default": 5000,
+          "description": "Defaults to the bounded JWKS fetch timeout.",
+          "format": "uint64",
+          "maximum": 30000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cacheTtlSeconds": {
+          "default": 600,
+          "description": "Defaults to the bounded JWKS cache time-to-live.",
+          "format": "uint64",
+          "maximum": 86400,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "maximumDocumentBytes": {
+          "default": 65536,
+          "description": "Defaults to the bounded maximum JWKS document size.",
+          "format": "uint64",
+          "maximum": 1048576,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "negativeCacheTtlSeconds": {
+          "default": 60,
+          "description": "Defaults to the bounded JWKS negative-cache time-to-live.",
+          "format": "uint64",
+          "maximum": 3600,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "outageToleranceSeconds": {
+          "default": 900,
+          "description": "Defaults to the bounded cached-key outage tolerance.",
+          "format": "uint64",
+          "maximum": 86400,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "refreshCooldownSeconds": {
+          "default": 30,
+          "description": "Defaults to the bounded JWKS refresh cooldown.",
+          "format": "uint64",
+          "maximum": 3600,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RawMetricsListenerConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind",
+          "description": "Operator-private loopback or private numeric address and named port,\nfor example `127.0.0.1:9100`."
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
+    },
+    "RawOidcVerifierConfig": {
+      "additionalProperties": false,
+      "description": "The OIDC issuer a runtime accepts access tokens from: the exact `iss`\nvalue, the `aud` value a token must carry, and where the issuer's signing\nkeys come from, written under `authentication.oidc` beside the product's\nown token rules.",
+      "properties": {
+        "accessTokenType": {
+          "description": "The one admitted access-token `typ` semantics. Configuring the\nRFC 9068 access-token media type as `at+jwt` or\n`application/at+jwt` admits both spellings of that one type; any\nother value (for example `JWT`) admits only that token type, matched\ncase-insensitively.",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1F\\x7F](?:[^\\x00-\\x1F\\x7F]*[^\\s\\x00-\\x1F\\x7F])?$",
+          "type": "string"
+        },
+        "allowedAlgorithm": {
+          "$ref": "#/$defs/OidcAlgorithm"
+        },
+        "allowedClients": {
+          "$ref": "#/$defs/AllowedClients",
+          "description": "The OAuth clients whose tokens this registry accepts: `unrestricted`\nto accept a token from every client, or a list of at least one\nclient."
+        },
+        "assertionIssuers": {
+          "additionalProperties": {
+            "items": {
+              "maxLength": 512,
+              "minLength": 1,
+              "pattern": "^[^\\x00-\\x20\\x7F]+$",
+              "type": "string"
+            },
+            "maxItems": 128,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "description": "The assertion authorities each client may exchange a subject token\nfrom, keyed by client identifier. Omitted, no assertion-issuer rule\napplies; written, it lists at least one client, each with at least one\nauthority, and a client not listed may exchange from no authority.",
+          "maxProperties": 128,
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/ExternalId",
+            "maxLength": 512,
+            "minLength": 1,
+            "pattern": "^[^\\x00-\\x20\\x7F]+$"
+          },
+          "type": "object"
+        },
+        "audience": {
+          "description": "The audience every accepted access token must carry in `aud`.",
+          "maxLength": 512,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1F\\x7F](?:[^\\x00-\\x1F\\x7F]*[^\\s\\x00-\\x1F\\x7F])?$",
+          "type": "string"
+        },
+        "deniedKids": {
+          "description": "The signing key identifiers this registry refuses a token from.\nOmitted, no key is denied; written, it names at least one key.",
+          "items": {
+            "maxLength": 512,
+            "minLength": 1,
+            "pattern": "^[^\\x00-\\x20\\x7F]+$",
+            "type": "string"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "issuer": {
+          "$ref": "#/$defs/Url",
+          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL.",
+          "maxLength": 2048,
+          "minLength": 1
+        },
+        "jwksCache": {
+          "$ref": "#/$defs/RawJwksCacheConfig",
+          "default": {
+            "attemptTimeoutMilliseconds": 5000,
+            "cacheTtlSeconds": 600,
+            "maximumDocumentBytes": 65536,
+            "negativeCacheTtlSeconds": 60,
+            "outageToleranceSeconds": 900,
+            "refreshCooldownSeconds": 30
+          },
+          "description": "Optional JWKS fetch and cache tuning. Defaults to bounded cache behavior."
+        },
+        "jwksSource": {
+          "$ref": "#/$defs/JwksSource",
+          "description": "Where the issuer's signing keys come from. Absent reads the issuer's\nOpenID Connect discovery document."
+        },
+        "leewayMilliseconds": {
+          "format": "uint64",
+          "maximum": 300000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "maximumTokenLifetimeSeconds": {
+          "format": "uint64",
+          "maximum": 7200,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "scopeClaim": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[\\x21-\\x7E]+$",
+          "type": "string"
+        },
+        "scopeSeparator": {
+          "maxLength": 1,
+          "minLength": 1,
+          "pattern": "^[^A-Za-z0-9\\x00-\\x1F\\x7F]$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuer",
+        "audience",
+        "allowedAlgorithm",
+        "accessTokenType",
+        "scopeClaim",
+        "scopeSeparator",
+        "allowedClients",
+        "maximumTokenLifetimeSeconds",
+        "leewayMilliseconds"
+      ],
+      "type": "object"
+    },
+    "RawOperationalTimeouts": {
+      "additionalProperties": false,
+      "properties": {
+        "httpRequestMilliseconds": {
+          "default": 10000,
+          "description": "Defaults to the bounded per-request HTTP timeout.",
+          "format": "uint64",
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "migrationLockMilliseconds": {
+          "default": 30000,
+          "description": "Defaults to the bounded migration lock timeout.",
+          "format": "uint64",
+          "maximum": 300000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "migrationStatementMilliseconds": {
+          "default": 60000,
+          "description": "Defaults to the bounded migration statement timeout.",
+          "format": "uint64",
+          "maximum": 3600000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "recordLockMilliseconds": {
+          "default": 5000,
+          "description": "Defaults to the bounded record lock timeout.",
+          "format": "uint64",
+          "maximum": 30000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "shutdownGraceMilliseconds": {
+          "default": 30000,
+          "description": "Defaults to the bounded graceful-shutdown timeout.",
+          "format": "uint64",
+          "maximum": 300000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RawPackageConfig": {
+      "additionalProperties": false,
+      "description": "The package a runtime serves: `root` is the absolute package directory,\nand `expectedDigest`, when set, pins the package digest the runtime must\nfind there. The package digest is the digest of the package's\n`SHA256SUMS` file; see [`crate::package`].",
+      "properties": {
+        "expectedDigest": {
+          "$ref": "#/$defs/Digest",
+          "description": "`sha256:` label of the package digest, the digest of the package's\n`SHA256SUMS` file. When set, the runtime refuses to start on any other\npackage."
+        },
+        "root": {
+          "description": "Absolute path of the package directory.",
+          "maxLength": 512,
+          "minLength": 1,
+          "pattern": "^/",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root"
+      ],
+      "type": "object"
+    },
+    "RawPoolBounds": {
+      "additionalProperties": false,
+      "properties": {
+        "createTimeoutMilliseconds": {
+          "default": 30000,
+          "description": "Defaults to the bounded PostgreSQL pool connection-creation timeout.",
+          "format": "uint64",
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "maximumConnections": {
+          "format": "uint32",
+          "maximum": 128,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "recycleTimeoutMilliseconds": {
+          "default": 30000,
+          "description": "Defaults to the bounded PostgreSQL pool connection-recycle timeout.",
+          "format": "uint64",
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "waitTimeoutMilliseconds": {
+          "default": 30000,
+          "description": "Defaults to the bounded PostgreSQL pool wait timeout.",
+          "format": "uint64",
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maximumConnections"
+      ],
+      "type": "object"
+    },
+    "RawRegistryDatabase": {
+      "additionalProperties": false,
+      "description": "The registry's database: the shared database block and the connection\npool and SQL roles the registry adds.",
+      "properties": {
+        "migrationUrlRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the migration connection URL."
+        },
+        "pool": {
+          "$ref": "#/$defs/RawPoolBounds"
+        },
+        "roles": {
+          "$ref": "#/$defs/RawSqlRoles"
+        },
+        "runtimeUrlRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the least-privileged runtime connection URL."
+        },
+        "testOnlyPlaintext": {
+          "default": false,
+          "description": "Allow a plaintext connection. Refused outside test builds.",
+          "type": "boolean"
+        },
+        "trustedRootCertificateRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
+        }
+      },
+      "required": [
+        "runtimeUrlRef",
+        "migrationUrlRef",
+        "pool",
+        "roles"
+      ],
+      "type": "object"
+    },
+    "RawRegistryListener": {
+      "additionalProperties": false,
+      "description": "The registry's listener: the shared listener block and an optional public\norigin.",
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind"
+        },
+        "publicOrigin": {
+          "$ref": "#/$defs/Url",
+          "description": "Canonical public origin for QGIS discovery and pagination links, with\nan optional deployment path prefix such as\n`https://registry.example.org/breg`. It is `https`; `http` is accepted\nonly for a loopback host, for local development. Required when the\nregistry exposes GIS collections; omitted, the registry builds no\nabsolute discovery or paging links."
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
+    },
+    "RawReviewAuthorityConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "completionRecipient": {
+          "description": "The logical recipient the review authority names in each completion\nnotification. Written together with `completionTokenRef`; omitted, no\ncompletion notification is accepted and the registry polls for\nresults.",
+          "type": "string"
+        },
+        "completionTokenRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "The bearer token the review authority presents when it notifies this\nregistry that a review completed. Written together with\n`completionRecipient`; omitted, no completion notification is\naccepted and the registry polls for results."
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "privateKeyJwt": {
+          "$ref": "#/$defs/RawReviewPrivateKeyJwtConfig",
+          "description": "A refreshing client-assertion credential for the review service.\nExactly one of `tokenRef` and `privateKeyJwt` is written."
+        },
+        "producerId": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "recoveryDays": {
+          "format": "uint32",
+          "maximum": 3650,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "tokenRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "A static bearer token for the review service. Exactly one of\n`tokenRef` and `privateKeyJwt` is written."
+        }
+      },
+      "required": [
+        "endpoint",
+        "profile",
+        "producerId",
+        "recoveryDays"
+      ],
+      "type": "object"
+    },
+    "RawReviewExecutorConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "accessProfile": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "privateKeyJwt": {
+          "$ref": "#/$defs/RawReviewPrivateKeyJwtConfig",
+          "description": "A refreshing client-assertion credential for the executing registry.\nExactly one of `tokenRef` and `privateKeyJwt` is written."
+        },
+        "registryId": {
+          "type": "string"
+        },
+        "tokenRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "A static bearer token for the executing registry. Exactly one of\n`tokenRef` and `privateKeyJwt` is written."
+        }
+      },
+      "required": [
+        "endpoint",
+        "registryId",
+        "accessProfile"
+      ],
+      "type": "object"
+    },
+    "RawReviewPrivateKeyJwtConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "assertionAudience": {
+          "type": "string"
+        },
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "A PEM bundle of the roots that sign the token endpoint's certificate.\nOmitted, the platform's trusted roots verify it."
+        },
+        "clientAssertionKeyRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "clientIdRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "scopes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tokenEndpoint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tokenEndpoint",
+        "clientIdRef",
+        "clientAssertionKeyRef",
+        "assertionAudience",
+        "resource",
+        "scopes"
+      ],
+      "type": "object"
+    },
+    "RawSqlRoles": {
+      "additionalProperties": false,
+      "properties": {
+        "migration": {
+          "maxLength": 63,
+          "minLength": 1,
+          "pattern": "^[_a-z][_a-z0-9]{0,62}$",
+          "type": "string"
+        },
+        "runtime": {
+          "maxLength": 63,
+          "minLength": 1,
+          "pattern": "^[_a-z][_a-z0-9]{0,62}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "migration",
+        "runtime"
+      ],
+      "type": "object"
+    },
+    "RawWasmExecutionConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "default": "pulley",
+          "description": "The backend handler modules are compiled and executed for: `pulley`\n(default, the portable interpreter target) or `native`. Any other\nvalue is refused as an invalid `wasmExecution` section.",
+          "type": "string"
+        },
+        "maximumGuestMemoryBytes": {
+          "default": 33554432,
+          "description": "Defaults to the platform guest-memory ceiling (32 MiB).",
+          "format": "uint64",
+          "maximum": 1073741824,
+          "minimum": 1048576,
+          "type": "integer"
+        },
+        "maximumModuleBytes": {
+          "default": 2097152,
+          "description": "Defaults to the default execution-time module ceiling (2 MiB); the\nstructural admission ceiling (5 MiB) is operator-reachable here.",
+          "format": "uint64",
+          "maximum": 5242880,
+          "minimum": 1024,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SecretProvidersConfig": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "file": {
+              "$ref": "#/$defs/FileSecretProviderConfig"
+            }
+          },
+          "required": [
+            "file"
+          ]
+        },
+        {
+          "properties": {
+            "environment": {
+              "$ref": "#/$defs/EnvironmentSecretProviderConfig"
+            }
+          },
+          "required": [
+            "environment"
+          ]
+        }
+      ],
+      "description": "The secret providers a runtime enables. A reference is resolved only by a\nprovider declared here: `secret:file/name` under `file.root`, and\n`secret:env/NAME` only when `environment: {}` is present.",
+      "properties": {
+        "environment": {
+          "$ref": "#/$defs/EnvironmentSecretProviderConfig",
+          "description": "Enables `secret:env/NAME` references, read from the process\nenvironment. Declared as an empty mapping: `environment: {}`."
+        },
+        "file": {
+          "$ref": "#/$defs/FileSecretProviderConfig",
+          "description": "Enables `secret:file/name` references, read from files under `root`."
+        }
+      },
+      "type": "object"
+    },
+    "SecretReference": {
+      "description": "An exact secret reference: secret:file/name, resolved under secretProviders.file.root, or secret:env/NAME, resolved only when secretProviders.environment is declared.",
+      "pattern": "^(?:secret:env/[A-Z][A-Z0-9_]{0,127}|secret:file/[a-z][a-z0-9._-]{0,127})$",
+      "type": "string"
+    },
+    "TaskGrantStatusConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "baseUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "The Casework base URL the status check calls. It is `https`; `http`\nis accepted only for a loopback host, for local development."
+        },
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "PEM CA bundle for Casework and its token endpoint. Omitted, the\nplatform's trusted roots verify them."
+        },
+        "caseworkResource": {
+          "type": "string"
+        },
+        "clientAssertionAudience": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "privateKeyRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "sourceIssuer": {
+          "$ref": "#/$defs/Url",
+          "description": "The Casework task authority's issuer, exactly as Casework states it.\n`http` and `https` are both accepted, since the value is compared, not\nfetched."
+        },
+        "tokenEndpoint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceIssuer",
+        "baseUrl",
+        "tokenEndpoint",
+        "clientAssertionAudience",
+        "clientId",
+        "privateKeyRef",
+        "caseworkResource"
+      ],
+      "type": "object"
+    },
+    "Url": {
+      "description": "An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+([/?#][^\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]*)?$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/breg/runtime/runtime.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/runtime/v1alpha1",
+      "type": "string"
+    },
+    "attachmentStorage": {
+      "$ref": "#/$defs/RawAttachmentStorageConfig",
+      "default": {
+        "type": "database"
+      },
+      "description": "Defaults to PostgreSQL; S3 requires a bucket with versioning never enabled."
+    },
+    "attachmentVerification": {
+      "$ref": "#/$defs/RawAttachmentVerificationConfig",
+      "default": {
+        "type": "disabled"
+      },
+      "description": "Optional external verdict hook. Disabled by default."
+    },
+    "audit": {
+      "$ref": "#/$defs/RawAuditConfig"
+    },
+    "authentication": {
+      "$ref": "#/$defs/RawAuthenticationConfig"
+    },
+    "cursor": {
+      "$ref": "#/$defs/RawCursorConfig"
+    },
+    "database": {
+      "$ref": "#/$defs/RawRegistryDatabase"
+    },
+    "eventDelivery": {
+      "$ref": "#/$defs/RawEventDeliveryConfig",
+      "default": {
+        "payloadRetentionDays": 7
+      },
+      "description": "Optional event-delivery tuning. Defaults to the server's bounded retention policy."
+    },
+    "eventDestinations": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RawEventDestinationConfig"
+      },
+      "maxProperties": 128,
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "evidenceProviders": {
+      "additionalProperties": {
+        "$ref": "#/$defs/EvidenceProviderConfig"
+      },
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "fieldEncryption": {
+      "$ref": "#/$defs/RawFieldEncryptionConfig",
+      "default": {},
+      "description": "Optional field-encryption data-key provider. Absent by default, which\nserves unencrypted entities only."
+    },
+    "idempotency": {
+      "$ref": "#/$defs/RawIdempotencyConfig",
+      "default": {
+        "receiptRetentionDays": 7
+      },
+      "description": "Optional idempotency tuning. Defaults to a seven-day receipt horizon."
+    },
+    "identity": {
+      "$ref": "#/$defs/RawDeploymentIdentity"
+    },
+    "kind": {
+      "const": "BRegRuntimeConfig",
+      "type": "string"
+    },
+    "listener": {
+      "$ref": "#/$defs/RawRegistryListener"
+    },
+    "metricsListener": {
+      "$ref": "#/$defs/RawMetricsListenerConfig",
+      "description": "Optional operator-private metrics listener. Absent by default, which\nserves no metrics surface at all."
+    },
+    "operationalTimeouts": {
+      "$ref": "#/$defs/RawOperationalTimeouts",
+      "default": {
+        "httpRequestMilliseconds": 10000,
+        "migrationLockMilliseconds": 30000,
+        "migrationStatementMilliseconds": 60000,
+        "recordLockMilliseconds": 5000,
+        "shutdownGraceMilliseconds": 30000
+      },
+      "description": "Optional operational request, shutdown, locking, and migration timeout tuning."
+    },
+    "package": {
+      "$ref": "#/$defs/RawPackageConfig"
+    },
+    "reviewAuthorities": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RawReviewAuthorityConfig"
+      },
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "reviewExecutors": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RawReviewExecutorConfig"
+      },
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "secretProviders": {
+      "$ref": "#/$defs/SecretProvidersConfig"
+    },
+    "taskGrantStatus": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TaskGrantStatusConfig"
+      },
+      "type": "array"
+    },
+    "wasmExecution": {
+      "$ref": "#/$defs/RawWasmExecutionConfig",
+      "default": {
+        "backend": "pulley",
+        "maximumGuestMemoryBytes": 33554432,
+        "maximumModuleBytes": 2097152
+      },
+      "description": "Optional WASM handler execution budgets. Parsed in every build;\nexecuted only in builds with the `wasm` cargo feature, on by default."
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "listener",
+    "identity",
+    "secretProviders",
+    "database",
+    "package",
+    "authentication",
+    "audit",
+    "cursor"
+  ],
+  "title": "Base Registry Engine runtime configuration",
+  "type": "object"
+}
