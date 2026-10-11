@@ -1,9 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import { validateArtifactMediaType } from './artifact-media-types.mjs';
+
 import {
   assertSupportedKind,
+  bindEntryArtifactMediaType,
   catalogFileForKind,
+  identifierEntry,
   mergeCatalog,
   parseArguments,
 } from './import-registry-stack-catalog.mjs';
@@ -20,6 +24,90 @@ test('catalog import requires an explicit full source commit', () => {
     'a'.repeat(40),
   ]);
   assert.equal(parsed.revision, 'a'.repeat(40));
+});
+
+test('catalog import retains a non-default artifact media type', () => {
+  const entry = identifierEntry(
+    {
+      uri: 'https://id.registrystack.org/schemas/example/v1.schema.json',
+      kind: 'schema',
+      status: 'active',
+      compatibilityLine: 'v1',
+      owner: 'example',
+      title: 'Example schema',
+      description: 'Example YAML schema.',
+      source: { path: 'example.schema.yaml', sha256: 'a'.repeat(64) },
+      artifact: {
+        path: 'example.schema.yaml',
+        sha256: 'a'.repeat(64),
+        mediaType: 'application/yaml',
+      },
+    },
+    'b'.repeat(40),
+    `src/artifacts/sha256/${'a'.repeat(64)}.yaml`,
+  );
+  assert.equal(entry.artifact_media_type, 'application/yaml');
+});
+
+test('catalog import refuses an unsafe artifact media type', () => {
+  assert.throws(
+    () => validateArtifactMediaType('application/yaml\nCache-Control: public'),
+    /invalid artifact media type/,
+  );
+});
+
+test('artifact type binding survives when a canonical URI advances to a new digest', () => {
+  const canonicalUri =
+    'https://id.registrystack.org/schemas/example/v1.schema.json';
+  const oldDigest = 'a'.repeat(64);
+  const newDigest = 'b'.repeat(64);
+  const oldEntry = {
+    uri: canonicalUri,
+    kind: 'schema',
+    status: 'active',
+    source: `src/artifacts/sha256/${oldDigest}.json`,
+    artifact_sha256: oldDigest,
+    artifact_media_type: 'application/example+json; profile=old',
+  };
+  const newEntry = {
+    uri: canonicalUri,
+    kind: 'schema',
+    status: 'active',
+    source: `src/artifacts/sha256/${newDigest}.json`,
+    artifact_sha256: newDigest,
+  };
+  const bindings = new Map();
+  bindEntryArtifactMediaType(bindings, oldEntry);
+  const merged = mergeCatalog([oldEntry], [newEntry], 'schema');
+  bindEntryArtifactMediaType(bindings, newEntry);
+
+  assert.equal(merged.length, 1);
+  assert.equal(merged[0].source, newEntry.source);
+  assert.equal(
+    bindings.get(`${oldDigest}.json`),
+    'application/example+json; profile=old',
+  );
+  assert.equal(bindings.get(`${newDigest}.json`), 'application/schema+json');
+});
+
+test('artifact type binding refuses conflicting metadata for one immutable URI', () => {
+  const digest = 'c'.repeat(64);
+  const bindings = new Map();
+  bindEntryArtifactMediaType(bindings, {
+    kind: 'schema',
+    source: `src/artifacts/sha256/${digest}.json`,
+    artifact_sha256: digest,
+  });
+  assert.throws(
+    () =>
+      bindEntryArtifactMediaType(bindings, {
+        kind: 'schema',
+        source: `src/artifacts/sha256/${digest}.json`,
+        artifact_sha256: digest,
+        artifact_media_type: 'application/example+json',
+      }),
+    /conflicting media types/,
+  );
 });
 
 test('catalog merge preserves identifiers absent from the current source catalog', () => {

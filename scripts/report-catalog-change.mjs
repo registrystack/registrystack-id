@@ -34,6 +34,7 @@ function comparable(entry) {
     compatibility_line: entry.compatibility_line,
     code: entry.code,
     http_statuses: entry.http_statuses,
+    artifact_media_type: entry.artifact_media_type,
     source_path: entry.source_reference?.path,
     source_sha256: entry.source_reference?.sha256,
   };

@@ -11,6 +11,8 @@ import { join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
+import { artifactMediaType } from './artifact-media-types.mjs';
+
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const publicDir = resolve(repoRoot, 'public');
 const tempDir = mkdtempSync(join(tmpdir(), 'registrystack-id-'));
@@ -66,6 +68,7 @@ function expectedEntryFields(kind, entry) {
   ];
   if (entry.source) {
     fields.push('artifact_sha256', 'immutable_uri', 'source');
+    if (entry.artifact_media_type) fields.push('artifact_media_type');
   }
   return fields.sort();
 }
@@ -141,9 +144,10 @@ function checkCatalogBindings() {
     if (entry.artifact) {
       if (
         !current.source ||
-        digest(resolve(repoRoot, current.source)) !== entry.artifact.sha256
+        digest(resolve(repoRoot, current.source)) !== entry.artifact.sha256 ||
+        artifactMediaType(current) !== entry.artifact.mediaType
       ) {
-        throw new Error(`published artifact digest differs for ${entry.uri}`);
+        throw new Error(`published artifact binding differs for ${entry.uri}`);
       }
     }
   }

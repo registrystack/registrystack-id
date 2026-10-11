@@ -34,8 +34,8 @@ Published identifiers are stable contracts.
   identifiers and documentation pointers, not a parsing interface.
 - Keep generated static files in sync with `src/catalogs/`.
 - Publish imported schema, context, and profile bytes at their canonical URI
-  and at an immutable SHA-256 artifact URI, each served with the content type
-  its kind defines.
+  and at an immutable SHA-256 artifact URI, each served with the artifact media
+  type the exact Registry Stack catalog declares.
 - Resolve Relay V2's authored `vocab/core/<field>` predicates to the governed
   core vocabulary record. The record states that child terms are adopter-owned
   and that resolution does not register or review a child term.
@@ -81,6 +81,10 @@ Import the catalog and artifacts from an exact Registry Stack commit:
 ```sh
 npm run import:catalog -- ../registry-stack --source-revision <full-commit>
 ```
+
+The import is the only writer of `src/artifacts/media-types.json`. That file
+keeps the exact media type for every retained digest-addressed artifact, even
+after its canonical URI advances to newer bytes.
 
 Verify the vendored catalog against a checkout of that same commit:
 

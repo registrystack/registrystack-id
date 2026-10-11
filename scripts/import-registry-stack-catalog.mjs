@@ -9,10 +9,19 @@ import {
 import { dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import {
+  artifactMediaType,
+  artifactMediaTypeBindingsDocument,
+  artifactMediaTypeOverride,
+  bindArtifactMediaType,
+  parseArtifactMediaTypeBindings,
+} from './artifact-media-types.mjs';
+
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const baseUrl = 'https://id.registrystack.org';
 const catalogPath = 'products/identifiers/generated/catalog.v1.json';
 const sourceRepository = 'https://github.com/registrystack/registry-stack';
+const artifactMediaTypesPath = 'src/artifacts/media-types.json';
 
 function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex');
@@ -111,7 +120,16 @@ function historicalSourceReference(entry, commit, catalogFile, catalogBytes) {
   };
 }
 
-function retainHistoricalArtifact(entry, commit) {
+export function bindEntryArtifactMediaType(bindings, entry) {
+  if (!entry.source || !entry.artifact_sha256) return;
+  bindArtifactMediaType(
+    bindings,
+    entry.source.replace(/^src\/artifacts\/sha256\//, ''),
+    artifactMediaType(entry),
+  );
+}
+
+function retainHistoricalArtifact(kind, entry, commit, artifactMediaTypes) {
   if (!entry.source) return undefined;
   let bytes;
   try {
@@ -134,10 +152,25 @@ function retainHistoricalArtifact(entry, commit) {
   } else {
     writeFileSync(target, bytes);
   }
+  bindArtifactMediaType(
+    artifactMediaTypes,
+    source.replace(/^src\/artifacts\/sha256\//, ''),
+    artifactMediaType({
+      kind,
+      artifact_media_type: entry.artifact_media_type,
+    }),
+  );
   return { source, digest };
 }
 
-function normalizeHistoricalEntry(kind, entry, commit, catalogFile, catalogBytes) {
+function normalizeHistoricalEntry(
+  kind,
+  entry,
+  commit,
+  catalogFile,
+  catalogBytes,
+  artifactMediaTypes,
+) {
   const sourceReference = historicalSourceReference(
     entry,
     commit,
@@ -161,7 +194,12 @@ function normalizeHistoricalEntry(kind, entry, commit, catalogFile, catalogBytes
     };
   }
 
-  const retained = retainHistoricalArtifact(entry, commit);
+  const retained = retainHistoricalArtifact(
+    kind,
+    entry,
+    commit,
+    artifactMediaTypes,
+  );
   const normalized = {
     uri: entry.uri,
     title: entry.title,
@@ -175,13 +213,14 @@ function normalizeHistoricalEntry(kind, entry, commit, catalogFile, catalogBytes
   if (retained) {
     normalized.source = retained.source;
     normalized.artifact_sha256 = retained.digest;
+    normalized.artifact_media_type = entry.artifact_media_type;
     normalized.immutable_uri =
       `${baseUrl}/${retained.source.replace(/^src\//, '')}`;
   }
   return normalized;
 }
 
-function publishedHistory(kind, catalogFile) {
+function publishedHistory(kind, catalogFile, artifactMediaTypes) {
   let commits;
   try {
     commits = gitText(repoRoot, 'log', '--format=%H', '--', catalogFile)
@@ -210,6 +249,7 @@ function publishedHistory(kind, catalogFile) {
         commit,
         catalogFile,
         catalogBytes,
+        artifactMediaTypes,
       );
       if (!entries.has(uri)) {
         entries.set(uri, normalized);
@@ -293,7 +333,7 @@ function problemEntry(entry, revision) {
   };
 }
 
-function identifierEntry(entry, revision, artifactSource) {
+export function identifierEntry(entry, revision, artifactSource) {
   return {
     uri: entry.uri,
     title: entry.title,
@@ -305,6 +345,9 @@ function identifierEntry(entry, revision, artifactSource) {
     source: artifactSource,
     source_reference: sourceReference(entry, revision),
     artifact_sha256: entry.artifact?.sha256,
+    artifact_media_type: entry.artifact
+      ? artifactMediaTypeOverride(entry.kind, entry.artifact.mediaType)
+      : undefined,
     immutable_uri: artifactSource
       ? `${baseUrl}/${artifactSource.replace(/^src\//, '')}`
       : undefined,
@@ -383,14 +426,20 @@ export function importCatalog(stackRoot, revision) {
   }
   validateSourceBindings(stackRoot, resolvedRevision, catalog.entries);
 
+  const artifactMediaTypes = existsSync(resolve(repoRoot, artifactMediaTypesPath))
+    ? parseArtifactMediaTypeBindings(readJson(artifactMediaTypesPath))
+    : new Map();
   const previous = {};
   const imported = {};
   for (const [kind, file] of Object.entries(catalogFiles)) {
     const current = existsSync(resolve(repoRoot, file))
       ? readJson(file).entries
       : [];
+    for (const entry of current) {
+      bindEntryArtifactMediaType(artifactMediaTypes, entry);
+    }
     const byUri = new Map(current.map((entry) => [uriForEntry(entry, kind), entry]));
-    for (const historical of publishedHistory(kind, file)) {
+    for (const historical of publishedHistory(kind, file, artifactMediaTypes)) {
       const uri = uriForEntry(historical, kind);
       if (!byUri.has(uri)) byUri.set(uri, historical);
     }
@@ -408,6 +457,13 @@ export function importCatalog(stackRoot, revision) {
     const artifactSource = entry.artifact
       ? writeImmutableArtifact(stackRoot, resolvedRevision, entry)
       : undefined;
+    if (artifactSource) {
+      bindArtifactMediaType(
+        artifactMediaTypes,
+        artifactSource.replace(/^src\/artifacts\/sha256\//, ''),
+        entry.artifact.mediaType,
+      );
+    }
     imported[entry.kind].push(
       identifierEntry(entry, resolvedRevision, artifactSource),
     );
@@ -436,6 +492,10 @@ export function importCatalog(stackRoot, revision) {
     catalog_path: catalogPath,
     catalog_sha256: sha256(catalogBytes),
   });
+  writeJson(
+    artifactMediaTypesPath,
+    artifactMediaTypeBindingsDocument(artifactMediaTypes),
+  );
   return { revision: resolvedRevision, count: catalog.entries.length };
 }
 
