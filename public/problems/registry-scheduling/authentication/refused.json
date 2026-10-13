@@ -37,7 +37,7 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "9a5f52958c5baf5554310789e3914ecd47c5a903",
+    "commit": "a695de15d303837e18d603064d7038c77819ffcd",
     "path": "crates/registry-scheduling-core/src/problem.rs",
     "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
   }
