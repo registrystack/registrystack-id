@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-scheduling/receipt/unresolved",
+  "type": "https://id.registrystack.org/problems/registry-scheduling/receipt/unresolved",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-scheduling",
+  "code": "receipt.unresolved",
+  "title": "Original receipt unresolved",
+  "summary": "No retained success receipt matches this caller, key, and original request. The original outcome remains unknown; this is not evidence that no effect occurred.",
+  "description": "No retained success receipt matches this caller, key, and original request. The original outcome remains unknown; this is not evidence that no effect occurred.",
+  "category": null,
+  "http_statuses": [
+    409
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "9a5f52958c5baf5554310789e3914ecd47c5a903",
+    "path": "crates/registry-scheduling-core/src/problem.rs",
+    "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
+  }
+}
