@@ -1,0 +1,771 @@
+{
+  "$defs": {
+    "AuditConfig": {
+      "additionalProperties": false,
+      "description": "The audit journal: where it is written and the key its hashes use.",
+      "else": {
+        "required": [
+          "path"
+        ]
+      },
+      "if": {
+        "properties": {
+          "destination": {
+            "const": "stdout"
+          }
+        },
+        "required": [
+          "destination"
+        ]
+      },
+      "properties": {
+        "destination": {
+          "$ref": "#/$defs/AuditDestinationKind",
+          "default": "file",
+          "description": "Where audit entries go: a rotated `file` (the default) or `stdout`."
+        },
+        "hashKeyRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the audit hash key."
+        },
+        "path": {
+          "description": "The active audit file. Required for, and only allowed with, `file`.",
+          "pattern": "^/+(?:(?:[^/.][^/]*|\\.(?:[^/.][^/]*|\\.[^/]+)?)/+)*(?:[^/.][^/]*|\\.(?:[^/.][^/]*|\\.[^/]+))$",
+          "type": "string"
+        },
+        "retentionDays": {
+          "description": "Delete rotated files older than this many days. Only allowed with\n`file`; omitted, rotated files are kept 90 days.",
+          "format": "uint32",
+          "maximum": 36500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rotateBytes": {
+          "description": "Rotate the active file once it reaches this many bytes. Only allowed\nwith `file`; omitted, the file rotates at 100 MiB.",
+          "format": "uint64",
+          "maximum": 4294967295,
+          "minimum": 1048576,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "hashKeyRef"
+      ],
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "path"
+              ]
+            },
+            {
+              "required": [
+                "rotateBytes"
+              ]
+            },
+            {
+              "required": [
+                "retentionDays"
+              ]
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "AuditDestinationKind": {
+      "description": "The configured audit destination kind, as written in product configuration.",
+      "oneOf": [
+        {
+          "const": "file",
+          "description": "Durable, rotated JSON Lines file.",
+          "type": "string"
+        },
+        {
+          "const": "stdout",
+          "description": "One JSON line per entry on standard output, flushed per entry.",
+          "type": "string"
+        }
+      ]
+    },
+    "AuthenticationConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "oidc": {
+          "$ref": "#/$defs/OidcConfig"
+        }
+      },
+      "required": [
+        "oidc"
+      ],
+      "type": "object"
+    },
+    "BregBinding": {
+      "additionalProperties": false,
+      "description": "Environment-specific transport and reader identity. Human display always replaces it.",
+      "properties": {
+        "baseUrl": {
+          "$ref": "#/$defs/Url"
+        },
+        "clientAssertionAudience": {
+          "type": "string"
+        },
+        "clientAssertionKeyRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "clientIdRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "scopes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "statusProfile": {
+          "type": "string"
+        },
+        "tokenEndpoint": {
+          "$ref": "#/$defs/Url"
+        }
+      },
+      "required": [
+        "baseUrl",
+        "statusProfile",
+        "tokenEndpoint",
+        "clientIdRef",
+        "clientAssertionKeyRef"
+      ],
+      "type": "object"
+    },
+    "DatabaseConfig": {
+      "additionalProperties": false,
+      "description": "The PostgreSQL connection a stateful runtime uses. Both URLs are secret\nreferences and may name the same secret.",
+      "properties": {
+        "migrationUrlRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the migration connection URL."
+        },
+        "runtimeUrlRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to the least-privileged runtime connection URL."
+        },
+        "testOnlyPlaintext": {
+          "default": false,
+          "description": "Allow a plaintext connection. Refused outside test builds.",
+          "type": "boolean"
+        },
+        "trustedRootCertificateRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
+        }
+      },
+      "required": [
+        "runtimeUrlRef",
+        "migrationUrlRef"
+      ],
+      "type": "object"
+    },
+    "Digest": {
+      "description": "A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "EnvironmentSecretProviderConfig": {
+      "additionalProperties": false,
+      "description": "The environment secret provider. It takes no settings.",
+      "type": "object"
+    },
+    "ExternalId": {
+      "description": "An identifier another system issues, written exactly as its issuer gives it.",
+      "maxLength": 512,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    },
+    "FileSecretProviderConfig": {
+      "additionalProperties": false,
+      "description": "The file secret provider.",
+      "properties": {
+        "root": {
+          "description": "Absolute directory holding one file per secret. Each file must be a\nregular file owned by the runtime user, mode 0400 or 0600, with exactly\none hard link.",
+          "pattern": "^/",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root"
+      ],
+      "type": "object"
+    },
+    "HumanIdentityConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "claim": {
+          "default": "registry_actor_kind",
+          "type": "string"
+        },
+        "value": {
+          "default": "human",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentityConfig": {
+      "additionalProperties": false,
+      "description": "The logical identity of the database this deployment activates packages\nin. It is chosen by the operator (for example `casework-production`) and\nnever derived from a URL or a PostgreSQL database name. The first\n`caseworkctl apply` records it, and every later apply and every startup\nrefuses a database whose recorded identity differs.",
+      "properties": {
+        "databaseId": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f \\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000](?:[^\\u0000-\\u001f\\u007f-\\u009f]*[^\\u0000-\\u001f\\u007f-\\u009f \\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000])?$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseId"
+      ],
+      "type": "object"
+    },
+    "JwksSource": {
+      "description": "Where a runtime obtains the OIDC issuer's signing keys.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "Read `jwks_uri` from the issuer's OpenID Connect discovery document.",
+          "properties": {
+            "type": {
+              "const": "discovery",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.",
+          "properties": {
+            "type": {
+              "const": "uri",
+              "type": "string"
+            },
+            "uri": {
+              "$ref": "#/$defs/Url"
+            }
+          },
+          "required": [
+            "type",
+            "uri"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Read the key set from a secret, for deployments without network access\nto the issuer.",
+          "properties": {
+            "documentRef": {
+              "$ref": "#/$defs/SecretReference"
+            },
+            "type": {
+              "const": "static",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "documentRef"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "ListenerBind": {
+      "description": "Socket address the runtime listens on, written host:port with an IP address host ([addr]:port for IPv6).",
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "ListenerNetworkExposure": {
+      "description": "The operator-declared private network placement of an HTTP listener.",
+      "enum": [
+        "private-address",
+        "container-private"
+      ],
+      "type": "string"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "MetricsListenerConfig": {
+      "additionalProperties": false,
+      "description": "Operator-private listener for `/metrics` and `/version`.\n\nIt is separate from the API listener so the counters and the active\npackage digest never appear on the surface the public contract describes.",
+      "properties": {
+        "bind": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
+    },
+    "OidcAllowedClients": {
+      "anyOf": [
+        {
+          "const": "unrestricted",
+          "description": "Admit a token from every client the issuer verifies.",
+          "type": "string"
+        },
+        {
+          "description": "Admit a token only from a listed client.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      ],
+      "description": "How `allowedClients` is written (CFG-EMPTY-2): the keyword `unrestricted`,\nor a list of at least one client. An empty list is refused, because it\nreads as both \"none\" and \"any\"."
+    },
+    "OidcConfig": {
+      "additionalProperties": false,
+      "description": "The access tokens this runtime accepts: the issuer and its keys, the\nclients admitted, the scope claim, and the claim that marks a human actor.",
+      "properties": {
+        "allowedClients": {
+          "$ref": "#/$defs/OidcAllowedClients",
+          "description": "The OAuth clients whose access tokens are admitted: `unrestricted` to\nadmit a token from every client the issuer verifies, or a list of at\nleast one distinct client. A runtime decides whether `unrestricted`\nis acceptable in production."
+        },
+        "assertionIssuers": {
+          "additionalProperties": {
+            "items": {
+              "maxLength": 512,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 16,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "description": "Assertion authorities each client may exchange a subject token from,\nkeyed by client identifier. Omitted, no assertion-issuer rule applies;\nwritten, it lists at least one client, each with at least one\nauthority. Once a client is listed, a token it exchanged is accepted\nonly for one of that client's declared authorities, and a client that\nis not listed may exchange from no authority.",
+          "maxProperties": 64,
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/ExternalId",
+            "maxLength": 128
+          },
+          "type": "object"
+        },
+        "audience": {
+          "description": "The audience every accepted access token must carry in `aud`.",
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "humanIdentity": {
+          "$ref": "#/$defs/HumanIdentityConfig"
+        },
+        "issuer": {
+          "$ref": "#/$defs/Url",
+          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL."
+        },
+        "jwksSource": {
+          "$ref": "#/$defs/JwksSource",
+          "default": {
+            "type": "discovery"
+          },
+          "description": "Where the issuer's signing keys come from. Absent reads the issuer's\nOpenID Connect discovery document."
+        },
+        "scopeClaim": {
+          "default": "registry_scopes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuer",
+        "audience",
+        "allowedClients"
+      ],
+      "type": "object"
+    },
+    "PrivateListenerConfig": {
+      "additionalProperties": false,
+      "description": "The listener of a runtime that declares its TLS termination and network\nexposure.",
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind"
+        },
+        "networkExposure": {
+          "$ref": "#/$defs/ListenerNetworkExposure",
+          "default": "private-address"
+        },
+        "tlsTermination": {
+          "$ref": "#/$defs/TlsTermination"
+        }
+      },
+      "required": [
+        "bind",
+        "tlsTermination"
+      ],
+      "type": "object"
+    },
+    "ReviewCompletionAuthConfig": {
+      "additionalProperties": false,
+      "description": "How a completion destination presents its secret. Without `header` the\nsecret is sent as `Authorization: Bearer`; with one, the raw secret is the\nvalue of that header and no `Authorization` header is sent.",
+      "properties": {
+        "header": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[!#$%&'*+.^_`|~0-9A-Za-z-]+$",
+          "type": "string"
+        },
+        "secretRef": {
+          "$ref": "#/$defs/SecretReference"
+        }
+      },
+      "required": [
+        "secretRef"
+      ],
+      "type": "object"
+    },
+    "ReviewCompletionRuntimeConfig": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "bearerTokenRef"
+          ]
+        },
+        {
+          "required": [
+            "auth"
+          ]
+        }
+      ],
+      "properties": {
+        "attemptTimeoutMilliseconds": {
+          "default": 5000,
+          "format": "uint64",
+          "maximum": 30000,
+          "minimum": 100,
+          "type": "integer"
+        },
+        "auth": {
+          "$ref": "#/$defs/ReviewCompletionAuthConfig"
+        },
+        "bearerTokenRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Shorthand for `auth` with no header: the secret is presented as\n`Authorization: Bearer`. Exactly one of this and `auth` is configured."
+        },
+        "maximumAttempts": {
+          "default": 12,
+          "format": "uint32",
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "retryDelaySeconds": {
+          "default": 30,
+          "format": "uint64",
+          "maximum": 86400,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
+    "RuntimePackageConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "expectedDigest": {
+          "$ref": "#/$defs/Digest",
+          "description": "`sha256:` label of the package digest, the digest of the package's\n`SHA256SUMS` file. When set, the runtime refuses to start on any other\npackage, and on an authored project that has no `SHA256SUMS`.\nOmitted, the runtime starts on whichever package `root` holds."
+        },
+        "root": {
+          "description": "Absolute path of the package directory.",
+          "pattern": "^/",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root"
+      ],
+      "type": "object"
+    },
+    "SecretProvidersConfig": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "file": {
+              "$ref": "#/$defs/FileSecretProviderConfig"
+            }
+          },
+          "required": [
+            "file"
+          ]
+        },
+        {
+          "properties": {
+            "environment": {
+              "$ref": "#/$defs/EnvironmentSecretProviderConfig"
+            }
+          },
+          "required": [
+            "environment"
+          ]
+        }
+      ],
+      "description": "The secret providers a runtime enables. A reference is resolved only by a\nprovider declared here: `secret:file/name` under `file.root`, and\n`secret:env/NAME` only when `environment: {}` is present.",
+      "properties": {
+        "environment": {
+          "$ref": "#/$defs/EnvironmentSecretProviderConfig",
+          "description": "Enables `secret:env/NAME` references, read from the process\nenvironment. Declared as an empty mapping: `environment: {}`."
+        },
+        "file": {
+          "$ref": "#/$defs/FileSecretProviderConfig",
+          "description": "Enables `secret:file/name` references, read from files under `root`."
+        }
+      },
+      "type": "object"
+    },
+    "SecretReference": {
+      "description": "An exact secret reference: secret:file/name, resolved under secretProviders.file.root, or secret:env/NAME, resolved only when secretProviders.environment is declared.",
+      "pattern": "^(?:secret:env/[A-Z][A-Z0-9_]{0,127}|secret:file/[a-z][a-z0-9._-]{0,127})$",
+      "type": "string"
+    },
+    "TaskAuthorityConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "exchangeAudience": {
+          "type": "string"
+        },
+        "issuer": {
+          "$ref": "#/$defs/Url"
+        },
+        "signingKeyRef": {
+          "$ref": "#/$defs/SecretReference"
+        },
+        "statusClients": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Service client IDs mapped to their one protected resource audience.",
+          "propertyNames": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "issuer",
+        "exchangeAudience",
+        "signingKeyRef",
+        "statusClients"
+      ],
+      "type": "object"
+    },
+    "TlsTermination": {
+      "description": "Declares the trusted transport boundary for a runtime's plaintext HTTP\nlistener. Production listeners require operator-controlled upstream TLS\ntermination; direct plaintext is limited to the explicit loopback-only\ndevelopment mode.",
+      "enum": [
+        "operator-controlled-upstream",
+        "development-loopback"
+      ],
+      "type": "string"
+    },
+    "Url": {
+      "description": "An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+([/?#][^\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]*)?$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/casework/runtime/runtime.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authentication": {
+            "properties": {
+              "oidc": {
+                "properties": {
+                  "jwksSource": {
+                    "properties": {
+                      "documentRef": {
+                        "pattern": "^secret:env/"
+                      }
+                    },
+                    "required": [
+                      "documentRef"
+                    ]
+                  }
+                },
+                "required": [
+                  "jwksSource"
+                ]
+              }
+            },
+            "required": [
+              "oidc"
+            ]
+          }
+        },
+        "required": [
+          "authentication"
+        ]
+      },
+      "then": {
+        "properties": {
+          "secretProviders": {
+            "properties": {
+              "environment": {
+                "$ref": "#/$defs/EnvironmentSecretProviderConfig"
+              }
+            },
+            "required": [
+              "environment"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authentication": {
+            "properties": {
+              "oidc": {
+                "properties": {
+                  "jwksSource": {
+                    "properties": {
+                      "documentRef": {
+                        "pattern": "^secret:file/"
+                      }
+                    },
+                    "required": [
+                      "documentRef"
+                    ]
+                  }
+                },
+                "required": [
+                  "jwksSource"
+                ]
+              }
+            },
+            "required": [
+              "oidc"
+            ]
+          }
+        },
+        "required": [
+          "authentication"
+        ]
+      },
+      "then": {
+        "properties": {
+          "secretProviders": {
+            "properties": {
+              "file": {
+                "$ref": "#/$defs/FileSecretProviderConfig"
+              }
+            },
+            "required": [
+              "file"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/casework/runtime/v1alpha1",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/AuditConfig"
+    },
+    "authentication": {
+      "$ref": "#/$defs/AuthenticationConfig"
+    },
+    "contextProviders": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BregBinding"
+      },
+      "default": {},
+      "description": "Provider transport bindings keyed by the deploymentRef `casework.yaml` declares.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "database": {
+      "$ref": "#/$defs/DatabaseConfig"
+    },
+    "identity": {
+      "$ref": "#/$defs/IdentityConfig"
+    },
+    "kind": {
+      "const": "CaseworkRuntimeConfig",
+      "type": "string"
+    },
+    "listener": {
+      "$ref": "#/$defs/PrivateListenerConfig"
+    },
+    "metricsListener": {
+      "$ref": "#/$defs/MetricsListenerConfig"
+    },
+    "package": {
+      "$ref": "#/$defs/RuntimePackageConfig"
+    },
+    "reviewCompletionDestinations": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ReviewCompletionRuntimeConfig"
+      },
+      "description": "Completion destinations keyed by the destination id a review producer\nnames in `casework.yaml`, kept as written.",
+      "propertyNames": {
+        "$ref": "#/$defs/ExternalId"
+      },
+      "type": "object"
+    },
+    "secretProviders": {
+      "$ref": "#/$defs/SecretProvidersConfig"
+    },
+    "taskAuthority": {
+      "$ref": "#/$defs/TaskAuthorityConfig"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "identity",
+    "package",
+    "listener",
+    "secretProviders",
+    "database",
+    "authentication",
+    "audit"
+  ],
+  "title": "Registry Casework runtime configuration",
+  "type": "object"
+}

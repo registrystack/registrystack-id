@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/model-explanation/model-explanation.v1alpha5.schema.json",
+  "title": "ModelExplanation",
+  "description": "Wire shape of the native compiled model inspector and module closure.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "registryId",
+    "version",
+    "moduleOrder",
+    "moduleClosure",
+    "revision",
+    "recordTypes",
+    "actions",
+    "statisticalDatasets",
+    "display",
+    "reviewAuthorities"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/model-explanation/v1alpha5"
+    },
+    "kind": {
+      "const": "BRegModelExplanation"
+    },
+    "registryId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "moduleOrder": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "moduleClosure": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "digest",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "digest": {
+            "$ref": "#/$defs/Digest"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revision": {
+      "$ref": "#/$defs/Digest"
+    },
+    "recordTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "apiName",
+          "revision",
+          "display",
+          "fields",
+          "relationships",
+          "sourceModule",
+          "primaryDataset",
+          "route",
+          "mutationMode",
+          "mutationPolicy",
+          "classification",
+          "canonicalId",
+          "tombstone",
+          "batch",
+          "temporal",
+          "geojson",
+          "accessLog",
+          "constraints",
+          "indexes",
+          "selectorProfiles",
+          "readPaths",
+          "hooks",
+          "derivedRelations"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "revision": {
+            "$ref": "#/$defs/Digest"
+          },
+          "mutationMode": {
+            "enum": [
+              "mutable",
+              "create-only"
+            ]
+          },
+          "mutationPolicy": {
+            "type": "object",
+            "additionalProperties": {
+              "const": "proposal-required"
+            },
+            "propertyNames": {
+              "$ref": "#/$defs/LocalId"
+            }
+          },
+          "classification": {
+            "enum": [
+              "public",
+              "internal",
+              "restricted"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "apiName",
+                "schema",
+                "fieldType",
+                "required",
+                "classification"
+              ],
+              "properties": {
+                "fieldType": {
+                  "type": "object",
+                  "x-registry-passthrough": "The compiled FieldTypeSource, as in query field summaries; its internal shape follows the engine's field type contract."
+                }
+              },
+              "x-registry-passthrough": "Normalized logical field schema and effective classification; compiler-owned metadata."
+            }
+          },
+          "readPaths": {
+            "type": "object",
+            "x-registry-passthrough": "Compiler-resolved read paths, separate from relationship edges."
+          },
+          "hooks": {
+            "type": "object",
+            "x-registry-passthrough": "Compiled hook declarations, with empty condition tests omitted."
+          }
+        },
+        "x-registry-passthrough": "Source-free normalized definition owned by the compiler; identity and revision are pinned here."
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "revision",
+          "execution",
+          "inputs",
+          "plan",
+          "bounds"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "revision": {
+            "$ref": "#/$defs/Digest"
+          }
+        },
+        "x-registry-passthrough": "Source-free normalized definition owned by the compiler; identity and revision are pinned here."
+      }
+    },
+    "statisticalDatasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "unitEntityId",
+          "population",
+          "period",
+          "dimensions",
+          "disclosure"
+        ],
+        "x-registry-passthrough": "Normalized compiled statistical dataset inventory, including authority requirements; no source bytes."
+      }
+    },
+    "display": {
+      "$ref": "#/$defs/Display"
+    },
+    "reviewAuthorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "protocol",
+          "display"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "protocol": {
+            "const": "id.registrystack.org/protocols/review/v1"
+          },
+          "display": {
+            "$ref": "#/$defs/Display"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Digest": {
+      "description": "A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "Display": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "titleField": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

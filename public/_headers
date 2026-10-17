@@ -89,12 +89,22 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
 
+/contracts/breg/proposal-event/v1
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/breg/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
 /schemas/casework/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/coordinator/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
@@ -159,6 +169,11 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/evidence/project/project.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/evidence/question/question.v1alpha1.schema.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
@@ -184,12 +199,22 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/evidence/target-authority/target-authority.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/evidence/target-governance/target-governance.v1alpha1.schema.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
 /schemas/evidence/target-settings/target-settings.v1alpha1.schema.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/schemas/evidence/target/target.v1alpha1.schema.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400

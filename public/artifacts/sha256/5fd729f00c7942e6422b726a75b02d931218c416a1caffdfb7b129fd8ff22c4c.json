@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "ActiveClientExchange": {
+      "additionalProperties": false,
+      "description": "Local issuer wiring for a client whose Evidence authority comes from a task\nassertion. This does not grant access or change the governed task profile.",
+      "properties": {
+        "bootstrapResource": {
+          "description": "None means the issuer owner's default resource, not the Evidence resource.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bootstrapScope": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ActiveClientExchangeKind"
+        },
+        "sourceIssuer": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Url"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "bootstrapScope"
+      ],
+      "type": "object"
+    },
+    "ActiveClientExchangeKind": {
+      "enum": [
+        "institutional-grant",
+        "first-party"
+      ],
+      "type": "string"
+    },
+    "ActorKind": {
+      "enum": [
+        "human",
+        "agent",
+        "service"
+      ],
+      "type": "string"
+    },
+    "ClientStatus": {
+      "enum": [
+        "active",
+        "revoked"
+      ],
+      "type": "string"
+    },
+    "Url": {
+      "description": "An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+([/?#][^\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]*)?$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/evidence/access-client/access-client.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accessProfiles": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "actorKind": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActorKind"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/evidence/access-client/v1alpha1",
+      "type": "string"
+    },
+    "clientId": {
+      "type": "string"
+    },
+    "evidenceAudience": {
+      "type": "string"
+    },
+    "exchange": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActiveClientExchange"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "keys": {
+      "items": true,
+      "type": "array"
+    },
+    "kind": {
+      "const": "EvidenceAccessClient",
+      "type": "string"
+    },
+    "principal": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ClientStatus"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "clientId",
+    "status",
+    "accessProfiles",
+    "principal",
+    "evidenceAudience",
+    "keys"
+  ],
+  "title": "Evidence local access client",
+  "type": "object"
+}
