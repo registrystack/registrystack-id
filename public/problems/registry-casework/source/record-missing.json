@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-casework/source/record-missing",
   "type": "https://id.registrystack.org/problems/registry-casework/source/record-missing",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1alpha1",
   "product": "registry-casework",
   "code": "source.record-missing",
