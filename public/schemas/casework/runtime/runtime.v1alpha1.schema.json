@@ -103,20 +103,12 @@
     },
     "BregBinding": {
       "additionalProperties": false,
-      "description": "Launcher-owned BReg connection material for one authored Casework source.",
+      "description": "Environment-specific transport and reader identity. Human display always replaces it.",
       "properties": {
-        "attemptTimeoutMilliseconds": {
-          "default": 30000,
-          "format": "uint64",
-          "maximum": 300000,
-          "minimum": 1,
-          "type": "integer"
-        },
         "baseUrl": {
           "$ref": "#/$defs/Url"
         },
         "clientAssertionAudience": {
-          "description": "Explicit OAuth client assertion audience; omission preserves endpoint audience.",
           "type": "string"
         },
         "clientAssertionKeyRef": {
@@ -125,55 +117,28 @@
         "clientIdRef": {
           "$ref": "#/$defs/SecretReference"
         },
-        "connectTimeoutMilliseconds": {
-          "default": 10000,
-          "format": "uint64",
-          "maximum": 300000,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "eventSource": {
-          "type": "string"
-        },
-        "readerProfile": {
-          "type": "string"
-        },
-        "reconciliationIntervalMilliseconds": {
-          "default": 60000,
-          "format": "uint64",
-          "maximum": 3600000,
-          "minimum": 1000,
-          "type": "integer"
-        },
         "resource": {
-          "description": "Exact resource indicator required by the configured authorization server.",
           "type": "string"
         },
         "scopes": {
-          "description": "Explicit scopes for this source reader's service credential.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
-        "tokenEndpoint": {
+        "statusProfile": {
           "type": "string"
         },
-        "trustedRootCertificatesRef": {
-          "$ref": "#/$defs/SecretReference"
-        },
-        "webhookSecretRef": {
-          "$ref": "#/$defs/SecretReference"
+        "tokenEndpoint": {
+          "$ref": "#/$defs/Url"
         }
       },
       "required": [
         "baseUrl",
-        "readerProfile",
+        "statusProfile",
         "tokenEndpoint",
         "clientIdRef",
-        "clientAssertionKeyRef",
-        "webhookSecretRef",
-        "eventSource"
+        "clientAssertionKeyRef"
       ],
       "type": "object"
     },
@@ -286,7 +251,7 @@
         },
         {
           "additionalProperties": false,
-          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.",
+          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.\nA plain `http` URI is accepted on loopback for supervised local\ndevelopment, and beyond loopback only when the issuer block sets\n`allowInsecureHttp`.",
           "properties": {
             "type": {
               "const": "uri",
@@ -377,6 +342,11 @@
       "additionalProperties": false,
       "description": "The access tokens this runtime accepts: the issuer and its keys, the\nclients admitted, the scope claim, and the claim that marks a human actor.",
       "properties": {
+        "allowInsecureHttp": {
+          "default": false,
+          "description": "Permit plain HTTP beyond loopback to the configured issuer and to a\nJWKS URI declared in configuration. TLS remains required unless the\noperator explicitly accepts this transport risk.",
+          "type": "boolean"
+        },
         "allowedClients": {
           "$ref": "#/$defs/OidcAllowedClients",
           "description": "The OAuth clients whose access tokens are admitted: `unrestricted` to\nadmit a token from every client the issuer verifies, or a list of at\nleast one distinct client. A runtime decides whether `unrestricted`\nis acceptable in production."
@@ -413,7 +383,7 @@
         },
         "issuer": {
           "$ref": "#/$defs/Url",
-          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL."
+          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL, or a plain `http` URL when `allowInsecureHttp` is set."
         },
         "jwksSource": {
           "$ref": "#/$defs/JwksSource",
@@ -421,6 +391,23 @@
             "type": "discovery"
           },
           "description": "Where the issuer's signing keys come from. Absent reads the issuer's\nOpenID Connect discovery document."
+        },
+        "maximumTokenLifetimeSeconds": {
+          "description": "Optional deployment bound on the lifetime declared by an incoming\naccess token, independently of the issuer's own policy.",
+          "format": "uint64",
+          "maximum": 7200,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "revokedKeyIds": {
+          "description": "Signing-key identifiers Casework refuses locally, even while the issuer\nstill publishes them; listing a key does not revoke it at the issuer.\nOmitted, no key is refused; written, the list is non-empty.",
+          "items": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
         },
         "scopeClaim": {
           "default": "registry_scopes",
@@ -529,10 +516,6 @@
     "RuntimePackageConfig": {
       "additionalProperties": false,
       "properties": {
-        "acknowledgeStrandedWork": {
-          "$ref": "#/$defs/Digest",
-          "description": "The package digest of a package the operator has accepted will strand\nin-flight work pinned under an earlier package. Startup and `doctor`\nrefuse such a package unless this names its exact digest, so an\nacknowledgement never carries over to a later package. Omitted, no\nstranding package is accepted."
-        },
         "expectedDigest": {
           "$ref": "#/$defs/Digest",
           "description": "`sha256:` label of the package digest, the digest of the package's\n`SHA256SUMS` file. When set, the runtime refuses to start on any other\npackage, and on an authored project that has no `SHA256SUMS`.\nOmitted, the runtime starts on whichever package `root` holds."
@@ -747,6 +730,17 @@
     "authentication": {
       "$ref": "#/$defs/AuthenticationConfig"
     },
+    "contextProviders": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BregBinding"
+      },
+      "default": {},
+      "description": "Provider transport bindings keyed by the deploymentRef `casework.yaml` declares.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
     "database": {
       "$ref": "#/$defs/DatabaseConfig"
     },
@@ -778,17 +772,6 @@
     },
     "secretProviders": {
       "$ref": "#/$defs/SecretProvidersConfig"
-    },
-    "sources": {
-      "additionalProperties": {
-        "$ref": "#/$defs/BregBinding"
-      },
-      "default": {},
-      "description": "Source bindings keyed by the source id `casework.yaml` declares.",
-      "propertyNames": {
-        "$ref": "#/$defs/LocalId"
-      },
-      "type": "object"
     },
     "taskAuthority": {
       "$ref": "#/$defs/TaskAuthorityConfig"

@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-casework/source/not-found",
   "type": "https://id.registrystack.org/problems/registry-casework/source/not-found",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1alpha1",
   "product": "registry-casework",
   "code": "source.not-found",

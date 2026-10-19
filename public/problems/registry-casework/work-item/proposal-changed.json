@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-casework/work-item/proposal-changed",
   "type": "https://id.registrystack.org/problems/registry-casework/work-item/proposal-changed",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1alpha1",
   "product": "registry-casework",
   "code": "work-item.proposal-changed",
