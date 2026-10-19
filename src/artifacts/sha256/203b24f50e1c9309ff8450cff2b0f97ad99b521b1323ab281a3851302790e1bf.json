@@ -1,0 +1,609 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/access-explanation/access-explanation.v1alpha5.schema.json",
+  "title": "AccessExplanation",
+  "description": "Wire shape of `explanation` for `bregctl explain access` without `--scenario`. Evaluation-rule strings are pinned. Record grants retain compiled authority with inspection-only explicit row boundaries and allowCount. Routes, actions and rowReach follow the compiled model, except pinned routes.entries[].recordType. claimContract remains opaque except principalClaims and its success/error relationship with claimContractError. Consent and statisticalDatasets are pinned in full.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "scopeMatching",
+    "purposeMatching",
+    "rowMatching",
+    "profileSelection",
+    "relationshipMatching",
+    "missingClaims",
+    "evaluation",
+    "routes",
+    "recordTypes",
+    "actions",
+    "rowReach",
+    "claimContract",
+    "claimContractError",
+    "consent",
+    "statisticalDatasets"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/access-explanation/v1alpha5"
+    },
+    "kind": {
+      "const": "BRegAccessExplanation"
+    },
+    "scopeMatching": {
+      "type": "string"
+    },
+    "purposeMatching": {
+      "type": "string"
+    },
+    "rowMatching": {
+      "type": "string"
+    },
+    "profileSelection": {
+      "type": "string"
+    },
+    "relationshipMatching": {
+      "type": "string"
+    },
+    "missingClaims": {
+      "type": "string"
+    },
+    "evaluation": {
+      "type": "string"
+    },
+    "routes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entries"
+      ],
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Passthrough of the compiled access-route inventory; only `recordType` is pinned. Other fields follow CompiledAccessEntry and are outside this contract version.",
+            "x-registry-passthrough": "bregctl writes each compiled access-route entry as the engine holds it; only recordType is pinned, and its other members follow CompiledAccessEntry and are outside this contract version.",
+            "additionalProperties": true,
+            "required": [
+              "recordType"
+            ],
+            "properties": {
+              "recordType": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "recordTypes": {
+      "type": "array",
+      "description": "Per-Record type author inspection. Record grants explicitly report allowCount and render an empty compiled claim-bound row list as unrestricted. Other profile members follow the compiled AccessProfileSource.",
+      "items": {
+        "type": "object",
+        "x-registry-passthrough": "EntityAccessExplanation retains compiled authority with inspection-only explicit defaults on its profiles.",
+        "required": [
+          "profiles"
+        ],
+        "properties": {
+          "profiles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "rowBoundaries",
+                "allowCount"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "rowBoundaries": {
+                  "description": "Unrestricted means no claim-bound row restriction. Membership and consent boundaries, when present, still apply.",
+                  "oneOf": [
+                    {
+                      "const": "unrestricted"
+                    },
+                    {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "field",
+                          "claim",
+                          "operator"
+                        ],
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "claim": {
+                            "type": "string"
+                          },
+                          "operator": {
+                            "enum": [
+                              "equals",
+                              "in"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "allowCount": {
+                  "type": "boolean"
+                }
+              },
+              "x-registry-passthrough": "The inspector retains the compiled AccessProfileSource members unchanged except rowBoundaries and allowCount. Only those explicit defaults and the profile id are pinned here; other members follow the compiled contract."
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "description": "Action inventory with canonical author inspection definitions, routes and access entries.",
+      "x-registry-passthrough": "Actions use the same author inspector as ActionsExplanation, with exact fixed plans or function ceilings; routes and access follow the compiler."
+    },
+    "rowReach": {
+      "type": "array",
+      "description": "Passthrough of the compiled model's row-reach explanation; shape follows RowReachExplanation and is outside this contract version.",
+      "items": {
+        "type": "object",
+        "x-registry-passthrough": "bregctl writes each row-reach explanation as the engine holds it; its shape follows RowReachExplanation and is outside this contract version."
+      }
+    },
+    "claimContract": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Passthrough of the compiled authority inventory, or null when that inventory failed. `principalClaims` is pinned for exact contract inspection; every other member follows AuthorityInventory and remains outside this contract version. Casework provider pairing verifies a sealed purpose-bound context export and grants no BReg authority.",
+      "x-registry-passthrough": "bregctl writes the compiled authority inventory as the engine holds it; only principalClaims is pinned, and its other members follow AuthorityInventory outside this contract version.",
+      "required": [
+        "principalClaims"
+      ],
+      "properties": {
+        "principalClaims": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "claimContractError": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The compiled authority inventory's failure, or null when the inventory was built. AuthorityInventoryError is a value-free enum serialized as one of these kebab-case strings; the vocabulary is pinned and grows only with an apiVersion bump.",
+      "enum": [
+        "principal-claim-missing",
+        "target-entity-not-compiled",
+        "boundary-field-not-compiled",
+        "lookup-selector-not-compiled",
+        "lookup-claim-mapping-incomplete",
+        "lookup-field-not-compiled",
+        "conflicting-claim-expectation",
+        null
+      ]
+    },
+    "consent": {
+      "description": "Consent-gated permissions, the recipient set of every client, and the consent records they check; null when the project declares no recipients, consent record, or requireConsent permission. Built only for this payload and pinned in full.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "condition",
+        "unmappedClients",
+        "trustModel",
+        "ungating",
+        "organizations",
+        "groups",
+        "clients",
+        "records",
+        "permissions",
+        "issuers"
+      ],
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "unmappedClients": {
+          "type": "string"
+        },
+        "trustModel": {
+          "type": "string"
+        },
+        "ungating": {
+          "type": "string"
+        },
+        "organizations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "clients",
+              "groups",
+              "retired"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/LocalId"
+              },
+              "name": {
+                "type": "string"
+              },
+              "clients": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "retired": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "members",
+              "clients"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/LocalId"
+              },
+              "name": {
+                "type": "string"
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "clients": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/consentClient"
+          }
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "recordType",
+              "maximumDurationDays",
+              "gives",
+              "revokes",
+              "refusals",
+              "scopes",
+              "indexes"
+            ],
+            "properties": {
+              "recordType": {
+                "type": "string"
+              },
+              "maximumDurationDays": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3652
+              },
+              "gives": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "revokes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "refusals": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scopes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "recordType",
+              "profile",
+              "sourcePath",
+              "record",
+              "on",
+              "condition",
+              "purposes",
+              "scope",
+              "maximumDurationDays",
+              "probeFunction",
+              "indexes",
+              "readableFields",
+              "clients",
+              "issuingActions"
+            ],
+            "properties": {
+              "recordType": {
+                "type": "string"
+              },
+              "profile": {
+                "type": "string"
+              },
+              "sourcePath": {
+                "type": "string"
+              },
+              "record": {
+                "type": "string"
+              },
+              "on": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "purposes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scope": {
+                "type": "string"
+              },
+              "maximumDurationDays": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3652
+              },
+              "probeFunction": {
+                "type": "string"
+              },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "readableFields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "field",
+                    "classification"
+                  ],
+                  "properties": {
+                    "field": {
+                      "type": "string"
+                    },
+                    "classification": {
+                      "enum": [
+                        "public",
+                        "internal",
+                        "restricted",
+                        null
+                      ]
+                    }
+                  }
+                }
+              },
+              "clients": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/consentClient"
+                }
+              },
+              "issuingActions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/consentIssuer"
+                }
+              }
+            }
+          }
+        },
+        "issuers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/consentIssuer"
+          }
+        }
+      }
+    },
+    "statisticalDatasets": {
+      "description": "Who may do what with each statistical dataset, ordered by dataset; empty when the project declares none. Each list names access profiles in order. `readReleases` is every profile that reads the dataset's releases, and is empty when no profile publishes it.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset",
+          "readLive",
+          "publish",
+          "readReleases",
+          "accessProfiles"
+        ],
+        "properties": {
+          "dataset": {
+            "type": "string"
+          },
+          "readLive": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publish": {
+            "type": "array",
+            "maxItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "readReleases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessProfiles": {
+            "type": "array",
+            "description": "Full authentication requirements for dataset grants, including profiles with no Record type grant.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "default",
+                "principalClaim",
+                "requiredScopes",
+                "requiredPurposes"
+              ],
+              "x-registry-passthrough": "Dataset profile authority retained by the compiler; shape follows AccessProfileSource."
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "claimContract": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "claimContract"
+        ]
+      },
+      "then": {
+        "properties": {
+          "claimContractError": {
+            "type": "string"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "claimContractError": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "consentIssuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "issuer"
+      ],
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "issuer": {
+          "enum": [
+            "self",
+            "steward"
+          ]
+        }
+      }
+    },
+    "consentClient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "organization",
+        "recipients"
+      ],
+      "properties": {
+        "client": {
+          "type": "string"
+        },
+        "organization": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

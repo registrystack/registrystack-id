@@ -1,0 +1,3810 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://id.registrystack.org/schemas/evidence/bundle/bundle.v1.schema.json
+title: Evidence governed package configuration Version 1
+type: object
+additionalProperties: false
+required:
+  - apiVersion
+  - kind
+  - assuranceProfile
+  - service
+  - issuer
+  - authentication
+  - audit
+  - subjectBinding
+  - rateLimits
+  - signing
+  - selectorProfiles
+  - sources
+  - authorityProfiles
+  - requirements
+properties:
+  apiVersion:
+    description: >-
+      Names the package configuration grammar the rest of this document is read against; the
+      runtime refuses any other value at startup, so a future incompatible grammar is never read
+      as if it were this one.
+    const: id.registrystack.org/formats/evidence/bundle/v1
+  kind:
+    description: >-
+      Names the document type; together with `apiVersion` it tells a governed package
+      configuration apart from every other Registry Stack file.
+    const: EvidenceBundle
+  project:
+    description: >-
+      Stable normalized EvidenceProject identifier. A package carrying this identifier
+      contains no authority profiles; startup captures a separately activated target
+      authority for this project and exact package digest. Each definition declares all
+      grant-ceiling dimensions and its representation ceiling.
+    $ref: '#/$defs/LocalId'
+  assuranceProfile:
+    description: >-
+      Declares the governed assurance boundary of the whole package, and the value is visible
+      in every assertion, so an authentic `local` assertion never satisfies a relying procedure
+      expecting a deployable profile. `local` is an authoring profile that lets a requirement
+      omit `fixtures` and disables no other runtime boundary; the deployable profiles require
+      every requirement to reference a fixture suite with complete coverage before the package
+      loads.
+    enum:
+      - local
+      - production
+      - evidence-grade
+  service:
+    description: >-
+      Carries the identity this deployment asserts under: the technical Evidence provider
+      identity placed in evidence and the operator-controlled trust domain of the process.
+    type: object
+    additionalProperties: false
+    required:
+      - providerId
+      - publicOrigin
+      - trustDomain
+    properties:
+      providerId:
+        description: >-
+          Technical provider URI placed in every assertion as `providedBy`. Enabling `sd-jwt-vc`
+          outside local assurance requires this value to be the stable HTTPS origin of the
+          deployment, because issuer metadata and the published JWKS URI are derived from
+          that origin.
+        type: string
+        format: uri
+        maxLength: 512
+      publicOrigin:
+        description: >-
+          Exact public origin of this Evidence protected resource. Production and
+          evidence-grade deployments require a canonical HTTPS origin. The local
+          assurance profile also permits canonical HTTP on numeric 127.0.0.1 with
+          an explicit non-zero port for supervised tutorials.
+        $ref: '#/$defs/Url'
+        maxLength: 512
+      trustDomain:
+        description: >-
+          Scopes the process to one operator-controlled trust domain, whose URI is bound into
+          subject bindings and into requester pseudonym scope, so the same subject yields
+          different pseudonyms under a different trust domain.
+        type: string
+        format: uri
+        maxLength: 512
+  issuer:
+    description: >-
+      Carries the legal issuer identity placed in every assertion, kept separate from the
+      technical provider that operates the process and signs.
+    type: object
+    additionalProperties: false
+    required:
+      - uri
+    properties:
+      uri:
+        description: >-
+          Legal issuer URI placed in every assertion as `issuedBy`, and governance must authorize
+          the provider named in `service.providerId` to act for that issuer.
+        $ref: '#/$defs/uri'
+  publication:
+    description: >-
+      Optional provider-authored public facts that cannot be derived from the governed service,
+      issuer, response-format, binding-mode, and Evidence Type inventory. When present, the
+      runtime publishes one deterministic closed Registry Discovery description.
+    type: object
+    additionalProperties: false
+    required:
+      - serviceId
+      - title
+      - description
+      - endpointUrl
+      - jurisdictions
+    properties:
+      serviceId: {type: string, format: uri, maxLength: 512}
+      title: {type: string, minLength: 1, maxLength: 4096, pattern: '^[^\s\u0000-\u001F\u007F-\u009F](?:[^\u0000-\u001F\u007F-\u009F]*[^\s\u0000-\u001F\u007F-\u009F])?$'}
+      description: {type: string, minLength: 1, maxLength: 4096, pattern: '^[^\s\u0000-\u001F\u007F-\u009F](?:[^\u0000-\u001F\u007F-\u009F]*[^\s\u0000-\u001F\u007F-\u009F])?$'}
+      endpointUrl:
+        description: >-
+          Public URL Registry Discovery advertises for this Evidence service, with no query or
+          fragment. It requires HTTPS; the local assurance profile also permits HTTP on
+          localhost, 127.0.0.1, or [::1].
+        $ref: '#/$defs/Url'
+        maxLength: 512
+      jurisdictions:
+        type: array
+        minItems: 1
+        maxItems: 128
+        uniqueItems: true
+        items: {type: string, format: uri, maxLength: 512}
+      publisherId: {type: string, format: uri, maxLength: 512}
+      operatorId: {type: string, format: uri, maxLength: 512}
+  authentication:
+    description: >-
+      Verification policy for inbound bearer tokens: the runtime validates each token against
+      these values itself and ignores upstream identity headers.
+    $ref: '#/$defs/authentication'
+  audit:
+    description: >-
+      Governs audit pseudonymization for the whole deployment; `runtime.yaml` contributes only
+      the audit destination.
+    $ref: '#/$defs/audit'
+  subjectBinding:
+    description: >-
+      Keys the audience- and purpose-scoped subject bindings an assertion carries in place
+      of selector values, derived over the complete canonical role, profile, and value set
+      rather than as per-field hashes.
+    $ref: '#/$defs/subject-binding'
+  rateLimits:
+    description: >-
+      Governs the anti-enumeration budget for authenticated callers, counted against scoped
+      pseudonyms of the principal and the authority rather than against any raw selector value.
+    $ref: '#/$defs/rate-limits'
+  signing:
+    description: >-
+      Governs signature format, active and published key selection, key retirement, and assertion
+      validity; missing signing material fails readiness and no unsigned fallback exists.
+    type: object
+    additionalProperties: false
+    required:
+      - format
+      - algorithm
+      - activePublicJwkFile
+      - publishedPublicJwkFiles
+      - revokedKeyIds
+      - jwksPath
+      - maximumAssertionValiditySeconds
+      - verifierClockSkewSeconds
+    properties:
+      format:
+        description: >-
+          Fixes the wire serialization of a signed assertion to flattened JWS JSON, returned
+          as `application/jose+json`.
+        const: flattened-jws-json
+      algorithm:
+        description: >-
+          Binds assertion signatures to ES256 over P-256, and a verifier rejects any protected
+          header `alg` that differs from the algorithm bound to the trusted key.
+        const: ES256
+      activePublicJwkFile:
+        description: >-
+          Names the bundle-held public JWK the runtime signer's key must equal exactly, proven
+          by one sign-and-verify test before readiness.
+        $ref: '#/$defs/public-jwk-path'
+      publishedPublicJwkFiles:
+        description: >-
+          Retains predecessor public keys in the served key set so assertions signed before
+          a rollover still verify, for at least the maximum assertion validity plus the verifier
+          clock skew.
+        type: array
+        maxItems: 32
+        uniqueItems: true
+        items:
+          description: >-
+            One retained public key served beside the active key; an entry that repeats the
+            active key or names a revoked identifier is rejected at startup.
+          $ref: '#/$defs/public-jwk-path'
+      revokedKeyIds:
+        description: >-
+          Emergency denylist: a listed identifier is excluded from the active set, the published
+          set, and the served key set, and a verifier rejects that identifier before selecting
+          a pinned public key.
+        type: array
+        maxItems: 33
+        uniqueItems: true
+        items:
+          description: >-
+            One denied service key, named by its RFC 7638 thumbprint rather than by a provider-assigned
+            key name.
+          $ref: '#/$defs/service-key-id'
+      jwksPath:
+        description: >-
+          Route where the deployment serves its public key set; that route is not a trust
+          anchor, because a verifier pins the provider identity and key location through its
+          own governed configuration.
+        const: /.well-known/evidence/jwks.json
+      maximumAssertionValiditySeconds:
+        description: >-
+          Ceiling every `requirements[].validitySeconds` must stay within, and the base of
+          the window a retired public key stays published.
+        type: integer
+        minimum: 1
+        maximum: 31536000
+      verifierClockSkewSeconds:
+        description: >-
+          Skew a relying party applies when checking current validity, and the margin added
+          to the maximum assertion validity before a retired public key may be removed.
+        type: integer
+        minimum: 0
+        maximum: 300
+  responseFormats:
+    description: >-
+      Sets the deployment-wide ceiling of response serializations, and omission means `[signed-jws]`.
+      A bundle that drops signed JWS is rejected at startup, and every other listed format
+      additionally requires the one matched grant's `authorityProfiles.*.grants[].responseFormats`
+      to permit that format.
+    $ref: '#/$defs/response-formats'
+  selectorProfiles:
+    description: >-
+      Named registry of selector profiles that requirement subject roles and authority-grant
+      subjects reference by id; an id absent from the map fails validation before startup.
+    type: object
+    minProperties: 1
+    maxProperties: 128
+    propertyNames:
+      $ref: '#/$defs/LocalId'
+    additionalProperties:
+      description: >-
+        One named, closed profile of deployment-defined fields and their combined byte bound;
+        a profile is not an identity type, and possession of its field values does not by
+        itself grant authority.
+      $ref: '#/$defs/selector-profile'
+  sourceConnections:
+    description: >-
+      Optional explicit process-local owners of HTTP destination, workload authentication,
+      TLS trust and aggregate resource limits. Authored connection references are resolved
+      at build time; startup requires every concrete source value to equal its named owner.
+      Independent connection names are never deduplicated using secret bytes.
+    type: object
+    maxProperties: 128
+    propertyNames:
+      $ref: '#/$defs/LocalId'
+    additionalProperties:
+      $ref: '#/$defs/source-connection'
+  sources:
+    description: >-
+      Complete map of fixed sources a requirement can reference by id in its `acquisition`
+      field, fixed at startup and immune to override by `runtime.yaml`.
+    type: object
+    minProperties: 1
+    maxProperties: 128
+    propertyNames:
+      $ref: '#/$defs/LocalId'
+    additionalProperties:
+      description: >-
+        One fixed source referenced by this map key from a requirement's `acquisition` field,
+        combining a transport, the fixed request that transport carries, and a minimization
+        posture with the extraction script and schemas that turn the source's response into
+        facts.
+      $ref: '#/$defs/source'
+  authorityProfiles:
+    description: >-
+      Complete authority profiles for a legacy compiled bundle. A normalized project package
+      carries an empty map, and the runtime installs only the separately activated target
+      snapshot after package validation. Exactly one complete authority path may match;
+      overlapping paths deny rather than combining their permissions.
+    type: object
+    minProperties: 0
+    maxProperties: 128
+    propertyNames:
+      $ref: '#/$defs/LocalId'
+    additionalProperties:
+      description: >-
+        Everything one requester class may ask for. Access is per requester class rather than
+        per client identity, so two clients carrying the same tags have identical access.
+      $ref: '#/$defs/authority-profile'
+  acquisitionCapabilities:
+    description: >-
+      Gated acquisition kinds and source-call optimizations this bundle opts in to. The original
+      Version 1 forms are absent from the vocabulary on purpose, because every bundle already had
+      them; omission and an explicit empty list both enable nothing.
+    type: array
+    maxItems: 2
+    uniqueItems: true
+    items:
+      description: >-
+        One gated acquisition kind or source-call optimization this bundle declares, which is
+        the bundle half of a two-sided gate. A requirement using an absent kind is rejected at
+        startup; an absent optimization is never selected.
+      enum:
+        - search-then-fetch-set
+        - source-batch
+  maximumHolderBoundBatchSize:
+    description: >-
+      Ceiling on how many assertions one holder-bound release may carry. Omission means one,
+      so a bundle written before batch release cannot serve a batch; declaring a ceiling this
+      deployment never reaches enables nothing on its own, because each requirement still
+      needs its own holder-bound declaration and a grant that permits the mode.
+    type: integer
+    minimum: 1
+    maximum: 16
+  requirements:
+    description: >-
+      Requirement identifiers and Evidence Type URIs must each be unique across every entry;
+      a repeat of either rejects the whole bundle at startup.
+    type: array
+    minItems: 1
+    maxItems: 128
+    items:
+      description: >-
+        One independently versioned evidence definition; its configuration revision spans
+        only this requirement's own configuration and artifact closure, letting a relying
+        party pin this requirement without depending on the rest of the deployment.
+      $ref: '#/$defs/requirement'
+allOf:
+  - if:
+      required: [project]
+    then:
+      properties:
+        authorityProfiles: {maxProperties: 0}
+        requirements:
+          items:
+            required: [grantCeiling, representations]
+    else:
+      properties:
+        authorityProfiles: {minProperties: 1}
+  - if:
+      properties:
+        assuranceProfile:
+          const: local
+    then:
+      properties:
+        authentication:
+          properties:
+            oidc:
+              properties:
+                issuer:
+                  pattern: ^(?:https://.*|http://127\.0\.0\.1:[1-9][0-9]{0,4})$
+                jwksSource:
+                  properties:
+                    uri:
+                      # Local development permits a supervised issuer on the exact
+                      # canonical loopback origin, serving its JWKS from that origin at
+                      # any absolute path without query or fragment. The route is the
+                      # issuer's to choose; the origin is not.
+                      pattern: ^(?:https://.*|http://127\.0\.0\.1:[1-9][0-9]{0,4}/[^\s?#]*)$
+  - if:
+      properties:
+        assuranceProfile:
+          enum:
+            - production
+            - evidence-grade
+    then:
+      properties:
+        authentication:
+          properties:
+            oidc:
+              properties:
+                issuer:
+                  pattern: ^https://
+                jwksSource:
+                  properties:
+                    uri:
+                      pattern: ^https://
+        requirements:
+          items:
+            required:
+              - fixtures
+        sources:
+          additionalProperties:
+            properties:
+              authentication:
+                not:
+                  type: object
+                  required:
+                    - type
+                  properties:
+                    type:
+                      const: none
+        sourceConnections:
+          additionalProperties:
+            properties:
+              authentication:
+                not:
+                  type: object
+                  required:
+                    - type
+                  properties:
+                    type:
+                      const: none
+  - if:
+      properties:
+        assuranceProfile:
+          enum:
+            - production
+            - evidence-grade
+        responseFormats:
+          contains:
+            enum:
+              - sd-jwt-vc
+              - sd-jwt-vc-batch
+      required:
+        - assuranceProfile
+        - responseFormats
+    then:
+      properties:
+        service:
+          properties:
+            providerId:
+              type: string
+              pattern: ^https://(?:[A-Za-z0-9.-]+|\[[0-9A-Fa-f:]+\])(?::[1-9][0-9]{0,4})?$
+  - if:
+      properties:
+        requirements:
+          contains:
+            required:
+              - acquisition
+            properties:
+              acquisition:
+                required:
+                  - type
+                properties:
+                  type:
+                    const: search-then-fetch-set
+      required:
+        - requirements
+    then:
+      required:
+        - acquisitionCapabilities
+      properties:
+        acquisitionCapabilities:
+          contains:
+            const: search-then-fetch-set
+$defs:
+  Url:
+    type: string
+    format: uri
+    maxLength: 2048
+    pattern: '^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\u005C\u0000-\u0020\u007F-\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]+([/?#][^\u005C\u0000-\u0020\u007F-\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]*)?$'
+    description: An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.
+  ExternalId:
+    type: string
+    minLength: 1
+    maxLength: 512
+    pattern: "^[^\\u0000-\\u001F\\u007F-\\u009F]+$"
+    description: An identifier another system issues, written exactly as its issuer gives it.
+  LocalId:
+    type: string
+    pattern: ^[a-z][a-z0-9_-]{0,63}$
+    description: 'A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.'
+  local-id:
+    type: string
+    pattern: ^[a-z][a-z0-9._-]{0,127}$
+  uri:
+    type: string
+    format: uri
+    maxLength: 512
+  response-formats:
+    # Closed enabled response formats. Signed flattened JWS is mandatory and
+    # remains the default; the unsigned and SD-JWT VC formats must each be
+    # enabled by the bundle and permitted by the complete matched grant.
+    # Omission means signed only.
+    type: array
+    minItems: 1
+    maxItems: 4
+    uniqueItems: true
+    contains:
+      const: signed-jws
+    items:
+      description: >-
+        One permitted serialization of the same assertion, which introduces no separate issuance
+        protocol and no credential state; a format reaches a response only when the bundle
+        and the one matched grant both permit that format.
+      enum:
+        - signed-jws
+        - unsigned-json
+        - sd-jwt-vc
+        - sd-jwt-vc-batch
+  subject-binding-mode:
+    # What the subject bindings in an assertion are derived under. Closed, with
+    # no default: absence at every point that references this is what means
+    # audience-scoped, so an existing document's meaning is unchanged and its
+    # projected configuration does not move.
+    enum:
+      - audience-scoped
+      - holder-bound
+  SecretReference:
+    type: string
+    pattern: ^(?:secret:env/[A-Z][A-Z0-9_]{0,127}|secret:file/[a-z][a-z0-9._-]{0,127})$
+    description: 'An exact secret reference: secret:file/name, resolved under secretProviders.file.root, or secret:env/NAME, resolved only when secretProviders.environment is declared.'
+  relative-path:
+    type: string
+    pattern: ^(adapters|derivations|schemas|codelists|fixtures)/[A-Za-z0-9._/-]+$
+  statement-path:
+    type: string
+    pattern: ^queries/[A-Za-z0-9._/-]+\.sql$
+  public-jwk-path:
+    type: string
+    pattern: ^public-keys/[A-Za-z0-9._-]+\.jwk\.json$
+  service-key-id:
+    type: string
+    pattern: ^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$
+  # A public ES256 P-256 key with exactly these members. The strict verifier
+  # additionally requires kid to be the key's own RFC 7638 thumbprint.
+  trusted-service-jwk:
+    type: object
+    additionalProperties: false
+    required: [alg, crv, kid, kty, x, y]
+    properties:
+      alg: {const: ES256}
+      crv: {const: P-256}
+      kid: {$ref: '#/$defs/service-key-id'}
+      kty: {const: EC}
+      x: {type: string, pattern: '^[A-Za-z0-9_-]{43}$'}
+      y: {type: string, pattern: '^[A-Za-z0-9_-]{43}$'}
+  authentication:
+    type: object
+    additionalProperties: false
+    required:
+      - oidc
+    properties:
+      oidc:
+        description: >-
+          The one OpenID Connect issuer whose access tokens this deployment accepts, and the
+          rules a token from it must satisfy.
+        $ref: '#/$defs/oidc-authentication'
+  oidc-authentication:
+    type: object
+    additionalProperties: false
+    required:
+      - issuer
+      - audience
+      - tokenTypes
+      - algorithms
+      - jwksSource
+      - principalClaim
+      - requesterTagsClaim
+      - evidenceAudienceClaim
+      - maximumTokenLifetimeSeconds
+      - revokedKeyIds
+      - allowedClients
+      - requiredScopes
+    properties:
+      issuer:
+        description: >-
+          Exact token issuer an inbound access token must declare, with path-based issuers
+          supported; deployable bundles require HTTPS.
+        $ref: '#/$defs/Url'
+        pattern: ^https?://
+        maxLength: 512
+      allowInsecureHttp:
+        description: >-
+          Permits plain HTTP to the issuer and JWKS URI beyond loopback under the local assurance
+          profile only. Deployable bundles require HTTPS for both even when it is set, and a
+          production or evidence-grade bundle that sets it to true is refused. Omission is false.
+        type: boolean
+        default: false
+      audience:
+        description: >-
+          The one exact audience value an inbound access token must carry to be accepted; it is
+          also the resource this deployment advertises in its protected-resource metadata.
+        type: string
+        minLength: 1
+        maxLength: 512
+      tokenTypes:
+        description: >-
+          Allowlist of the exact `typ` value an inbound token's protected JWT header must
+          declare.
+        type: array
+        minItems: 1
+        maxItems: 4
+        uniqueItems: true
+        items:
+          description: >-
+            One exact protected-header `typ` value accepted on an inbound access token.
+          enum:
+            - at+jwt
+            - application/at+jwt
+      algorithms:
+        description: >-
+          Closes the set of signature algorithms accepted on an inbound access token, and
+          no algorithm fallback outside the set is permitted.
+        type: array
+        minItems: 1
+        maxItems: 3
+        uniqueItems: true
+        items:
+          description: >-
+            One signature algorithm the token verifier accepts on an inbound access token.
+          enum:
+            - EdDSA
+            - ES256
+            - RS256
+      jwksSource:
+        description: >-
+          Where the verifier fetches issuer signing keys. Evidence accepts only `type: uri`, a
+          fixed endpoint named in the governed bundle; discovery and static key sets are
+          refused.
+        type: object
+        additionalProperties: false
+        required:
+          - type
+          - uri
+        properties:
+          type:
+            description: >-
+              Selects the fixed-endpoint key source, the only one Evidence accepts.
+            const: uri
+          uri:
+            description: >-
+              Fixed endpoint the verifier fetches issuer signing keys from. As an endpoint the
+              operator declares, it inherits the declared issuer's allowance on any origin: it
+              may resolve to a public, private, or loopback address, while cloud-metadata and
+              link-local destinations remain prohibited, DNS is pinned for each fetch, and
+              ambient proxies and redirects are disabled. It requires HTTPS; the local assurance
+              profile also permits HTTP on the exact numeric 127.0.0.1 loopback origin with an
+              explicit port, or elsewhere under allowInsecureHttp.
+            $ref: '#/$defs/Url'
+            pattern: ^https?://
+            maxLength: 512
+      tlsTrustProfile:
+        description: >-
+          Logical name resolved to an exact private certificate authority file bound in
+          `runtime.yaml`, trusted beside the system roots for the `jwksSource.uri` connection
+          alone. Omission trusts only the system roots, and the profile is rejected outright
+          when `jwksSource.uri` is a local HTTP origin.
+        $ref: '#/$defs/local-id'
+      principalClaim:
+        description: >-
+          The only claim read as the principal, whose absence denies the request; `client_id`,
+          `azp`, request data, and proxy headers are not fallbacks.
+        $ref: '#/$defs/claim-name'
+      requesterTagsClaim:
+        description: >-
+          Names the verified claim whose tag list selects which authority profile can match
+          the request.
+        $ref: '#/$defs/claim-name'
+      evidenceAudienceClaim:
+        description: >-
+          Names the verified claim that fixes the audience an assertion is issued to, and
+          the public request cannot choose another audience.
+        $ref: '#/$defs/claim-name'
+      claims:
+        description: >-
+          Optional direct claim-name mapping for the shared contextual-authorization profile.
+          Omission uses the registry_* names defined by the profile. Names remain direct JWT
+          members even when they contain a dot.
+        $ref: '#/$defs/contextual-claim-names'
+      maximumTokenLifetimeSeconds:
+        description: >-
+          Caps the accepted `exp - iat` interval, and its presence requires `iat` and an `exp`
+          greater than `iat`.
+        type: integer
+        minimum: 1
+        maximum: 86400
+      revokedKeyIds:
+        description: >-
+          Emergency denylist of issuer key identifiers, checked before cached JWKS key selection
+          so a compromised key is refused even while the cache still holds the key.
+        type: array
+        maxItems: 32
+        uniqueItems: true
+        items:
+          description: >-
+            One issuer key identifier the verifier refuses, whatever the cached JWKS still
+            holds.
+          type: string
+          minLength: 1
+          maxLength: 256
+          pattern: ^[^\u0000-\u001F\u007F-\u009F]+$
+      actorClaim:
+        description: >-
+          Names the verified claim read as the actor alongside the principal, and omitting
+          the key enables no fallback actor source.
+        $ref: '#/$defs/claim-name'
+      allowedClients:
+        description: >-
+          Machine-client admission every bundle decides, matched against the verified token's
+          `client_id`/`azp`; never `sub`. The keyword `unrestricted` admits every client the
+          issuer vouched for; a list admits exactly the clients it names. An omitted key and
+          an empty list are refused. Audience plus static issuer-governed attributes alone
+          cannot establish that a client was granted this resource's permission, which is
+          what `requiredScopes` closes.
+        oneOf:
+          - description: Admit every client the issuer vouched for.
+            const: unrestricted
+          - description: Admit exactly the listed clients.
+            type: array
+            minItems: 1
+            maxItems: 32
+            uniqueItems: true
+            items:
+              description: One client identifier admitted to call this deployment.
+              type: string
+              minLength: 1
+              maxLength: 128
+      assertionIssuers:
+        description: >-
+          Per-client assertion-authority admission for a token that carries the
+          platform verifier's `registry_assertion_issuer` claim, keyed by the
+          client identifier the token's `client_id`/`azp` names and naming the
+          issuers that client may present the claim as. Omitting the key
+          applies no rule, so every exchanged token is admitted regardless of
+          the claim. A token that carries no such claim is never affected by
+          this admission.
+        type: object
+        minProperties: 1
+        maxProperties: 32
+        propertyNames:
+          $ref: '#/$defs/ExternalId'
+          maxLength: 128
+        additionalProperties:
+          description: >-
+            The issuers one client may present the `registry_assertion_issuer`
+            claim as.
+          type: array
+          minItems: 1
+          maxItems: 8
+          uniqueItems: true
+          items:
+            description: One issuer URL the client may present the claim as.
+            type: string
+            minLength: 1
+            maxLength: 512
+      requiredScopes:
+        description: >-
+          Scope gate every bundle decides, read from the verified token's scope set after
+          signature verification and before any authority claim is read. The keyword
+          `unrestricted` applies no scope gate; a list names the scopes every inbound token
+          must carry. An omitted key and an empty list are refused; a missing scope is never
+          inferred from tags, principal, roles, `sub`, or request fields.
+        oneOf:
+          - description: Apply no scope gate.
+            const: unrestricted
+          - description: Require every listed scope.
+            type: array
+            minItems: 1
+            maxItems: 32
+            uniqueItems: true
+            items:
+              description: One RFC 6749 scope-token every inbound token must carry.
+              type: string
+              minLength: 1
+              maxLength: 256
+              pattern: ^[\x21\x23-\x5B\x5D-\x7E]+$
+    if:
+      required:
+        - jwksSource
+      properties:
+        jwksSource:
+          properties:
+            uri:
+              pattern: ^http://
+    then:
+      not:
+        required:
+          - tlsTrustProfile
+  audit:
+    type: object
+    additionalProperties: false
+    required:
+      - hashKeyRef
+      - hashKeyVersion
+    properties:
+      hashKeyRef:
+        description: >-
+          Points at the secret Rust derives the audit pseudonym key from; the same reference
+          cannot also serve `subjectBinding.secretRef`. Every audit gate is fail
+          closed whatever this section says, so an authorization refusal, access attempt, or
+          disclosure release whose entry cannot be written stops the response instead of being
+          served unaudited.
+        $ref: '#/$defs/SecretReference'
+      hashKeyVersion:
+        description: >-
+          Stamped into every audit pseudonym as its version prefix, so pseudonyms produced
+          under different audit key material stay distinguishable within one audit log.
+        type: integer
+        minimum: 1
+        maximum: 2147483647
+  subject-binding:
+    type: object
+    additionalProperties: false
+    required:
+      - secretRef
+      - keyVersion
+    properties:
+      secretRef:
+        description: >-
+          Points at the secret keying every subject binding; that reference and its resolved
+          bytes must both differ from the audit master, and a match fails startup.
+        $ref: '#/$defs/SecretReference'
+      keyVersion:
+        description: >-
+          Scopes each derived binding and appears in the binding value, so a new version changes
+          every binding a relying party already retains as an expectation.
+        type: integer
+        minimum: 1
+        maximum: 2147483647
+  rate-limits:
+    type: object
+    additionalProperties: false
+    required:
+      - requestsPerPrincipalPerMinute
+      - burstPerPrincipal
+      - failedSelectorAttemptsPerPrincipalAuthorityPerMinute
+    properties:
+      requestsPerPrincipalPerMinute:
+        description: >-
+          Rate at which one principal's request budget refills, spread continuously across
+          the minute rather than granted in full at its start.
+        type: integer
+        minimum: 1
+        maximum: 1000000
+      burstPerPrincipal:
+        description: >-
+          Capacity of one principal's request bucket, bounding how many requests may arrive
+          back to back before `requestsPerPrincipalPerMinute` governs the pace.
+        type: integer
+        minimum: 1
+        maximum: 100000
+      failedSelectorAttemptsPerPrincipalAuthorityPerMinute:
+        description: >-
+          Budget for selector-resolution failures, checked before source access and consumed
+          only when selector validation itself fails, so repeated probing is refused before
+          it reaches a source.
+        type: integer
+        minimum: 1
+        maximum: 100000
+  claim-name:
+    type: string
+    pattern: ^[A-Za-z_][A-Za-z0-9_.-]{0,127}$
+  contextual-claim-names:
+    type: object
+    additionalProperties: false
+    properties:
+      actorKind: {$ref: '#/$defs/claim-name', default: registry_actor_kind}
+      purpose: {$ref: '#/$defs/claim-name', default: registry_purpose}
+      grantId: {$ref: '#/$defs/claim-name', default: registry_grant_id}
+      grantSourceIssuer: {$ref: '#/$defs/claim-name', default: registry_grant_source_issuer}
+      grantClient: {$ref: '#/$defs/claim-name', default: registry_grant_client}
+      grantResource: {$ref: '#/$defs/claim-name', default: registry_grant_resource}
+      grantExp: {$ref: '#/$defs/claim-name', default: registry_grant_exp}
+      grantBounds: {$ref: '#/$defs/claim-name', default: registry_grant_bounds}
+      approver: {$ref: '#/$defs/claim-name', default: registry_approver}
+  claim-path:
+    type: string
+    pattern: ^[A-Za-z_][A-Za-z0-9_-]*(\.[A-Za-z_][A-Za-z0-9_-]*)*$
+  selector-profile:
+    type: object
+    additionalProperties: false
+    required:
+      - maximumAggregateBytes
+      - fields
+    properties:
+      maximumAggregateBytes:
+        description: >-
+          Caps the summed canonical byte size of every field value resolved for one authorized
+          use of the profile; exceeding it denies the request.
+        type: integer
+        minimum: 1
+        maximum: 8192
+      fields:
+        description: >-
+          Closed map of the profile's field declarations, keyed by adopter-chosen names that
+          are opaque to Rust and carry no meaning of their own.
+        type: object
+        minProperties: 1
+        maxProperties: 16
+        propertyNames:
+          $ref: '#/$defs/LocalId'
+        additionalProperties:
+          description: >-
+            One field's exact declaration: Rust matches a supplied value against it verbatim,
+            performing no case folding, normalization, transliteration, tokenization, partial-date
+            matching, or fuzzy scoring.
+          $ref: '#/$defs/selector-field'
+  selector-field:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - minimumBytes
+          - maximumBytes
+        properties:
+          type:
+            description: >-
+              Selects the field's scalar kind, fixing which other declaration keys are required;
+              a supplied value of a different kind is rejected.
+            const: string
+          minimumBytes:
+            description: >-
+              Inclusive lower bound, in UTF-8 bytes, on this field's accepted string value;
+              it cannot exceed the field's own `maximumBytes`.
+            type: integer
+            minimum: 1
+            maximum: 8192
+          maximumBytes:
+            description: >-
+              Inclusive upper bound, in UTF-8 bytes, on this field's accepted string or `controlled-code`
+              value; it cannot exceed the profile's `maximumAggregateBytes`.
+            type: integer
+            minimum: 1
+            maximum: 8192
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+        properties:
+          type:
+            const: date
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+        properties:
+          type:
+            const: uuid
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - minimum
+          - maximum
+        properties:
+          type:
+            const: integer
+          minimum:
+            description: >-
+              Inclusive lower bound on this field's accepted integer selector value; a submitted
+              value less than this bound is rejected rather than clamped.
+            type: integer
+            minimum: -9007199254740991
+            maximum: 9007199254740991
+          maximum:
+            description: >-
+              Inclusive upper bound on this field's accepted integer selector value; a submitted
+              value greater than this bound is rejected rather than clamped.
+            type: integer
+            minimum: -9007199254740991
+            maximum: 9007199254740991
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+        properties:
+          type:
+            const: boolean
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - codelist
+          - codelistVersion
+          - maximumBytes
+        properties:
+          type:
+            const: controlled-code
+          codelist:
+            description: >-
+              Path to the bundled codelist artifact a `controlled-code` value must belong
+              to; a missing referenced artifact fails bundle loading.
+            $ref: '#/$defs/relative-path'
+          codelistVersion:
+            description: >-
+              Version this field's `controlled-code` values are pinned to; it must equal the
+              referenced codelist artifact's own version or bundle loading fails.
+            type: string
+            minLength: 1
+            maxLength: 128
+          maximumBytes:
+            type: integer
+            minimum: 1
+            maximum: 8192
+  source:
+    oneOf:
+      - $ref: '#/$defs/http-json-source'
+      - $ref: '#/$defs/sqlite-extract-source'
+  source-connection:
+    type: object
+    additionalProperties: false
+    required: [baseUrl, authentication]
+    properties:
+      baseUrl:
+        description: >-
+          Fixed source origin the runtime constrains exactly as it constrains an inline HTTP
+          source: a canonical host, no user information, path, query or fragment, and a port
+          inside the range a port can hold. When `authentication.type` is `none` the origin
+          narrows further, to one exact numeric-loopback HTTP spelling carrying an explicit
+          in-range port.
+        $ref: '#/$defs/Url'
+        oneOf:
+          - type: string
+            pattern: >-
+              ^https://(?:[A-Za-z0-9.-]+|\[[0-9A-Fa-f:]+\])(?::(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$
+          - type: string
+            pattern: >-
+              ^http://(?:127\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|\[::1\])(?::(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$
+      authentication:
+        description: Complete existing source authentication union, including both OAuth audiences.
+        $ref: '#/$defs/source-authentication'
+      tlsTrustProfile:
+        description: >-
+          Logical additive private-CA profile bound by the runtime document. It is rejected
+          outright when `authentication.type` is `none`.
+        $ref: '#/$defs/local-id'
+      maximumConcurrency:
+        description: Aggregate occupied source calls for this explicit connection in one process.
+        type: integer
+        minimum: 1
+        maximum: 256
+        default: 4
+      admissionTimeoutMilliseconds:
+        description: Maximum bounded wait for aggregate admission or OAuth single-flight refresh.
+        type: integer
+        minimum: 1
+        maximum: 30000
+        default: 5000
+      tokenTimeoutMilliseconds:
+        description: Maximum total duration of one OAuth token request and response body.
+        type: integer
+        minimum: 1
+        maximum: 30000
+        default: 5000
+    allOf:
+      - if:
+          required:
+            - authentication
+          properties:
+            authentication:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  const: none
+        then:
+          properties:
+            baseUrl:
+              type: string
+              pattern: >-
+                ^http://(?:127\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|\[::1\]):(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$
+          not:
+            required:
+              - tlsTrustProfile
+  http-json-source:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - baseUrl
+      - posture
+      - authentication
+      - request
+      - responseSchema
+      - extractScript
+      - factSchema
+    properties:
+      type:
+        description: >-
+          Selects the HTTP-plus-JSON transport, which reaches a fixed HTTPS origin over the
+          network under one request and response contract for method, media type, and body
+          shape. The tag chooses the shape of the whole source, so a key belonging to another
+          transport is an unknown key here rather than an ignored one.
+        const: http-json
+      connection:
+        description: >-
+          Optional explicit sourceConnections owner. Startup rejects differing resolved
+          baseUrl, authentication, tlsTrustProfile or request.maximumConcurrency values.
+        $ref: '#/$defs/local-id'
+      behaviorRevision:
+        description: >-
+          Optional digest of the provider's selected read behavior. It is a reached source
+          dependency; unrelated export provenance stays outside requirement revisions.
+        type: string
+        pattern: '^sha256:[0-9a-f]{64}$'
+      evidence:
+        description: >-
+          Optional signed Evidence protocol on the existing HTTP source channel. The
+          governed contract pins one audience-scoped definition and independently accepted
+          public keys. Rust generates the request nonce, verifies the complete signed
+          answer, and exposes only a values object keyed by the declared concept handles.
+          Requires a fixed POST path ending in /v1/evidence, a required JSON body, forbidden
+          query, no Accept override, no batch or unresolvedProblem declaration, no
+          forwardAccessAttribution, and request-origin selectors only.
+        $ref: '#/$defs/evidence-source'
+      forwardAccessAttribution:
+        description: >-
+          Opts this HTTP source into host-owned forwarding of the verified access requester
+          and request purpose. The Gateway sends bounded base64url-encoded values in the
+          reserved Registry-Access-Requester and Registry-Access-Purpose headers only after
+          authentication, authorization, and selector resolution. Omission is false.
+        type: boolean
+      baseUrl:
+        description: >-
+          Fixed HTTPS origin the source's evidence-data requests target, with no path, query,
+          fragment, user information, or runtime substitution. An HTTP numeric-loopback origin
+          is accepted only when `sources.*.authentication.type` is `none`.
+        $ref: '#/$defs/Url'
+        oneOf:
+          - type: string
+            pattern: ^https://[^/?#]+$
+          - type: string
+            pattern: ^http://(127(\.[0-9]{1,3}){3}|\[::1\])(:[0-9]{1,5})?$
+      posture:
+        description: >-
+          Describes how much of the underlying record crosses the source wire, weakest at
+          `record-transformed` and strongest at `source-derived`. A chained search-then-fetch
+          requirement can claim no stronger minimization than the weaker of its two sources'
+          postures.
+        enum:
+          - source-derived
+          - field-projected
+          - record-transformed
+      unresolvedProblem:
+        description: >-
+          Optional exact source-neutral Problem Details tuple which declares one HTTP 404
+          response as an explicit unresolved lookup outcome. The runtime accepts it only with
+          exactly one application/problem+json Content-Type and an exact duplicate-free
+          six-member Problem Details object whose status, type, and code equal this tuple.
+          Omission preserves the ordinary rule that every HTTP 404 is a dependency failure.
+          This outcome is unavailable for an optimized physical source batch because one
+          response cannot identify the unresolved logical item.
+        type: object
+        additionalProperties: false
+        required: [status, type, code]
+        properties:
+          status: {const: 404}
+          type:
+            type: string
+            format: uri
+            maxLength: 512
+            pattern: ^https://
+          code:
+            type: string
+            minLength: 1
+            maxLength: 64
+            pattern: ^[a-z][a-z0-9._-]{0,63}$
+      tlsTrustProfile:
+        description: >-
+          Logical name resolved to an exact private certificate authority file bound in `runtime.yaml`.
+          Omission trusts only configured system roots, and the profile is rejected outright
+          when `sources.*.authentication.type` is `none`.
+        $ref: '#/$defs/local-id'
+      authentication:
+        description: >-
+          One closed credential profile the runtime presents on this source's outbound calls,
+          distinct from the inbound caller policy at the bundle's top-level `authentication`.
+          Reference members name secrets that resolve only after authorization, durable access
+          audit, and request-parts validation, and no secret reaches a script.
+        $ref: '#/$defs/source-authentication'
+      request:
+        description: >-
+          The one fixed evidence-data request plan for this source; a preparation script,
+          a caller, and a source response hold no authority over method, path, headers, redirects,
+          bounds, or request count.
+        $ref: '#/$defs/fixed-request'
+      responseSchema:
+        description: >-
+          Bundle-relative closed JSON Schema the projected source response must satisfy before
+          `sources.*.extractScript` runs; a response outside this shape fails as a source-protocol
+          error and no script runs. Unlike `sources.*.factSchema`, this schema may require
+          fewer members than it declares and may mark a leaf nullable, because projection
+          can legitimately drop or null a value the record did not carry.
+        $ref: '#/$defs/relative-path'
+      extractScript:
+        description: >-
+          Bundle-relative Rhai script whose two-parameter `extract` function maps the schema-validated
+          projected response and adapter context to a match, no-match, or ambiguous outcome.
+          The script never selects a candidate among multiple records and never turns protocol
+          inconsistency into a closed lookup outcome.
+        $ref: '#/$defs/relative-path'
+      factSchema:
+        description: >-
+          Bundle-relative closed JSON Schema the extraction script's output `facts` must exactly
+          satisfy on a match outcome. Unlike `sources.*.responseSchema`, this schema validates
+          what the script returns, not what the source sent.
+        $ref: '#/$defs/relative-path'
+      batch:
+        description: >-
+          Optional reviewed one-call optimization for the public multi-subject request batch.
+          It is eligible only for a `single` acquisition using this HTTP source's fixed `path`,
+          when the complete item set fits `maximumItems`, and when both bundle and runtime name
+          `source-batch` under `acquisitionCapabilities`. Omission selects ordinary sequential
+          execution. The block cannot change source, method, origin, path, authentication,
+          headers, TLS, redirect, timeout, response-byte, concurrency, or preparation-limit
+          authority.
+        $ref: '#/$defs/http-json-batch'
+    allOf:
+      - if:
+          required:
+            - authentication
+          properties:
+            authentication:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  const: none
+        then:
+          properties:
+            baseUrl:
+              type: string
+              pattern: >-
+                ^http://(?:127\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(?:0|[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|\[::1\]):(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$
+          not:
+            required:
+              - tlsTrustProfile
+      - if:
+          required:
+            - batch
+        then:
+          not:
+            required:
+              - unresolvedProblem
+          properties:
+            request:
+              not:
+                required:
+                  - pathBindings
+      - if:
+          required: [evidence]
+        then:
+          not:
+            anyOf:
+              - required: [batch]
+              - required: [unresolvedProblem]
+          properties:
+            forwardAccessAttribution: {const: false}
+            authentication:
+              properties:
+                type: {not: {const: none}}
+            request:
+              required: [path]
+              properties:
+                method: {const: POST}
+                path: {pattern: '/v1/evidence$'}
+                preparationLimits:
+                  properties:
+                    query: {const: forbidden}
+                    jsonBody: {const: required}
+                fixedHeaders:
+                  items:
+                    properties:
+                      name:
+                        not:
+                          pattern: '^[Aa][Cc][Cc][Ee][Pp][Tt]$'
+  evidence-source:
+    type: object
+    additionalProperties: false
+    required: [contract, trustedJwks, maximumAssertionLifetimeSeconds]
+    properties:
+      contract:
+        description: >-
+          One independently reviewed registry.evidence-definitions/v1 document containing
+          exactly one audience-scoped definition with signed-jws support. Its complete
+          nested shape, unknown-member refusal, identifiers, selector bounds and output
+          contracts are validated by the canonical Evidence definitions validator.
+        type: object
+        additionalProperties: false
+        required: [schema, assuranceProfile, audience, issuedBy, providedBy, definitions]
+        properties:
+          schema: {const: registry.evidence-definitions/v1}
+          assuranceProfile: {enum: [local, production, evidence-grade]}
+          audience: {type: string, format: uri, maxLength: 512}
+          issuedBy: {type: string, format: uri, maxLength: 512}
+          providedBy: {type: string, format: uri, maxLength: 512}
+          maximumHolderBoundBatchSize: {type: integer, minimum: 1, maximum: 16}
+          definitions:
+            type: array
+            minItems: 1
+            maxItems: 1
+            items:
+              $ref: '#/$defs/evidence-source-definition'
+      trustedJwks:
+        description: >-
+          Public keys explicitly accepted before deployment, in a JWKS object. The strict
+          verifier checks their shape and key identifiers. Neither a response nor a live
+          discovery endpoint may replace these keys. Private key members are refused.
+        type: object
+        additionalProperties: false
+        required: [keys]
+        properties:
+          keys: {type: array, minItems: 1, maxItems: 33, items: {$ref: '#/$defs/trusted-service-jwk'}}
+      revokedKeyIds:
+        type: array
+        uniqueItems: true
+        maxItems: 33
+        items: {$ref: '#/$defs/service-key-id'}
+      maximumAssertionLifetimeSeconds: {type: integer, minimum: 1, maximum: 31536000}
+      clockSkewSeconds: {type: integer, minimum: 0, maximum: 300, default: 0}
+  # The signed source uses the public definitions grammar, narrowed to the
+  # audience-scoped signed-JWS form. Runtime validation additionally closes
+  # inter-field relationships before any request is prepared.
+  evidence-source-definition:
+    type: object
+    additionalProperties: false
+    required:
+      - handle
+      - requirement
+      - configurationRevision
+      - kind
+      - evidenceType
+      - purpose
+      - responseFormats
+      - referenceFrameworks
+      - subjects
+      - concepts
+    properties:
+      handle: {type: string, pattern: '^[a-z][a-z0-9._-]{0,127}$'}
+      requirement: {type: string, format: uri, maxLength: 512}
+      configurationRevision:
+        description: >-
+          The revision an assertion for this requirement carries. It covers this
+          requirement's own configuration and artifact closure, so a relying
+          party pins one requirement without depending on the rest of the
+          deployment.
+        type: string
+        pattern: '^sha256:[a-f0-9]{64}$'
+      kind: {enum: [criterion, information-requirement, constraint]}
+      subjectBindingMode:
+        description: >-
+          What the subject bindings in this requirement's assertions are derived
+          under. The vocabulary is closed and carries no default: absence means
+          audience-scoped, stated here so a relying party reading a definition
+          without the key knows the requirement issues audience-scoped
+          assertions and is not reading an omission it has to resolve elsewhere.
+          A definition that does carry the key states the mode explicitly.
+        const: audience-scoped
+      evidenceType: {type: string, format: uri, maxLength: 512}
+      purpose: {type: string, pattern: '^[a-z][a-z0-9._:-]{0,127}$'}
+      responseFormats:
+        type: array
+        minItems: 1
+        maxItems: 4
+        uniqueItems: true
+        items: {enum: [signed-jws, unsigned-json, sd-jwt-vc]}
+        contains: {const: signed-jws}
+      referenceFrameworks:
+        type: array
+        minItems: 1
+        maxItems: 16
+        uniqueItems: true
+        items: {type: string, format: uri, maxLength: 512}
+      subjects:
+        type: array
+        minItems: 1
+        maxItems: 8
+        uniqueItems: true
+        items: {$ref: '#/$defs/evidence-source-subject'}
+      concepts:
+        type: array
+        minItems: 1
+        maxItems: 16
+        uniqueItems: true
+        items: {$ref: '#/$defs/evidence-source-concept'}
+  evidence-source-subject:
+    type: object
+    additionalProperties: false
+    required: [role, cardinality, selector]
+    properties:
+      role: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+      cardinality: {const: one}
+      selector: {$ref: '#/$defs/evidence-source-selector'}
+  evidence-source-selector:
+    type: object
+    additionalProperties: false
+    required: [profile, valueOrigin, fields]
+    properties:
+      profile: {type: string, pattern: '^[a-z][a-z0-9._-]{0,127}$'}
+      valueOrigin:
+        description: >-
+          Only request-origin selectors are accepted. The upstream authenticates this
+          service's own source credential, so it would resolve an authenticated-context or
+          authenticated-grant selector from that credential rather than from the
+          downstream caller's subject.
+        const: request
+      fields:
+        type: array
+        minItems: 1
+        maxItems: 16
+        uniqueItems: true
+        items: {$ref: '#/$defs/evidence-source-selector-field'}
+  evidence-source-selector-field:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required: [type, name, minimumBytes, maximumBytes]
+        properties:
+          type: {const: string}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+          minimumBytes: {type: integer, minimum: 1, maximum: 8192}
+          maximumBytes: {type: integer, minimum: 1, maximum: 8192}
+      - type: object
+        additionalProperties: false
+        required: [type, name]
+        properties:
+          type: {const: date}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+      - type: object
+        additionalProperties: false
+        required: [type, name]
+        properties:
+          type: {const: uuid}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+      - type: object
+        additionalProperties: false
+        required: [type, name, minimum, maximum]
+        properties:
+          type: {const: integer}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+          minimum:
+            {type: integer, minimum: -9007199254740991, maximum: 9007199254740991}
+          maximum:
+            {type: integer, minimum: -9007199254740991, maximum: 9007199254740991}
+      - type: object
+        additionalProperties: false
+        required: [type, name]
+        properties:
+          type: {const: boolean}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+      - type: object
+        additionalProperties: false
+        required: [type, name, scheme, version, maximumBytes]
+        properties:
+          type: {const: controlled-code}
+          name: {type: string, pattern: '^[a-z][a-z0-9._-]{0,63}$'}
+          scheme: {type: string, format: uri, maxLength: 512}
+          version: {type: string, minLength: 1, maxLength: 128}
+          maximumBytes: {type: integer, minimum: 1, maximum: 8192}
+  evidence-source-concept:
+    type: object
+    additionalProperties: false
+    required: [handle, concept, required, form]
+    properties:
+      handle: {type: string, pattern: '^[a-z][a-z0-9._-]{0,127}$'}
+      concept: {type: string, format: uri, maxLength: 512}
+      required: {type: boolean}
+      form:
+        oneOf:
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: boolean}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: integer}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: string}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: date-bucket}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: time-bucket}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: entity-reference}
+          - type: object
+            additionalProperties: false
+            required: [type]
+            properties:
+              type: {const: structured}
+          - type: object
+            additionalProperties: false
+            required: [type, items, minimumItems, maximumItems, unique]
+            properties:
+              type: {const: list}
+              items: {enum: [string, entity-reference]}
+              minimumItems: {type: integer, minimum: 1, maximum: 64}
+              maximumItems: {type: integer, minimum: 1, maximum: 64}
+              unique: {const: true}
+  sqlite-extract-source:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - posture
+      - extractProfile
+      - request
+      - maximumExtractAgeSeconds
+      - responseSchema
+      - extractScript
+      - factSchema
+    properties:
+      type:
+        description: >-
+          Selects the statement transport, which runs one reviewed SQL statement against a
+          read-only SQLite extract file mounted beside the process. There is no origin, no
+          credential, and no network hop, so the keys the HTTP transport needs for those are
+          unknown keys here rather than ignored ones.
+        const: sqlite-extract
+      posture:
+        description: >-
+          Describes how much of the underlying record crosses the source boundary, weakest at
+          `record-transformed` and strongest at `source-derived`. A statement that aggregates
+          in SQL claims `source-derived` honestly, because only the aggregate leaves the
+          statement.
+        enum:
+          - source-derived
+          - field-projected
+          - record-transformed
+      extractProfile:
+        description: >-
+          Logical name resolved to an exact extract file bound in `runtime.yaml` under
+          `sourceExtracts`. The bundle never names a filesystem location, and startup refuses
+          a profile no runtime binds as well as a bound profile no source reads.
+        $ref: '#/$defs/local-id'
+      request:
+        description: >-
+          The one fixed statement plan for this source; a preparation script, a caller, and
+          the extract itself hold no authority over the statement text, the declared columns,
+          the parameters, or the bounds.
+        $ref: '#/$defs/statement-request'
+      maximumExtractAgeSeconds:
+        description: >-
+          Bounds how far the extract's published instant may lag the evaluation instant before
+          the request fails as stale. Staleness tolerance belongs to the bundle because it is a
+          property of the concept being asserted rather than of the deployment, and the runtime
+          reads the published instant from the extract's reserved metadata table, never from
+          the file's modification time.
+        type: integer
+        minimum: 1
+        maximum: 2592000
+      responseSchema:
+        description: >-
+          Bundle-relative closed JSON Schema the projected statement result must satisfy before
+          `sources.*.extractScript` runs; a result outside this shape fails as a source-protocol
+          error and no script runs. Unlike `sources.*.factSchema`, this schema may require
+          fewer members than it declares and may mark a leaf nullable, because a declared column
+          may legitimately be null in the extract.
+        $ref: '#/$defs/relative-path'
+      extractScript:
+        description: >-
+          Bundle-relative Rhai script whose two-parameter `extract` function maps the schema-validated
+          projected result and adapter context to a match, no-match, or ambiguous outcome.
+          The script never selects a candidate among multiple rows and never turns protocol
+          inconsistency into a closed lookup outcome.
+        $ref: '#/$defs/relative-path'
+      factSchema:
+        description: >-
+          Bundle-relative closed JSON Schema the extraction script's output `facts` must exactly
+          satisfy on a match outcome. Unlike `sources.*.responseSchema`, this schema validates
+          what the script returns, not what the statement returned.
+        $ref: '#/$defs/relative-path'
+  source-authentication:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+        properties:
+          type:
+            description: >-
+              Selects which credential the runtime presents to this source and closes the
+              member set to that profile. `none` sends no credential and is admitted only
+              by a `local` assurance bundle at a canonical numeric-loopback origin; production
+              and evidence-grade bundles reject that kind.
+            const: none
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - usernameRef
+          - passwordRef
+        properties:
+          type:
+            const: basic
+          usernameRef:
+            description: >-
+              Logical file-secret reference for the user name half of the HTTP Basic credential
+              the runtime presents to this source.
+            $ref: '#/$defs/SecretReference'
+          passwordRef:
+            description: >-
+              Logical file-secret reference for the password half of the HTTP Basic credential
+              the runtime encodes into the Authorization header of every request to this source.
+            $ref: '#/$defs/SecretReference'
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - tokenRef
+        properties:
+          type:
+            const: static-authorization
+          tokenRef:
+            description: >-
+              Logical file-secret reference for the static token the runtime places in the
+              Authorization header of every request to this source.
+            $ref: '#/$defs/SecretReference'
+          scheme:
+            description: >-
+              Authentication scheme the token is presented under; absent, the runtime sends
+              `Bearer`. RFC 9110 section 11.1 makes the scheme an HTTP token chosen by the
+              origin, and `static-api-key` cannot serve a source that wants another one because
+              it refuses the Authorization header by name.
+            type: string
+            minLength: 1
+            maxLength: 32
+            pattern: ^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - headerName
+          - valueRef
+        properties:
+          type:
+            const: static-api-key
+          headerName:
+            description: >-
+              Names the header carrying this source's API-key value. The name is validated
+              as an HTTP field name and rejected when it collides with authentication, routing,
+              framing, cookie, forwarding, proxy, tracing, or hop-by-hop headers.
+            $ref: '#/$defs/configurable-header-name'
+          valueRef:
+            description: >-
+              Logical file-secret reference for the API-key value the runtime places in `headerName`;
+              the resolved value is bounded and rejects control characters, CR, and LF.
+            $ref: '#/$defs/SecretReference'
+      - type: object
+        description: >-
+          Client-credentials grant with shared-secret client authentication. The secret
+          names the credential and `credentialPlacement` names the channel it travels in,
+          so both are required. There is no assertion, so there is no assertion audience
+          to name.
+        additionalProperties: false
+        required:
+          - type
+          - tokenEndpoint
+          - clientIdRef
+          - clientSecretRef
+          - credentialPlacement
+          - maximumCacheSeconds
+        properties:
+          type:
+            const: oauth2-client-credentials
+          tokenEndpoint:
+            description: >-
+              Fixed endpoint the runtime exchanges client credentials at before calling this
+              source; the exchange is credential bootstrap, never an evidence-data request
+              or a fact source.
+            oneOf:
+              - type: string
+                pattern: ^https://[^?#]+$
+              - type: string
+                pattern: ^http://(127(\.[0-9]{1,3}){3}|\[::1\])(:[0-9]{1,5})?/[^?#]*$
+          clientIdRef:
+            description: >-
+              Logical file-secret reference for the client identifier the runtime presents
+              in the client-credentials exchange at `tokenEndpoint`.
+            $ref: '#/$defs/SecretReference'
+          clientSecretRef:
+            description: >-
+              Logical file-secret reference for the client secret the runtime presents at
+              `tokenEndpoint`; the token URL, body, response, and debug output stay redacted,
+              so the resolved value reaches no log. `credentialPlacement` names the channel
+              it travels in.
+            $ref: '#/$defs/SecretReference'
+          scope:
+            description: >-
+              Fixed scope requested in the client-credentials exchange; a token response reporting
+              a scope other than this one is a credential failure.
+            type: string
+            minLength: 1
+            maxLength: 512
+          audience:
+            description: >-
+              Fixed `audience` form parameter sent with the token request, for an authorization
+              server that keys the issued token to an audience the scope cannot express and
+              returns an unusable token without it. Sent as it stands with no fallback, so a
+              blank value is refused here rather than by the authorization server at readiness.
+            type: string
+            minLength: 1
+            maxLength: 512
+            pattern: \S
+          resource:
+            description: >-
+              Optional RFC 8707 resource indicator sent as a token-request form parameter.
+              It is one governed absolute URI without a fragment or user information and
+              is transmitted exactly as configured. It names the intended resource server;
+              it does not retarget the token endpoint or replace the separate audience
+              parameter or signed client assertion audience.
+            type: string
+            format: uri
+            minLength: 3
+            maxLength: 512
+            pattern: '^[A-Za-z][A-Za-z0-9+.-]*:[A-Za-z0-9._~:/?\[\]@!$&''()*+,;=%-]+$'
+            not:
+              anyOf:
+                - pattern: '^[A-Za-z][A-Za-z0-9+.-]*://[^/?#]*@'
+                - pattern: '%($|[^0-9A-Fa-f]|[0-9A-Fa-f]($|[^0-9A-Fa-f]))'
+          credentialPlacement:
+            description: >-
+              Selects whether the client identifier and secret travel in the Authorization
+              header or the form body of the token request; Version 1 offers no query-string
+              placement, so neither value can reach an authorization-server, proxy, or ingress
+              URL log.
+            enum:
+              - basic-header
+              - form-body
+          maximumCacheSeconds:
+            description: >-
+              Bounds how long one acquired token is reused across evidence requests for this
+              source; the cache lifetime is the smaller of this bound and the provider's reported
+              expiry.
+            type: integer
+            minimum: 0
+            maximum: 86400
+          assumedLifetimeSeconds:
+            description: >-
+              Lifetime credited to an acquired token whose response omits `expires_in`, rather
+              than inferring one from the token. Without this key such a response is a credential
+              failure, and the cached lifetime is still clamped to `maximumCacheSeconds`.
+            type: integer
+            minimum: 1
+            maximum: 86400
+      - type: object
+        description: >-
+          Client-credentials grant with assertion client authentication. The signing key
+          is the whole credential, so a shared secret and a placement for one have
+          nothing to describe.
+        additionalProperties: false
+        required:
+          - type
+          - tokenEndpoint
+          - clientIdRef
+          - clientAssertionKeyRef
+          - maximumCacheSeconds
+        properties:
+          type:
+            const: oauth2-private-key-jwt
+          tokenEndpoint:
+            description: >-
+              Fixed endpoint the runtime exchanges client credentials at before calling this
+              source; the exchange is credential bootstrap, never an evidence-data request
+              or a fact source.
+            oneOf:
+              - type: string
+                pattern: ^https://[^?#]+$
+              - type: string
+                pattern: ^http://(127(\.[0-9]{1,3}){3}|\[::1\])(:[0-9]{1,5})?/[^?#]*$
+          clientIdRef:
+            description: >-
+              Logical file-secret reference for the client identifier the runtime presents
+              in the client-credentials exchange at `tokenEndpoint`.
+            $ref: '#/$defs/SecretReference'
+          clientAssertionKeyRef:
+            description: >-
+              Logical file-secret reference for the private JWK the runtime signs an RFC 7523
+              section 2.2 client assertion with, which is the client authentication SMART on
+              FHIR Backend Services requires. The assertion is audienced to
+              `clientAssertionAudience`, or to `tokenEndpoint` when the bundle names none,
+              and lives 60 seconds and always travels in the form body; no private key
+              leaves the process.
+            $ref: '#/$defs/SecretReference'
+          clientAssertionAudience:
+            description: >-
+              Fixed `aud` claim of the signed client assertion, for an authorization server
+              that expects an identifier it is not reached at, such as its issuer or a host
+              in front of a proxy. Defaults to `tokenEndpoint`. RFC 7523 section 3 has the
+              server compare this by Simple
+              String Comparison, so it is an opaque identifier rather than a URL and is signed
+              byte for byte. It names who may accept the assertion, never where it is sent.
+              A blank value is refused here rather than at the first token request, where
+              signing rejects a whitespace-only audience as empty.
+            type: string
+            minLength: 1
+            maxLength: 512
+            pattern: \S
+          scope:
+            description: >-
+              Fixed scope requested in the client-credentials exchange; a token response reporting
+              a scope other than this one is a credential failure.
+            type: string
+            minLength: 1
+            maxLength: 512
+          audience:
+            description: >-
+              Fixed `audience` form parameter sent with the token request, for an authorization
+              server that keys the issued token to an audience the scope cannot express and
+              returns an unusable token without it. Sent as it stands with no fallback, so a
+              blank value is refused here rather than by the authorization server at readiness.
+            type: string
+            minLength: 1
+            maxLength: 512
+            pattern: \S
+          resource:
+            description: >-
+              Optional RFC 8707 resource indicator sent as a token-request form parameter.
+              It is one governed absolute URI without a fragment or user information and
+              is transmitted exactly as configured. It names the intended resource server;
+              it does not retarget the token endpoint or replace the separate audience
+              parameter or signed client assertion audience.
+            type: string
+            format: uri
+            minLength: 3
+            maxLength: 512
+            pattern: '^[A-Za-z][A-Za-z0-9+.-]*:[A-Za-z0-9._~:/?\[\]@!$&''()*+,;=%-]+$'
+            not:
+              anyOf:
+                - pattern: '^[A-Za-z][A-Za-z0-9+.-]*://[^/?#]*@'
+                - pattern: '%($|[^0-9A-Fa-f]|[0-9A-Fa-f]($|[^0-9A-Fa-f]))'
+          maximumCacheSeconds:
+            description: >-
+              Bounds how long one acquired token is reused across evidence requests for this
+              source; the cache lifetime is the smaller of this bound and the provider's reported
+              expiry.
+            type: integer
+            minimum: 0
+            maximum: 86400
+          assumedLifetimeSeconds:
+            description: >-
+              Lifetime credited to an acquired token whose response omits `expires_in`, rather
+              than inferring one from the token. Without this key such a response is a credential
+              failure, and the cached lifetime is still clamped to `maximumCacheSeconds`.
+            type: integer
+            minimum: 1
+            maximum: 86400
+  http-json-batch:
+    type: object
+    additionalProperties: false
+    required:
+      - maximumItems
+      - prepareScript
+      - extractScript
+      - responseSchema
+      - projection
+    properties:
+      maximumItems:
+        description: >-
+          Largest complete logical request batch this source accepts in one physical call. A
+          larger outer batch uses sequential execution from the start and is never split into
+          optimized sub-batches.
+        type: integer
+        minimum: 1
+        maximum: 16
+      prepareScript:
+        description: >-
+          Bundle-relative Rhai script implementing `prepare_batch/2` over ordered opaque slots
+          and minimized selectors. Its RequestParts output is checked under the ordinary
+          source request's preparationLimits before credentials are resolved.
+        $ref: '#/$defs/relative-path'
+      extractScript:
+        description: >-
+          Bundle-relative Rhai script implementing `extract_batch/2` over the projected,
+          schema-validated response. Rust requires one closed lookup result for every opaque
+          slot and rejects missing, duplicated, extra, negative, or out-of-range slots.
+        $ref: '#/$defs/relative-path'
+      responseSchema:
+        description: >-
+          Bundle-relative closed JSON Schema the batch projection must satisfy before
+          `extract_batch/2` runs. It governs only the optional optimized response and does not
+          replace the ordinary source responseSchema used by sequential execution.
+        $ref: '#/$defs/relative-path'
+      projection:
+        description: >-
+          Allowlist of response leaves Rust retains for optimized batch extraction under the
+          same extended JSON Pointer and projected-input bounds as ordinary extraction.
+        type: array
+        minItems: 1
+        maxItems: 64
+        uniqueItems: true
+        items:
+          type: string
+          minLength: 2
+          maxLength: 256
+          pattern: ^/(?!/)([^/~]|~[01]|/|\*)+$
+  fixed-request:
+    type: object
+    additionalProperties: false
+    required:
+      - method
+      - path
+      - selectorInputs
+      - prepareScript
+      - adapterParameters
+      - adapterParametersSchema
+      - preparationLimits
+      - projection
+      - redirects
+      - attemptTimeoutMilliseconds
+      - maximumResponseBytes
+      - maximumConcurrency
+    properties:
+      method:
+        description: >-
+          Fixes the HTTP method for every request to this source; a `GET` source must also
+          set `preparationLimits.jsonBody` to `forbidden`.
+        enum:
+          - GET
+          - POST
+      path:
+        description: >-
+          Fixed normalized absolute path used for every request to this source: a literal, or
+          a template whose placeholders each occupy one complete segment and are expanded by
+          Rust. A path carrying a scheme, authority, query, fragment, empty segment, or dot
+          segment fails startup.
+        type: string
+        minLength: 2
+        maxLength: 2048
+        pattern: ^/(?!/)[A-Za-z0-9._~!$&'()*+,;=:@%/{\}-]*$
+      pathBindings:
+        description: >-
+          Supplies each `path` placeholder with a Rust-resolved value, and a script chooses
+          neither a binding origin nor a path value. Required exactly when `path` names a
+          placeholder.
+        type: object
+        minProperties: 1
+        maxProperties: 16
+        propertyNames:
+          $ref: '#/$defs/LocalId'
+        additionalProperties:
+          description: >-
+            One placeholder's tagged binding, filling exactly one complete path segment from
+            a value Rust has already validated.
+          $ref: '#/$defs/path-binding'
+      fixedHeaders:
+        description: >-
+          Ordered non-secret header constants sent on every request to this source; a script
+          cannot add, remove, or change a header.
+        type: array
+        maxItems: 32
+        items:
+          description: >-
+            One constant name and value pair added to every request to this source, in the
+            order declared.
+          type: object
+          additionalProperties: false
+          required:
+            - name
+            - value
+          properties:
+            name:
+              description: >-
+                Header field name, rejected at startup when it falls in the authentication,
+                host and routing, cookie, body framing, content length or type, connection,
+                forwarding, proxy, or tracing families Rust owns.
+              $ref: '#/$defs/configurable-header-name'
+            value:
+              description: >-
+                Constant value sent verbatim, with any control character rejected at startup,
+                which closes header injection through configuration.
+              type: string
+              maxLength: 4096
+              pattern: ^[^\u0000-\u001F\u007F-\u009F]*$
+      selectorInputs:
+        description: >-
+          Closes the minimized authorized selector alternatives a preparation script can see;
+          an empty array is accepted only on a fetch source.
+        type: array
+        minItems: 0
+        maxItems: 8
+        items:
+          description: >-
+            One subject role together with the alternative profiles and exact field sets a
+            preparation script may receive for that role.
+          $ref: '#/$defs/selector-input'
+      prepareScript:
+        description: >-
+          Bundle-relative Rhai script implementing `prepare/2`, the only step that turns the
+          minimized authorized selectors, closed parameters, and any prior facts into ordered
+          query pairs and at most one JSON body.
+        $ref: '#/$defs/relative-path'
+      adapterParameters:
+        description: >-
+          Closed non-secret constants supplied to both the preparation and the extraction
+          script, rejected at bundle load when they fall outside `adapterParametersSchema`.
+        type: object
+        maxProperties: 64
+        propertyNames:
+          allOf:
+            - $ref: '#/$defs/ExternalId'
+            - $ref: '#/$defs/parameter-key'
+        additionalProperties:
+          description: >-
+            One constant read by both the preparation and the extraction script, which may
+            itself nest further parameter values.
+          $ref: '#/$defs/adapter-parameter-value'
+      adapterParametersSchema:
+        description: >-
+          Bundle-relative closed JSON Schema for the parameter set, whose required-equals-properties
+          rule turns an undeclared or missing parameter into a startup failure.
+        $ref: '#/$defs/relative-path'
+      preparationLimits:
+        description: >-
+          Channel policy and output bounds Rust applies to the request parts a preparation
+          script returns, all checked before credentials are resolved or the source is contacted.
+        $ref: '#/$defs/preparation-limits'
+      projection:
+        description: >-
+          Allowlist of response leaves Rust retains, alongside the containers needed to reach
+          them, so an extraction script never observes a field the source returned but the
+          bundle did not select.
+        type: array
+        minItems: 1
+        maxItems: 64
+        uniqueItems: true
+        items:
+          description: >-
+            One extended JSON Pointer whose `*` segment visits every element of the current
+            array, with no numeric index, recursive descent, filter, predicate, union, or
+            script-computed path admitted.
+          type: string
+          minLength: 2
+          maxLength: 256
+          pattern: ^/(?!/)([^/~]|~[01]|/|\*)+$
+      redirects:
+        description: >-
+          Refuses to follow a redirect, so a source response cannot move the request to a
+          different origin; a redirect is classed as a transport failure.
+        const: deny
+      attemptTimeoutMilliseconds:
+        description: >-
+          Bounds each phase of one attempt at this source separately, carrying its whole value
+          into every one: concurrency admission, any wait on the token single-flight boundary,
+          and the HTTP exchange. It is not one deadline across the attempt, so an attempt that
+          waits at one phase and then runs the next spends the bound again, and its worst-case
+          wall clock is a multiple of this value rather than this value.
+        type: integer
+        minimum: 1
+        maximum: 30000
+      maximumResponseBytes:
+        description: >-
+          Caps the response body read from this source before parsing and projection, so an
+          oversized response fails as a transport failure rather than being parsed.
+        type: integer
+        minimum: 1
+        maximum: 1048576
+      maximumConcurrency:
+        description: >-
+          Bounds how many evaluations may hold an outbound request to this source at once,
+          and waiting for that admission is bounded by `attemptTimeoutMilliseconds`.
+        type: integer
+        minimum: 1
+        maximum: 256
+    allOf:
+      - if:
+          required:
+            - path
+          properties:
+            path:
+              pattern: '[{}]'
+        then:
+          required:
+            - pathBindings
+        else:
+          not:
+            required:
+              - pathBindings
+      - if:
+          required:
+            - method
+          properties:
+            method:
+              const: GET
+        then:
+          properties:
+            preparationLimits:
+              properties:
+                jsonBody:
+                  const: forbidden
+  statement-request:
+    type: object
+    additionalProperties: false
+    required:
+      - statement
+      - columns
+      - selectorInputs
+      - projection
+      - maximumRows
+      - maximumCellBytes
+      - maximumStatementSteps
+      - attemptTimeoutMilliseconds
+      - maximumResponseBytes
+      - maximumConcurrency
+    properties:
+      statement:
+        description: >-
+          Bundle-relative SQL file holding exactly one statement, hash-identified like every
+          other bundle artifact and reviewed with the bundle. A second statement in the file
+          fails the request, and the statement text is fixed: no caller, script, or extract
+          contributes to it.
+        $ref: '#/$defs/statement-path'
+      columns:
+        description: >-
+          Closes the result shape by naming every column the statement returns and the type
+          each carries, in order. A result whose column count, names, or value types differ
+          fails as a source-protocol error, so a statement edited without its declaration
+          cannot silently change what the extraction script sees.
+        type: array
+        minItems: 1
+        maxItems: 64
+        items:
+          description: >-
+            One declared result column, whose name is unique across the declaration and opaque
+            to Rust.
+          $ref: '#/$defs/statement-column'
+      selectorInputs:
+        description: >-
+          Closes the minimized authorized selector alternatives this source's parameter bindings
+          may draw on; an empty array is accepted only on a source that binds no selector.
+        type: array
+        minItems: 0
+        maxItems: 8
+        items:
+          description: >-
+            One subject role together with the alternative profiles and exact field sets a
+            binding may name for that role.
+          $ref: '#/$defs/selector-input'
+      parameterBindings:
+        description: >-
+          States where each named statement parameter's value comes from, so no value reaches
+          the statement by string substitution. A parameter has one origin and exactly one: a
+          `selector` parameter is filled from the authorized selector field it names and from
+          nothing else, and a `prepared` parameter is filled by the preparation script and by
+          nothing else. A parameter the statement uses and no binding supplies fails the
+          request, as does a binding the statement never names. The reserved name `evidence_now`
+          may not be bound, because Rust binds it.
+        type: object
+        maxProperties: 64
+        propertyNames:
+          allOf:
+            - $ref: '#/$defs/ExternalId'
+            - $ref: '#/$defs/parameter-key'
+        additionalProperties:
+          description: >-
+            One parameter's tagged binding, filling exactly one named statement parameter from
+            a value Rust has already validated.
+          $ref: '#/$defs/statement-parameter-binding'
+      prepareScript:
+        description: >-
+          Bundle-relative Rhai script implementing `prepare/2`. A statement source usually
+          declares neither this nor `preparationLimits`, because most parameters name the
+          selector field they come from; a source declares both together or neither, and only
+          where it also declares a `prepared` parameter for the script to fill.
+        $ref: '#/$defs/relative-path'
+      adapterParameters:
+        description: >-
+          Closed non-secret constants supplied to the extraction script, and to the preparation
+          script when one is declared, rejected at bundle load when they fall outside
+          `adapterParametersSchema`.
+        type: object
+        maxProperties: 64
+        propertyNames:
+          allOf:
+            - $ref: '#/$defs/ExternalId'
+            - $ref: '#/$defs/parameter-key'
+        additionalProperties:
+          description: >-
+            One constant read by the scripts, which may itself nest further parameter values.
+          $ref: '#/$defs/adapter-parameter-value'
+      adapterParametersSchema:
+        description: >-
+          Bundle-relative closed JSON Schema for the parameter set, whose required-equals-properties
+          rule turns an undeclared or missing parameter into a startup failure. A non-empty
+          `adapterParameters` without it fails startup.
+        $ref: '#/$defs/relative-path'
+      preparationLimits:
+        description: >-
+          Output bounds Rust applies to what a preparation script returns, declared with
+          `prepareScript` and never alone.
+        $ref: '#/$defs/statement-preparation-limits'
+      projection:
+        description: >-
+          Restates the statement result shape for the shared projection boundary. It must
+          preserve every declared row column, either through `/rows`, `/rows/*`, or each
+          `/rows/*/<column>` path, and may additionally retain reviewed extract metadata.
+        type: array
+        minItems: 1
+        maxItems: 64
+        uniqueItems: true
+        items:
+          description: >-
+            One extended JSON Pointer whose `*` segment visits every element of the current
+            array, with no numeric index, recursive descent, filter, predicate, union, or
+            script-computed path admitted.
+          type: string
+          minLength: 2
+          maxLength: 256
+          pattern: ^/(?!/)([^/~]|~[01]|/|\*)+$
+      maximumRows:
+        description: >-
+          Caps the rows the statement may return before the request fails, so a statement that
+          matches more broadly than intended fails rather than moving a bulk result into the
+          runtime.
+        type: integer
+        minimum: 1
+        maximum: 256
+      maximumCellBytes:
+        description: >-
+          Caps one returned value, so a single oversized cell fails the request rather than
+          entering the response. A cell far past this bound is refused by the engine, on the
+          length recorded beside it, before its content is read at all.
+        type: integer
+        minimum: 1
+        maximum: 65536
+      maximumStatementSteps:
+        description: >-
+          Caps the virtual-machine steps the statement may take, which bounds work the wall
+          clock does not: a scan that is slow because it is large is stopped by this bound
+          rather than by the timeout.
+        type: integer
+        minimum: 1
+        maximum: 1000000
+      attemptTimeoutMilliseconds:
+        description: >-
+          One absolute deadline for an attempt at this source, covering concurrency admission,
+          blocking-worker queueing, and statement execution. Time spent in an earlier phase
+          reduces what remains for every later phase.
+        type: integer
+        minimum: 1
+        maximum: 30000
+      maximumResponseBytes:
+        description: >-
+          Caps the assembled result before projection, so an oversized result fails rather
+          than being projected.
+        type: integer
+        minimum: 1
+        maximum: 1048576
+      maximumConcurrency:
+        description: >-
+          Bounds how many evaluations may hold a statement against this extract at once, and
+          waiting for that admission is bounded by `attemptTimeoutMilliseconds`.
+        type: integer
+        minimum: 1
+        maximum: 256
+    oneOf:
+      - required:
+          - prepareScript
+          - preparationLimits
+      - not:
+          anyOf:
+            - required:
+                - prepareScript
+            - required:
+                - preparationLimits
+    allOf:
+      - if:
+          required:
+            - adapterParameters
+          properties:
+            adapterParameters:
+              type: object
+              minProperties: 1
+        then:
+          required:
+            - adapterParametersSchema
+      # `evidence_now` is the runtime's own evaluation instant, so a bundle that
+      # bound the name would be choosing a second clock.
+      - properties:
+          parameterBindings:
+            not:
+              required:
+                - evidence_now
+      # A preparation script and a prepared parameter exist for each other. A
+      # script with nothing prepared to fill could only ever return a name the
+      # source refuses, and a prepared parameter with no script could never be
+      # filled, so each is stated only with the other. JSON Schema can say "at
+      # least one binding is prepared" about an object only by refusing the case
+      # where every binding is a selector one, which is what the negations below
+      # are doing.
+      - if:
+          required:
+            - prepareScript
+        then:
+          required:
+            - parameterBindings
+          properties:
+            parameterBindings:
+              not:
+                additionalProperties:
+                  $ref: '#/$defs/statement-selector-parameter-binding'
+      - if:
+          required:
+            - parameterBindings
+          properties:
+            parameterBindings:
+              not:
+                additionalProperties:
+                  $ref: '#/$defs/statement-selector-parameter-binding'
+        then:
+          required:
+            - prepareScript
+  statement-column:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - type
+    properties:
+      name:
+        description: >-
+          Name this column carries into the result object, unique across the declaration and
+          opaque to Rust; it need not equal the column's name in the extract.
+        type: string
+        pattern: ^[a-z][a-z0-9._-]{0,63}$
+      type:
+        description: >-
+          Exact value type Rust admits for this column. A null is admitted for any declared
+          type, and any other mismatch fails as a source-protocol error rather than being
+          coerced.
+        enum:
+          - string
+          - integer
+          - number
+          - boolean
+  statement-parameter-binding:
+    oneOf:
+      - $ref: '#/$defs/statement-selector-parameter-binding'
+      - $ref: '#/$defs/statement-prepared-parameter-binding'
+  statement-selector-parameter-binding:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - role
+      - profile
+      - field
+    properties:
+      type:
+        description: >-
+          Selects the binding origin. This parameter is filled from the authorized selector
+          field named below and from nothing else, so the preparation script cannot stand in
+          for it.
+        const: selector
+      role:
+        description: >-
+          Subject role the value is taken from, which must be one the request's `selectorInputs`
+          declares.
+        $ref: '#/$defs/local-id'
+      profile:
+        description: >-
+          Selector profile the value is taken from, which must be an alternative that role
+          declares.
+        $ref: '#/$defs/local-id'
+      field:
+        description: >-
+          Exact field of that profile whose resolved value Rust binds to the parameter.
+        type: string
+        pattern: ^[a-z][a-z0-9._-]{0,63}$
+  statement-prepared-parameter-binding:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+    properties:
+      type:
+        description: >-
+          Selects the binding origin. This parameter is filled by the preparation script and by
+          nothing else, which is how a value no selector holds, such as a normalized reference
+          or a derived bound, reaches the statement. It names no selector, because naming one
+          would give the parameter a second origin, and the request fails if the script returns
+          no value for it.
+        const: prepared
+  statement-preparation-limits:
+    type: object
+    additionalProperties: false
+    required:
+      - maximumParameters
+      - maximumParameterValueBytes
+    properties:
+      maximumParameters:
+        description: >-
+          Caps how many parameters a preparation script may return.
+        type: integer
+        minimum: 1
+        maximum: 64
+      maximumParameterValueBytes:
+        description: >-
+          Caps one returned parameter value.
+        type: integer
+        minimum: 1
+        maximum: 4096
+  selector-input:
+    type: object
+    additionalProperties: false
+    required:
+      - role
+      - alternatives
+    properties:
+      role:
+        description: >-
+          Subject role this selector input covers, unique across the declaration; the runtime
+          resolves request subjects by role rather than by array position.
+        $ref: '#/$defs/local-id'
+      alternatives:
+        description: >-
+          Closed set of profile and field combinations permitted for the role; the runtime
+          materializes only the combination the matched authority grant carries, never the
+          union of every alternative declared.
+        type: array
+        minItems: 1
+        maxItems: 16
+        items:
+          description: >-
+            One permitted selector profile paired with the exact field subset that alternative
+            exposes.
+          type: object
+          additionalProperties: false
+          required:
+            - profile
+            - fields
+          properties:
+            profile:
+              description: >-
+                Selector profile this alternative admits for the role; a profile absent from
+                `selectorProfiles` is rejected at startup.
+              $ref: '#/$defs/local-id'
+            fields:
+              description: >-
+                Exact subset of the named profile's declared fields this alternative exposes,
+                which is how a consumer is handed less than the authorized selector carries.
+              type: array
+              minItems: 1
+              maxItems: 16
+              uniqueItems: true
+              items:
+                description: >-
+                  One selector field name, which the named profile must declare or the bundle
+                  is rejected at startup.
+                type: string
+                pattern: ^[a-z][a-z0-9._-]{0,63}$
+  path-binding:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - role
+          - profile
+          - field
+        properties:
+          type:
+            description: >-
+              Chooses whether Rust reads the placeholder value from an already authorized
+              selector or from a scalar prior fact, and a prior-fact binding is accepted only
+              on a fetch source.
+            const: selector
+          role:
+            description: >-
+              Subject role whose authorized selector supplies the value; every selector set
+              the request can activate must carry this role and profile, or plan compilation
+              refuses the source.
+            $ref: '#/$defs/local-id'
+          profile:
+            description: >-
+              Selector profile the bound field belongs to; the same role, profile, and field
+              must also be declared in `selectorInputs`, or the source is rejected at startup.
+            $ref: '#/$defs/local-id'
+          field:
+            description: >-
+              Names the selector field or prior-fact property whose value fills the placeholder;
+              a value carrying `/`, `\`, `%`, a control, `.`, or `..` is rejected, which closes
+              path traversal and segment injection.
+            type: string
+            pattern: ^[a-z][a-z0-9._-]{0,63}$
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - field
+        properties:
+          type:
+            const: prior-fact
+          field:
+            type: string
+            pattern: ^[a-z][a-z0-9._-]{0,63}$
+  configurable-header-name:
+    type: string
+    minLength: 1
+    maxLength: 64
+    pattern: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+$
+  parameter-key:
+    type: string
+    pattern: ^[A-Za-z_][A-Za-z0-9._-]{0,127}$
+  adapter-parameter-value:
+    oneOf:
+      - type: boolean
+      - type: integer
+        minimum: -9223372036854775808
+        maximum: 9223372036854775807
+      - type: string
+        maxLength: 16384
+      - type: array
+        maxItems: 256
+        items:
+          description: >-
+            One element of a parameter array, which is a parameter value in turn, so the parameter
+            shape nests rather than flattening.
+          $ref: '#/$defs/adapter-parameter-value'
+      - type: object
+        maxProperties: 256
+        propertyNames:
+          allOf:
+            - $ref: '#/$defs/ExternalId'
+            - $ref: '#/$defs/parameter-key'
+        additionalProperties:
+          description: >-
+            One member of a parameter object, which is a parameter value in turn, so the parameter
+            shape nests rather than flattening.
+          $ref: '#/$defs/adapter-parameter-value'
+  preparation-limits:
+    type: object
+    additionalProperties: false
+    required:
+      - query
+      - jsonBody
+    properties:
+      query:
+        description: >-
+          Decides whether a preparation script may, must, or must not return query pairs,
+          where `required` means at least one pair. Setting this key and `jsonBody` both to
+          `forbidden` fails startup, because one output channel must stay usable.
+        enum:
+          - required
+          - allowed
+          - forbidden
+      jsonBody:
+        description: >-
+          Decides whether a preparation script may, must, or must not return a JSON body,
+          where JSON `null` counts as absent and an empty object or array counts as present.
+        enum:
+          - required
+          - allowed
+          - forbidden
+      maximumQueryPairs:
+        description: >-
+          Caps how many query pairs a preparation script may return, bounding the query string
+          the source receives.
+        type: integer
+        minimum: 1
+        maximum: 64
+      maximumQueryNameBytes:
+        description: >-
+          Caps the length of each query-pair name a preparation script returns, applied before
+          the pair is percent-encoded.
+        type: integer
+        minimum: 1
+        maximum: 64
+      maximumQueryValueBytes:
+        description: >-
+          Caps the length of each query-pair value a preparation script returns, applied before
+          the pair is percent-encoded.
+        type: integer
+        minimum: 1
+        maximum: 4096
+      maximumJsonDepth:
+        description: >-
+          Caps the nesting depth of the prepared JSON body; a deeper body fails preparation
+          and no request is made.
+        type: integer
+        minimum: 1
+        maximum: 32
+      maximumCollectionItems:
+        description: >-
+          Caps the entries in each array and object of the prepared JSON body; a body over
+          the cap fails preparation and no request is made.
+        type: integer
+        minimum: 1
+        maximum: 256
+      maximumStringBytes:
+        description: >-
+          Caps every string a preparation script returns, covering query names and values
+          as well as JSON body strings and member names.
+        type: integer
+        minimum: 1
+        maximum: 16384
+      maximumNormalizedBytes:
+        description: >-
+          Caps the serialized size of the complete request parts, query pairs and body together,
+          so the outbound request stays bounded whichever channel a script fills.
+        type: integer
+        minimum: 1
+        maximum: 65536
+    not:
+      properties:
+        query:
+          const: forbidden
+        jsonBody:
+          const: forbidden
+      required:
+        - query
+        - jsonBody
+  authority-profile:
+    type: object
+    additionalProperties: false
+    required:
+      - kind
+      - requesterTags
+      - grants
+    properties:
+      kind:
+        description: >-
+          Declared basis of authority for this profile's grants; a request whose verified
+          token carries an actor claim matches only a `delegated` profile.
+        enum:
+          - statutory
+          - organizational
+          - consent
+          - delegated
+          - explicit-request
+      actorKind:
+        description: >-
+          Restrict this authority profile to the verified actor kind. An agent without
+          a task grant must use a profile explicitly bound to agent. Normalized target
+          authority must explicitly name a kind inside the definition's actor ceiling;
+          omission cannot turn that ceiling into wildcard authority.
+        enum: [human, agent, service]
+      requesterTags:
+        description: >-
+          Complete tag set the claim named by `authentication.requesterTagsClaim` must contain
+          for this profile to match, so adding a tag narrows the profile rather than widening
+          it.
+        type: array
+        minItems: 1
+        maxItems: 32
+        uniqueItems: true
+        items:
+          description: >-
+            One tag that must be present in the verified claim; differentiated requirements,
+            purposes, or `valueClaims` are expressed by issuing different tags rather than
+            by naming individual clients.
+          $ref: '#/$defs/local-id'
+      requesterClients:
+        description: >-
+          Exact verified OAuth clients allowed to exercise this profile's authenticated-grant
+          paths. Required and nonempty when any subject uses authenticated-grant.
+        type: array
+        minItems: 1
+        maxItems: 32
+        uniqueItems: true
+        items: {type: string, minLength: 1, maxLength: 128}
+      grantSourceIssuer:
+        description: >-
+          Exact trusted issuer that supplied the immutable task-grant context before token
+          exchange. Required when any subject uses authenticated-grant.
+        $ref: '#/$defs/uri'
+      grants:
+        description: >-
+          Complete set of authorized paths this requester class has. Permissions are never
+          unioned across grants, so one grant must cover an entire request on its own.
+        type: array
+        minItems: 1
+        maxItems: 128
+        items:
+          description: >-
+            One authorized path, binding a single requirement, a single purpose, the audience
+            origin, and the referenced requirement's complete subject-role set.
+          type: object
+          additionalProperties: false
+          required:
+            - requirement
+            - purpose
+            - audienceFrom
+            - subjects
+          properties:
+            requirement:
+              description: >-
+                The one requirement this path authorizes, named by its exact requirement URI;
+                a requirement no bundle entry declares fails startup.
+              $ref: '#/$defs/uri'
+            purpose:
+              description: >-
+                The one purpose this path authorizes, matched exactly against the request
+                purpose; a purpose the referenced requirement does not declare fails startup.
+              type: string
+              pattern: ^[a-z][a-z0-9._:-]{0,127}$
+            audienceFrom:
+              description: >-
+                Binds the assertion audience to the requester's verified evidence audience
+                claim, so the public request cannot name another audience. For a normalized
+                definition the resolved audience must also fit its authored audience ceiling
+                before selector values, credentials or sources are accessed.
+              const: authenticated-requester
+            responseFormats:
+              description: >-
+                Serializations this path permits, defaulting to signed JWS alone when omitted.
+                Unsigned and SD-JWT VC output each require both the bundle-level `responseFormats`
+                and the one matched grant to permit them. Holder-bound grants may name only
+                SD-JWT forms; the mandatory signed-JWS package format does not widen this grant.
+              type: array
+              minItems: 1
+              maxItems: 4
+              uniqueItems: true
+              items: {enum: [signed-jws, unsigned-json, sd-jwt-vc, sd-jwt-vc-batch]}
+            subjectBindingModes:
+              description: >-
+                Subject-binding modes this path permits, defaulting to audience-scoped alone when
+                omitted or empty. Permitting a serialization is not permitting a binding mode:
+                a path widened to `sd-jwt-vc` gains no right to issue holder-bound assertions
+                until that mode is named here. A path may name `holder-bound` alone, which
+                permits nothing else.
+              type: array
+              maxItems: 2
+              uniqueItems: true
+              items:
+                description: >-
+                  One binding mode this path permits, which is the operator half of a two-sided
+                  gate; a requirement declaring a mode no grant for it permits is unreachable
+                  and is rejected at startup.
+                $ref: '#/$defs/subject-binding-mode'
+            subjects:
+              description: >-
+                Authorization for the referenced requirement's complete subject-role set;
+                a grant that omits a declared role, or repeats one, fails startup.
+              type: array
+              minItems: 1
+              maxItems: 8
+              items:
+                description: >-
+                  Authorization for one subject role, fixing which selector profile identifies
+                  the subject and where that subject's selector values may originate.
+                type: object
+                additionalProperties: false
+                required:
+                  - role
+                  - selectorProfile
+                  - valueOrigin
+                properties:
+                  role:
+                    description: >-
+                      Names the requirement subject role this authorization covers; a role
+                      the requirement's `subjectRoles` does not declare fails startup, and
+                      no role may appear twice in one grant.
+                    $ref: '#/$defs/local-id'
+                  selectorProfile:
+                    description: >-
+                      The selector profile whose field set identifies this role's subject;
+                      a profile the requirement's `subjectRoles` entry does not permit for
+                      the role fails startup.
+                    $ref: '#/$defs/local-id'
+                  valueOrigin:
+                    description: >-
+                      Fixes where this role's selector values originate. A `request` origin
+                      takes values from the closed public request and prohibits `valueClaims`;
+                      `authenticated-context` rejects caller values and reads the exact `valueClaims`
+                      map; `authenticated-grant` reads that same map and additionally requires a
+                      verified grant whose trusted source issuer, requester client, purpose, and
+                      Evidence requirement bound match exactly one authority profile.
+                    enum:
+                      - authenticated-context
+                      - authenticated-grant
+                      - request
+                  valueClaims:
+                    description: >-
+                      Maps every field of the named selector profile to the claim path in
+                      the verified access token that supplies that field's value. Missing,
+                      extra, duplicate-target, or invalid claim paths fail startup.
+                    type: object
+                    minProperties: 1
+                    maxProperties: 16
+                    propertyNames:
+                      $ref: '#/$defs/LocalId'
+                    additionalProperties:
+                      description: >-
+                        Claim path resolved only from the strictly verified access token,
+                        so a caller-supplied selector, grant reference, or approval value
+                        cannot supply the field.
+                      $ref: '#/$defs/claim-path'
+                allOf:
+                  - if:
+                      required:
+                        - valueOrigin
+                      properties:
+                        valueOrigin:
+                          enum:
+                            - authenticated-context
+                            - authenticated-grant
+                    then:
+                      required:
+                        - valueClaims
+                  - if:
+                      required:
+                        - valueOrigin
+                      properties:
+                        valueOrigin:
+                          const: request
+                    then:
+                      not:
+                        required:
+                          - valueClaims
+  acquisition:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - source
+        properties:
+          type:
+            description: >-
+              Selects this requirement's closed acquisition shape, and therefore how many
+              fixed source calls the runtime issues; a gated kind serves only where the bundle
+              and the deployment both name it under `acquisitionCapabilities`.
+            const: single
+          source:
+            description: >-
+              Read only when `acquisition.type` is `single`; the one configured source this
+              requirement queries in its single fixed call.
+            $ref: '#/$defs/local-id'
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - search
+          - fetch
+        properties:
+          type:
+            const: search-then-fetch
+          search:
+            description: >-
+              Read when `acquisition.type` is `search-then-fetch` or `search-then-fetch-set`;
+              names the first-stage source, and the runtime aborts before the fetch stage
+              unless this call resolves to exactly one match.
+            $ref: '#/$defs/local-id'
+          fetch:
+            description: >-
+              Read when `acquisition.type` is `search-then-fetch` or `search-then-fetch-set`;
+              the fixed second-stage source, or the ordered array of member sources, invoked
+              after the search resolves and never chosen from response content.
+            $ref: '#/$defs/local-id'
+          onFetchNoMatch:
+            description: >-
+              Selects how an absent optional fetch record is reported. The default preserves
+              dependency failure; unavailable returns evidence.unavailable and an Unresolved
+              audit decision. Ambiguity and transport failures remain dependency failures.
+            enum: [dependency-failure, unavailable]
+            default: dependency-failure
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - search
+          - fetch
+          - maximumAcquisitionMilliseconds
+        properties:
+          type:
+            const: search-then-fetch-set
+          search:
+            $ref: '#/$defs/local-id'
+          fetch:
+            type: array
+            minItems: 2
+            maxItems: 4
+            items:
+              description: >-
+                One declared fetch member of a `search-then-fetch-set` acquisition, called
+                in the order the array declares and reached only after the search resolves
+                to a unique schema-valid match. Members must be distinct from each other and
+                from the search source.
+              type: object
+              additionalProperties: false
+              required:
+                - source
+                - factInputs
+              properties:
+                source:
+                  description: >-
+                    The one configured source this member calls, fixed by the bundle like
+                    every other acquisition source.
+                  $ref: '#/$defs/local-id'
+                factInputs:
+                  description: >-
+                    Allowlist of validated search facts this member receives, and the only
+                    search-derived data reaching it through any channel, including the body
+                    its preparation builds.
+                  type: array
+                  minItems: 1
+                  maxItems: 16
+                  uniqueItems: true
+                  items:
+                    description: >-
+                      One search fact name this member is permitted to read, which the search
+                      source's fact schema must require or the bundle is rejected at startup.
+                    type: string
+                    pattern: ^[a-z][a-z0-9._-]{0,63}$
+          maximumAcquisitionMilliseconds:
+            description: >-
+              Ceiling on the whole acquisition, covering the search, every declared member,
+              and the transitions between stages; exceeding it fails the requirement as a
+              dependency failure and never cancels a durable audit append.
+            type: integer
+            minimum: 1
+            maximum: 30000
+  requirement:
+    type: object
+    additionalProperties: false
+    required:
+      - handle
+      - uri
+      - kind
+      - acquisition
+      - purposes
+      - subjectRoles
+      - referenceFrameworks
+      - evidenceType
+      - validitySeconds
+      - derivation
+      - concepts
+      - disclosureGuard
+      - existenceDisclosure
+    properties:
+      question:
+        description: Human-facing presentation; excluded from the definition behavior revision.
+        type: string
+        minLength: 1
+        maxLength: 2048
+      grantCeiling:
+        description: >-
+          Package-owned authority, actor, value-origin and audience ceilings. The definition's
+          purposes, subject-role selector profiles, representations and subjectBinding supply
+          the remaining dimensions. A target grant can narrow the complete tuple only.
+        type: object
+        additionalProperties: false
+        required: [authorities, actorKinds, valueOrigins, audiences]
+        properties:
+          authorities:
+            type: array
+            minItems: 1
+            maxItems: 5
+            uniqueItems: true
+            items: {enum: [statutory, organizational, consent, delegated, explicit-request]}
+          actorKinds:
+            type: array
+            minItems: 1
+            maxItems: 3
+            uniqueItems: true
+            items: {enum: [human, agent, service]}
+          valueOrigins:
+            type: array
+            minItems: 1
+            maxItems: 3
+            uniqueItems: true
+            items: {enum: [request, authenticated-context, authenticated-grant]}
+          audiences:
+            type: array
+            minItems: 1
+            maxItems: 32
+            uniqueItems: true
+            items: {$ref: '#/$defs/uri'}
+      representations:
+        description: >-
+          Definition-specific serialization ceiling inside the package responseFormats.
+          The one complete target grant and binding mode must also permit the selected format.
+        type: array
+        minItems: 1
+        maxItems: 4
+        uniqueItems: true
+        items: {enum: [signed-jws, unsigned-json, sd-jwt-vc, sd-jwt-vc-batch]}
+        x-runtime-validation: Each format must be permitted by the definition binding mode.
+      handle:
+        description: >-
+          Stable local authoring, inspection and generated-code identifier for this definition.
+          Public requests select its exact Requirement URI; this handle is not a substitute
+          wire identity and is never inferred from that URI.
+        $ref: '#/$defs/local-id'
+      uri:
+        description: >-
+          Stable requirement URI a public request names to select this requirement; the runtime
+          looks up requirements by this exact value and no other.
+        $ref: '#/$defs/uri'
+      kind:
+        description: >-
+          Requirement classification carried unchanged into every assertion issued for this
+          requirement.
+        enum:
+          - criterion
+          - information-requirement
+          - constraint
+      subjectBinding:
+        description: >-
+          What this requirement's subject bindings are derived under; omission means
+          `audience-scoped`, which is what every requirement written before this key existed
+          did. A `holder-bound` requirement is rejected at startup unless the bundle and at
+          least one grant for it both permit a serialization the mode allows, which is
+          `sd-jwt-vc` or `sd-jwt-vc-batch`, and unless none of its concepts uses an
+          entity-reference value form, whose pointer only the audience it was scoped to
+          could resolve.
+        $ref: '#/$defs/subject-binding-mode'
+      acquisition:
+        description: >-
+          Fixes this requirement's complete source-request shape to one call over a single
+          source, or to a fixed sequence of calls named here; no response content chooses
+          a different source or an additional call.
+        $ref: '#/$defs/acquisition'
+      purposes:
+        description: >-
+          Closed set of purpose codes this definition can be requested under. One complete
+          target grant must bind an allowed purpose with every declared subject role, selector
+          profile and value origin. Package validity does not itself create target authority.
+        type: array
+        minItems: 1
+        maxItems: 32
+        uniqueItems: true
+        items:
+          description: >-
+            One purpose code eligible for this requirement; an authority-profile grant must
+            name this exact code before a request under it is authorized.
+          type: string
+          pattern: ^[a-z][a-z0-9._:-]{0,127}$
+      subjectRoles:
+        description: >-
+          Complete set of subject positions this requirement resolves; incoming request array
+          order carries no meaning, and resolved subjects are always canonicalized to this
+          array's declaration order before signing.
+        type: array
+        minItems: 1
+        maxItems: 8
+        items:
+          description: >-
+            One subject position this requirement resolves; a request supplying a different
+            number of subjects, a duplicate role, or a role this requirement does not declare
+            is unauthorized.
+          type: object
+          additionalProperties: false
+          required:
+            - role
+            - cardinality
+            - selectorProfiles
+          properties:
+            role:
+              description: >-
+                Deployment-chosen identifier distinguishing this subject position from the
+                requirement's others; requests, grants, and derivation inputs all address
+                the position by this exact value, never by array position.
+              type: string
+              pattern: '^[a-z][a-z0-9._-]{0,63}$'
+            cardinality:
+              description: >-
+                Fixes this subject position to a single resolved value; Evidence Version 1
+                defines no plural or list-valued role.
+              const: one
+            selectorProfiles:
+              description: >-
+                Selector profiles permitted for this subject position; every one of them must
+                be reachable by some authority-profile grant for every code in `purposes`,
+                or the bundle fails to load.
+              type: array
+              minItems: 1
+              maxItems: 16
+              uniqueItems: true
+              items:
+                description: >-
+                  One selector profile id permitted for this position; it must name an entry
+                  in the bundle's `selectorProfiles` map, or the bundle fails to load.
+                $ref: '#/$defs/local-id'
+      referenceFrameworks:
+        description: >-
+          Governed legal or procedural framework URIs carried as a whole into every assertion
+          issued for this requirement.
+        type: array
+        minItems: 1
+        maxItems: 16
+        uniqueItems: true
+        items:
+          description: >-
+            One governed framework URI in that set, copied unchanged into the assertion alongside
+            its siblings; the runtime does not select or rank among them.
+          $ref: '#/$defs/uri'
+      evidenceType:
+        description: >-
+          Exact Evidence Type URI placed in every assertion issued for this requirement; it
+          must be unique across the bundle, and a duplicate rejects the bundle at startup.
+        $ref: '#/$defs/uri'
+      observationTimezone:
+        description: >-
+          IANA timezone resolving `legal_local_date` and `legal_local_time` from the runtime-supplied
+          `observed_at` instant; an unrecognized name fails validation, and omitting the field
+          resolves both values in UTC instead.
+        type: string
+        minLength: 1
+        maxLength: 128
+      validitySeconds:
+        description: >-
+          Sets the assertion's validity window measured from `issuedAt`; the bundle fails
+          to load if this exceeds `signing.maximumAssertionValiditySeconds`.
+        type: integer
+        minimum: 1
+        maximum: 31536000
+      derivation:
+        description: >-
+          Determines which Rhai script computes the requirement's concept values as `derive/3`,
+          and what minimized selector inputs and closed typed parameters that script is allowed
+          to see.
+        type: object
+        additionalProperties: false
+        required:
+          - script
+          - parameters
+        properties:
+          script:
+            description: >-
+              Bundle-relative Rhai script compiled at startup to expose the requirement's
+              `derive/3` entry point before the runtime reaches readiness.
+            $ref: '#/$defs/relative-path'
+          selectorInputs:
+            description: >-
+              Optional closed set of authorized selector roles the derivation may read; omission
+              means `derive/3` receives an empty selector map.
+            type: array
+            maxItems: 8
+            items:
+              description: >-
+                Declares one subject role the derivation may read, together with the closed
+                profile alternatives permitted for that role; only the alternative matching
+                the authorized request subject reaches `derive/3`.
+              $ref: '#/$defs/selector-input'
+          parameters:
+            description: >-
+              Closed set of adopter-named parameter values available to the requirement's
+              derivation; the map cannot carry secrets or runtime authority.
+            type: object
+            maxProperties: 32
+            propertyNames:
+              $ref: '#/$defs/LocalId'
+            additionalProperties:
+              description: >-
+                One named parameter's value, closed to a bounded string, a safe integer, a
+                boolean, one typed canonical decimal, or a bounded array of decimal bucket
+                boundaries whose own bounds reuse that same typed-decimal shape.
+              $ref: '#/$defs/parameter-value'
+      concepts:
+        description: >-
+          Declares the complete, closed set of values this requirement's assertion may disclose;
+          a value the derivation produces under an identifier absent from this list fails
+          evaluation instead of being disclosed.
+        type: array
+        minItems: 1
+        maxItems: 16
+        items:
+          description: >-
+            One value the requirement may disclose, corresponding to exactly one `cccev:InformationConcept`,
+            and becoming one entry of the assertion's supported values when the derivation
+            produces that value.
+          type: object
+          additionalProperties: false
+          required:
+            - handle
+            - uri
+            - type
+            - required
+          properties:
+            handle:
+              description: >-
+                Stable application-facing key for this output in typed client
+                result maps. It is governed explicitly and is never inferred
+                from the concept URI.
+              $ref: '#/$defs/local-id'
+            uri:
+              description: >-
+                Stable identifier that names this concept as `providesValueFor` in the assertion
+                and, unless an `sdJwtVc.claim` override is declared, is also the concept's
+                claim name in the SD-JWT VC serialization.
+              $ref: '#/$defs/uri'
+            type:
+              enum:
+                - boolean
+                - controlled-code
+                - controlled-category
+                - bounded-identifier
+                - bounded-integer
+                - bounded-decimal
+                - date-bucket
+                - time-bucket
+                - audience-scoped-entity-reference
+                - controlled-code-list
+                - entity-reference-list
+                - reviewed-structured-value
+            required:
+              description: >-
+                Whether the derivation must produce a value for this concept; a missing required
+                concept fails the whole evaluation, and a missing optional concept is left
+                out of the disclosed supported values.
+              type: boolean
+            constraints:
+              description: >-
+                Closed bounds a derived value must satisfy before it is accepted into evidence;
+                the `allOf` branch below that matches the concept's `type` fixes their exact shape.
+            sdJwtVc:
+              description: >-
+                Optional per-concept projection that the concept declaration may set only
+                for `reviewed-structured-value` concepts, selecting how that structured value's
+                fields are exposed as SD-JWT VC disclosures.
+              $ref: '#/$defs/sd-jwt-vc-concept-projection'
+          allOf:
+            - oneOf:
+                - properties:
+                    type:
+                      description: >-
+                        Selects the concept's closed value shape, which fixes the exact set
+                        of keys `constraints` must declare and no others.
+                      const: boolean
+                    constraints:
+                      description: >-
+                        Closed, form-specific bounds a derived value must satisfy before it
+                        is accepted into evidence; which keys apply is fixed entirely by the
+                        concept's `type`.
+                      $ref: '#/$defs/boolean-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: controlled-code
+                    constraints:
+                      $ref: '#/$defs/controlled-code-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: controlled-category
+                    constraints:
+                      $ref: '#/$defs/controlled-category-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: bounded-identifier
+                    constraints:
+                      $ref: '#/$defs/bounded-identifier-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: bounded-integer
+                    constraints:
+                      $ref: '#/$defs/bounded-integer-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: bounded-decimal
+                    constraints:
+                      $ref: '#/$defs/bounded-decimal-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: date-bucket
+                    constraints:
+                      $ref: '#/$defs/bucket-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: time-bucket
+                    constraints:
+                      $ref: '#/$defs/bucket-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: audience-scoped-entity-reference
+                    constraints:
+                      $ref: '#/$defs/entity-reference-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: controlled-code-list
+                    constraints:
+                      $ref: '#/$defs/controlled-code-list-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: entity-reference-list
+                    constraints:
+                      $ref: '#/$defs/entity-reference-list-constraints'
+                - required:
+                    - constraints
+                  properties:
+                    type:
+                      const: reviewed-structured-value
+                    constraints:
+                      $ref: '#/$defs/reviewed-structured-value-constraints'
+            - if:
+                required:
+                  - sdJwtVc
+              then:
+                properties:
+                  type:
+                    const: reviewed-structured-value
+      fixtures:
+        description: >-
+          Bundle-relative path to this requirement's sanitized fixture suite; omitting it
+          is accepted only under `assuranceProfile: local`, and `production` or `evidence-grade`
+          refuse to load without it and its complete case coverage.
+        $ref: '#/$defs/relative-path'
+      disclosureGuard:
+        description: >-
+          Binds this requirement's release to the reviewed disclosure families a human combined-disclosure
+          review has already assessed.
+        type: object
+        additionalProperties: false
+        required:
+          - families
+        properties:
+          families:
+            description: >-
+              Non-empty set of those reviewed family URIs; sharing even one family with another
+              enabled requirement rejects the whole bundle at startup.
+            type: array
+            minItems: 1
+            maxItems: 16
+            uniqueItems: true
+            items:
+              description: >-
+                One reviewed disclosure-family URI; this exact value, not what it represents,
+                is what the startup check compares for reuse across requirements.
+              $ref: '#/$defs/uri'
+      existenceDisclosure:
+        description: >-
+          Governs the outward shape of an unresolved outcome: the runtime returns one identical
+          public problem whether the subject was absent, ambiguous, or found with inconsistent
+          derivation inputs, so a caller cannot distinguish the cause from the response.
+        enum:
+          - collapse-unresolved
+  boolean-constraints:
+    type: object
+    additionalProperties: false
+    maxProperties: 0
+  controlled-code-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - codelist
+      - codelistVersion
+      - maximumBytes
+    properties:
+      codelist:
+        description: >-
+          Bundle-relative path to the closed codelist artifact whose entries fix exact membership
+          for `controlled-code`, `controlled-category`, and `controlled-code-list` concepts,
+          validated at startup.
+        $ref: '#/$defs/relative-path'
+      codelistVersion:
+        description: >-
+          Version tag paired with `codelist` for `controlled-code` and `controlled-code-list`
+          concepts that must exactly equal the referenced codelist artifact's own declared
+          version, or the bundle fails to load.
+        type: string
+        minLength: 1
+        maxLength: 128
+      maximumBytes:
+        description: >-
+          Caps the disclosed byte length of a `controlled-code`, `controlled-category`, or
+          `audience-scoped-entity-reference` concept's value; a value or projected reference
+          longer than the cap fails validation instead of being truncated.
+        type: integer
+        minimum: 1
+        maximum: 8192
+  bounded-identifier-constraints:
+    description: >-
+      A source-owned immutable identifier is disclosed as an exact JSON string. Its ASCII
+      prefix is fixed by the governed bundle; the nonempty suffix begins with an ASCII
+      letter or digit and then contains only ASCII letters, digits, dots, underscores, or
+      hyphens. The full string must fit the declared UTF-8 byte bounds.
+    type: object
+    additionalProperties: false
+    required: [prefix, minimumBytes, maximumBytes]
+    properties:
+      prefix:
+        description: >-
+          Exact ASCII prefix ending in a dot, underscore, hyphen, colon, slash, or hash.
+          It may contain only ASCII letters, digits, and those six separators.
+        type: string
+        minLength: 1
+        maxLength: 512
+        pattern: '^[A-Za-z0-9._:/#-]*[._:/#-]$'
+      minimumBytes:
+        type: integer
+        minimum: 1
+        maximum: 1024
+      maximumBytes:
+        type: integer
+        minimum: 1
+        maximum: 1024
+  controlled-category-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - categoryScheme
+      - schemeVersion
+      - codelist
+      - maximumBytes
+    properties:
+      categoryScheme:
+        description: >-
+          URI naming the reviewed category vocabulary a `controlled-category` concept's value
+          must belong to; matched against `schemeVersion` and `codelist` at startup, it enforces
+          exact category membership and rejects any unreviewed category.
+        $ref: '#/$defs/uri'
+      schemeVersion:
+        description: >-
+          Version tag that must exactly equal a referenced codelist artifact's own declared
+          version at startup; pairs with `categoryScheme` for `controlled-category` concepts
+          and with `bucketScheme` for `date-bucket` and `time-bucket` concepts.
+        type: string
+        minLength: 1
+        maxLength: 128
+      codelist:
+        $ref: '#/$defs/relative-path'
+      maximumBytes:
+        type: integer
+        minimum: 1
+        maximum: 8192
+  bounded-integer-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - minimum
+      - maximum
+    properties:
+      minimum:
+        description: >-
+          Inclusive lower bound paired with `maximum` for `bounded-integer` and `bounded-decimal`
+          concepts; a derived value under it fails evaluation instead of being disclosed.
+        type: integer
+        minimum: -9007199254740991
+        maximum: 9007199254740991
+      maximum:
+        description: >-
+          Inclusive upper bound paired with `minimum` for `bounded-integer` and `bounded-decimal`
+          concepts; a derived value over it fails evaluation instead of being disclosed.
+        type: integer
+        minimum: -9007199254740991
+        maximum: 9007199254740991
+  bounded-decimal-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - minimum
+      - maximum
+      - maximumScale
+    properties:
+      minimum:
+        $ref: '#/$defs/canonical-decimal-text'
+      maximum:
+        $ref: '#/$defs/canonical-decimal-text'
+      maximumScale:
+        description: >-
+          Upper bound on the number of fractional digits accepted for a `bounded-decimal`
+          concept's derived value; a finer scale fails validation instead of being rounded.
+        type: integer
+        minimum: 0
+        maximum: 9
+  canonical-decimal-text:
+    type: string
+    pattern: ^-?(0|[1-9][0-9]*)(\.[0-9]*[1-9])?$
+  bucket-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - bucketScheme
+      - schemeVersion
+    properties:
+      bucketScheme:
+        description: >-
+          URI naming the reviewed bucket scheme for a `date-bucket` or `time-bucket` concept;
+          paired with `schemeVersion`, `bucketScheme` resolves to exactly one codelist artifact,
+          so only the matched bucket code is disclosed and the underlying date, instant, or
+          duration never appears in the assertion.
+        $ref: '#/$defs/uri'
+      schemeVersion:
+        type: string
+        minLength: 1
+        maxLength: 128
+  entity-reference-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - maximumBytes
+    properties:
+      maximumBytes:
+        type: integer
+        minimum: 1
+        maximum: 8192
+  controlled-code-list-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - codelist
+      - codelistVersion
+      - minimumItems
+      - maximumItems
+      - unique
+    properties:
+      codelist:
+        $ref: '#/$defs/relative-path'
+      codelistVersion:
+        type: string
+        minLength: 1
+        maxLength: 128
+      minimumItems:
+        description: >-
+          Inclusive lower bound paired with `maximumItems` on how many items a `controlled-code-list`
+          or `entity-reference-list` concept discloses; a shorter derived list fails validation.
+        type: integer
+        minimum: 1
+        maximum: 64
+      maximumItems:
+        description: >-
+          Inclusive upper bound paired with `minimumItems` on how many items a `controlled-code-list`
+          or `entity-reference-list` concept discloses; a longer derived list fails validation.
+        type: integer
+        minimum: 1
+        maximum: 64
+      unique:
+        description: >-
+          Requires every item in a `controlled-code-list` or `entity-reference-list` concept's
+          disclosed list to be pairwise distinct; a duplicate item fails validation instead
+          of being deduplicated or disclosed twice.
+        const: true
+  entity-reference-list-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - minimumItems
+      - maximumItems
+      - unique
+    properties:
+      minimumItems:
+        type: integer
+        minimum: 1
+        maximum: 64
+      maximumItems:
+        type: integer
+        minimum: 1
+        maximum: 64
+      unique:
+        const: true
+  reviewed-structured-value-constraints:
+    type: object
+    additionalProperties: false
+    required:
+      - schema
+      - maximumSerializedBytes
+    properties:
+      schema:
+        description: >-
+          URI resolving to exactly one closed JSON Schema artifact in the immutable bundle
+          that a `reviewed-structured-value` concept's fields are validated against; the schema
+          closes every property, so unexpected or additional JSON in the derived value fails
+          validation.
+        $ref: '#/$defs/uri'
+      maximumSerializedBytes:
+        description: >-
+          Caps the serialized JSON byte length of a `reviewed-structured-value` concept's
+          entire disclosed object; an oversized derived value fails validation before signing.
+        type: integer
+        minimum: 1
+        maximum: 65536
+  sd-jwt-vc-concept-projection:
+    type: object
+    additionalProperties: false
+    required:
+      - claim
+      - disclosure
+    properties:
+      claim:
+        description: >-
+          Public claim name substituted for the concept identifier in the SD-JWT VC response;
+          it must be unique within the requirement and cannot collide with a profile-owned
+          claim.
+        type: string
+        pattern: ^[A-Za-z][A-Za-z0-9_]{0,63}$
+      disclosure:
+        description: >-
+          Fixes where the structured value's field-level disclosures are exposed in the SD-JWT
+          VC claim set: as an always-visible top-level object under `sdJwtVc.claim`.
+        const: top-level
+  parameter-value:
+    oneOf:
+      - type: string
+        maxLength: 1024
+      - type: integer
+        minimum: -9007199254740991
+        maximum: 9007199254740991
+      - type: boolean
+      - $ref: '#/$defs/decimal-value'
+      - type: array
+        minItems: 1
+        maxItems: 64
+        items:
+          description: >-
+            One decimal bucket boundary in an ordered array parameter, evaluated by the `bucket_number`
+            primitive to classify a derived decimal into the matching boundary's code; each
+            lower bound must equal the previous boundary's upper bound, and a gap fails validation
+            at startup.
+          $ref: '#/$defs/bucket-boundary'
+  decimal-value:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - value
+    properties:
+      type:
+        description: >-
+          Literal `decimal` discriminator marking the typed-decimal form, required wherever
+          that form appears and present only alongside `value`.
+        const: decimal
+      value:
+        description: >-
+          Canonical decimal text of the typed-decimal form, restricted to exact finite decimal
+          text with no exponent, no leading zero, and no trailing fractional zero.
+        type: string
+        pattern: ^-?(0|[1-9][0-9]*)(\.[0-9]*[1-9])?$
+  bucket-boundary:
+    type: object
+    additionalProperties: false
+    required:
+      - minimumInclusive
+      - maximumExclusive
+      - code
+    properties:
+      minimumInclusive:
+        description: >-
+          Inclusive lower bound of this boundary's half-open interval, expressed with the
+          same typed-decimal shape as a scalar parameter value.
+        $ref: '#/$defs/decimal-value'
+      maximumExclusive:
+        description: >-
+          Exclusive upper bound of this boundary's half-open interval, expressed with the
+          same typed-decimal shape as a scalar parameter value.
+        $ref: '#/$defs/decimal-value'
+      code:
+        description: >-
+          Output code returned when a derived decimal falls inside this boundary's interval;
+          duplicate codes across the array fail validation at startup.
+        type: string
+        pattern: ^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$
+bundle_layout:
+  root: evidence.yaml
+  allowed_directories:
+    - adapters
+    - derivations
+    - schemas
+    - codelists
+    - fixtures
+    - public-keys
+  symlinks: prohibited
+  path_escape: prohibited
+  unknown_files: prohibited
+atomic_revision:
+  digest: sha256 over a canonical sorted path manifest plus exact file bytes
+  trust: Established by operator deployment controls, not by the digest itself.
+  lifetime: >-
+    Mounted read-only and loaded once; reload, merge, mutation, fallback, and partial serving
+    are prohibited.
+startup_checks:
+  - Unique stable identifiers and no dangling references.
+  - Complete role/profile/origin/authority/source bindings.
+  - >-
+    Secret references resolve without expanding values into YAML or diagnostics.
+  - >-
+    Scripts compile and use only the Version 1 ABI and primitive allowlist.
+  - Schemas and codelists are closed, versioned, bounded, and referenced.
+  - >-
+    Each reviewed structured-value schema URI resolves to exactly one schema artifact by its
+    `$id`; missing, duplicate, unreferenced, or open schemas fail startup.
+  - >-
+    Each date- or time-bucket scheme URI and version resolves to exactly one reviewed codelist
+    artifact; missing, duplicate, or unreferenced schemes fail startup.
+  - >-
+    Fixtures cover positive, negative, boundary, missing, no-match, ambiguous, source failure,
+    and anti-reconstruction cases. When an initial HTTP source declares unresolvedProblem, one
+    data-free declaredUnresolved case may satisfy both no-match and ambiguous coverage because
+    the upstream contract has already collapsed those states; the fixture carries no lookup
+    label or Problem Details members.
+  - >-
+    The complete simultaneously enabled requirement set passes disclosure-combination review.
+  - >-
+    No two enabled requirements share a disclosureGuard family; a shared family rejects the
+    bundle regardless of purposes, audiences, requester entitlements, or rate limits.
+  - >-
+    Each context-derived or grant-derived subject has valueClaims whose keys exactly equal
+    the named selector profile field set; missing, extra, duplicate-target, or invalid claim
+    paths fail startup.
+  - Request-derived subjects have no valueClaims.
+  - >-
+    Request preparation receives only the closed selectorInputs alternatives and the exact
+    adapter context of parameters plus empty or validated prior facts; it cannot choose transport
+    authority, path-binding origin, headers, credentials, or request count.
+  - >-
+    Configured authority claim names are distinct and none names a registered JWT claim; `sub`
+    is permitted for principalClaim alone, because it already carries the principal. A repeated
+    or shadowing name would read one verified token member as something the issuer wrote for
+    another purpose.
+  - >-
+    For authenticated-grant origin, the complete shared task-grant claim set must be present and
+    unexpired. The signed principal, client, resource, source issuer, purpose, authority, and
+    Evidence requirement bound must exactly match verified request context and the selected
+    profile before selector resolution. A present malformed grant cannot fall back to a standing
+    profile.
+  - >-
+    Required signing, audit, credential, and source dependencies are ready.
+  - >-
+    The active and published public JWK files are public-only exact ES256 P-256 JWKs whose
+    43-character kid equals their RFC 7638 thumbprint; paths, kids, and key material are unique
+    and no revoked identifier is active, published, or served.
+  - >-
+    The active plus published set contains at most 33 keys. A published predecessor remains
+    available for the maximum assertion validity plus clock skew, unless emergency revocation
+    requires immediate removal and denylisting.
+  - >-
+    The runtime signer matches the governed active public JWK exactly and passes a startup
+    sign-and-verify test; local assurance uses local-jwk and production or evidence-grade
+    uses Transit.
+  - >-
+    Every secret reference uses the closed file-secret grammar and is resolved beneath runtime.yaml
+    secretProviders.file.root.
+  - >-
+    Fixed path and path-template forms are mutually exclusive and every template placeholder
+    has exactly one tagged selector or prior-fact binding. Prior-fact bindings are allowed
+    only on fetch sources and must name a scalar property required by every preceding search
+    fact schema.
+  - ? >-
+      Every selector set an authority grant can activate for a source carries each role and
+      profile that source's selector path bindings require. The sets are derived one per grant,
+      so covering a bound role across their union is not enough
+    : >-
+      a single grant omitting one yields a set with no value to substitute, which fails startup
+      rather than every request that grant would serve.
+  - >-
+    Fixed headers and static API-key header names reject authentication, routing, framing,
+    cookie, forwarding, proxy, tracing, and hop-by-hop collisions after ASCII case folding.
+  - >-
+    Extended JSON Pointer projections are non-empty, uniquely decoded, and reject duplicate
+    or overlapping ancestor, descendant, and wildcard paths.
+  - >-
+    Every source preparation, extraction, and derivation selector-input contract is closed
+    and cross-referenced to the exact authorized role/profile/field set.
+secret_policy:
+  permitted: >-
+    Secret references matching the exact secret-reference grammar only: `secret:file/name`
+    logical names, and `secret:env/NAME` variable names, which resolve only when the runtime
+    enables secretProviders.environment.
+  prohibited: >-
+    private key, password, bearer token, client secret, or expanded environment value in any
+    bundle file
+  oauth_placement_rule: >-
+    Client credentials travel in the Authorization header or the token request body only.
+    There is no query-string placement, so no credential can reach a token URL, and the token
+    URL, body, response, and debug output are still fully redacted.
+  file_provider_rule: >-
+    Resolve secret:file logical names beneath the configured owner-controlled file root, reject
+    symlinks and path traversal, require regular owner-only files, and parse values as data.
+  environment_provider_rule: >-
+    Resolve secret:env names from the process environment only when the runtime declares
+    secretProviders.environment; a bundle reference naming the environment is refused at
+    startup otherwise, and values are parsed as data.
+  environment_expression_rule: >-
+    The bundle is parsed as written. A `${...}` environment expression in any bundle key or
+    string value is refused at startup, naming the field and never the expression;
+    substitution applies to runtime.yaml only.
+deployment_rules:
+  authentication: >-
+    Evidence independently validates the bearer token against exact configured issuer, audience,
+    token type, algorithm, and JWKS; upstream identity headers are ignored and rejected if
+    mapped
+  audit: >-
+    keyed pseudonymization remains governed and every audit gate is fail closed; the audit
+    destination, path, rotation size, and retention come only from runtime.yaml
+  rate_limit_labels: >-
+    principal and authority use scoped pseudonyms; raw selector values are never labels or
+    keys
+  source_urls: >-
+    HTTPS is required except explicit HTTP numeric loopback on 127.0.0.0/8 or ::1 for deterministic
+    local mocks; Rust parses IP and port strictly and rejects userinfo, DNS localhost aliases,
+    non-loopback HTTP, invalid octets, fragments, and URL ambiguity
+  runtime_split: >-
+    runtime.yaml cannot override any field in this schema; the two closed documents have independent
+    digests and immutable startup lifetimes

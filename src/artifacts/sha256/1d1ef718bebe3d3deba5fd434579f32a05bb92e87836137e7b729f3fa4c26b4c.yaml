@@ -1,0 +1,486 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://id.registrystack.org/schemas/evidence/runtime/runtime.v1alpha1.schema.json
+title: Evidence closed operator runtime configuration Version 1
+type: object
+additionalProperties: false
+required:
+  - apiVersion
+  - kind
+  - package
+  - listener
+  - secretProviders
+  - signer
+  - audit
+  - outboundTls
+properties:
+  apiVersion:
+    description: >-
+      Names the grammar this runtime document is written in; the loader refuses any other
+      value, so a future incompatible runtime shape is never read as if it were this one.
+    const: id.registrystack.org/formats/evidence/runtime/v1alpha1
+  kind:
+    description: >-
+      Names the document type; together with `apiVersion` it tells an Evidence runtime file
+      apart from any other product's runtime configuration.
+    const: EvidenceRuntimeConfig
+  package:
+    description: >-
+      Selects the one governed package this process verifies and loads at startup; no alternate,
+      overlay, or fallback package path exists for a running deployment.
+    type: object
+    additionalProperties: false
+    required:
+      - root
+    properties:
+      root:
+        description: >-
+          Absolute path of the governed package directory this process verifies and loads.
+        $ref: '#/$defs/absolute-path'
+      expectedDigest:
+        description: >-
+          Optional `sha256:` digest of the package's `SHA256SUMS` file. When set, startup is
+          refused unless the verified package found at `package.root` has exactly this digest.
+        $ref: '#/$defs/Digest'
+  authority:
+    description: >-
+      Selects the separately governed target authority store captured at startup. Required
+      for a normalized project package and forbidden as an authority override of a legacy
+      package. Activation commits one validated snapshot and durable history atomically;
+      the running process keeps its captured authority until a controlled restart.
+    type: object
+    additionalProperties: false
+    required: [root, target]
+    properties:
+      root:
+        description: Absolute owned directory containing the committed authority-state.json.
+        $ref: '#/$defs/absolute-path'
+      target:
+        description: Exact governed target identifier matched by the activated authority document.
+        $ref: '#/$defs/LocalId'
+  listener:
+    description: >-
+      Groups the network binding and per-request admission limits for the process's evidence
+      endpoint; `metricsListener`, when present, is an entirely separate binding with its
+      own limits.
+    type: object
+    additionalProperties: false
+    required:
+      - bind
+      - tlsTermination
+      - trustProxyIdentityHeaders
+      - maximumRequestBytes
+      - maximumConcurrentRequests
+      - requestTimeoutMilliseconds
+      - shutdownGraceMilliseconds
+    properties:
+      bind:
+        description: >-
+          Numeric socket address the evidence API listens on, written `host:port`, with an
+          IPv6 host in brackets (`[addr]:port`). The default `private-address` exposure accepts
+          a loopback, RFC 1918 private IPv4, or RFC 4193 unique-local IPv6 host. The explicit
+          `container-private` exposure additionally accepts the unspecified IPv4 or IPv6
+          wildcard for a container network confined by the operator. Multicast, public, and
+          hostname values are prohibited in both modes, and port `0`, which would ask the
+          kernel for an arbitrary ephemeral port instead of naming one, is refused.
+        $ref: '#/$defs/socket-address'
+        x-runtime-validation: >-
+          Parsed as a socket address and its host checked together with
+          listener.networkExposure. Wildcards require the explicit container-private value;
+          public addresses remain prohibited.
+      networkExposure:
+        description: >-
+          Declares the operator-owned network boundary around the listener. Absent preserves
+          the private-address contract used by existing runtime files. container-private permits
+          a wildcard bind only for a container network whose ingress and TLS termination are
+          controlled by the operator; it does not enable public or direct-TLS serving.
+        type: string
+        enum:
+          - private-address
+          - container-private
+        default: private-address
+      tlsTermination:
+        description: >-
+          Declares that TLS terminates at an operator-controlled upstream in front of this
+          listener; the runtime accepts no other value and exposes no direct-TLS or `insecure`
+          mode of its own.
+        const: operator-controlled-upstream
+      trustProxyIdentityHeaders:
+        description: >-
+          Fixes the listener to ignore proxy-supplied identity headers; authenticated identity
+          and authority always come from the verified access token, never from a header a
+          network intermediary can set.
+        const: false
+      maximumRequestBytes:
+        description: >-
+          Caps accepted request body size; a request whose declared or actual length exceeds
+          this bound is rejected as malformed before evidence evaluation begins.
+        type: integer
+        minimum: 1024
+        maximum: 1048576
+      maximumConcurrentRequests:
+        description: >-
+          Sizes the fixed admission semaphore for concurrent evidence requests; a request
+          that cannot acquire a slot within `listener.requestTimeoutMilliseconds` receives
+          a service-unavailable response instead of queuing without bound.
+        type: integer
+        minimum: 1
+        maximum: 4096
+      requestTimeoutMilliseconds:
+        description: >-
+          Bounds admission-slot acquisition and request-body collection; once protected evaluation
+          starts, this timer no longer cancels it, and source and OIDC boundaries carry their
+          own separate limits.
+        type: integer
+        minimum: 1
+        maximum: 30000
+      shutdownGraceMilliseconds:
+        description: >-
+          Operational target for graceful shutdown to finish within; it does not cancel a
+          request already inside protected evaluation, so audit and signing invariants complete
+          even if shutdown outlives this grace period.
+        type: integer
+        minimum: 1
+        maximum: 120000
+  metricsListener:
+    description: >-
+      Optional operator-only telemetry listener serving GET /metrics. Absent means the deployment
+      serves no metrics endpoint, which is the default. This listener is a separate binding from
+      the evidence listener and is not described by the public evidence contract.
+    type: object
+    additionalProperties: false
+    required:
+      - bind
+    properties:
+      bind:
+        description: >-
+          Numeric socket address for the optional metrics listener, written `host:port`. The
+          host must be a loopback, RFC 1918 private IPv4, or RFC 4193 unique-local IPv6
+          address; unspecified, multicast, public, and hostname values are prohibited, port
+          `0` is refused, and the address must not repeat the evidence listener's binding.
+        $ref: '#/$defs/socket-address'
+        x-runtime-validation: >-
+          Parsed as a socket address and accepted only when Rust classifies its host as
+          loopback, private IPv4, or unique-local IPv6.
+    x-runtime-validation: >-
+      Rejected at startup when the bind address repeats the evidence listener binding.
+  secretProviders:
+    description: >-
+      Enables the providers a secret reference may resolve through; it supplies storage
+      locations only, and which secret each governed field names is fixed by the bundle, not
+      by this section. At least one provider is declared, and a bundle reference naming a
+      provider this section does not enable is refused at startup.
+    type: object
+    additionalProperties: false
+    minProperties: 1
+    properties:
+      file:
+        description: >-
+          Enables the file-based secret provider and names its root directory; every
+          `secret:file/name` reference resolves beneath this one path.
+        type: object
+        additionalProperties: false
+        required:
+          - root
+        properties:
+          root:
+            description: >-
+              Absolute base directory every `secret:file/name` reference resolves beneath;
+              each name is one bounded path component opened relative to this root, and the
+              opened file is checked for type, ownership, mode, and link count before its
+              bytes are read.
+            $ref: '#/$defs/absolute-path'
+      environment:
+        description: >-
+          Enables `secret:env/NAME` references, read from the process environment when a
+          request needs them. It takes no settings and is written `environment: {}`; absent
+          means no reference may name the environment.
+        type: object
+        additionalProperties: false
+        maxProperties: 0
+  signer:
+    description: >-
+      Binds the process to the private-key transport that produces every signature over the
+      bundle's governed active public key; it can select and configure that transport but
+      cannot change the governed key set or signing algorithm.
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - privateKeyRef
+        properties:
+          type:
+            description: >-
+              Selects the signer transport for this deployment: `local-jwk` resolves a file-provider
+              secret directly, `transit` calls a workload-local signing proxy over a Unix
+              socket; only the kind matching the bundle's assurance profile is accepted at
+              startup.
+            const: local-jwk
+          privateKeyRef:
+            description: >-
+              Names the file-provider secret holding the local signing private key material,
+              read only when `signer.type` is `local-jwk`; the value is a reference, and configuration
+              never carries the key bytes themselves.
+            $ref: '#/$defs/SecretReference'
+      - type: object
+        additionalProperties: false
+        required:
+          - type
+          - unixSocketPath
+          - mount
+          - keyName
+          - keyVersion
+          - attemptTimeoutMilliseconds
+        properties:
+          type:
+            const: transit
+          unixSocketPath:
+            description: >-
+              Absolute Unix socket path used to reach the workload-local Transit signing proxy;
+              the runtime supplies no provider token over this connection, because token custody
+              and renewal stay with the proxy.
+            $ref: '#/$defs/absolute-path'
+          mount:
+            description: >-
+              Names the Transit secrets-engine mount this signer calls; it is a path segment
+              in the local Transit-proxy request URL, not a filesystem location.
+            $ref: '#/$defs/local-id'
+          keyName:
+            description: >-
+              Names the specific key within `signer.mount` this signer calls; combined with
+              `signer.mount` and `signer.keyVersion`, it reaches exactly one pinned Transit
+              key.
+            $ref: '#/$defs/local-id'
+          keyVersion:
+            description: >-
+              Pins signing to one exact Transit key version rather than a `latest` alias,
+              so a provider-side rotation cannot silently replace the key bytes behind an
+              unchanged `kid`.
+            type: integer
+            minimum: 1
+            maximum: 4294967295
+          attemptTimeoutMilliseconds:
+            description: >-
+              Bounds how long the runtime waits on each call to the Transit signing proxy;
+              because a `transit` signer keeps no local fallback key, a call that exceeds
+              this bound fails the request rather than blocking it indefinitely.
+            type: integer
+            minimum: 1
+            maximum: 30000
+  audit:
+    description: >-
+      Chooses where this process writes its audit entries through the shared platform audit
+      writer; the pseudonymization key and its version are governed by the bundle's `audit`
+      section, not by this one. Every audit gate is fail closed on either destination.
+    type: object
+    additionalProperties: false
+    properties:
+      destination:
+        description: >-
+          `file`, the default, appends each entry durably to `path` under a single-writer lock
+          and rotates and prunes sealed files; `stdout` writes each entry as one line on
+          standard output for a collector that owns durability, rotation, and retention.
+        enum:
+          - file
+          - stdout
+      path:
+        description: >-
+          Absolute path to the active append-only JSON Lines audit file on durable,
+          operator-owned storage; required for the `file` destination and refused for
+          `stdout`. This physical destination is process-local and is not chosen by the
+          bundle.
+        $ref: '#/$defs/absolute-path'
+      rotateBytes:
+        description: >-
+          Size at which the active file is sealed and a fresh one opened; defaults to
+          104857600 (100 MiB). File destination only.
+        type: integer
+        minimum: 1048576
+        maximum: 4294967295
+      retentionDays:
+        description: >-
+          Age in days after which a sealed file is deleted when the writer opens or rotates;
+          defaults to 90. The active file is never deleted. File destination only.
+        type: integer
+        minimum: 1
+        maximum: 36500
+    if:
+      required:
+        - destination
+      properties:
+        destination:
+          const: stdout
+    then:
+      not:
+        anyOf:
+          - required:
+              - path
+          - required:
+              - rotateBytes
+          - required:
+              - retentionDays
+    else:
+      required:
+        - path
+  outboundTls:
+    description: >-
+      Groups outbound TLS trust for calls to configured sources; it can add private certificate
+      authorities through named trust profiles but carries no setting to weaken hostname verification
+      or skip TLS.
+    type: object
+    additionalProperties: false
+    required:
+      - systemRoots
+      - trustProfiles
+    properties:
+      systemRoots:
+        description: >-
+          Fixes the system certificate authority store as always trusted for outbound calls;
+          because Version 1 has no way to disable it, a source's or the access-token issuer's
+          public certificate must still chain to a trusted root even when a private trust
+          profile also applies.
+        const: true
+      trustProfiles:
+        description: >-
+          Closed map of private certificate-authority bundles a source or the access-token
+          issuer may reference by logical id; the set of ids present here must exactly match
+          the `tlsTrustProfile` names the bundle's sources and `authentication` declare, with
+          no extra or missing profile.
+        type: object
+        maxProperties: 64
+        propertyNames:
+          $ref: '#/$defs/LocalId'
+        additionalProperties:
+          description: >-
+            One named private trust profile, binding a logical id a `tlsTrustProfile`
+            reference names to the certificate-authority bundle used only for the outbound
+            connections of the source or access-token issuer that names it.
+          type: object
+          additionalProperties: false
+          required:
+            - caBundleFile
+          properties:
+            caBundleFile:
+              description: >-
+                Absolute path to one bounded PEM file of trust anchors, loaded and validated
+                at startup; changing its bytes requires a restart before the new trust anchors
+                can be used.
+              $ref: '#/$defs/absolute-path'
+  sourceExtracts:
+    description: >-
+      Closed map of process-local extract files a source may read by logical name; the set of
+      names present here must exactly match the `extractProfile` names the bundle's extract
+      sources declare, with no extra or missing name. Omission binds none, which is what a
+      runtime file for a bundle with no extract source says.
+    type: object
+    maxProperties: 64
+    propertyNames:
+      $ref: '#/$defs/LocalId'
+    additionalProperties:
+      description: >-
+        One named extract binding, joining a logical name a source's `extractProfile` reference
+        declares to the process-local file that holds it, so the reviewed bundle names what it
+        reads and the operator decides where that file sits.
+      type: object
+      additionalProperties: false
+      required:
+        - path
+      properties:
+        path:
+          description: >-
+            Absolute path to one read-only regular file, validated at startup and digested
+            without being read into memory; it must be neither a symbolic link nor writable,
+            because the statement executor opens it as immutable. Startup binds the exact file
+            identity and content digest for the process lifetime.
+          $ref: '#/$defs/absolute-path'
+  acquisitionCapabilities:
+    description: >-
+      Gated acquisition kinds and source-call optimizations this deployment enables, the
+      operator half of the same two-sided gate the bundle declares. Omission and an explicit
+      empty list both enable nothing.
+    type: array
+    maxItems: 2
+    uniqueItems: true
+    items:
+      description: >-
+        One gated acquisition kind or source-call optimization this deployment permits. A
+        bundle needing an acquisition kind absent here is refused before the listener binds;
+        an absent optimization is never selected.
+      enum:
+        - search-then-fetch-set
+        - source-batch
+    x-runtime-validation: >-
+      A bundle whose requirement needs a gated acquisition kind, or whose HTTP source carries a
+      batch block, is refused at startup when the corresponding capability is absent from this
+      list, before the deployment serves anything.
+$defs:
+  Digest:
+    type: string
+    pattern: ^sha256:[0-9a-f]{64}$
+    description: 'A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.'
+  LocalId:
+    type: string
+    pattern: ^[a-z][a-z0-9_-]{0,63}$
+    description: 'A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.'
+  local-id:
+    type: string
+    pattern: ^[a-z][a-z0-9._-]{0,127}$
+  SecretReference:
+    type: string
+    pattern: ^(?:secret:env/[A-Z][A-Z0-9_]{0,127}|secret:file/[a-z][a-z0-9._-]{0,127})$
+    description: 'An exact secret reference: secret:file/name, resolved under secretProviders.file.root, or secret:env/NAME, resolved only when secretProviders.environment is declared.'
+  socket-address:
+    description: >-
+      A numeric `host:port` socket address with a non-zero port, the host in brackets when
+      it is IPv6.
+    type: string
+    minLength: 1
+    maxLength: 128
+    pattern: ^(?:[0-9]{1,3}(?:\.[0-9]{1,3}){3}|\[[0-9A-Fa-f:.]+\]):(?!0+$)[0-9]{1,5}$
+  absolute-path:
+    type: string
+    minLength: 2
+    maxLength: 512
+    pattern: ^/(?!/)(?!.*(?:^|/)\.\.?(?:/|$))[^\\\u0000]+$
+ownership:
+  governed_fields: prohibited
+  allowed:
+    - bundle package root and optional expected revision
+    - listener binding and process limits
+    - optional operator metrics listener binding
+    - enabled secret providers and the file-secret root
+    - signer binding to a local private JWK or workload-local Transit proxy
+    - audit destination, path, rotation size, and retention
+    - logical private-CA file bindings
+    - logical source-extract file bindings
+    - >-
+      optional enabled acquisition capabilities, which widen nothing a bundle did not already
+      declare
+  overrides: prohibited
+startup:
+  unknown_keys: rejected at every level
+  mutability: >-
+    runtime.yaml and bound CA files are captured read-only once; reload, merge, fallback,
+    and partial serving are prohibited
+  substitution: >-
+    `${NAME}` and `${NAME:-default}` expressions in string values are substituted from the
+    process environment after parsing; they are refused inside secret references and inside
+    secretProviders
+  trust_profiles: >-
+    names must exactly equal the logical tlsTrustProfile names the governed bundle's sources
+    and authentication use
+  secrets: >-
+    values and provider tokens are never parsed into or included in the runtime document
+  signer: >-
+    local assurance requires local-jwk; production and evidence-grade require Transit through
+    an absolute Unix socket. Transit key version is pinned and no provider token is supplied
+    to Evidence.
+  proxy: >-
+    HTTP_PROXY, HTTPS_PROXY, ALL_PROXY, and NO_PROXY are ignored; no application-level proxy
+    field exists
+platform:
+  supported: Unix
+  reason: >-
+    Version 1 requires Unix owner, mode, no-follow, link-count, and file-identity guarantees
+    for the runtime file, the package directory and its artifacts, named CA bundle files, the
+    secret root, source extracts, individual secrets, and the audit file destination.

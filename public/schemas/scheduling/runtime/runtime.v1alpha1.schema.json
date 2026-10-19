@@ -234,7 +234,7 @@
         },
         {
           "additionalProperties": false,
-          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.",
+          "description": "Fetch the key set from this absolute `https` URI, skipping discovery.\nA plain `http` URI is accepted on loopback for supervised local\ndevelopment, and beyond loopback only when the issuer block sets\n`allowInsecureHttp`.",
           "properties": {
             "type": {
               "const": "uri",
@@ -293,6 +293,11 @@
       "additionalProperties": false,
       "description": "The access tokens this runtime accepts: the issuer and its keys, the\nclients admitted, and the scopes each route family requires.",
       "properties": {
+        "allowInsecureHttp": {
+          "default": false,
+          "description": "Permit plain HTTP beyond loopback to the configured issuer and to a\nJWKS URI declared in configuration. TLS remains required unless the\noperator explicitly accepts this transport risk.",
+          "type": "boolean"
+        },
         "allowedClients": {
           "description": "Client identifiers whose access tokens are admitted. Required in every\nfile; an omitted or empty list, a repeated client, and `unrestricted`\nare refused.",
           "items": {
@@ -330,13 +335,13 @@
           "type": "string"
         },
         "explainScope": {
-          "default": "scheduling-explain",
+          "default": "scheduling:explain",
           "description": "The scope the separately authorized explain path requires.",
           "type": "string"
         },
         "issuer": {
           "$ref": "#/$defs/Url",
-          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL."
+          "description": "Exact issuer accepted in access-token `iss` claims, an absolute\n`https` URL, or a plain `http` URL when `allowInsecureHttp` is set."
         },
         "jwksSource": {
           "$ref": "#/$defs/JwksSource",
@@ -346,12 +351,13 @@
           "description": "Where the issuer's signing keys come from. Absent reads the issuer's\nOpenID Connect discovery document."
         },
         "readsScope": {
-          "default": "scheduling-read",
+          "default": "scheduling:read",
           "description": "The scope every listing and availability read requires.",
           "type": "string"
         },
         "scopeClaim": {
-          "default": "registry_scopes",
+          "default": "scope",
+          "description": "The claim carrying the accepted OAuth scopes.",
           "type": "string"
         }
       },
@@ -422,11 +428,11 @@
       "additionalProperties": false,
       "description": "Retention periods the retention sweep enforces. Every value is deployment\nconfiguration, never policy: a jurisdiction's retention schedule approves\nthe deployed numbers, and changing one is an operational event.",
       "properties": {
-        "attemptReceiptRetentionDays": {
+        "claimOwnerRetentionDays": {
           "default": 7,
-          "description": "How long a stored idempotency receipt stays replayable, from one\nthrough 65535 days.",
+          "description": "How long raw ownership remains after an appointment ends or is\ncancelled, or a hold expires, is released, or is consumed.",
           "format": "uint32",
-          "maximum": 65535,
+          "maximum": 365,
           "minimum": 1,
           "type": "integer"
         },
@@ -435,6 +441,14 @@
           "description": "Lifetime of canonical hook envelopes retained for retry and\ndead-letter inspection, from one through thirty days.",
           "format": "uint32",
           "maximum": 30,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "receiptRetentionDays": {
+          "default": 7,
+          "description": "How long a stored idempotency receipt stays replayable, from one\nthrough 365 days.",
+          "format": "uint32",
+          "maximum": 365,
           "minimum": 1,
           "type": "integer"
         }
@@ -495,10 +509,6 @@
           "$ref": "#/$defs/SecretReference",
           "description": "PEM CA bundle for the authority and its token endpoint. Omitted, the\nplatform's trusted roots verify them."
         },
-        "caseworkResource": {
-          "$ref": "#/$defs/ExternalId",
-          "description": "The audience the runtime requests its status credential for, an\nabsolute resource URI."
-        },
         "clientAssertionAudience": {
           "$ref": "#/$defs/ExternalId"
         },
@@ -517,6 +527,10 @@
           "description": "The status route appended to `baseUrl`'s path. It starts with `/` and\nhas exactly one whole `{grantId}` segment; every other segment uses\nonly letters, digits, `-`, `.`, `_`, and `~`. Omitted,\n`/v1/task-grants/{grantId}/status`.",
           "type": "string"
         },
+        "statusResource": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "The audience the runtime requests its status credential for, an\nabsolute resource URI."
+        },
         "statusScope": {
           "$ref": "#/$defs/ExternalId",
           "default": "casework:grants:status",
@@ -533,7 +547,7 @@
         "clientAssertionAudience",
         "clientId",
         "privateKeyRef",
-        "caseworkResource"
+        "statusResource"
       ],
       "type": "object"
     },

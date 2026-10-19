@@ -2,7 +2,7 @@
   "id": "https://id.registrystack.org/problems/registry-breg/request/plan_refused",
   "type": "https://id.registrystack.org/problems/registry-breg/request/plan_refused",
   "kind": "problem",
-  "lifecycle_status": "active",
+  "lifecycle_status": "deprecated",
   "compatibility_line": "v1alpha1",
   "product": "registry-breg",
   "code": "request.plan_refused",
