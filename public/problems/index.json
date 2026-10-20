@@ -39,7 +39,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -83,7 +83,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -127,7 +127,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -171,7 +171,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -215,7 +215,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -259,7 +259,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -303,7 +303,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -347,7 +347,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -391,7 +391,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -435,7 +435,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -479,7 +479,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -523,7 +523,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -567,7 +567,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -611,7 +611,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -655,7 +655,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -699,7 +699,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -743,7 +743,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -787,7 +787,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -831,7 +831,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -875,7 +875,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -919,7 +919,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -963,7 +963,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1051,7 +1051,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1095,7 +1095,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1139,7 +1139,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1183,7 +1183,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1227,7 +1227,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1271,7 +1271,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1315,7 +1315,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1359,7 +1359,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1403,7 +1403,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1447,7 +1447,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1491,7 +1491,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-breg/src/problem.rs",
         "sha256": "195cdc0a38ca34e09cff30e0017f6ac78a2e1ca6e2234fb5b13a2f7ca13e8f0c"
       }
@@ -1535,7 +1535,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1579,7 +1579,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1623,7 +1623,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1667,7 +1667,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1711,7 +1711,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1755,7 +1755,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1799,7 +1799,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1843,7 +1843,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1887,7 +1887,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1931,7 +1931,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -1975,7 +1975,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2019,7 +2019,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2063,7 +2063,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2107,7 +2107,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2151,7 +2151,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2195,7 +2195,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2239,7 +2239,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2283,7 +2283,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2327,7 +2327,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2371,7 +2371,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2503,7 +2503,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2547,7 +2547,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2591,7 +2591,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2635,7 +2635,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2679,7 +2679,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2723,7 +2723,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2767,7 +2767,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2811,7 +2811,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2855,7 +2855,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2899,7 +2899,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2943,7 +2943,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -2987,7 +2987,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3031,7 +3031,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3075,7 +3075,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3119,7 +3119,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3339,7 +3339,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3383,7 +3383,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-casework/src/problem.rs",
         "sha256": "75ab90463f5a52c121fd0a2afea9fc831d6c3273f3164ac95572c378d535ddba"
       }
@@ -3779,7 +3779,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -3823,7 +3823,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -3867,7 +3867,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -3911,7 +3911,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -3955,7 +3955,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -3999,7 +3999,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4043,7 +4043,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4087,7 +4087,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4131,7 +4131,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4175,7 +4175,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4219,7 +4219,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4263,7 +4263,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4307,7 +4307,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4351,7 +4351,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4395,7 +4395,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4439,7 +4439,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4483,7 +4483,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4527,7 +4527,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4571,7 +4571,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4615,7 +4615,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4659,7 +4659,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4703,7 +4703,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4747,7 +4747,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4791,7 +4791,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4835,7 +4835,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4879,7 +4879,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4923,7 +4923,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -4967,7 +4967,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5011,7 +5011,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5055,7 +5055,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5099,7 +5099,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5143,7 +5143,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5187,7 +5187,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5231,7 +5231,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5275,7 +5275,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5319,7 +5319,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5363,7 +5363,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5407,7 +5407,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5451,7 +5451,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5495,7 +5495,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5539,7 +5539,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5583,7 +5583,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5627,7 +5627,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5671,7 +5671,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-coordinator/src/problem.rs",
         "sha256": "a472cccbff47f90183f2f6f9a2258f8f160e5b457db120d23092f4cc290628d1"
       }
@@ -5715,7 +5715,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -5759,7 +5759,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -5803,7 +5803,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -5847,7 +5847,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-discovery/src/problem.rs",
         "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
       }
@@ -5935,7 +5935,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -5979,7 +5979,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6067,7 +6067,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6155,7 +6155,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6199,7 +6199,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6243,7 +6243,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6331,7 +6331,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6419,7 +6419,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6463,7 +6463,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6507,7 +6507,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-evidence/src/problem.rs",
         "sha256": "09e2898f19ebef1f3bf4699280261a4c7549b05eb9f8d30dba60ab2973bc06f9"
       }
@@ -6551,7 +6551,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6595,7 +6595,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6639,7 +6639,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6683,7 +6683,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6727,7 +6727,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6771,7 +6771,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6815,7 +6815,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6859,7 +6859,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6903,7 +6903,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6947,7 +6947,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -6991,7 +6991,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7035,7 +7035,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7079,7 +7079,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7123,7 +7123,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7167,7 +7167,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7211,7 +7211,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7255,7 +7255,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7299,7 +7299,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7343,7 +7343,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7387,7 +7387,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7431,7 +7431,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7475,7 +7475,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7519,7 +7519,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7563,7 +7563,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7607,7 +7607,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7651,7 +7651,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -7695,7 +7695,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-messaging-core/src/problem.rs",
         "sha256": "b2c08b13660c7bc99e9865575be322dae315474f708180031d14702ad62acdb7"
       }
@@ -17284,7 +17284,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17328,7 +17328,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17372,7 +17372,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17416,7 +17416,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17460,7 +17460,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17504,7 +17504,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17548,7 +17548,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17592,7 +17592,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17636,7 +17636,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17680,7 +17680,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17724,7 +17724,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17768,7 +17768,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17812,7 +17812,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17856,7 +17856,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17900,7 +17900,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17944,7 +17944,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -17988,7 +17988,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18032,7 +18032,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18076,7 +18076,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18120,7 +18120,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18164,7 +18164,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18208,7 +18208,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18252,7 +18252,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18296,7 +18296,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18340,7 +18340,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18384,7 +18384,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18428,7 +18428,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18472,7 +18472,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18516,7 +18516,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18560,7 +18560,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18604,7 +18604,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18648,7 +18648,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
@@ -18692,7 +18692,7 @@
       },
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "2d7d3d23c000feae281f9c0cbcd3141f57893232",
+        "commit": "6aa75f07262db499bcbd05ab60e81250732c7587",
         "path": "crates/registry-scheduling-core/src/problem.rs",
         "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
       }
