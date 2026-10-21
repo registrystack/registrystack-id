@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "DisplayText": {
+      "description": "Human-readable display text. Bidirectional embedding, override, and isolate controls, byte-order marks, line and paragraph separators, and Unicode noncharacters are refused; multilingual joiners and direction marks remain valid.",
+      "not": {
+        "pattern": "[  ‪-‮⁦-⁩﻿﷐-﷯￾￿]|🿾|🿿|𯿾|𯿿|𿿾|𿿿|񏿾|񏿿|񟿾|񟿿|񯿾|񯿿|񿿾|񿿿|򏿾|򏿿|򟿾|򟿿|򯿾|򯿿|򿿾|򿿿|󏿾|󏿿|󟿾|󟿿|󯿾|󯿿|󿿾|󿿿|􏿾|􏿿"
+      },
+      "type": "string"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "Operation": {
+      "enum": [
+        "create",
+        "invoke",
+        "get",
+        "history",
+        "start",
+        "inspect",
+        "submit",
+        "apply",
+        "edit",
+        "revise",
+        "rebase",
+        "retry",
+        "cancel"
+      ],
+      "type": "string"
+    },
+    "ProposalExpectation": {
+      "additionalProperties": false,
+      "properties": {
+        "problemCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "status": {
+          "format": "uint32",
+          "maximum": 599,
+          "minimum": 400,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "type": "string"
+            }
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "input": {
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/Step"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "input",
+        "steps"
+      ],
+      "type": "object"
+    },
+    "Step": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "enum": [
+                  "create",
+                  "get",
+                  "history"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "recordType"
+            ]
+          }
+        },
+        {
+          "else": {
+            "not": {
+              "required": [
+                "captureResults"
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "operation": {
+                "const": "invoke"
+              }
+            }
+          },
+          "then": {
+            "oneOf": [
+              {
+                "not": {
+                  "required": [
+                    "captureResults"
+                  ]
+                },
+                "required": [
+                  "recordType",
+                  "result",
+                  "capture"
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "recordType"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "result"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "capture"
+                      ]
+                    }
+                  ]
+                },
+                "required": [
+                  "captureResults"
+                ]
+              }
+            ],
+            "required": [
+              "action",
+              "input"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "accessProfile": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "action": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "capture": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local capture alias for this step's result. For create and invoke steps,\nRecord capture aliases must be unique throughout the scenario, including\naliases in captureResults; the reader checks this semantic rule."
+        },
+        "captureResults": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "description": "Maps disclosed Action result aliases to distinct local capture aliases.\nRecord capture aliases must be unique throughout the scenario, including\nearlier Record captures; the reader checks this semantic rule.",
+          "maxProperties": 100,
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "object"
+        },
+        "client": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "expect": {
+          "$ref": "#/$defs/ProposalExpectation"
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "input": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "operation": {
+          "$ref": "#/$defs/Operation"
+        },
+        "proposal": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "record": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "recordType": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "result": {
+          "$ref": "#/$defs/LocalId"
+        }
+      },
+      "required": [
+        "id",
+        "operation",
+        "client",
+        "accessProfile"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/breg/example-scenarios/example-scenarios.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/example-scenarios/v1alpha1",
+      "description": "The format and version this file is written in.",
+      "type": "string"
+    },
+    "kind": {
+      "const": "BRegExampleScenarios",
+      "description": "The kind of document this file is.",
+      "type": "string"
+    },
+    "scenarios": {
+      "items": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "scenarios"
+  ],
+  "title": "Base Registry Engine example scenarios",
+  "type": "object"
+}

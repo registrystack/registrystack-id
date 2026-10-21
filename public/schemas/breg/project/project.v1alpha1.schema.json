@@ -12,10 +12,17 @@
           "type": "integer"
         },
         "reason": {
-          "description": "Bounded policy reason retained and audited with each delayed entry.",
-          "maxLength": 256,
-          "minLength": 1,
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "description": "Bounded policy reason retained and audited with each delayed entry."
         },
         "sourceRecordType": {
           "description": "Record type whose access profile authorizes the read. Omitted for direct reads of the logged record type.",
@@ -92,6 +99,9 @@
         "default": {
           "default": false,
           "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/$defs/PresentationSource"
         },
         "filterableFields": {
           "default": [],
@@ -379,7 +389,7 @@
           "type": "string"
         },
         "label": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         }
       },
       "required": [
@@ -2032,6 +2042,9 @@
         "classification": {
           "$ref": "#/$defs/Classification"
         },
+        "display": {
+          "$ref": "#/$defs/DisplaySource"
+        },
         "id": {
           "$ref": "#/$defs/LocalId"
         }
@@ -2083,16 +2096,23 @@
       "additionalProperties": false,
       "properties": {
         "description": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         },
         "label": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         },
         "titleField": {
           "type": "string"
         }
       },
       "type": "object"
+    },
+    "DisplayText": {
+      "description": "Human-readable display text. Bidirectional embedding, override, and isolate controls, byte-order marks, line and paragraph separators, and Unicode noncharacters are refused; multilingual joiners and direction marks remain valid.",
+      "not": {
+        "pattern": "[  ‪-‮⁦-⁩﻿﷐-﷯￾￿]|🿾|🿿|𯿾|𯿿|𿿾|𿿿|񏿾|񏿿|񟿾|񟿿|񯿾|񯿿|񿿾|񿿿|򏿾|򏿿|򟿾|򟿿|򯿾|򯿿|򿿾|򿿿|󏿾|󏿿|󟿾|󟿿|󯿾|󯿿|󿿾|󿿿|􏿾|􏿿"
+      },
+      "type": "string"
     },
     "EntityPermissionSource": {
       "additionalProperties": false,
@@ -2962,6 +2982,10 @@
       "additionalProperties": false,
       "description": "One declared hook on an entity.\n\nThe shape is [`registry_platform_hooks::HookDeclaration`] with `trigger`\nand `when` closed to the vocabulary this compiler validates, and with\n`handler` optional. A hook that declares no handler is still recorded in\nthe outbox and delivered nowhere; production compilation refuses that.\n\nEntity hooks run after the triggering transaction commits, so `phase` is\nwritten and the compiler refuses any value it cannot run.",
       "properties": {
+        "display": {
+          "$ref": "#/$defs/PresentationSource",
+          "description": "Authored presentation only; labels never establish identity or authority."
+        },
         "handler": {
           "$ref": "#/$defs/HookHandlerSource",
           "description": "Governed, destination-neutral delivery. `destinationId` is a key in\nruntime `eventDestinations`; the project carries no URL or secret, and\ndeployment configuration may tighten the bounds it binds but cannot\nsupply or widen this authority. Production compilation requires it."
@@ -3229,7 +3253,7 @@
           "type": "string"
         },
         "owner": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         },
         "spatialCoverage": {
           "type": "string"
@@ -3411,7 +3435,7 @@
           "type": "string"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         }
       },
       "required": [
@@ -3496,11 +3520,11 @@
     "ManifestProjectionTextSource": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         },
         {
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/$defs/DisplayText"
           },
           "propertyNames": {
             "$ref": "#/$defs/ExternalId"
@@ -3760,6 +3784,19 @@
       ],
       "type": "object"
     },
+    "PresentationSource": {
+      "additionalProperties": false,
+      "description": "Authored words for an object without a Record's title-field selection.",
+      "properties": {
+        "description": {
+          "$ref": "#/$defs/DisplayText"
+        },
+        "label": {
+          "$ref": "#/$defs/DisplayText"
+        }
+      },
+      "type": "object"
+    },
     "ProjectAccessProfileSource": {
       "additionalProperties": false,
       "description": "One access profile as a project writes it.",
@@ -3770,6 +3807,10 @@
         "default": {
           "default": false,
           "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/$defs/PresentationSource",
+          "description": "Authored presentation only; labels never establish identity or authority."
         },
         "id": {
           "$ref": "#/$defs/LocalId"
@@ -3959,6 +4000,10 @@
     "ProposalHookSource": {
       "additionalProperties": false,
       "properties": {
+        "display": {
+          "$ref": "#/$defs/PresentationSource",
+          "description": "Authored presentation only; labels never establish identity or authority."
+        },
         "handler": {
           "$ref": "#/$defs/HookHandlerSource"
         },
@@ -4312,7 +4357,7 @@
           "type": "array"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         }
       },
       "required": [
@@ -4333,13 +4378,13 @@
           "type": "array"
         },
         "contact": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         },
         "id": {
           "$ref": "#/$defs/LocalId"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/$defs/DisplayText"
         }
       },
       "required": [
@@ -4599,6 +4644,10 @@
         },
         "disclosure": {
           "$ref": "#/$defs/StatisticalDisclosureSource"
+        },
+        "display": {
+          "$ref": "#/$defs/PresentationSource",
+          "description": "Authored presentation only; labels never establish identity or authority."
         },
         "id": {
           "$ref": "#/$defs/LocalId"

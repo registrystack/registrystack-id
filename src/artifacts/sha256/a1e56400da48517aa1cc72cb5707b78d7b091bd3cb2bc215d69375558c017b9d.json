@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/lifecycle-explanation/lifecycle-explanation.v1alpha7.schema.json",
+  "title": "LifecycleExplanation",
+  "description": "The native engine-owned Proposal lifecycle, pinned independently of project source.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "lifecycles"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/lifecycle-explanation/v1alpha7"
+    },
+    "kind": {
+      "const": "BRegLifecycleExplanation"
+    },
+    "lifecycles": {
+      "const": [
+        {
+          "enforcement": [
+            {
+              "description": "The selected access profile must explicitly authorize the Proposal operation. Verified caller claims, task grants, ownership restrictions, target boundaries, and disclosure remain independent checks.",
+              "events": [
+                "edit",
+                "submit",
+                "revise",
+                "rebase",
+                "retry",
+                "cancel",
+                "apply"
+              ],
+              "id": "caller-authority"
+            },
+            {
+              "description": "A promoted transition carries the current Proposal revision and caller-bound If-Match condition. A stale condition requires rediscovery; availability is a hint and does not authorize execution.",
+              "events": [
+                "edit",
+                "submit",
+                "revise",
+                "rebase",
+                "retry",
+                "cancel",
+                "apply"
+              ],
+              "id": "optimistic-concurrency"
+            },
+            {
+              "description": "A retained authorized receipt can recover an uncertain outcome only for the original method, path, body, condition, and idempotency key. Recovery does not generate a different attempt or reacquire external guards for a committed application.",
+              "events": [
+                "edit",
+                "submit",
+                "revise",
+                "rebase",
+                "retry",
+                "cancel",
+                "apply"
+              ],
+              "id": "exact-receipt-recovery"
+            },
+            {
+              "description": "Submission validates the typed Action input and runs the shared bounded plan evaluator. Function execution and external Evidence acquisition hold no database transaction or row lock. The controller rechecks the observed revision before freezing the submission.",
+              "events": [
+                "submit"
+              ],
+              "id": "plan-preparation"
+            },
+            {
+              "description": "Rebase explicitly selects the active Action definition and requires both the current Rebase grant and active Start authority. An incompatible activation never silently changes a frozen submission.",
+              "events": [
+                "rebase"
+              ],
+              "id": "explicit-contract-rebase"
+            },
+            {
+              "description": "Application revalidates the frozen Action revision, submission version, effect digest, current caller or restricted executor authority, and any required current approval and Evidence. Manual and automatic execution use the same application boundary.",
+              "events": [
+                "apply"
+              ],
+              "id": "application-authorization"
+            },
+            {
+              "description": "The writer locks authorized current targets, enforces commit guards and PostgreSQL row policies, then commits the ordered effects, Record history, and exact application receipt atomically. A failed precondition produces no partial Record mutation.",
+              "events": [
+                "apply"
+              ],
+              "id": "atomic-commit"
+            },
+            {
+              "description": "No caller operation rejects a Proposal. Only a verified result from the configured review authority for the exact current, not withdrawn submission does, in the same transaction that records the result and its lifecycle event.",
+              "events": [
+                "reject"
+              ],
+              "id": "review-authority-result"
+            }
+          ],
+          "id": "proposal",
+          "label": "Proposal lifecycle",
+          "states": [
+            {
+              "id": "draft",
+              "incomingTransitions": 4,
+              "initial": true,
+              "outgoingTransitions": 4,
+              "terminal": false,
+              "turns": [
+                {
+                  "condition": "Always while the Proposal is in this state.",
+                  "turn": "party"
+                }
+              ],
+              "unreachable": false
+            },
+            {
+              "id": "submitted",
+              "incomingTransitions": 2,
+              "initial": false,
+              "outgoingTransitions": 6,
+              "terminal": false,
+              "turns": [
+                {
+                  "condition": "The submission package is blocked; Review ended without a usable approval; or, after approval or when Review is not required, application is not manual and is blocked without recovery retry.",
+                  "turn": "party"
+                },
+                {
+                  "condition": "The submission package is not blocked, and either Review is pending or being retried, or, after approval or when Review is not required, application is manual or is blocked with recovery retry.",
+                  "turn": "official"
+                },
+                {
+                  "condition": "The submission package is not blocked, Review is approved or not required, and application is neither manual nor blocked, including queued, running, or unreported application status.",
+                  "turn": "nobody"
+                }
+              ],
+              "unreachable": false
+            },
+            {
+              "id": "cancelled",
+              "incomingTransitions": 2,
+              "initial": false,
+              "outgoingTransitions": 0,
+              "terminal": true,
+              "turns": [
+                {
+                  "condition": "Always while the Proposal is in this state.",
+                  "turn": "nobody"
+                }
+              ],
+              "unreachable": false
+            },
+            {
+              "id": "applied",
+              "incomingTransitions": 1,
+              "initial": false,
+              "outgoingTransitions": 0,
+              "terminal": true,
+              "turns": [
+                {
+                  "condition": "Always while the Proposal is in this state.",
+                  "turn": "nobody"
+                }
+              ],
+              "unreachable": false
+            },
+            {
+              "id": "rejected",
+              "incomingTransitions": 1,
+              "initial": false,
+              "outgoingTransitions": 0,
+              "terminal": true,
+              "turns": [
+                {
+                  "condition": "Always while the Proposal is in this state.",
+                  "turn": "nobody"
+                }
+              ],
+              "unreachable": false
+            }
+          ],
+          "transitions": [
+            {
+              "event": "edit",
+              "from": "draft",
+              "guard": "The Proposal is draft; replace validated Action input and advance its lifecycle revision.",
+              "to": "draft"
+            },
+            {
+              "event": "submit",
+              "from": "draft",
+              "guard": "The Proposal is draft and this submission version has not been frozen; accept the prepared plan and freeze its digest.",
+              "to": "submitted"
+            },
+            {
+              "event": "rebase",
+              "from": "draft",
+              "guard": "The Proposal is draft; explicitly bind the active Action definition and preserve the current submission version.",
+              "to": "draft"
+            },
+            {
+              "event": "cancel",
+              "from": "draft",
+              "guard": "The Proposal is draft or submitted; cancel without applying its effects.",
+              "to": "cancelled"
+            },
+            {
+              "event": "revise",
+              "from": "submitted",
+              "guard": "The Proposal is submitted; open a new draft submission version without modifying the frozen prior submission.",
+              "to": "draft"
+            },
+            {
+              "event": "rebase",
+              "from": "submitted",
+              "guard": "The Proposal is submitted; open a new draft version explicitly bound to the active Action definition.",
+              "to": "draft"
+            },
+            {
+              "event": "retry",
+              "from": "submitted",
+              "guard": "The Proposal remains submitted; schedule another eligible review or application attempt without changing the frozen plan.",
+              "to": "submitted"
+            },
+            {
+              "event": "cancel",
+              "from": "submitted",
+              "guard": "The Proposal is draft or submitted; cancel without applying its effects.",
+              "to": "cancelled"
+            },
+            {
+              "event": "apply",
+              "from": "submitted",
+              "guard": "The submission version, displayed digest, frozen Action contract, authorized targets, commit guards, and required approval match the application attempt.",
+              "to": "applied"
+            },
+            {
+              "event": "reject",
+              "from": "submitted",
+              "guard": "The configured review authority returned a rejected result for the exact current submission. A rejection is terminal; a changes-requested result leaves the Proposal submitted and revisable.",
+              "to": "rejected"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
