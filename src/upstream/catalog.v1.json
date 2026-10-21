@@ -30,7 +30,7 @@
       "description": "Base Registry Engine fixed Proposal lifecycle event schema, reproduced byte-for-byte from its packaged artifact.",
       "source": {
         "path": "crates/registry-breg/src/proposal_hooks.rs",
-        "sha256": "59466573a33f40791edb8a6afd37dcb8b39d2c6e7be27329aebba4c72815fb34"
+        "sha256": "85e00aa997167fea3047cc9a94378bc5db069dd7a42bca4aa2cfa65561931609"
       },
       "artifact": {
         "path": "products/breg/generated/event-schemas/proposal-lifecycle.schema.json",
@@ -48,7 +48,7 @@
       "description": "JSON-LD namespace for Registry Manifest terms.",
       "source": {
         "path": "crates/registry-manifest-core/src/lib.rs",
-        "sha256": "1b17271cd3fb0fdec2f4d2e6e2f52cdd62bd4c78c05afb4ee48f2938a68affbc"
+        "sha256": "58759dbaca49d8646761158fc71aab4afada27423aebc0c3d9568a1a6f2f05c1"
       }
     },
     {
@@ -3642,20 +3642,20 @@
       }
     },
     {
-      "uri": "https://id.registrystack.org/schemas/breg/access-explanation/access-explanation.v1alpha5.schema.json",
+      "uri": "https://id.registrystack.org/schemas/breg/access-explanation/access-explanation.v1alpha6.schema.json",
       "kind": "schema",
       "status": "active",
-      "compatibilityLine": "v1alpha5",
+      "compatibilityLine": "v1alpha6",
       "owner": "breg",
       "title": "AccessExplanation",
       "description": "Base Registry Engine bregctl explain output JSON Schemas, written by hand and held to bregctl's output by its contract test.",
       "source": {
         "path": "products/breg/contracts/explain/AccessExplanation.schema.json",
-        "sha256": "203b24f50e1c9309ff8450cff2b0f97ad99b521b1323ab281a3851302790e1bf"
+        "sha256": "4f7557a41597d271d3bb6109d327cda4ece33b794785cc4f5ec1d6bb6391d84f"
       },
       "artifact": {
         "path": "products/breg/contracts/explain/AccessExplanation.schema.json",
-        "sha256": "203b24f50e1c9309ff8450cff2b0f97ad99b521b1323ab281a3851302790e1bf",
+        "sha256": "4f7557a41597d271d3bb6109d327cda4ece33b794785cc4f5ec1d6bb6391d84f",
         "mediaType": "application/schema+json"
       }
     },
@@ -3687,7 +3687,7 @@
       "description": "Base Registry Engine portable Action contract export schema, reproduced from the canonical compiled project.",
       "source": {
         "path": "crates/registry-breg/src/artifacts.rs",
-        "sha256": "0aebcd1d073370a1f93d6962d47c4d3425b8f865ac77dc966010646c67ef197b"
+        "sha256": "af7d83ffc410311f9efb19545e4a34411fb6558c38d2fae6b27453039c223882"
       },
       "artifact": {
         "path": "products/breg/generated/facility/generated/action-contracts.schema.json",
@@ -3696,20 +3696,20 @@
       }
     },
     {
-      "uri": "https://id.registrystack.org/schemas/breg/actions-explanation/actions-explanation.v1alpha5.schema.json",
+      "uri": "https://id.registrystack.org/schemas/breg/actions-explanation/actions-explanation.v1alpha6.schema.json",
       "kind": "schema",
       "status": "active",
-      "compatibilityLine": "v1alpha5",
+      "compatibilityLine": "v1alpha6",
       "owner": "breg",
       "title": "ActionsExplanation",
       "description": "Base Registry Engine bregctl explain output JSON Schemas, written by hand and held to bregctl's output by its contract test.",
       "source": {
         "path": "products/breg/contracts/explain/ActionsExplanation.schema.json",
-        "sha256": "07a3711c755ee7475a7f00cce30e94bd1018edc95555dc456bdfd78f327dc558"
+        "sha256": "b519a0321f4da6dad7e578bacc32cc02af395f959ea8bc60e06089dbc267e6f2"
       },
       "artifact": {
         "path": "products/breg/contracts/explain/ActionsExplanation.schema.json",
-        "sha256": "07a3711c755ee7475a7f00cce30e94bd1018edc95555dc456bdfd78f327dc558",
+        "sha256": "b519a0321f4da6dad7e578bacc32cc02af395f959ea8bc60e06089dbc267e6f2",
         "mediaType": "application/schema+json"
       }
     },
@@ -3781,7 +3781,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/tools/example-scenarios.v1alpha1.schema.json",
-        "sha256": "6cf55caa1d39f0b653e96a84dae76d14148f6e56a411d14a1e9b458ee2c74432",
+        "sha256": "ea3e859161f961767bc44b463a025feefc17662dd31fa7ba4c67f71b0188f1bc",
         "mediaType": "application/schema+json"
       }
     },
@@ -3804,20 +3804,20 @@
       }
     },
     {
-      "uri": "https://id.registrystack.org/schemas/breg/lifecycle-explanation/lifecycle-explanation.v1alpha6.schema.json",
+      "uri": "https://id.registrystack.org/schemas/breg/lifecycle-explanation/lifecycle-explanation.v1alpha7.schema.json",
       "kind": "schema",
       "status": "active",
-      "compatibilityLine": "v1alpha6",
+      "compatibilityLine": "v1alpha7",
       "owner": "breg",
       "title": "LifecycleExplanation",
       "description": "Base Registry Engine bregctl explain output JSON Schemas, written by hand and held to bregctl's output by its contract test.",
       "source": {
         "path": "products/breg/contracts/explain/LifecycleExplanation.schema.json",
-        "sha256": "c7dbd61a710dd189637f783e9720b749f98e2d307af549849ab6e85b790a4ab9"
+        "sha256": "a1e56400da48517aa1cc72cb5707b78d7b091bd3cb2bc215d69375558c017b9d"
       },
       "artifact": {
         "path": "products/breg/contracts/explain/LifecycleExplanation.schema.json",
-        "sha256": "c7dbd61a710dd189637f783e9720b749f98e2d307af549849ab6e85b790a4ab9",
+        "sha256": "a1e56400da48517aa1cc72cb5707b78d7b091bd3cb2bc215d69375558c017b9d",
         "mediaType": "application/schema+json"
       }
     },
@@ -3858,20 +3858,20 @@
       }
     },
     {
-      "uri": "https://id.registrystack.org/schemas/breg/model-explanation/model-explanation.v1alpha5.schema.json",
+      "uri": "https://id.registrystack.org/schemas/breg/model-explanation/model-explanation.v1alpha6.schema.json",
       "kind": "schema",
       "status": "active",
-      "compatibilityLine": "v1alpha5",
+      "compatibilityLine": "v1alpha6",
       "owner": "breg",
       "title": "ModelExplanation",
       "description": "Base Registry Engine bregctl explain output JSON Schemas, written by hand and held to bregctl's output by its contract test.",
       "source": {
         "path": "products/breg/contracts/explain/ModelExplanation.schema.json",
-        "sha256": "bbcd216d8d94ead31a52e290c87f8782c95f939057cc5e31e4c90a49a02d2dc1"
+        "sha256": "2786376fa2511102b84de8d63f3affaa1fe0f7b239fb344f4e42abd828f4d0cb"
       },
       "artifact": {
         "path": "products/breg/contracts/explain/ModelExplanation.schema.json",
-        "sha256": "bbcd216d8d94ead31a52e290c87f8782c95f939057cc5e31e4c90a49a02d2dc1",
+        "sha256": "2786376fa2511102b84de8d63f3affaa1fe0f7b239fb344f4e42abd828f4d0cb",
         "mediaType": "application/schema+json"
       }
     },
@@ -3889,7 +3889,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/tools/model-selection.v1alpha1.schema.json",
-        "sha256": "1f02f199bd6a722452f2e3abb15f1c74f03f62c5b52acdbea6a33d90b60b0ffd",
+        "sha256": "975478df7cdc216115fcf370f1478ffc3309c6ac6ae47f79be1c8b358c90dd7e",
         "mediaType": "application/schema+json"
       }
     },
@@ -3907,7 +3907,7 @@
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-module.schema.json",
-        "sha256": "9e303f8a0d24dad6b2b840f16b647278bc933cb66f1f38ae3cc55222719396cc",
+        "sha256": "d65b89c37268c96cc059b18511a8397063047e591a0d1bacfbcc19b484465e7f",
         "mediaType": "application/schema+json"
       }
     },
@@ -3925,25 +3925,25 @@
       },
       "artifact": {
         "path": "products/breg/generated/authoring/registry-project.schema.json",
-        "sha256": "f7766f4483a2a2593a93e17b7b80eb55a8ed4bff0cfc8d7916db1ac6cd246581",
+        "sha256": "f747fe4a357c3ac62d378349cea0f9642b0fa6fa69e81bbd812b6f8f015d9b63",
         "mediaType": "application/schema+json"
       }
     },
     {
-      "uri": "https://id.registrystack.org/schemas/breg/proposals-explanation/proposals-explanation.v1alpha1.schema.json",
+      "uri": "https://id.registrystack.org/schemas/breg/proposals-explanation/proposals-explanation.v1alpha2.schema.json",
       "kind": "schema",
       "status": "active",
-      "compatibilityLine": "v1alpha1",
+      "compatibilityLine": "v1alpha2",
       "owner": "breg",
       "title": "ProposalsExplanation",
       "description": "Base Registry Engine bregctl explain output JSON Schemas, written by hand and held to bregctl's output by its contract test.",
       "source": {
         "path": "products/breg/contracts/explain/ProposalsExplanation.schema.json",
-        "sha256": "db0b87404208419ac251771f0d749cdd9f2910b05d6bc0bd6fff77a4457e8b3f"
+        "sha256": "9f61d4960c65b84d505d00f783e17387d327f0214784cba88e2a840c4a738fc9"
       },
       "artifact": {
         "path": "products/breg/contracts/explain/ProposalsExplanation.schema.json",
-        "sha256": "db0b87404208419ac251771f0d749cdd9f2910b05d6bc0bd6fff77a4457e8b3f",
+        "sha256": "9f61d4960c65b84d505d00f783e17387d327f0214784cba88e2a840c4a738fc9",
         "mediaType": "application/schema+json"
       }
     },
@@ -4065,7 +4065,7 @@
       "description": "Registry Casework fixture JSON Schema.",
       "source": {
         "path": "crates/registry-casework-core/src/schema.rs",
-        "sha256": "76603343a97d90453469654b798ff5b272ad65a2a4b4fd77af39de31a457c47a"
+        "sha256": "5f769f9f2edf54312300a2c9d1090ad91f99fef0b84a4ba7399dcd6e2879bd30"
       },
       "artifact": {
         "path": "products/casework/generated/fixture/fixture.schema.json",
@@ -4083,7 +4083,7 @@
       "description": "Registry Casework holiday set JSON Schema.",
       "source": {
         "path": "crates/registry-casework-core/src/schema.rs",
-        "sha256": "76603343a97d90453469654b798ff5b272ad65a2a4b4fd77af39de31a457c47a"
+        "sha256": "5f769f9f2edf54312300a2c9d1090ad91f99fef0b84a4ba7399dcd6e2879bd30"
       },
       "artifact": {
         "path": "products/casework/generated/holiday-set/holiday-set.schema.json",
@@ -4101,11 +4101,11 @@
       "description": "Registry Casework project JSON Schema.",
       "source": {
         "path": "crates/registry-casework-core/src/schema.rs",
-        "sha256": "76603343a97d90453469654b798ff5b272ad65a2a4b4fd77af39de31a457c47a"
+        "sha256": "5f769f9f2edf54312300a2c9d1090ad91f99fef0b84a4ba7399dcd6e2879bd30"
       },
       "artifact": {
         "path": "products/casework/generated/project/project.schema.json",
-        "sha256": "a54a5d29464f6de1e0b46ea7ae91a2fd6ff563090f98f7686496ddad45344b7d",
+        "sha256": "8711ca3efe9fbbd9e1851270802ba89e6ae1559017bc6a2a76f7bfad04c3c37c",
         "mediaType": "application/schema+json"
       }
     },
@@ -4123,7 +4123,7 @@
       },
       "artifact": {
         "path": "products/casework/contracts/cli/report.schema.json",
-        "sha256": "073149171864d41eae1eff6de29a901ec9adb40bcf4592f53e7920ae86fa0ffc",
+        "sha256": "0e12c37c7e1f4f34b30ea6fa3444a98c84bba52a3c9b575b1a8fa14019b82b56",
         "mediaType": "application/schema+json"
       }
     },
@@ -4155,11 +4155,11 @@
       "description": "Registry Coordinator portable project authoring JSON Schema.",
       "source": {
         "path": "crates/registry-coordinator/src/authoring.rs",
-        "sha256": "ddc60cd3c06746fdffe4ceaeceb3acfa0db8d38aade5c99fbabc756e13cc01c0"
+        "sha256": "a17ce5230cfa08ec66ec73c90837a1035a995e37e719036eba43fb9cf7e5cf26"
       },
       "artifact": {
         "path": "products/coordinator/generated/project/project.schema.json",
-        "sha256": "3538e178fd3b21ed3e8b59c1596dee65d98e216e5a4a6862fb1fd64527cc22d1",
+        "sha256": "a110454da4cb39aaa5158a0666b7f7579585423d73be8513b5136b022ac316fe",
         "mediaType": "application/schema+json"
       }
     },
@@ -4173,7 +4173,7 @@
       "description": "Registry Coordinator runtime configuration JSON Schema.",
       "source": {
         "path": "crates/registry-coordinator/src/runtime.rs",
-        "sha256": "2963cc34d692dccb61a5acfc9e455649f491b005aec59e1941f7853ecae43f57"
+        "sha256": "5095df87476c778de7733f7ecc6779de0aee4e3e8c86b9f565763810aa2dc8ce"
       },
       "artifact": {
         "path": "products/coordinator/generated/runtime/runtime.schema.json",
@@ -4191,7 +4191,7 @@
       "description": "Registry Coordinator deterministic scenario authoring JSON Schema.",
       "source": {
         "path": "crates/registry-coordinator/src/scenarios.rs",
-        "sha256": "6bc5a10d20dcc4dddbc5bca003e550aeb866955b2d6898d74cc5f4d3811a4887"
+        "sha256": "3f183ed2753706aa38dd2e6146a3a0c4f867de86c67a602c1bb407aa910924bd"
       },
       "artifact": {
         "path": "products/coordinator/generated/scenarios/scenarios.schema.json",
@@ -4299,11 +4299,11 @@
       "description": "Evidence frozen Version 1 contract and configuration schemas, written as YAML.",
       "source": {
         "path": "products/evidence/contracts/bundle.schema.yaml",
-        "sha256": "43eb1560294204ef545bd6bf2dd5928aa25e84118d07e942eafe1923f1b32f78"
+        "sha256": "97ca7f9e2c530ed09793286128b3b2a145842dce2cab235d8066790da8f746a0"
       },
       "artifact": {
         "path": "products/evidence/contracts/bundle.schema.yaml",
-        "sha256": "43eb1560294204ef545bd6bf2dd5928aa25e84118d07e942eafe1923f1b32f78",
+        "sha256": "97ca7f9e2c530ed09793286128b3b2a145842dce2cab235d8066790da8f746a0",
         "mediaType": "application/yaml"
       }
     },
@@ -4447,7 +4447,7 @@
       },
       "artifact": {
         "path": "crates/registry-evidencectl/schemas/authoring/project.schema.json",
-        "sha256": "06939f1bfbecee443635734088f844273489b89974769e5b3e94b1cff314a5d8",
+        "sha256": "3c8a56419f2b6a011463736e94f99c868f78636325dd8d34b3b70c0c693a65f1",
         "mediaType": "application/schema+json"
       }
     },
@@ -4519,7 +4519,7 @@
       },
       "artifact": {
         "path": "crates/registry-evidencectl/schemas/authoring/target.schema.json",
-        "sha256": "cbe92a3329351dbdf53f0a63d5f4f9dfc7b8bbcb0947ddf30f1558943d34e188",
+        "sha256": "98a5983770a763c045cd661fb176f5d057e451bcfbde5211273c7b58a5543da3",
         "mediaType": "application/schema+json"
       }
     },
@@ -4569,11 +4569,11 @@
       "description": "Registry Manifest metadata manifest and profile descriptor JSON Schema.",
       "source": {
         "path": "crates/registry-manifest-cli/src/schema.rs",
-        "sha256": "93cd355b9b825c0949006e7bce4113ce4112518403807f706bf8ef4d240657ff"
+        "sha256": "19d037ee50b143b70576b4ce50808883e0ccb831373f72d42beed770a67d8eae"
       },
       "artifact": {
         "path": "products/manifest/schemas/metadata.schema.json",
-        "sha256": "fc95f405cbef9537864e6d2d9b54ebe3e3b893fb35ecb7e1f47a5081a94f28ff",
+        "sha256": "63a205c50ddd5ab0565fd56e02213f8061613f057d8759ad0af3c8adc4d38d11",
         "mediaType": "application/schema+json"
       }
     },
@@ -4587,11 +4587,11 @@
       "description": "Registry Manifest metadata manifest and profile descriptor JSON Schema.",
       "source": {
         "path": "crates/registry-manifest-cli/src/schema.rs",
-        "sha256": "93cd355b9b825c0949006e7bce4113ce4112518403807f706bf8ef4d240657ff"
+        "sha256": "19d037ee50b143b70576b4ce50808883e0ccb831373f72d42beed770a67d8eae"
       },
       "artifact": {
         "path": "products/manifest/schemas/profile.schema.json",
-        "sha256": "a94130c4276456fcb5a50d7b73c225762d86c471faed372c08b1343f44644987",
+        "sha256": "f8e367082254b713f8347ccb9055d7ac527ddef43b06b33239f8d81d0ed11012",
         "mediaType": "application/schema+json"
       }
     },
@@ -4713,7 +4713,7 @@
       "description": "Registry Render bundle manifest, label table, and runtime configuration JSON Schema.",
       "source": {
         "path": "crates/registry-render/src/schema.rs",
-        "sha256": "7928ac30b4f5442dd4cb89632ff23a35bba1b27d4df882955ee284e841f4b7e9"
+        "sha256": "47dcb8f1ab50319c0eb31c888ea7bc9e608167ced277c493b19e2518f6a8a202"
       },
       "artifact": {
         "path": "products/render/schemas/bundle.schema.json",
@@ -4731,11 +4731,11 @@
       "description": "Registry Render bundle manifest, label table, and runtime configuration JSON Schema.",
       "source": {
         "path": "crates/registry-render/src/schema.rs",
-        "sha256": "7928ac30b4f5442dd4cb89632ff23a35bba1b27d4df882955ee284e841f4b7e9"
+        "sha256": "47dcb8f1ab50319c0eb31c888ea7bc9e608167ced277c493b19e2518f6a8a202"
       },
       "artifact": {
         "path": "products/render/schemas/labels.schema.json",
-        "sha256": "1f7517cc73cc2c0cb0c626cc2f716f638d333d4d9db7ebe7eaef0c4046a191b8",
+        "sha256": "f511f546980251198954678790b986a5aa2cb4f037bd463f20531b8c9736d28b",
         "mediaType": "application/schema+json"
       }
     },
@@ -4749,7 +4749,7 @@
       "description": "Registry Render bundle manifest, label table, and runtime configuration JSON Schema.",
       "source": {
         "path": "crates/registry-render/src/schema.rs",
-        "sha256": "7928ac30b4f5442dd4cb89632ff23a35bba1b27d4df882955ee284e841f4b7e9"
+        "sha256": "47dcb8f1ab50319c0eb31c888ea7bc9e608167ced277c493b19e2518f6a8a202"
       },
       "artifact": {
         "path": "products/render/schemas/runtime.schema.json",
@@ -4771,7 +4771,7 @@
       },
       "artifact": {
         "path": "products/scheduling/generated/fixture/fixture.schema.json",
-        "sha256": "ea3e5db017d1c733bbbc9d5aed6ad5f5e760649379d6ba1a993c48e17e02e3a2",
+        "sha256": "e85a091e8f47fab25632650e86081d585b46ade1a8b096c116ead7550dc39dc5",
         "mediaType": "application/schema+json"
       }
     },
@@ -4789,7 +4789,7 @@
       },
       "artifact": {
         "path": "products/scheduling/generated/project/project.schema.json",
-        "sha256": "4e357155b17d753e4d15394ab3a0750dc0319a57505aa36719fe54e0f83489f2",
+        "sha256": "cbc34fc5f6fc9cba3fb714a41595bf999fb0d73a45b6bf610f772cd4256deecc",
         "mediaType": "application/schema+json"
       }
     },
@@ -4807,7 +4807,7 @@
       },
       "artifact": {
         "path": "products/scheduling/generated/records/records.schema.json",
-        "sha256": "1c1030390a47406fe6109ef404c7e1daa8e9903d7b2ad113991e158a2f38e380",
+        "sha256": "1c1299d6ebeaf19120f9b8d76f572e2392368513560e1249d024b61ef2ef9060",
         "mediaType": "application/schema+json"
       }
     },
