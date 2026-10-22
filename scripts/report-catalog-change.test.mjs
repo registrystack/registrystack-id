@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   catalogKinds,
@@ -73,4 +75,14 @@ test('catalog change summary rejects kind changes', () => {
       ),
     /changed kind/,
   );
+});
+
+test('catalog comparison refuses surplus arguments before reading a ref', () => {
+  const script = fileURLToPath(new URL('./report-catalog-change.mjs', import.meta.url));
+  const output = spawnSync(process.execPath, [script, 'origin/main', 'ignored'], {
+    encoding: 'utf8',
+  });
+  assert.equal(output.status, 2);
+  assert.match(output.stderr, /at most one reference/);
+  assert.equal(output.stdout, '');
 });

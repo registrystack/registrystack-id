@@ -151,10 +151,15 @@ export function renderMarkdown(summary) {
 const isMain =
   process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const reference = process.argv[2] ?? 'origin/main';
-  const summary = summarizeCatalogs(
-    loadRefCatalogs(reference),
-    loadWorkingCatalogs(),
-  );
-  process.stdout.write(renderMarkdown(summary));
+  if (process.argv.length > 3) {
+    console.error('catalog comparison accepts at most one reference');
+    process.exitCode = 2;
+  } else {
+    const reference = process.argv[2] ?? 'origin/main';
+    const summary = summarizeCatalogs(
+      loadRefCatalogs(reference),
+      loadWorkingCatalogs(),
+    );
+    process.stdout.write(renderMarkdown(summary));
+  }
 }
