@@ -75,7 +75,7 @@
       "owner": "registry-record",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "bfa04333f2266faf080b2cd40703cd6fcc2e80aa",
+        "commit": "70d05eb66376c3512b066db33ac6e8f2f24208fb",
         "path": "products/registry-record/context/registry-record-v1.jsonld",
         "sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71"
       },

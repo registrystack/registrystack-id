@@ -114,6 +114,11 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/documents/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/evidence/access-client/access-client.v1alpha1.schema.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *
