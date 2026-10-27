@@ -1,0 +1,660 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://id.registrystack.org/schemas/breg/actions-explanation/actions-explanation.v1alpha7.schema.json",
+  "title": "ActionsExplanation",
+  "description": "Author inspection of normalized Action definitions. Reviewed asset paths and module identities are included; program bytes are absent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "registryId",
+    "revision",
+    "recordTypes",
+    "actions",
+    "statisticalDatasets",
+    "display",
+    "reviewAuthorities",
+    "datasets",
+    "accessProfiles"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/breg/actions-explanation/v1alpha7"
+    },
+    "kind": {
+      "const": "BRegActionsExplanation"
+    },
+    "registryId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "recordTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "apiName",
+          "revision",
+          "display",
+          "fields",
+          "relationships",
+          "sourceModule",
+          "primaryDataset",
+          "route",
+          "mutationMode",
+          "mutationPolicy",
+          "classification",
+          "canonicalId",
+          "tombstone",
+          "batch",
+          "temporal",
+          "geojson",
+          "accessLog",
+          "constraints",
+          "indexes",
+          "selectorProfiles",
+          "readPaths",
+          "hooks",
+          "derivedRelations",
+          "moduleOrigins"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "revision": {
+            "$ref": "#/$defs/Digest"
+          },
+          "mutationMode": {
+            "enum": [
+              "mutable",
+              "create-only"
+            ]
+          },
+          "mutationPolicy": {
+            "type": "object",
+            "additionalProperties": {
+              "const": "proposal-required"
+            },
+            "propertyNames": {
+              "$ref": "#/$defs/LocalId"
+            }
+          },
+          "classification": {
+            "enum": [
+              "public",
+              "internal",
+              "restricted"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "apiName",
+                "schema",
+                "fieldType",
+                "required",
+                "classification",
+                "display"
+              ],
+              "properties": {
+                "encrypted": {
+                  "type": "boolean"
+                },
+                "fieldType": {
+                  "type": "object",
+                  "x-registry-passthrough": "The compiled FieldTypeSource, as in query field summaries; its internal shape follows the engine's field type contract."
+                },
+                "display": {
+                  "$ref": "#/$defs/Display"
+                }
+              },
+              "x-registry-passthrough": "Normalized logical field schema and effective classification; compiler-owned metadata."
+            }
+          },
+          "readPaths": {
+            "type": "object",
+            "x-registry-passthrough": "Compiler-resolved read paths, separate from relationship edges."
+          },
+          "hooks": {
+            "type": "object",
+            "x-registry-passthrough": "Compiled hook declarations, with empty condition tests omitted.",
+            "propertyNames": {
+              "$ref": "#/$defs/LocalId"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "display": {
+                  "$ref": "#/$defs/Presentation"
+                }
+              },
+              "x-registry-passthrough": "Compiled hook declaration, including optional authored display."
+            }
+          },
+          "moduleOrigins": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fields": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "constraints": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "hooks": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "derivedRelations": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "indexes": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "accessProfiles": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "selectorProfiles": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              },
+              "readPaths": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "additionalProperties": {
+                  "$ref": "#/$defs/LocalId"
+                }
+              }
+            },
+            "description": "Module ids that contributed members of this Record type. An absent member originated in the project root."
+          }
+        },
+        "x-registry-passthrough": "Source-free normalized definition owned by the compiler; identity and revision are pinned here."
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "apiName",
+          "revision",
+          "migrationReviewRevision",
+          "display",
+          "execution",
+          "inputs",
+          "plan",
+          "commitGuards",
+          "dependencies",
+          "bounds",
+          "permissions"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "apiName": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "migrationReviewRevision": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "description": "Digest of the Action behavior contract used to decide whether an activation change requires migration review."
+          },
+          "display": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "execution": {
+            "type": "object",
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "immediate",
+                  "proposal"
+                ]
+              },
+              "proposal": {
+                "type": "object",
+                "properties": {
+                  "hooks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "display": {
+                          "$ref": "#/$defs/Presentation"
+                        }
+                      },
+                      "x-registry-passthrough": "Compiled Proposal hook, including optional authored display."
+                    }
+                  }
+                },
+                "x-registry-passthrough": "Compiled Proposal policy; display is presentation only."
+              }
+            },
+            "x-registry-passthrough": "The fixed mode and complete typed Proposal policy are owned by the compiled engine contract."
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "apiName",
+                "label",
+                "schema",
+                "required",
+                "nullable"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/LocalId"
+                },
+                "apiName": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "schema": {
+                  "type": "object",
+                  "x-registry-foreign": "json-schema-2020-12"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "display": {
+                  "$ref": "#/$defs/Display"
+                }
+              },
+              "x-registry-passthrough": "Normalized compiled logical field metadata; its field type and schema are owned by the engine."
+            }
+          },
+          "plan": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "effects",
+                  "order"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "fixed"
+                  },
+                  "effects": {
+                    "type": "array"
+                  },
+                  "order": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "function"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "function"
+                  },
+                  "function": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "sourceModule",
+                      "abi",
+                      "writes",
+                      "refusals",
+                      "id",
+                      "entrypoint",
+                      "capabilities",
+                      "boundInputs",
+                      "source"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "rhai",
+                          "wasm"
+                        ]
+                      },
+                      "sourceModule": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "abi": {
+                        "const": "registry.action-plan/v1"
+                      },
+                      "rhaiVersion": {
+                        "type": "string"
+                      },
+                      "scriptSha256": {
+                        "type": "string",
+                        "pattern": "^sha256:[0-9a-f]{64}$"
+                      },
+                      "moduleSha256": {
+                        "type": "string",
+                        "pattern": "^sha256:[0-9a-f]{64}$"
+                      },
+                      "limits": {
+                        "type": "object",
+                        "x-registry-passthrough": "Compiled function resource ceilings, owned and bounded by the engine."
+                      },
+                      "writes": {
+                        "type": "array"
+                      },
+                      "refusals": {
+                        "type": "object",
+                        "propertyNames": {
+                          "$ref": "#/$defs/LocalId"
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "id": {
+                        "$ref": "#/$defs/LocalId"
+                      },
+                      "entrypoint": {
+                        "type": "string"
+                      },
+                      "capabilities": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "evidence"
+                          ]
+                        },
+                        "uniqueItems": true
+                      },
+                      "boundInputs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                        }
+                      },
+                      "source": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Reviewed asset path relative to the project root or sourceModule; program bytes are absent."
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "description": "Fixed plans expose exact authored mutations and execution order. Function plans expose reviewed source identity and write ceilings, never placeholder mutations."
+          },
+          "commitGuards": {
+            "type": "array"
+          },
+          "dependencies": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "x-registry-passthrough": "Exact provider-published Evidence contract and bindings, compiled by the engine."
+                },
+                "x-registry-passthrough": "The exact compiled Evidence relying-party closure is owned by the engine."
+              }
+            }
+          },
+          "bounds": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "maximumTargets",
+              "maximumFieldMutations",
+              "maximumSnapshotBytes"
+            ],
+            "properties": {
+              "maximumTargets": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16
+              },
+              "maximumFieldMutations": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 128
+              },
+              "maximumSnapshotBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2097152
+              }
+            }
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "x-registry-passthrough": "Compiled Action grants retained in author inspection and owned by the engine."
+            }
+          }
+        }
+      }
+    },
+    "statisticalDatasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "unitEntityId",
+          "population",
+          "period",
+          "dimensions",
+          "disclosure"
+        ],
+        "x-registry-passthrough": "Normalized compiled statistical dataset inventory, including authority requirements; no source bytes.",
+        "properties": {
+          "display": {
+            "$ref": "#/$defs/Presentation"
+          }
+        }
+      }
+    },
+    "display": {
+      "$ref": "#/$defs/Display"
+    },
+    "reviewAuthorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "protocol",
+          "display"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "protocol": {
+            "const": "id.registrystack.org/protocols/review/v1"
+          },
+          "display": {
+            "$ref": "#/$defs/Display"
+          }
+        }
+      }
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "display"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "display": {
+            "$ref": "#/$defs/Display"
+          }
+        }
+      }
+    },
+    "accessProfiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "display"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "display": {
+            "$ref": "#/$defs/Presentation"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "LocalId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+    },
+    "Display": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "titleField": {
+          "type": "string"
+        }
+      }
+    },
+    "Digest": {
+      "description": "A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "Presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

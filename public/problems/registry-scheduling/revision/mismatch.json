@@ -7,8 +7,8 @@
   "product": "registry-scheduling",
   "code": "revision.mismatch",
   "title": "Revision mismatch",
-  "summary": "The window revision changed before the request committed. Reload the catalogue and try again.",
-  "description": "The window revision changed before the request committed. Reload the catalogue and try again.",
+  "summary": "The observed revision is no longer current.",
+  "description": "The observed revision is no longer current.",
   "category": null,
   "http_statuses": [
     412
@@ -37,8 +37,8 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "bfa04333f2266faf080b2cd40703cd6fcc2e80aa",
+    "commit": "f71bdbc4216f9f87bae275854e4636e98a99b616",
     "path": "crates/registry-scheduling-core/src/problem.rs",
-    "sha256": "12f4afc02a4396f0111b84b58cfa2a28d7112e14e7e9b80ea1809b4a03905e54"
+    "sha256": "2a84c86a852cfeb47db62acfe2fad5fa7f2eeba199003401022f7bcd1a928691"
   }
 }
