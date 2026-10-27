@@ -5,7 +5,7 @@
   "lifecycle_status": "active",
   "compatibility_line": "v1alpha1",
   "product": "registry-discovery",
-  "code": "invalid-request",
+  "code": "request.invalid",
   "title": "Invalid request",
   "summary": "The Discovery request is invalid.",
   "description": "The Discovery request is invalid.",
@@ -37,8 +37,8 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "bfa04333f2266faf080b2cd40703cd6fcc2e80aa",
+    "commit": "f71bdbc4216f9f87bae275854e4636e98a99b616",
     "path": "crates/registry-discovery/src/problem.rs",
-    "sha256": "119d013635a62cb0d6cc38a81a7bc03d6a58371fa882180bbfd37847c65e6364"
+    "sha256": "cd37f4a483c9d29c5ed4cbffa11756ef78207d9df1e6e62b7f93de36a30b43e3"
   }
 }

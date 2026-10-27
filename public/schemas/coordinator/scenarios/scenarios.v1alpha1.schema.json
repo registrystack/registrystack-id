@@ -45,7 +45,7 @@
       "oneOf": [
         {
           "additionalProperties": false,
-          "description": "The call completed and returned `value`.",
+          "description": "The call completed and returned `value`. An `external.command/v1`\nstep takes a `response` reply instead.",
           "properties": {
             "type": {
               "const": "success",
@@ -102,7 +102,7 @@
         },
         {
           "additionalProperties": false,
-          "description": "The product returned a package-declared, no-effect business refusal.\nA supported call takes its `onDeclaredRefusal` edge when it has one;\notherwise the run stops as refused.",
+          "description": "The product returned a package-declared, no-effect business refusal.\nA supported call takes its `onDeclaredRefusal` edge when it has one;\notherwise the run stops as refused. An `external.command/v1` step\ntakes a `response` reply instead, which its interpretation Function\nmay turn into a declared refusal.",
           "properties": {
             "refusalCode": {
               "$ref": "#/$defs/DeclaredRefusalCode",
@@ -135,6 +135,25 @@
           "required": [
             "type",
             "code"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The provider answered an `external.command/v1` call with `value`. The\noperation's pinned interpretation Function turns it into an accepted\nresult, a declared refusal or an uncertain outcome, as it would at run\ntime. The status must be one the worker hands to that Function: a\nredirect, a 429 or a 5xx never reaches it, so a scenario models those\nwith an `uncertain` or `retryable` reply.",
+          "properties": {
+            "type": {
+              "const": "response",
+              "type": "string"
+            },
+            "value": {
+              "description": "The complete `{status, body}` response, which must satisfy the\noperation's declared response schema.",
+              "x-registry-foreign": "json"
+            }
+          },
+          "required": [
+            "type",
+            "value"
           ],
           "type": "object"
         },
