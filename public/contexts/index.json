@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71.jsonld",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "bae18995d0f00eba35d7b96629a56e051ac3d0df",
+        "commit": "d1fd2781e79179200c4d43ed15ab4211b89e8d96",
         "path": "products/registry-record/profile/registry-record-v1.md",
         "sha256": "f165e62044df2129b5cc533d3199cf81ae23d263617f39437ee37be87d3b37fe"
       },
