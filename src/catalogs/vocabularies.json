@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "uri": "https://id.registrystack.org/vocab/breg-odrl/",
+      "title": "BReg partial read-policy vocabulary",
+      "description": "Experimental BReg ODRL constraint and projection terms, defined by the shipped read-policy export profile.",
+      "kind": "vocabulary",
+      "status": "active",
+      "compatibility_line": "v1",
+      "owner": "breg",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "e9361a89c02e6dcec0e5f199eb6dd5116eb321be",
+        "path": "products/breg/contracts/odrl-profile.jsonld",
+        "sha256": "24d0950eb2c1a76d5005850e1145f675ad65df5231867907b41d11fdd2979cdc"
+      }
+    },
+    {
       "uri": "https://id.registrystack.org/vocab/core/",
       "title": "Registry Relay core vocabulary",
       "description": "Vocabulary base for Relay V2 Registry Core semantic predicates.",
@@ -40,9 +55,9 @@
       "owner": "registry-record",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "bae18995d0f00eba35d7b96629a56e051ac3d0df",
+        "commit": "e9361a89c02e6dcec0e5f199eb6dd5116eb321be",
         "path": "products/registry-record/context/registry-record-v1.jsonld",
-        "sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71"
+        "sha256": "c336506f4dcd7e266155e8cd1ff9710766bc240f395e27b0480b2e193e74e2ee"
       }
     }
   ]

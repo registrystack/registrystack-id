@@ -34,6 +34,7 @@
       "enum": [
         "registry-identity-changed",
         "registry-version-changed",
+        "record-timer-store-added",
         "entity-added",
         "entity-removed",
         "entity-physical-name-changed",
@@ -80,6 +81,9 @@
         "event-added",
         "event-removed",
         "event-changed",
+        "timer-added",
+        "timer-removed",
+        "timer-changed",
         "action-added",
         "action-removed",
         "action-changed",
@@ -99,13 +103,13 @@
     "CompiledRegistryChangeTarget": {
       "additionalProperties": false,
       "properties": {
-        "entityId": {
-          "type": "string"
-        },
         "kind": {
           "$ref": "#/$defs/CompiledRegistryChangeTargetKind"
         },
         "memberId": {
+          "type": "string"
+        },
+        "recordTypeId": {
           "type": "string"
         }
       },
@@ -117,7 +121,7 @@
     "CompiledRegistryChangeTargetKind": {
       "enum": [
         "registry",
-        "entity",
+        "record-type",
         "field",
         "derived-relation",
         "constraint",
@@ -126,6 +130,7 @@
         "route",
         "query-inventory",
         "event",
+        "timer",
         "action",
         "recipient",
         "statistical-dataset"
@@ -221,7 +226,7 @@
     },
     "ReviewedMigrationObjectKind": {
       "enum": [
-        "entity",
+        "record-type",
         "field",
         "constraint",
         "index"
