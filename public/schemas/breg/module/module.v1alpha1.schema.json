@@ -669,6 +669,10 @@
             "id": {
               "$ref": "#/$defs/LocalId"
             },
+            "pattern": {
+              "description": "Native PostgreSQL ARE expression the submitted string must match, in the\ndialect and with the bounds of a Record field `pattern`.",
+              "type": "string"
+            },
             "required": {
               "default": false,
               "type": "boolean"
@@ -695,6 +699,9 @@
             },
             "id": {
               "$ref": "#/$defs/LocalId"
+            },
+            "pattern": {
+              "type": "string"
             },
             "required": {
               "default": false,
@@ -738,14 +745,6 @@
         {
           "additionalProperties": false,
           "properties": {
-            "capabilities": {
-              "default": [],
-              "items": {
-                "type": "string"
-              },
-              "type": "array",
-              "uniqueItems": true
-            },
             "function": {
               "type": "string"
             },
@@ -792,11 +791,19 @@
           "minimum": -9223372036854775808,
           "type": "integer"
         },
+        "atLeastFromInput": {
+          "description": "Requires the stored value to be at or above the named required action\ninput of the same date, instant, or integer type.",
+          "type": "string"
+        },
         "atMost": {
           "format": "int64",
           "maximum": 9223372036854775807,
           "minimum": -9223372036854775808,
           "type": "integer"
+        },
+        "atMostFromInput": {
+          "description": "Requires the stored value to be at or below the named required action\ninput of the same date, instant, or integer type.",
+          "type": "string"
         },
         "currentDate": {
           "$ref": "#/$defs/CurrentDatePredicateSource"
@@ -1487,6 +1494,10 @@
             "id": {
               "$ref": "#/$defs/LocalId"
             },
+            "lastDayField": {
+              "description": "The inclusive last day, named in place of `endField` when the\nRecord type's interval declares `lastDayField`.",
+              "type": "string"
+            },
             "scopeFields": {
               "items": {
                 "type": "string"
@@ -2123,6 +2134,13 @@
             "$ref": "#/$defs/SelectorProfileSource"
           },
           "type": "array"
+        },
+        "timers": {
+          "description": "Additive timer definitions. Only a root-project `timerGrants` entry can\nenable a contributed timer.",
+          "items": {
+            "$ref": "#/$defs/TimerSource"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -2237,6 +2255,12 @@
         },
         "temporal": {
           "$ref": "#/$defs/TemporalSource"
+        },
+        "timers": {
+          "items": {
+            "$ref": "#/$defs/TimerSource"
+          },
+          "type": "array"
         },
         "tombstone": {
           "default": false,
@@ -2639,6 +2663,12 @@
         }
       ]
     },
+    "FunctionCapabilitySource": {
+      "enum": [
+        "evidence"
+      ],
+      "type": "string"
+    },
     "FunctionLimitsSource": {
       "additionalProperties": false,
       "properties": {
@@ -2669,7 +2699,7 @@
         "capabilities": {
           "default": [],
           "items": {
-            "type": "string"
+            "$ref": "#/$defs/FunctionCapabilitySource"
           },
           "type": "array",
           "uniqueItems": true
@@ -4003,6 +4033,11 @@
       "additionalProperties": false,
       "properties": {
         "endField": {
+          "description": "The exclusive end: the interval stops just before this value.",
+          "type": "string"
+        },
+        "lastDayField": {
+          "description": "The inclusive last day of a date interval, named in place of\n`endField` when the source records the last day in force.",
           "type": "string"
         },
         "startField": {
@@ -4010,8 +4045,7 @@
         }
       },
       "required": [
-        "startField",
-        "endField"
+        "startField"
       ],
       "type": "object"
     },
@@ -4067,6 +4101,96 @@
         "maximumLength"
       ],
       "type": "object"
+    },
+    "TimerInputSource": {
+      "additionalProperties": false,
+      "description": "One complete mapping into one ordinary Action input. Exactly one member is\nselected by compilation; the flat shape preserves authored source positions.",
+      "properties": {
+        "fromField": {
+          "type": "string"
+        },
+        "fromRecordId": {
+          "const": true,
+          "type": "boolean"
+        },
+        "fromTimer": {
+          "$ref": "#/$defs/TimerValueSource"
+        },
+        "value": true
+      },
+      "type": "object"
+    },
+    "TimerPredicateSource": {
+      "additionalProperties": false,
+      "description": "A bounded conjunction of equality checks over current stored fields.",
+      "properties": {
+        "equals": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ScalarLiteral"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "object"
+        },
+        "type": {
+          "const": "fields",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "equals"
+      ],
+      "type": "object"
+    },
+    "TimerSource": {
+      "additionalProperties": false,
+      "description": "One timer attached to a governed Record type.",
+      "properties": {
+        "at": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "input": {
+          "additionalProperties": {
+            "$ref": "#/$defs/TimerInputSource"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "object"
+        },
+        "invoke": {
+          "type": "string"
+        },
+        "notAfter": {
+          "type": "string"
+        },
+        "rearmOn": {
+          "type": "string"
+        },
+        "when": {
+          "$ref": "#/$defs/TimerPredicateSource"
+        }
+      },
+      "required": [
+        "id",
+        "at",
+        "invoke",
+        "input"
+      ],
+      "type": "object"
+    },
+    "TimerValueSource": {
+      "description": "Runtime-owned timer facts that may be mapped into Action inputs.",
+      "enum": [
+        "occurrence-id",
+        "due-at"
+      ],
+      "type": "string"
     },
     "TimestampFieldSourceSchema": {
       "additionalProperties": false,

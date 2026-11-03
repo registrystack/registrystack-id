@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-coordinator/check/not-waiting",
+  "type": "https://id.registrystack.org/problems/registry-coordinator/check/not-waiting",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-coordinator",
+  "code": "check.not-waiting",
+  "title": "Step is not waiting",
+  "summary": "That step is not waiting.",
+  "description": "That step is not waiting.",
+  "category": null,
+  "http_statuses": [
+    409
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "e9361a89c02e6dcec0e5f199eb6dd5116eb321be",
+    "path": "crates/registry-coordinator/src/problem.rs",
+    "sha256": "035835c5290ab2f174ddc5597eafa9ab0046d2732d8b76049e0003355effe9c6"
+  }
+}

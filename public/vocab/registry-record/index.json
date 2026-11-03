@@ -8,9 +8,9 @@
   "owner": "registry-record",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "bae18995d0f00eba35d7b96629a56e051ac3d0df",
+    "commit": "e9361a89c02e6dcec0e5f199eb6dd5116eb321be",
     "path": "products/registry-record/context/registry-record-v1.jsonld",
-    "sha256": "9b8bf452538214d8559b4e8034446bfade37b5f409cfeaaace650a567423be71"
+    "sha256": "c336506f4dcd7e266155e8cd1ff9710766bc240f395e27b0480b2e193e74e2ee"
   },
   "id": "https://id.registrystack.org/vocab/registry-record/",
   "documented_by": [

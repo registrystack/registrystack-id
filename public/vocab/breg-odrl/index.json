@@ -1,0 +1,30 @@
+{
+  "uri": "https://id.registrystack.org/vocab/breg-odrl/",
+  "title": "BReg partial read-policy vocabulary",
+  "description": "Experimental BReg ODRL constraint and projection terms, defined by the shipped read-policy export profile.",
+  "kind": "vocabulary",
+  "status": "active",
+  "compatibility_line": "v1",
+  "owner": "breg",
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "e9361a89c02e6dcec0e5f199eb6dd5116eb321be",
+    "path": "products/breg/contracts/odrl-profile.jsonld",
+    "sha256": "24d0950eb2c1a76d5005850e1145f675ad65df5231867907b41d11fdd2979cdc"
+  },
+  "id": "https://id.registrystack.org/vocab/breg-odrl/",
+  "documented_by": [
+    {
+      "title": "Contracts and machine identifiers",
+      "href": "https://docs.registrystack.org/reference/contracts/"
+    },
+    {
+      "title": "Registry Stack documentation",
+      "href": "https://docs.registrystack.org/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior."
+  }
+}
