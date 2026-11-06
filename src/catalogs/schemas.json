@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/7d694df0140e03e1a4c1e6a564e52d69a7d334b9e0063d8aeded24d28b83d182.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg/src/proposal_hooks.rs",
         "sha256": "02fe083f3d06c107298847923f42c0036ee98d5ba12347e527e886c0cedd2178"
       },
@@ -29,9 +29,9 @@
       "source": "src/artifacts/sha256/5bfd55b2ccee480035ee9db13b8fb3a99ac5a2e9cd01645fdda8dfeb593eb688.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
       "artifact_sha256": "5bfd55b2ccee480035ee9db13b8fb3a99ac5a2e9cd01645fdda8dfeb593eb688",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/5bfd55b2ccee480035ee9db13b8fb3a99ac5a2e9cd01645fdda8dfeb593eb688.json"
@@ -47,9 +47,9 @@
       "source": "src/artifacts/sha256/ca14df9aafa49fd2018a12869e54f4058e29de07f01c0cbc0dd13f069649bcc9.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
       "artifact_sha256": "ca14df9aafa49fd2018a12869e54f4058e29de07f01c0cbc0dd13f069649bcc9",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/ca14df9aafa49fd2018a12869e54f4058e29de07f01c0cbc0dd13f069649bcc9.json"
@@ -65,9 +65,9 @@
       "source": "src/artifacts/sha256/c1be1e7bc8efa01de429ea5a5cd7c19da49d9766d71839602a0e81cecc447d8b.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
       "artifact_sha256": "c1be1e7bc8efa01de429ea5a5cd7c19da49d9766d71839602a0e81cecc447d8b",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/c1be1e7bc8efa01de429ea5a5cd7c19da49d9766d71839602a0e81cecc447d8b.json"
@@ -83,12 +83,30 @@
       "source": "src/artifacts/sha256/38818527ae8cf4435485ea3f283af51b41c4d1d1e0e26d04ab3e59c158c150a7.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
       "artifact_sha256": "38818527ae8cf4435485ea3f283af51b41c4d1d1e0e26d04ab3e59c158c150a7",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/38818527ae8cf4435485ea3f283af51b41c4d1d1e0e26d04ab3e59c158c150a7.json"
+    },
+    {
+      "uri": "https://id.registrystack.org/schemas/adapter/mapping/mapping.v1alpha1.schema.json",
+      "title": "Registry Adapter mapping model",
+      "description": "Registry Adapter project, profile, pack, fixture, runtime configuration, ingestion job, job runtime configuration, and effective contract JSON Schema.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "adapter",
+      "source": "src/artifacts/sha256/1a713af021f69a27c5c7f58b22464cd227972173f9935b2fc3a0a48eda51e6f5.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
+        "path": "crates/registry-adapterctl/src/schemas.rs",
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
+      },
+      "artifact_sha256": "1a713af021f69a27c5c7f58b22464cd227972173f9935b2fc3a0a48eda51e6f5",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/1a713af021f69a27c5c7f58b22464cd227972173f9935b2fc3a0a48eda51e6f5.json"
     },
     {
       "uri": "https://id.registrystack.org/schemas/adapter/pack/pack.v1alpha1.schema.json",
@@ -98,15 +116,33 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "adapter",
-      "source": "src/artifacts/sha256/6031baaabca785fe6e0adfed4336fa555839e18ae1a3136cf3e895ad5e6f6dcb.json",
+      "source": "src/artifacts/sha256/b799254a0972b343e0366009422c58968813e356d76f5d4d9e66ef5ce3656761.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
-      "artifact_sha256": "6031baaabca785fe6e0adfed4336fa555839e18ae1a3136cf3e895ad5e6f6dcb",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/6031baaabca785fe6e0adfed4336fa555839e18ae1a3136cf3e895ad5e6f6dcb.json"
+      "artifact_sha256": "b799254a0972b343e0366009422c58968813e356d76f5d4d9e66ef5ce3656761",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/b799254a0972b343e0366009422c58968813e356d76f5d4d9e66ef5ce3656761.json"
+    },
+    {
+      "uri": "https://id.registrystack.org/schemas/adapter/preview-expectations/preview-expectations.v1alpha1.schema.json",
+      "title": "Registry Adapter preview expectations",
+      "description": "Registry Adapter project, profile, pack, fixture, runtime configuration, ingestion job, job runtime configuration, and effective contract JSON Schema.",
+      "kind": "schema",
+      "status": "active",
+      "compatibility_line": "v1alpha1",
+      "owner": "adapter",
+      "source": "src/artifacts/sha256/05ca00c30b9126084ea5d52e17db5002f7afb46e9aceac121fe42489afc5caa1.json",
+      "source_reference": {
+        "repository": "registry-stack",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
+        "path": "crates/registry-adapterctl/src/schemas.rs",
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
+      },
+      "artifact_sha256": "05ca00c30b9126084ea5d52e17db5002f7afb46e9aceac121fe42489afc5caa1",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/05ca00c30b9126084ea5d52e17db5002f7afb46e9aceac121fe42489afc5caa1.json"
     },
     {
       "uri": "https://id.registrystack.org/schemas/adapter/profile/profile.v1alpha1.schema.json",
@@ -119,9 +155,9 @@
       "source": "src/artifacts/sha256/8032fd67f82f517cade8e55c4d3972bc5481a957b84a4cb70b3f40f82ac970d3.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
       "artifact_sha256": "8032fd67f82f517cade8e55c4d3972bc5481a957b84a4cb70b3f40f82ac970d3",
       "immutable_uri": "https://id.registrystack.org/artifacts/sha256/8032fd67f82f517cade8e55c4d3972bc5481a957b84a4cb70b3f40f82ac970d3.json"
@@ -134,15 +170,15 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "adapter",
-      "source": "src/artifacts/sha256/2a31e088e66073cf94b5d3769aebbeef3552cafa59c2281405be83ccd5390435.json",
+      "source": "src/artifacts/sha256/5660a447be61398747639c2e0ecde3b0e355c29d4ff454209d3041cd02f5d1a5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
-      "artifact_sha256": "2a31e088e66073cf94b5d3769aebbeef3552cafa59c2281405be83ccd5390435",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/2a31e088e66073cf94b5d3769aebbeef3552cafa59c2281405be83ccd5390435.json"
+      "artifact_sha256": "5660a447be61398747639c2e0ecde3b0e355c29d4ff454209d3041cd02f5d1a5",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/5660a447be61398747639c2e0ecde3b0e355c29d4ff454209d3041cd02f5d1a5.json"
     },
     {
       "uri": "https://id.registrystack.org/schemas/adapter/runtime/runtime.v1alpha1.schema.json",
@@ -152,15 +188,15 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "adapter",
-      "source": "src/artifacts/sha256/169ce8657f2ab5a3140216b6aeeeaaaf7dfcea0f508364a76de142b93c6a0a14.json",
+      "source": "src/artifacts/sha256/d61ae16de167e40cfd90a2ec244886e75bb5778ffffc13a6617efe3729fc7e39.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-adapterctl/src/schemas.rs",
-        "sha256": "ee38dfe66d555d580545cec1b5d8e4148d1d108d194d5680c3dca63bbfbfd7c9"
+        "sha256": "4d73d31f4f7e2221fc7bfcdbb5eaa36c1e675fdfd2372721518fb760f35e13bd"
       },
-      "artifact_sha256": "169ce8657f2ab5a3140216b6aeeeaaaf7dfcea0f508364a76de142b93c6a0a14",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/169ce8657f2ab5a3140216b6aeeeaaaf7dfcea0f508364a76de142b93c6a0a14.json"
+      "artifact_sha256": "d61ae16de167e40cfd90a2ec244886e75bb5778ffffc13a6617efe3729fc7e39",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/d61ae16de167e40cfd90a2ec244886e75bb5778ffffc13a6617efe3729fc7e39.json"
     },
     {
       "uri": "https://id.registrystack.org/schemas/breg/access-explanation/access-explanation.v1alpha4.schema.json",
@@ -245,7 +281,7 @@
       "source": "src/artifacts/sha256/e9bae5707ef92498b162083958fc0af4c1c043e74eec71252259e70bab88b73d.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/AccessExplanation.schema.json",
         "sha256": "e9bae5707ef92498b162083958fc0af4c1c043e74eec71252259e70bab88b73d"
       },
@@ -263,7 +299,7 @@
       "source": "src/artifacts/sha256/18b0b088010cf8ddacae0ffaada4defe030e67eb1fb05c4b282e03ecf62a29a8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/AccessPreview.schema.json",
         "sha256": "18b0b088010cf8ddacae0ffaada4defe030e67eb1fb05c4b282e03ecf62a29a8"
       },
@@ -281,7 +317,7 @@
       "source": "src/artifacts/sha256/5e2e840d023549e7184ace57e19928c29c90e5601a84ed1bf86b1a03f0f08948.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg/src/artifacts.rs",
         "sha256": "8e7e1c82cc1ddb3bc1d41866c812c2ff7d0007d0b57b83422260681ff549e795"
       },
@@ -353,7 +389,7 @@
       "source": "src/artifacts/sha256/d0263a9335d657c23078e5190210f580db884a0608bd6591daebfcb2447a7bbd.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/ActionsExplanation.schema.json",
         "sha256": "d0263a9335d657c23078e5190210f580db884a0608bd6591daebfcb2447a7bbd"
       },
@@ -407,7 +443,7 @@
       "source": "src/artifacts/sha256/f52ad0028a6479717062d38de052df5c1d8e1b0c8b63c478980a3897cc2675cd.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -443,7 +479,7 @@
       "source": "src/artifacts/sha256/5020d8c8d12191760b03bfd268a0f11a8a88b7bc06982063573b7e48c9950fae.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -461,7 +497,7 @@
       "source": "src/artifacts/sha256/52b076a8325b63e0bcaffb71d348e0239cea4d48be094100a018ef8a819fdab5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/event-record-view/EventRecordView.schema.json",
         "sha256": "52b076a8325b63e0bcaffb71d348e0239cea4d48be094100a018ef8a819fdab5"
       },
@@ -497,7 +533,7 @@
       "source": "src/artifacts/sha256/13bb8f2e95d3244f368dccb5ea2c9779ad14a7b3f4661f61487cf56f983b2d45.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/EventsExplanation.schema.json",
         "sha256": "13bb8f2e95d3244f368dccb5ea2c9779ad14a7b3f4661f61487cf56f983b2d45"
       },
@@ -515,7 +551,7 @@
       "source": "src/artifacts/sha256/ea3e859161f961767bc44b463a025feefc17662dd31fa7ba4c67f71b0188f1bc.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -533,7 +569,7 @@
       "source": "src/artifacts/sha256/10006d4e4cd3b8ef2d9e742793967293c7bbdca89a8c11676310a7c4f4c1adc8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -605,7 +641,7 @@
       "source": "src/artifacts/sha256/738c5151b6085ee5a5da8d60334f70b179e740bc1af9cb2888325436c338d546.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/LifecycleExplanation.schema.json",
         "sha256": "738c5151b6085ee5a5da8d60334f70b179e740bc1af9cb2888325436c338d546"
       },
@@ -623,7 +659,7 @@
       "source": "src/artifacts/sha256/34d05bd2adc4b41a65becd76fa288943d2636b7b60e4cfaf17c026dbd962b0f1.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg-mcp/src/schema.rs",
         "sha256": "3e23892d238d9ae9f0fe5b88af8ff394e07891dec5d9c60fb04026c08edce6c2"
       },
@@ -641,7 +677,7 @@
       "source": "src/artifacts/sha256/8177563ac1261680db7070b59f8b651d1cfe8c33cb5423891902bab4d5f8173e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -713,7 +749,7 @@
       "source": "src/artifacts/sha256/c5c5461590e22ba0896a312e9235ad707c066b803c14759f34d402c186823797.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/ModelExplanation.schema.json",
         "sha256": "c5c5461590e22ba0896a312e9235ad707c066b803c14759f34d402c186823797"
       },
@@ -731,7 +767,7 @@
       "source": "src/artifacts/sha256/975478df7cdc216115fcf370f1478ffc3309c6ac6ae47f79be1c8b358c90dd7e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -749,7 +785,7 @@
       "source": "src/artifacts/sha256/9949f5e3a10d4deb0038359d76d1f59b160449472bcd0b6c99e45ad776d20f80.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "72890db9bee57302bf2dcca70dd6629c24bcd9634414fc507e218fd52daed9f9"
       },
@@ -767,7 +803,7 @@
       "source": "src/artifacts/sha256/4babace1053c7b8446b682ce2db17a220263e669b397a414d98ead9d47af459a.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "72890db9bee57302bf2dcca70dd6629c24bcd9634414fc507e218fd52daed9f9"
       },
@@ -821,7 +857,7 @@
       "source": "src/artifacts/sha256/809cf2a9a47ab9ba73dd108671963982724f8c9852f5c3ff904496704d0c8357.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/ProposalsExplanation.schema.json",
         "sha256": "809cf2a9a47ab9ba73dd108671963982724f8c9852f5c3ff904496704d0c8357"
       },
@@ -857,7 +893,7 @@
       "source": "src/artifacts/sha256/c30a70ce60b1946e6eb3cd0ebf1267841c97be81115f61e0bbf713262bfd59a3.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/QueriesExplanation.schema.json",
         "sha256": "c30a70ce60b1946e6eb3cd0ebf1267841c97be81115f61e0bbf713262bfd59a3"
       },
@@ -875,7 +911,7 @@
       "source": "src/artifacts/sha256/1c547522ee09c598590eaa302615aaabb5e5628516f85f2f5558989af25210b1.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg-review/src/schema.rs",
         "sha256": "88a916f23e3a50eb7f392a708ce6b089ffbb51b98e5cf102eccfc2e753da8814"
       },
@@ -911,7 +947,7 @@
       "source": "src/artifacts/sha256/1d26b2aee434f0e83ef227e9a502912e72f4ce60510852db5b9d6be1554a6f83.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/breg/contracts/explain/RoutesExplanation.schema.json",
         "sha256": "1d26b2aee434f0e83ef227e9a502912e72f4ce60510852db5b9d6be1554a6f83"
       },
@@ -929,7 +965,7 @@
       "source": "src/artifacts/sha256/55959ae4cc86f1cd393cca382d7cdfd367ccc703c8676a350af4299b59ebb043.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-breg/src/schema.rs",
         "sha256": "72890db9bee57302bf2dcca70dd6629c24bcd9634414fc507e218fd52daed9f9"
       },
@@ -947,7 +983,7 @@
       "source": "src/artifacts/sha256/598f916ebbe176797484afdd5d55165e6567d39bd0094b6876e5419908e0b78c.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-bregctl/src/tool_schema.rs",
         "sha256": "28567d54120dd29d734ddcd3e10c4c6ee128eb7b2d195e4c77bd1cd6c9bc5cfd"
       },
@@ -1037,7 +1073,7 @@
       "source": "src/artifacts/sha256/2481544f84d61d0bd21ba44e31e7bdefcbf9e10b12d3b103fc100ebead1e346e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-caseworkctl/src/schema.rs",
         "sha256": "4f5378799ebb3a0f65b82eff6f654d8323679bf147214eb68c821bbd6c94733a"
       },
@@ -1181,7 +1217,7 @@
       "source": "src/artifacts/sha256/b9158ab194325cbd1a807922d07d35f4616eff823d9b1c76892e73f330443cdd.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-casework-core/src/schema.rs",
         "sha256": "1604cf79433172ea4553b2f56365ea9e999a515aa3f16d60959cc652972ae185"
       },
@@ -1199,7 +1235,7 @@
       "source": "src/artifacts/sha256/7131a57da2c495a5f2142ab5e682e6b95cfda65a2e60d743c15c5c0c00b175dd.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-casework-core/src/schema.rs",
         "sha256": "1604cf79433172ea4553b2f56365ea9e999a515aa3f16d60959cc652972ae185"
       },
@@ -1289,7 +1325,7 @@
       "source": "src/artifacts/sha256/618dd00144eced267ce239c8412381a555e488af08cb7d6936e63dd963463b0a.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-casework-core/src/schema.rs",
         "sha256": "1604cf79433172ea4553b2f56365ea9e999a515aa3f16d60959cc652972ae185"
       },
@@ -1325,7 +1361,7 @@
       "source": "src/artifacts/sha256/9d026bf36a11bc83493f835f028ff52092e0f6c4cd42b471024ead336b6d8a9e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/casework/scripts/generate_cli_schemas.py",
         "sha256": "1af0958150a6476245c5019f6bc55ae2b3fbe87e88b43900bb75cac4786f0674"
       },
@@ -1361,7 +1397,7 @@
       "source": "src/artifacts/sha256/ef82e91c0f0c3366bd62967be8453e90920341c246a6d05f56e4b4b4b8eb85b0.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-casework/src/schema.rs",
         "sha256": "47d65004647fa541fef411bd213072d25a35384d5e48d03f8fdb51e5569e1bf8"
       },
@@ -1487,7 +1523,7 @@
       "source": "src/artifacts/sha256/472c4861ab27a301f077784e63cd06891ef4b73813aab1dd802c567daac70d16.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-coordinator/src/authoring.rs",
         "sha256": "ae097b5904283e2c57ae726020a6376fe02b975391df284e67e08e5b3ddaf64c"
       },
@@ -1505,7 +1541,7 @@
       "source": "src/artifacts/sha256/bbbc49cc6aa19d2b6329db459ac7d5c8635583e2a0ca63f2d75556840a804202.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-coordinator/src/runtime.rs",
         "sha256": "e544e9afbc39d84d18936d8ea1fffd903ebd94121db10d142394fa5d02ec5916"
       },
@@ -1523,7 +1559,7 @@
       "source": "src/artifacts/sha256/e42e044eb828ff7e12f0a199fc95065c04baeadf91773c2d28ba9a1b0252090e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-coordinator/src/scenarios.rs",
         "sha256": "e20158e5382f690d46879161f32b5adda80385767b2c99b6efb11f166d43a394"
       },
@@ -1541,7 +1577,7 @@
       "source": "src/artifacts/sha256/47cbeecaaa07a52b0af259faff736b4e32e6a0c1ed674634b4cc6815cb369fd4.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/discovery/schemas/evidence-mapping.schema.json",
         "sha256": "47cbeecaaa07a52b0af259faff736b4e32e6a0c1ed674634b4cc6815cb369fd4"
       },
@@ -1559,7 +1595,7 @@
       "source": "src/artifacts/sha256/97014247dcc83bc148d355a5e56ffaf8ab0a522cd0f462c93a97fda19bcb6ffc.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/discovery/schemas/index.schema.json",
         "sha256": "97014247dcc83bc148d355a5e56ffaf8ab0a522cd0f462c93a97fda19bcb6ffc"
       },
@@ -1577,7 +1613,7 @@
       "source": "src/artifacts/sha256/19f90f5a2f87b250dcd54d16fe1810fbea6bdd58e6ec46891e20b3c5110605d5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/discovery/schemas/origins.schema.json",
         "sha256": "19f90f5a2f87b250dcd54d16fe1810fbea6bdd58e6ec46891e20b3c5110605d5"
       },
@@ -1595,7 +1631,7 @@
       "source": "src/artifacts/sha256/d4c5894f466ce1683e7d0b3db2b86413fa71cb7cea81843d12dc1ccbafd5cff8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/discovery/schemas/runtime.schema.json",
         "sha256": "d4c5894f466ce1683e7d0b3db2b86413fa71cb7cea81843d12dc1ccbafd5cff8"
       },
@@ -1613,7 +1649,7 @@
       "source": "src/artifacts/sha256/dc7d339a46f7450b1c158e7c5bce237f3c1c5ea54a03c1b3fa3e53cb54a1c4a1.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-documents/src/schema.rs",
         "sha256": "9d6fc4ae1e652e78cb3de6410e3fb044ea2883e468db99e10bbb7ac4022a4914"
       },
@@ -1631,7 +1667,7 @@
       "source": "src/artifacts/sha256/d341927b2bb9a139cebe16a2edff9acaf6b069c9863b6f6f12108be6e4cd0731.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-documents/src/schema.rs",
         "sha256": "9d6fc4ae1e652e78cb3de6410e3fb044ea2883e468db99e10bbb7ac4022a4914"
       },
@@ -1649,7 +1685,7 @@
       "source": "src/artifacts/sha256/02988cabcddaa2560bc4efae9d8ad45bbc800fb2be14abfbb59533112e1c892a.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-documents/src/schema.rs",
         "sha256": "9d6fc4ae1e652e78cb3de6410e3fb044ea2883e468db99e10bbb7ac4022a4914"
       },
@@ -1667,7 +1703,7 @@
       "source": "src/artifacts/sha256/43d58cc3028e7a97f91929625aeff1ec243f937e16ee455de8f3cb1caa4675b7.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-documents/src/schema.rs",
         "sha256": "9d6fc4ae1e652e78cb3de6410e3fb044ea2883e468db99e10bbb7ac4022a4914"
       },
@@ -1685,7 +1721,7 @@
       "source": "src/artifacts/sha256/8f4833f26187b81d360edb0849313806ecdc55191a2dc1bbad731023130fa873.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-documents/src/schema.rs",
         "sha256": "9d6fc4ae1e652e78cb3de6410e3fb044ea2883e468db99e10bbb7ac4022a4914"
       },
@@ -1703,7 +1739,7 @@
       "source": "src/artifacts/sha256/5fd729f00c7942e6422b726a75b02d931218c416a1caffdfb7b129fd8ff22c4c.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
@@ -1754,16 +1790,16 @@
       "status": "active",
       "compatibility_line": "v1",
       "owner": "evidence",
-      "source": "src/artifacts/sha256/2847a56eda9c8b838d28fde619853c36851acc57b094b74ec2665150f1ace8d4.yaml",
+      "source": "src/artifacts/sha256/e880da093ee3d0b6200fc8963109746765971ad1747dd3ea29edb390328ab36a.yaml",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/evidence/contracts/bundle.schema.yaml",
-        "sha256": "2847a56eda9c8b838d28fde619853c36851acc57b094b74ec2665150f1ace8d4"
+        "sha256": "e880da093ee3d0b6200fc8963109746765971ad1747dd3ea29edb390328ab36a"
       },
-      "artifact_sha256": "2847a56eda9c8b838d28fde619853c36851acc57b094b74ec2665150f1ace8d4",
+      "artifact_sha256": "e880da093ee3d0b6200fc8963109746765971ad1747dd3ea29edb390328ab36a",
       "artifact_media_type": "application/yaml",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/2847a56eda9c8b838d28fde619853c36851acc57b094b74ec2665150f1ace8d4.yaml"
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/e880da093ee3d0b6200fc8963109746765971ad1747dd3ea29edb390328ab36a.yaml"
     },
     {
       "uri": "https://id.registrystack.org/schemas/evidence/client-contracts/client-contracts.v1.schema.json",
@@ -1776,7 +1812,7 @@
       "source": "src/artifacts/sha256/777f3b0aaf8129b9beacba85c188dce0b7aa841fe459c9ee517253eb49c7dc53.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-client/src/schema.rs",
         "sha256": "b28e799ebc6f2da79fb99e53af3b117aef9bc6d544a89c9fac1935572d6f0508"
       },
@@ -1794,7 +1830,7 @@
       "source": "src/artifacts/sha256/67cddb577791407b017c46465860c1a1674b45d3b7ed4005a2ea12cea3bb61d5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-client/src/schema.rs",
         "sha256": "b28e799ebc6f2da79fb99e53af3b117aef9bc6d544a89c9fac1935572d6f0508"
       },
@@ -1812,7 +1848,7 @@
       "source": "src/artifacts/sha256/b131ade304b8fa1e4afbf5ab8be445d72f8117d75cf996a00d9d20d774575ea1.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence/src/schema.rs",
         "sha256": "c598415dc0abd9f1cb985c9bda305aaf6d926ed286732ff5428bda8dc3469b79"
       },
@@ -1830,7 +1866,7 @@
       "source": "src/artifacts/sha256/912661673c41c1119a8bd83809c66cc2d38b16e171c963b4988175c74f627664.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence/src/schema.rs",
         "sha256": "c598415dc0abd9f1cb985c9bda305aaf6d926ed286732ff5428bda8dc3469b79"
       },
@@ -1848,7 +1884,7 @@
       "source": "src/artifacts/sha256/37d6a662a61c9a5730be870e1d202209d0bebeb658968f978f317bb8995c1cb5.yaml",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/evidence/contracts/holder-bound-verification-policy.schema.yaml",
         "sha256": "37d6a662a61c9a5730be870e1d202209d0bebeb658968f978f317bb8995c1cb5"
       },
@@ -1867,7 +1903,7 @@
       "source": "src/artifacts/sha256/761a6a1300c328344666ebacdb7c811deefd80ed293e9bc4c0adea3cd435b9c5.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
@@ -1885,7 +1921,7 @@
       "source": "src/artifacts/sha256/701ee38be07cd80d8fd73a393abfb243511d3accd7a34124893c39781d883191.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-oid4vci/src/schema.rs",
         "sha256": "0cc005a1e55672ce3a11ad5fd0c4e714155ec6e4b003328bd025a88d29d455b3"
       },
@@ -1900,15 +1936,15 @@
       "status": "active",
       "compatibility_line": "v1alpha1",
       "owner": "evidence",
-      "source": "src/artifacts/sha256/62c45846105e0231417e0450568a899ea05f78f41250b450353c074407cc5f26.json",
+      "source": "src/artifacts/sha256/3acebd18796613bcbce03cf4f43429a55acfe78124216a319c233abe5ba87b51.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
-      "artifact_sha256": "62c45846105e0231417e0450568a899ea05f78f41250b450353c074407cc5f26",
-      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/62c45846105e0231417e0450568a899ea05f78f41250b450353c074407cc5f26.json"
+      "artifact_sha256": "3acebd18796613bcbce03cf4f43429a55acfe78124216a319c233abe5ba87b51",
+      "immutable_uri": "https://id.registrystack.org/artifacts/sha256/3acebd18796613bcbce03cf4f43429a55acfe78124216a319c233abe5ba87b51.json"
     },
     {
       "uri": "https://id.registrystack.org/schemas/evidence/question/question.v1alpha1.schema.json",
@@ -1939,7 +1975,7 @@
       "source": "src/artifacts/sha256/fd4ef085ef94087f5fa6d846a284957345d5463df44372c5667ea1a8cf643d0d.yaml",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/evidence/contracts/runtime.schema.yaml",
         "sha256": "fd4ef085ef94087f5fa6d846a284957345d5463df44372c5667ea1a8cf643d0d"
       },
@@ -1976,7 +2012,7 @@
       "source": "src/artifacts/sha256/8ebfd8d54b92be742595c6bc1d4a71a570ae04ab80e85d0d276522f0967ab7bf.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
@@ -2012,7 +2048,7 @@
       "source": "src/artifacts/sha256/a1bab27c4778502d75e2041b7d38dd0dc9cfffaa91d52625813b16cf694b9b22.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
@@ -2066,7 +2102,7 @@
       "source": "src/artifacts/sha256/bb19696ad1cf4f6c89de72d1b50da9f8897761cd15066c4281500836306ea09e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-evidence-authoring/src/schema.rs",
         "sha256": "62464b27cb80552652f785f820ed3655cc9d48aa65dba30dcaea5696c5e79f70"
       },
@@ -2084,7 +2120,7 @@
       "source": "src/artifacts/sha256/b6a7e7200bf014a4b31dd064aa39bcbdb60fb624ef8c305f4c3431958b47bb12.yaml",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/evidence/contracts/verification-policy.schema.yaml",
         "sha256": "b6a7e7200bf014a4b31dd064aa39bcbdb60fb624ef8c305f4c3431958b47bb12"
       },
@@ -2103,7 +2139,7 @@
       "source": "src/artifacts/sha256/e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/identifiers/contracts/catalog.v1.schema.json",
         "sha256": "e45632976b2436dc468805b78e6ac35d4cb05340b260370d011eee68fcf28c5d"
       },
@@ -2121,7 +2157,7 @@
       "source": "src/artifacts/sha256/b68362a53e0abd42941a79dc6bd280538a5510c9046dc8fb53cbdd29be3d898e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-manifest-cli/src/schema.rs",
         "sha256": "19d037ee50b143b70576b4ce50808883e0ccb831373f72d42beed770a67d8eae"
       },
@@ -2139,7 +2175,7 @@
       "source": "src/artifacts/sha256/f8e367082254b713f8347ccb9055d7ac527ddef43b06b33239f8d81d0ed11012.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-manifest-cli/src/schema.rs",
         "sha256": "19d037ee50b143b70576b4ce50808883e0ccb831373f72d42beed770a67d8eae"
       },
@@ -2157,7 +2193,7 @@
       "source": "src/artifacts/sha256/af3c4d9d5e6da2a07c2d26fc9a06f7bdb3358f6145c54b25d7a045d3066c09e6.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-messaging/src/schema.rs",
         "sha256": "566657f59c1c8bb5059c0e0e2faa499f559a6fe905d1d8b1aba2eff781f62a09"
       },
@@ -2175,7 +2211,7 @@
       "source": "src/artifacts/sha256/06439b2e8b23831f90676f4103605a1fc7e79e34f9e8935023cf173e122934de.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-messaging/src/schema.rs",
         "sha256": "566657f59c1c8bb5059c0e0e2faa499f559a6fe905d1d8b1aba2eff781f62a09"
       },
@@ -2193,7 +2229,7 @@
       "source": "src/artifacts/sha256/d2c4ef5c2ca281c720117c95c5b136be7353d1da70a99f9c9455dd6b94dcae7b.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-messaging/src/schema.rs",
         "sha256": "566657f59c1c8bb5059c0e0e2faa499f559a6fe905d1d8b1aba2eff781f62a09"
       },
@@ -2211,7 +2247,7 @@
       "source": "src/artifacts/sha256/5d99a71fc7fb00d3d4f6f4ffc4f6399570e60497e53a080cd571fc0ef3bd0d42.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-messaging/src/schema.rs",
         "sha256": "566657f59c1c8bb5059c0e0e2faa499f559a6fe905d1d8b1aba2eff781f62a09"
       },
@@ -2229,7 +2265,7 @@
       "source": "src/artifacts/sha256/3fa0953ce1c3effc0a35c61e5c93d484d5b948e5f64478999c6ea671e588b3d1.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-platform-yaml/src/check_acceptances.rs",
         "sha256": "9f01dd394d730e590710e430baf1928ee3e02bb52c1d3ab53b41e447ac692fd2"
       },
@@ -2247,7 +2283,7 @@
       "source": "src/artifacts/sha256/c0ceb9cbec8393e03e125d10b4d512107bc120c7b5d31398cfd9256c78a49aee.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-cli-api/src/schema.rs",
         "sha256": "78e2cceb547c9691ee7636d8d3527aebde5a54570fa69c2fbced8b3583f561b1"
       },
@@ -2265,7 +2301,7 @@
       "source": "src/artifacts/sha256/5ea2b8f0276de7b574efc392e72672179ce8e1ccea923dc62f10cbb115274099.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-cli-api/src/schema.rs",
         "sha256": "78e2cceb547c9691ee7636d8d3527aebde5a54570fa69c2fbced8b3583f561b1"
       },
@@ -2283,7 +2319,7 @@
       "source": "src/artifacts/sha256/28757cb955ea96d628ff2442cc9dd7ce4f11998edada848a834ef9dfbc3c5c3e.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-mcp/src/schema.rs",
         "sha256": "92b053026e128997664c3981e09347cb4d2f1bd1c34dd96f646db0b37bdb4d7c"
       },
@@ -2301,7 +2337,7 @@
       "source": "src/artifacts/sha256/706e5506bf8bb44d7717ff00e841af2f862502437f3502c3eeadde91a0465030.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-thunderid-tooling/src/schema.rs",
         "sha256": "a0d71d083c0502cd9f9805451c1f80a1f0cf5623df094886cb1a6a140ce8bfe0"
       },
@@ -2319,7 +2355,7 @@
       "source": "src/artifacts/sha256/e9ddb96d7b521da29b033353ffa854e2e003b1c952f9aad847b30ed1e3b8cf2a.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "products/registry-record/schema/registry-record-v1.schema.json",
         "sha256": "e9ddb96d7b521da29b033353ffa854e2e003b1c952f9aad847b30ed1e3b8cf2a"
       },
@@ -2445,7 +2481,7 @@
       "source": "src/artifacts/sha256/48c416e7a409cde355bb7e7a1a1bd8eac6248e65867fd76b55b777d4b6e335d2.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-render/src/schema.rs",
         "sha256": "187b3c8a7cb457962a2cadc80432af5c81124641ca356f539f634a5c2403a309"
       },
@@ -2463,7 +2499,7 @@
       "source": "src/artifacts/sha256/f511f546980251198954678790b986a5aa2cb4f037bd463f20531b8c9736d28b.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-render/src/schema.rs",
         "sha256": "187b3c8a7cb457962a2cadc80432af5c81124641ca356f539f634a5c2403a309"
       },
@@ -2481,7 +2517,7 @@
       "source": "src/artifacts/sha256/e853c774b697a8debb56537eb3a14c4e8c32f9fa8771eba1cd05eb397505b3c6.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-render/src/schema.rs",
         "sha256": "187b3c8a7cb457962a2cadc80432af5c81124641ca356f539f634a5c2403a309"
       },
@@ -2499,7 +2535,7 @@
       "source": "src/artifacts/sha256/dbb4bea390c11e37fee5840aef5eab34e39a4f5d34bb72354fcf38f041bbb974.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-scheduling-core/src/schema.rs",
         "sha256": "7b0439b0479c783a02f1a2b4bd0633fe8440b8b015ca7c8978668f5a988ca1cc"
       },
@@ -2517,7 +2553,7 @@
       "source": "src/artifacts/sha256/1cb82ae0e7ec13bf7d54b109546a4d68cb2b3b031868941728dba209bea8bf21.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-scheduling-core/src/schema.rs",
         "sha256": "7b0439b0479c783a02f1a2b4bd0633fe8440b8b015ca7c8978668f5a988ca1cc"
       },
@@ -2535,7 +2571,7 @@
       "source": "src/artifacts/sha256/77ab388672f3d58275b278a94ebdddcf24828565af707f6720646cf1e09608e8.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-scheduling-core/src/schema.rs",
         "sha256": "7b0439b0479c783a02f1a2b4bd0633fe8440b8b015ca7c8978668f5a988ca1cc"
       },
@@ -2553,7 +2589,7 @@
       "source": "src/artifacts/sha256/eaf6f80ebeb9ebb3896982b2b334a1926e30fca4d62615c368d4b69e9c3366af.json",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "7a188d2d26601a86333076df0ef9bc452292ca72",
         "path": "crates/registry-scheduling/src/schema.rs",
         "sha256": "72c9a636e83d70101ef7110c0da9cd257cb8b3789f6df27910890eabbf8ae990"
       },
