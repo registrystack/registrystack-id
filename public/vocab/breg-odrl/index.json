@@ -8,7 +8,7 @@
   "owner": "breg",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "4ee5c22b4ae739882a5047ac8ae3d12c29097f8b",
+    "commit": "55fd3ac9c0cd406f0cd8d0018edf386a8f3977bb",
     "path": "products/breg/contracts/odrl-profile.jsonld",
     "sha256": "24d0950eb2c1a76d5005850e1145f675ad65df5231867907b41d11fdd2979cdc"
   },
