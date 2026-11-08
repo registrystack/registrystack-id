@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-evidence-oid4vp/issuer-unavailable",
+  "type": "https://id.registrystack.org/problems/registry-evidence-oid4vp/issuer-unavailable",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-evidence-oid4vp",
+  "code": "issuer-unavailable",
+  "title": "Service Unavailable",
+  "summary": "The token issuer is unavailable. Retry after the interval given.",
+  "description": "The token issuer is unavailable. Retry after the interval given.",
+  "category": null,
+  "http_statuses": [
+    503
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "4ee5c22b4ae739882a5047ac8ae3d12c29097f8b",
+    "path": "crates/registry-evidence-oid4vp/src/problem.rs",
+    "sha256": "50c4a646136a40b41e7026302ca16d6cfa757e84cc3b11394ca669fedfe8d644"
+  }
+}

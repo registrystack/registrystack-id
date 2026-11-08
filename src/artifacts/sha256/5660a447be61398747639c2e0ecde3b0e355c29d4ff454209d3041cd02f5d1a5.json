@@ -1,0 +1,664 @@
+{
+  "$defs": {
+    "AccessProfile": {
+      "additionalProperties": false,
+      "description": "One access profile: a named binding of scopes to concrete facade\noperations and record types, reviewed deployment policy\n(`products/adapter/CONCEPT.md` section 10.1).",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The access profile name a caller identity is granted."
+        },
+        "operations": {
+          "description": "The profile operation ids the profile may call, unique (CFG-ID-6).",
+          "items": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "recordTypes": {
+          "description": "The record types the profile may touch, unique (CFG-ID-6).",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "scopes": {
+          "description": "The OIDC scopes the profile admits, unique (CFG-ID-6).",
+          "items": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "scopes",
+        "operations",
+        "recordTypes"
+      ],
+      "type": "object"
+    },
+    "Binding": {
+      "additionalProperties": false,
+      "description": "One binding of a concrete contract operation to a route\n(`products/adapter/CONCEPT.md` section 7): one concrete operation per\n(profile operation, record type) pair, with the static worst-case\nupstream-call budget the checks hold the route to.",
+      "properties": {
+        "asyncCompletion": {
+          "$ref": "#/$defs/BindingAsyncCompletion",
+          "description": "The asynchronous response policy, absent for every synchronous\nbinding."
+        },
+        "filters": {
+          "description": "The declared fields of the bound record type a search binding\nfilters on (`products/adapter/CONCEPT.md` section 8.11.1); the\nfacade offers exactly these as typed equality query parameters.\nEvery declared filter is required: a call that leaves one out is\nrefused as an invalid field before any script runs or source is\ncalled.\nEvery entry must name a declared field, checked at the project\nchecks; the list is unique (CFG-ID-6).",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The binding identifier."
+        },
+        "maximumUpstreamCalls": {
+          "default": 4,
+          "description": "The declared budget of upstream sends per exchange; the static\nworst-case count must stay within it. Defaults to 4.",
+          "format": "uint64",
+          "maximum": 100000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "operation": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "The profile operation this binding serves."
+        },
+        "recordType": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The record type the concrete operation serves."
+        },
+        "route": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "The route the operation dispatches to."
+        }
+      },
+      "required": [
+        "id",
+        "operation",
+        "recordType",
+        "route"
+      ],
+      "type": "object"
+    },
+    "BindingAsyncCompletion": {
+      "description": "How one asynchronous binding answers while the source operation remains\npending. Both modes use the same profile-owned status link; bounded wait\nspends only the declared finite interval and poll count first.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "Return the committed accepted response immediately.",
+          "properties": {
+            "type": {
+              "const": "status-link",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Poll within all three authored bounds, then return either a proven\nterminal response or the same committed accepted response.",
+          "properties": {
+            "maximumPolls": {
+              "format": "uint64",
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "pollIntervalMilliseconds": {
+              "format": "uint64",
+              "maximum": 10000,
+              "minimum": 10,
+              "type": "integer"
+            },
+            "type": {
+              "const": "bounded-wait",
+              "type": "string"
+            },
+            "waitTimeoutMilliseconds": {
+              "format": "uint64",
+              "maximum": 30000,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "type",
+            "waitTimeoutMilliseconds",
+            "pollIntervalMilliseconds",
+            "maximumPolls"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "BindingTransform": {
+      "additionalProperties": false,
+      "description": "One binding's project-owned transformation. Its output schema is not\nrepeated here: the binding's record type selects one Consultation\ncollection/view, and that collection owns the single `dataSchema`\nreference.",
+      "properties": {
+        "entrypoint": {
+          "description": "The one-argument Rhai function invoked as `entrypoint(source)`.",
+          "type": "string"
+        },
+        "script": {
+          "$ref": "#/$defs/LocalId",
+          "description": "A [`ProjectScript`] id."
+        }
+      },
+      "required": [
+        "script",
+        "entrypoint"
+      ],
+      "type": "object"
+    },
+    "ConsultationCollection": {
+      "additionalProperties": false,
+      "description": "Deployment metadata for one project record type and public view.",
+      "properties": {
+        "dataSchema": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Pinned project schema for the public `data` member of this view."
+        },
+        "lookup": {
+          "$ref": "#/$defs/ConsultationLookup",
+          "description": "Exact-selector metadata, required only when Lookup is bound."
+        },
+        "recordType": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Project record type and literal Consultation collection identifier."
+        },
+        "registry": {
+          "description": "Stable identifier of the Registry that owns the Records.",
+          "type": "string"
+        },
+        "search": {
+          "$ref": "#/$defs/ConsultationSearch",
+          "description": "Named-search metadata, required only when Search is bound."
+        },
+        "transform": {
+          "$ref": "#/$defs/BindingTransform",
+          "description": "The transformation every `retrieve`, `lookup`, `list`, and `search`\nbinding of this record type follows unless `bindingTransforms` names\none for that binding."
+        },
+        "view": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Public view named by the concrete OpenAPI operation metadata. When\nomitted, the view is named after `dataSchema`."
+        }
+      },
+      "required": [
+        "recordType",
+        "registry",
+        "dataSchema"
+      ],
+      "type": "object"
+    },
+    "ConsultationFacade": {
+      "additionalProperties": false,
+      "description": "One deployment of the built-in Consultation facade.",
+      "properties": {
+        "collections": {
+          "description": "Collection metadata, unique by the record type that also supplies the\ncollection identifier on the wire.",
+          "items": {
+            "$ref": "#/$defs/ConsultationCollection"
+          },
+          "type": "array"
+        },
+        "contract": {
+          "description": "Version-specific HTTPS OpenAPI contract published for this deployment.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract",
+        "collections"
+      ],
+      "type": "object"
+    },
+    "ConsultationLookup": {
+      "additionalProperties": false,
+      "description": "One exact selector and the project schema of its `values` member.",
+      "properties": {
+        "inputSchema": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "selector": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Exact, at-most-one selector promised by the selected source route."
+        }
+      },
+      "required": [
+        "selector",
+        "inputSchema"
+      ],
+      "type": "object"
+    },
+    "ConsultationSearch": {
+      "additionalProperties": false,
+      "description": "One named Search and the project schema of its `criteria` member.",
+      "properties": {
+        "inputSchema": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "search": {
+          "$ref": "#/$defs/LocalId"
+        }
+      },
+      "required": [
+        "search",
+        "inputSchema"
+      ],
+      "type": "object"
+    },
+    "Digest": {
+      "description": "A SHA-256 digest: `sha256:` followed by 64 lowercase hex digits.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "ExternalId": {
+      "description": "An identifier another system issues, written exactly as its issuer gives it.",
+      "maxLength": 512,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "PinnedRef": {
+      "additionalProperties": false,
+      "description": "A pinned reference to a profile or pack: plain identifier plus the\nversion and digest `adapterctl check` verifies (CFG-ID-4,\n`products/adapter/CONCEPT.md` section 6).",
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/Digest",
+          "description": "The digest the artifact's bytes must hash to."
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The referenced artifact's identifier."
+        },
+        "version": {
+          "description": "The referenced artifact's version.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "digest"
+      ],
+      "type": "object"
+    },
+    "ProjectArtifacts": {
+      "additionalProperties": false,
+      "description": "The project-owned artifact inventory. Empty inventories preserve existing\ngeneric profile deployments, which keep all route behavior in their pack.",
+      "properties": {
+        "schemas": {
+          "default": [],
+          "description": "Versioned public JSON Schemas.",
+          "items": {
+            "$ref": "#/$defs/ProjectSchema"
+          },
+          "type": "array"
+        },
+        "scripts": {
+          "default": [],
+          "description": "Programme and public-view transformation scripts.",
+          "items": {
+            "$ref": "#/$defs/ProjectScript"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ProjectIdentity": {
+      "additionalProperties": false,
+      "description": "The project identity block: the deployment's own name and version\n(`products/adapter/CONCEPT.md` section 10.1). The id is a local\nidentifier (CFG-ID-1); the version is text, the same version-as-text\nrule as profiles and packs.",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The project identifier."
+        },
+        "version": {
+          "description": "The project version.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "type": "object"
+    },
+    "ProjectSchema": {
+      "additionalProperties": false,
+      "description": "One project-owned public data schema. The schema bytes carry their stable,\nversioned HTTPS `$id`; this inventory binds those bytes into the project\nclosure without duplicating that public identity in YAML.",
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/Digest",
+          "description": "The exact sha256 digest of the JSON Schema bytes."
+        },
+        "file": {
+          "description": "A clean path relative to the project document.",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The local name a Consultation collection uses as `dataSchema`."
+        }
+      },
+      "required": [
+        "id",
+        "file",
+        "digest"
+      ],
+      "type": "object"
+    },
+    "ProjectScript": {
+      "additionalProperties": false,
+      "description": "One project-owned Rhai source. The deployment project, rather than the\nreusable source pack, owns programme and public-view transformations.",
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/Digest",
+          "description": "The exact sha256 digest of the Rhai source bytes."
+        },
+        "file": {
+          "description": "A clean path relative to the project document.",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The local name transformations use."
+        }
+      },
+      "required": [
+        "id",
+        "file",
+        "digest"
+      ],
+      "type": "object"
+    },
+    "RecordField": {
+      "additionalProperties": false,
+      "description": "One declared record field, typed under CFG-VAL-9 so fixture values and\nroute outputs are checked against it.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The field name."
+        },
+        "required": {
+          "description": "Whether every record of the type carries the field.",
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/$defs/RecordFieldType",
+          "description": "The field's value type."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object"
+    },
+    "RecordFieldType": {
+      "description": "A record field's value type (CFG-VAL-9).",
+      "enum": [
+        "string",
+        "integer",
+        "decimal",
+        "boolean",
+        "date",
+        "date-time"
+      ],
+      "type": "string"
+    },
+    "RecordType": {
+      "additionalProperties": false,
+      "description": "One declared record type and its fields\n(`products/adapter/CONCEPT.md` section 6).",
+      "properties": {
+        "fields": {
+          "description": "The declared fields, unique by whole item.",
+          "items": {
+            "$ref": "#/$defs/RecordField"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "name": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The record type name, the `{type}` of concrete operations."
+        }
+      },
+      "required": [
+        "name",
+        "fields"
+      ],
+      "type": "object"
+    },
+    "TemplatedRoute": {
+      "additionalProperties": false,
+      "description": "A template instantiation in a project, Camel's `templatedRoute`\n(`manual/route-template.html`). Placeholders resolve at instantiation,\nduring `adapterctl check` and at startup, never per request.",
+      "properties": {
+        "parameters": {
+          "additionalProperties": true,
+          "description": "Parameter value by parameter name; each key is a local identifier,\nthe template parameter it instantiates (CFG-ID-1).",
+          "propertyNames": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "type": "object"
+        },
+        "routeId": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "The instantiated route id; its `from` becomes `direct:<routeId>`."
+        },
+        "routeTemplate": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "The pack template this instantiation references."
+        }
+      },
+      "required": [
+        "routeTemplate",
+        "routeId"
+      ],
+      "type": "object"
+    },
+    "WriteCollection": {
+      "additionalProperties": false,
+      "description": "Direct-write selection for one project record type. At least one of\nCreate and Update is required. Registry, view, and readable data-schema\nmetadata may be inherited from a matching Consultation collection; a\nWrite-only Update supplies them explicitly.",
+      "properties": {
+        "create": {
+          "$ref": "#/$defs/WriteCreate"
+        },
+        "readDataSchema": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Project schema for the companion read's public `data`, required for a\nWrite-only Update and separate by selection from each input schema."
+        },
+        "recordType": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Project record type and literal Write collection identifier."
+        },
+        "registry": {
+          "description": "Stable identifier of the Registry that owns the Records.",
+          "type": "string"
+        },
+        "update": {
+          "$ref": "#/$defs/WriteUpdate"
+        },
+        "view": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Public writable view, required for a Write-only Update."
+        }
+      },
+      "required": [
+        "recordType"
+      ],
+      "type": "object"
+    },
+    "WriteCreate": {
+      "additionalProperties": false,
+      "description": "Deployment metadata for direct Create of one record.",
+      "properties": {
+        "inputSchema": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Project-owned domain schema for `CreateInput.data`."
+        }
+      },
+      "required": [
+        "inputSchema"
+      ],
+      "type": "object"
+    },
+    "WriteFacade": {
+      "additionalProperties": false,
+      "description": "One deployment of the built-in GovStack direct Write target. Protocol\npaths, envelopes, error shapes, and Create/Update wrappers remain\nmaintained Rust; the project selects collections and domain schemas.",
+      "properties": {
+        "collections": {
+          "description": "Collection metadata, unique by the record type that also supplies the\npublic collection identifier.",
+          "items": {
+            "$ref": "#/$defs/WriteCollection"
+          },
+          "type": "array"
+        },
+        "contract": {
+          "description": "Version-specific HTTPS OpenAPI contract published for this deployment.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract",
+        "collections"
+      ],
+      "type": "object"
+    },
+    "WriteUpdate": {
+      "additionalProperties": false,
+      "description": "Deployment metadata for conditional Update of one record.",
+      "properties": {
+        "companionRead": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Existing same-collection read binding used by the one supporting GET.\nWhen omitted, the one `retrieve` or `writable-read` binding of the\nrecord type fills it; a record type with more than one such binding\nmust name it."
+        },
+        "inputSchema": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Project-owned domain merge-patch schema for `UpdateInput.data`."
+        }
+      },
+      "required": [
+        "inputSchema"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/adapter/project/project.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The adapter project artifact (`AdapterProject`): the declared record\nmodel, the pinned profile and pack references, the template\ninstantiations, the bindings, and the access profiles. Reading a project\nderives the members its short form leaves out; an explicit member always\nwins.",
+  "properties": {
+    "accessProfiles": {
+      "default": [],
+      "description": "The access profiles.",
+      "items": {
+        "$ref": "#/$defs/AccessProfile"
+      },
+      "type": "array"
+    },
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/adapter/project/v1alpha1",
+      "type": "string"
+    },
+    "artifacts": {
+      "$ref": "#/$defs/ProjectArtifacts",
+      "description": "Digest-pinned deployment-owned scripts and public schemas."
+    },
+    "bindingTransforms": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BindingTransform"
+      },
+      "description": "Project-owned transformations keyed by the binding id they follow.\nThe map form avoids duplicating the binding or source-route identity.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "bindings": {
+      "default": [],
+      "description": "The bindings of contract operations to routes.",
+      "items": {
+        "$ref": "#/$defs/Binding"
+      },
+      "type": "array"
+    },
+    "consultation": {
+      "$ref": "#/$defs/ConsultationFacade",
+      "description": "The project metadata for the built-in Consultation facade. Its paths,\nenvelopes, problems, and protocol schemas remain maintained Rust."
+    },
+    "kind": {
+      "const": "AdapterProject",
+      "type": "string"
+    },
+    "pack": {
+      "$ref": "#/$defs/PinnedRef",
+      "description": "The pinned adapter pack."
+    },
+    "parameterizedParts": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "The deployment's value for each of the profile's parameterized\nparts, keyed by part name. The engine writes each value over the\nresponse-envelope members of that name; every declared part needs\na value and no value names an undeclared part.",
+      "propertyNames": {
+        "$ref": "#/$defs/ExternalId"
+      },
+      "type": "object"
+    },
+    "profile": {
+      "$ref": "#/$defs/PinnedRef",
+      "description": "The pinned authored facade profile. Exactly one of this member and\n`consultation` selects the deployment's caller-facing protocol."
+    },
+    "project": {
+      "$ref": "#/$defs/ProjectIdentity",
+      "description": "The deployment's identity."
+    },
+    "recordTypes": {
+      "default": [],
+      "description": "The declared record types and fields. A Consultation or Write\nrecord type left out is declared with no fields.",
+      "items": {
+        "$ref": "#/$defs/RecordType"
+      },
+      "type": "array"
+    },
+    "templatedRoutes": {
+      "default": [],
+      "description": "The pack template instantiations, Camel's `templatedRoute`.",
+      "items": {
+        "$ref": "#/$defs/TemplatedRoute"
+      },
+      "type": "array"
+    },
+    "write": {
+      "$ref": "#/$defs/WriteFacade",
+      "description": "The project metadata for the built-in synchronous GovStack direct\nWrite target. It may coexist with Consultation, but never with an\nauthored generic profile."
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "pack",
+    "project"
+  ],
+  "title": "Registry Adapter project",
+  "type": "object"
+}

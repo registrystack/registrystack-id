@@ -3,14 +3,29 @@
     "Acquisition": {
       "additionalProperties": false,
       "properties": {
+        "holderPresented": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HolderPresented"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "A wallet presentation Source for the selector profiles it lists. A\nrequest on one of those profiles acquires only through this Source."
+        },
         "source": {
-          "$ref": "#/$defs/LocalId",
-          "description": "One reviewed route owns the complete bounded provider interaction."
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LocalId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "One reviewed route owns the complete bounded provider interaction for\nthe selector profiles that `holderPresented` does not claim. Optional\nonly when `holderPresented` lists every profile the subject roles allow."
         }
       },
-      "required": [
-        "source"
-      ],
       "type": "object"
     },
     "AcquisitionPosture": {
@@ -88,6 +103,17 @@
             "$ref": "#/$defs/LocalId"
           },
           "type": "object"
+        },
+        "publicCheck": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PublicCheck"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Experimental (`v1alpha1`). Declares that this definition may answer the\nunauthenticated public certificate check once a target authority\nactivates it. Declaring it grants nothing by itself."
         },
         "purpose": {
           "type": "string"
@@ -549,6 +575,28 @@
       ],
       "type": "object"
     },
+    "HolderPresented": {
+      "additionalProperties": false,
+      "properties": {
+        "selectorProfiles": {
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "source": {
+          "$ref": "#/$defs/LocalId"
+        }
+      },
+      "required": [
+        "source",
+        "selectorProfiles"
+      ],
+      "type": "object"
+    },
     "LocalId": {
       "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
       "pattern": "^[a-z][a-z0-9_-]{0,63}$",
@@ -800,6 +848,32 @@
       ],
       "type": "string"
     },
+    "PublicCheck": {
+      "additionalProperties": false,
+      "description": "The public certificate check's view of one assertion definition: where the\nstored check code is read from, and which two outputs form the answer. Other\noutputs of the definition stay on the relying-service path.",
+      "properties": {
+        "checkCodeFact": {
+          "description": "Name of a string fact of the acquiring Source holding the stored check\ncode. The code is compared and then removed; no Output can carry it.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "fieldsOutput": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Output id of a reviewed structured value whose `fields` object is the\nprinted content of the answer."
+        },
+        "statusOutput": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Output id of a controlled category whose values lie within `valid`,\n`suspended`, `revoked` and `expired`."
+        }
+      },
+      "required": [
+        "checkCodeFact",
+        "statusOutput",
+        "fieldsOutput"
+      ],
+      "type": "object"
+    },
     "Representation": {
       "enum": [
         "signed-jws",
@@ -949,6 +1023,17 @@
         "pack": {
           "$ref": "#/$defs/PackReference"
         },
+        "projection": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceProjection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional project-owned projection of matched native facts. Acquisition\nand lookup classification remain in the reusable pack."
+        },
         "route": {
           "$ref": "#/$defs/LocalId"
         }
@@ -990,6 +1075,27 @@
         "role",
         "profile",
         "field"
+      ],
+      "type": "object"
+    },
+    "SourceProjection": {
+      "additionalProperties": false,
+      "description": "A reviewed source-facts projection and its versioned output JSON Schema.",
+      "properties": {
+        "entrypoint": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "entrypoint",
+        "schema"
       ],
       "type": "object"
     },

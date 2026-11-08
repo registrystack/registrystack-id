@@ -11,7 +11,7 @@
       "source": "src/artifacts/sha256/24d0950eb2c1a76d5005850e1145f675ad65df5231867907b41d11fdd2979cdc.jsonld",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "4ee5c22b4ae739882a5047ac8ae3d12c29097f8b",
         "path": "products/breg/contracts/odrl-profile.jsonld",
         "sha256": "24d0950eb2c1a76d5005850e1145f675ad65df5231867907b41d11fdd2979cdc"
       },
@@ -45,7 +45,7 @@
       "source": "src/artifacts/sha256/c8685157d8e2982b00657a2a3b2fe729cf54792d76134cf22aa1be1cc7abf4a8.md",
       "source_reference": {
         "repository": "registry-stack",
-        "commit": "c0487fdbe36db15eadaecccb5bcd5e03317267b4",
+        "commit": "4ee5c22b4ae739882a5047ac8ae3d12c29097f8b",
         "path": "products/registry-record/profile/registry-record-v1.md",
         "sha256": "c8685157d8e2982b00657a2a3b2fe729cf54792d76134cf22aa1be1cc7abf4a8"
       },
