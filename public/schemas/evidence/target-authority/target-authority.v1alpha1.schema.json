@@ -59,6 +59,17 @@
         "authority": {
           "$ref": "#/$defs/AuthorityKind"
         },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "What the profile is for, accepted for authoring and tooling; never matched against a caller."
+        },
         "grantSourceIssuer": {
           "anyOf": [
             {
@@ -76,6 +87,17 @@
           "maxItems": 128,
           "minItems": 1,
           "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "A name for the profile, accepted for authoring and tooling; never matched against a caller."
         },
         "requesterClients": {
           "items": {
@@ -137,6 +159,13 @@
       ],
       "type": "string"
     },
+    "DisplayText": {
+      "description": "Human-readable display text. Bidirectional embedding, override, and isolate controls, byte-order marks, line and paragraph separators, and Unicode noncharacters are refused; multilingual joiners and direction marks remain valid.",
+      "not": {
+        "pattern": "[  ‪-‮⁦-⁩﻿﷐-﷯￾￿]|🿾|🿿|𯿾|𯿿|𿿾|𿿿|񏿾|񏿿|񟿾|񟿿|񯿾|񯿿|񿿾|񿿿|򏿾|򏿿|򟿾|򟿿|򯿾|򯿿|򿿾|򿿿|󏿾|󏿿|󟿾|󟿿|󯿾|󯿿|󿿾|󿿿|􏿾|􏿿"
+      },
+      "type": "string"
+    },
     "GrantedSubject": {
       "additionalProperties": false,
       "properties": {
@@ -173,6 +202,19 @@
       "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
       "pattern": "^[a-z][a-z0-9_-]{0,63}$",
       "type": "string"
+    },
+    "PublicCheckActivation": {
+      "additionalProperties": false,
+      "properties": {
+        "definition": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The definition whose `publicCheck` declaration this target serves."
+        }
+      },
+      "required": [
+        "definition"
+      ],
+      "type": "object"
     },
     "Representation": {
       "enum": [
@@ -222,6 +264,17 @@
     },
     "project": {
       "$ref": "#/$defs/LocalId"
+    },
+    "publicCheck": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PublicCheckActivation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Experimental (`v1alpha1`). Activates the unauthenticated public\ncertificate check for one definition that declares `publicCheck`. A\ncheck-only instance leaves `accessProfiles` empty."
     },
     "target": {
       "$ref": "#/$defs/LocalId"
