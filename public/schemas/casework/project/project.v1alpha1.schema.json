@@ -347,6 +347,12 @@
       ],
       "type": "string"
     },
+    "ReviewProgressCode": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
     "ReviewPublicReasonRule": {
       "description": "Whether a decision gives a public reason with an outcome.",
       "enum": [
@@ -413,6 +419,19 @@
           "$ref": "#/$defs/ReviewNegativeDecisionMode",
           "default": "settle",
           "description": "Controls whether a rejection or change request settles the whole review.\n`settle` is the default; `advise` records and counts the decision toward\nthis non-final stage without settling the review."
+        },
+        "outcomes": {
+          "description": "Outcome identifiers offered by this stage. Omission offers the whole\npolicy catalogue.",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "publicProgressCode": {
+          "$ref": "#/$defs/ReviewProgressCode",
+          "description": "Optional producer-visible progress code for this stage. Omission keeps\nthe stage private and preserves the previous policy wire shape."
         },
         "queue": {
           "type": "string"

@@ -803,6 +803,22 @@
       ],
       "type": "object"
     },
+    "ExplainAccessProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "principalClaim": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "principalClaim"
+      ],
+      "type": "object"
+    },
     "ExplainPolicy": {
       "additionalProperties": false,
       "properties": {
@@ -977,6 +993,12 @@
         },
         "negativeDecisions": {
           "$ref": "#/$defs/ReviewNegativeDecisionMode"
+        },
+        "outcomes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "queue": {
           "type": "string"
@@ -2733,6 +2755,11 @@
               },
               {
                 "required": [
+                  "accessProfiles"
+                ]
+              },
+              {
+                "required": [
                   "authority"
                 ]
               },
@@ -2776,6 +2803,7 @@
           "then": {
             "required": [
               "project",
+              "accessProfiles",
               "reviewPolicies",
               "contextProviders",
               "clocks",
@@ -2788,6 +2816,12 @@
         }
       ],
       "properties": {
+        "accessProfiles": {
+          "items": {
+            "$ref": "#/$defs/ExplainAccessProfile"
+          },
+          "type": "array"
+        },
         "apiVersion": {
           "const": "id.registrystack.org/formats/casework/report/v1alpha2",
           "type": "string"

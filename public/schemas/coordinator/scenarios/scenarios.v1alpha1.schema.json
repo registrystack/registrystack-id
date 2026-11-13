@@ -64,7 +64,7 @@
         },
         {
           "additionalProperties": false,
-          "description": "The call failed and may be retried; the run stops as retryable, or as\nuncertain after an earlier uncertain reply, unless a recovery consumes\nanother reply.",
+          "description": "The call failed after its automatic retries; the run stops as\nretryable, or as uncertain after an earlier uncertain reply, unless a\nrecovery consumes another reply. A step with `onFailure` takes that\nedge instead when the code is an availability category and no earlier\nreply was uncertain, as the runtime does once those retries are\nexhausted.",
           "properties": {
             "code": {
               "$ref": "#/$defs/LocalId",
@@ -289,7 +289,7 @@
         },
         {
           "additionalProperties": false,
-          "description": "No event arrives: the clock moves by the step's `timeoutSeconds`, and\nthe run continues at its `onTimeout`, or stops as `timed-out` when the\nstep has none. A deadline that passes first stops the run as\n`deadline-exceeded`.",
+          "description": "No event arrives: the clock moves by the step's `timeoutSeconds`, and\nthe run continues at its `onTimeout`, or stops as `timed-out` when the\nstep has none. An earlier service deadline takes `onDeadline`. The\nhard run deadline stops the run as `deadline-exceeded`.",
           "properties": {
             "type": {
               "const": "timeout",
