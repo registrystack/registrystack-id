@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-breg/external_view/incomplete",
+  "type": "https://id.registrystack.org/problems/registry-breg/external_view/incomplete",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-breg",
+  "code": "external_view.incomplete",
+  "title": "Service Unavailable",
+  "summary": "The external view's indexed coverage is incomplete for this request.",
+  "description": "The external view's indexed coverage is incomplete for this request.",
+  "category": null,
+  "http_statuses": [
+    503
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "6714e1dc066664799617d5d2b21d649f3214e726",
+    "path": "crates/registry-breg/src/problem.rs",
+    "sha256": "0d852a01e6a4f71e84e4766721859af45e4aa9c114012b27a7cd4faefd5e8052"
+  }
+}
