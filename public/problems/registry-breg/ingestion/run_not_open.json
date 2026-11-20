@@ -37,7 +37,7 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "36d25ef65267fce0c8f38446e9b18677977e9698",
+    "commit": "5372e7f81954b85bb9a06141b2f20beab3c217d8",
     "path": "crates/registry-breg/src/problem.rs",
     "sha256": "0d852a01e6a4f71e84e4766721859af45e4aa9c114012b27a7cd4faefd5e8052"
   }
