@@ -284,6 +284,11 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 
+/schemas/rstack/*.json
+  Content-Type: application/schema+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
 /schemas/scheduling/*.json
   Content-Type: application/schema+json; charset=utf-8
   Access-Control-Allow-Origin: *

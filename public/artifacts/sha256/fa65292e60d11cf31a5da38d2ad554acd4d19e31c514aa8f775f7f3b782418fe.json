@@ -1,0 +1,447 @@
+{
+  "$defs": {
+    "ApplicationPlan": {
+      "additionalProperties": false,
+      "description": "A generic Node application and its configuration command. All artifact paths are relative to the supplied built root.",
+      "properties": {
+        "callbackPath": {
+          "description": "Exact loopback callback path registered with the run issuer.",
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "caseworkSourceCredentialRoles": {
+          "description": "Explicit existing served roles opting into separate same-human source credentials.\nThe application's checked configuration command validates their BReg mapping.",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "checker": {
+          "description": "Built configuration checker, invoked with the generated config path.",
+          "type": "string"
+        },
+        "client": {
+          "description": "Confidential browser client identifier admitted by the selected product profiles.",
+          "type": "string"
+        },
+        "configEnvironment": {
+          "description": "Environment variable naming the generated host configuration for the child.",
+          "type": "string"
+        },
+        "configSchema": {
+          "description": "Closed run-input schema name understood by the declared configuration command.",
+          "type": "string"
+        },
+        "deployment": {
+          "description": "Configuration source file, relative to the development project.",
+          "type": "string"
+        },
+        "entry": {
+          "description": "Built application entry, relative to the supplied artifact root.",
+          "type": "string"
+        },
+        "healthPath": {
+          "description": "Local readiness path served by the application.",
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "prepare": {
+          "description": "Built configuration command, invoked with --deployment, --run and --out.",
+          "type": "string"
+        },
+        "prepareVersion": {
+          "description": "Exact one-line response of the configuration command's --version flag.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client",
+        "callbackPath",
+        "healthPath",
+        "entry",
+        "prepare",
+        "checker",
+        "deployment",
+        "configSchema",
+        "configEnvironment",
+        "prepareVersion"
+      ],
+      "type": "object"
+    },
+    "Bindings": {
+      "additionalProperties": false,
+      "description": "Run-local connections between BReg and Casework. Configuring either one requires both products.",
+      "properties": {
+        "bregReviewAuthority": {
+          "$ref": "#/$defs/BregReviewAuthority",
+          "description": "Connects BReg to Casework as a review authority. BReg authenticates to Casework as a machine identity."
+        },
+        "caseworkContextProvider": {
+          "$ref": "#/$defs/CaseworkContextProvider",
+          "description": "Connects Casework to BReg as a context provider. Casework authenticates to BReg as a machine identity."
+        }
+      },
+      "type": "object"
+    },
+    "BregReviewAuthority": {
+      "additionalProperties": false,
+      "description": "A BReg review authority that the run connects to Casework.",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local identifier of the review authority."
+        },
+        "identity": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Name of the test person, in `people`, whose Casework grant BReg uses to authenticate. That grant needs at least one scope."
+        },
+        "producer": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local identifier of the review producer."
+        },
+        "runIssuerBinding": {
+          "$ref": "#/$defs/RunIssuerBinding",
+          "description": "Explicit exact source guards for binding this existing producer to the synthetic run issuer."
+        }
+      },
+      "required": [
+        "id",
+        "producer",
+        "identity"
+      ],
+      "type": "object"
+    },
+    "CaseworkContextProvider": {
+      "additionalProperties": false,
+      "description": "A Casework context provider that the run connects to BReg.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local identifier of the BReg action that the provider pairs with."
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local identifier of the context provider."
+        },
+        "identity": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Name of the test person, in `people`, whose BReg grant Casework uses to authenticate. That grant needs at least one scope."
+        }
+      },
+      "required": [
+        "id",
+        "identity",
+        "action"
+      ],
+      "type": "object"
+    },
+    "DerivedId": {
+      "description": "A dotted development journey step identifier whose segments are local identifiers.",
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_-]{0,63}(\\.[a-z][a-z0-9_-]{0,63})+$",
+      "type": "string"
+    },
+    "DisplayText": {
+      "description": "Human-readable display text. Bidirectional embedding, override, and isolate controls, byte-order marks, line and paragraph separators, and Unicode noncharacters are refused; multilingual joiners and direction marks remain valid.",
+      "not": {
+        "pattern": "[  ‪-‮⁦-⁩﻿﷐-﷯￾￿]|🿾|🿿|𯿾|𯿿|𿿾|𿿿|񏿾|񏿿|񟿾|񟿿|񯿾|񯿿|񿿾|񿿿|򏿾|򏿿|򟿾|򟿿|򯿾|򯿿|򿿾|򿿿|󏿾|󏿿|󟿾|󟿿|󯿾|󯿿|󿿾|󿿿|􏿾|􏿿"
+      },
+      "type": "string"
+    },
+    "ExternalId": {
+      "description": "An identifier another system issues, written exactly as its issuer gives it.",
+      "maxLength": 512,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+      "type": "string"
+    },
+    "Grant": {
+      "additionalProperties": false,
+      "description": "The authority a test person holds in one product.",
+      "properties": {
+        "claims": {
+          "additionalProperties": true,
+          "default": {},
+          "description": "Additional token claims, keyed by claim name. Names must not be reserved token claims such as `iss`, `aud`, `sub`, `scope` or any `registry_grant_` claim.",
+          "propertyNames": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "object",
+          "x-registry-passthrough": "Claim values are written into the development token as given."
+        },
+        "profile": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Local identifier of the product profile this grant uses."
+        },
+        "scopes": {
+          "description": "Distinct scopes written into the token, at most 32, each an OAuth scope-token of 1 to 256 bytes: printable ASCII without spaces, double quotes or backslashes.",
+          "items": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "maxItems": 32,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "profile",
+        "scopes"
+      ],
+      "type": "object"
+    },
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "Product": {
+      "description": "A product the development run can start.",
+      "enum": [
+        "breg",
+        "casework",
+        "evidence",
+        "messaging"
+      ],
+      "type": "string"
+    },
+    "ProductPlan": {
+      "additionalProperties": false,
+      "description": "One product to start and where its project lives.",
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "Token audience this product accepts: 1 to 256 characters without whitespace or control characters, distinct from the other products' audiences."
+        },
+        "product": {
+          "$ref": "#/$defs/Product",
+          "description": "Which product to start."
+        },
+        "project": {
+          "description": "Relative path from the plan's directory to the product project, or `.` for the plan's own directory. It must contain registry.yaml for BReg, casework.yaml for Casework, evidence.yaml for Evidence or messaging.yaml for Messaging.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "product",
+        "project",
+        "audience"
+      ],
+      "type": "object"
+    },
+    "RunInitiator": {
+      "additionalProperties": false,
+      "properties": {
+        "expectedIssuer": {
+          "$ref": "#/$defs/Url"
+        },
+        "trust": {
+          "$ref": "#/$defs/RunInitiatorTrust"
+        }
+      },
+      "required": [
+        "expectedIssuer",
+        "trust"
+      ],
+      "type": "object"
+    },
+    "RunInitiatorTrust": {
+      "enum": [
+        "run-test-people"
+      ],
+      "type": "string"
+    },
+    "RunIssuerBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "initiator": {
+          "$ref": "#/$defs/RunInitiator"
+        },
+        "producer": {
+          "$ref": "#/$defs/RunProducer"
+        }
+      },
+      "required": [
+        "producer"
+      ],
+      "type": "object"
+    },
+    "RunProducer": {
+      "additionalProperties": false,
+      "properties": {
+        "expectedIssuer": {
+          "$ref": "#/$defs/Url"
+        },
+        "expectedProfile": {
+          "type": "string"
+        },
+        "expectedSubject": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "expectedIssuer",
+        "expectedProfile",
+        "expectedSubject"
+      ],
+      "type": "object"
+    },
+    "TestPerson": {
+      "additionalProperties": false,
+      "description": "A named test identity that signs in to the started products.",
+      "properties": {
+        "caseworkContext": {
+          "default": false,
+          "description": "Forward the same authority to both products. Both grants must declare the same scopes and additional claims.",
+          "type": "boolean"
+        },
+        "client": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "Client identifier of this person's tokens: 1 to 256 characters without whitespace or control characters."
+        },
+        "displayName": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            }
+          ],
+          "description": "Name shown in the synthetic browser sign-in picker; it grants no authority.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "grants": {
+          "additionalProperties": false,
+          "description": "The authority this person holds in each product, keyed by `breg`, `casework`, `evidence` or `messaging`. An Evidence grant's profile is the requester tag the token carries. Give at least one grant, only for products listed in `products`.",
+          "properties": {
+            "breg": {
+              "$ref": "#/$defs/Grant"
+            },
+            "casework": {
+              "$ref": "#/$defs/Grant"
+            },
+            "evidence": {
+              "$ref": "#/$defs/Grant"
+            },
+            "messaging": {
+              "$ref": "#/$defs/Grant"
+            }
+          },
+          "type": "object"
+        },
+        "subject": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "Subject claim of this person's tokens: 1 to 256 characters without whitespace or control characters."
+        }
+      },
+      "required": [
+        "subject",
+        "client",
+        "grants"
+      ],
+      "type": "object"
+    },
+    "Url": {
+      "description": "An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+([/?#][^\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]*)?$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/rstack/dev/dev.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The development plan: the products to start, the test people who call them, and the scenarios to run.",
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/rstack/dev/v1alpha1",
+      "description": "The format and version this file is written in.",
+      "type": "string"
+    },
+    "application": {
+      "$ref": "#/$defs/ApplicationPlan",
+      "description": "A built local application this run prepares, starts, checks and stops. Its artifact root is supplied to `rstack dev start`."
+    },
+    "bindings": {
+      "$ref": "#/$defs/Bindings",
+      "default": {},
+      "description": "Run-local connections between BReg and Casework. Leave empty when the products do not call each other. A `runIssuerBinding` replaces the producer's fixed issuer with the run's own, so it requires `issuer: run`."
+    },
+    "issuer": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Url"
+        },
+        {
+          "const": "run"
+        }
+      ],
+      "description": "The issuer name written into every test token. Use an HTTPS URL that the products' trusted issuers and producers name. Set `run` instead only when the plan declares an `application` or a paired BReg and Casework `runIssuerBinding`: each of those requires `run`, and `run` requires one of them."
+    },
+    "kind": {
+      "const": "RStackDev",
+      "description": "The kind of document this file is.",
+      "type": "string"
+    },
+    "people": {
+      "additionalProperties": {
+        "$ref": "#/$defs/TestPerson"
+      },
+      "description": "The test people, keyed by a lowercase local identifier. Define 1 to 256, and give at least one grant to every started product.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    },
+    "products": {
+      "description": "The products to start, each with its project directory and token audience. List each product at most once.",
+      "items": {
+        "$ref": "#/$defs/ProductPlan"
+      },
+      "type": "array"
+    },
+    "scenarioFile": {
+      "description": "Project-relative path to the authored Stack scenarios file. Required: a development run exists to run scenarios.",
+      "type": "string"
+    },
+    "schemaTestPeople": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "propertyNames": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LocalId"
+            },
+            {
+              "$ref": "#/$defs/DerivedId"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "default": {},
+      "description": "Chooses the test person for a BReg fixture step in tests/journeys.yaml, keyed by journey identifier and then step identifier. Needed only when several people could run the step; every named person needs a BReg grant.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "issuer",
+    "products",
+    "people",
+    "scenarioFile"
+  ],
+  "title": "Registry Stack development plan",
+  "type": "object"
+}

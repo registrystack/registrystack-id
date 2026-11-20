@@ -1763,6 +1763,11 @@
           "type": "string"
         },
         {
+          "const": "read-exact",
+          "description": "Read the dataset's exact values for ended periods, computed under the dataset's `exactReads` profile.",
+          "type": "string"
+        },
+        {
           "const": "publish",
           "description": "Publish and withdraw the dataset's releases. One profile holds it per dataset.",
           "type": "string"
@@ -1783,7 +1788,7 @@
           "description": "The statistical dataset the permission names."
         },
         "operations": {
-          "description": "What the profile may do with the dataset. A profile that holds `read-live` or `publish` on a dataset with a publisher also holds `read-releases`.",
+          "description": "What the profile may do with the dataset. A profile that holds `read-live` or `publish` on a dataset with a publisher also holds `read-releases`. `read-exact` needs the dataset's `exactReads` member.",
           "items": {
             "$ref": "#/$defs/DatasetOperation"
           },
@@ -2799,21 +2804,12 @@
       "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
       "type": "string"
     },
-    "ExternalLabelSource": {
+    "ExternalLabelDeclaration": {
       "additionalProperties": false,
+      "description": "Authoring form of a link label. The identifier scheme and fields come from\nthe projection it names.",
       "properties": {
-        "fields": {
-          "items": {
-            "$ref": "#/$defs/LocalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
         "fromField": {
           "$ref": "#/$defs/LocalId"
-        },
-        "identifierScheme": {
-          "$ref": "#/$defs/ExternalId"
         },
         "projection": {
           "$ref": "#/$defs/LocalId"
@@ -2821,9 +2817,32 @@
       },
       "required": [
         "projection",
-        "fromField",
-        "identifierScheme",
-        "fields"
+        "fromField"
+      ],
+      "type": "object"
+    },
+    "ExternalLinkDeclaration": {
+      "additionalProperties": false,
+      "description": "Authoring form of a view link. The identifier scheme and fields come from\nthe projection it names.",
+      "properties": {
+        "fromField": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "label": {
+          "$ref": "#/$defs/ExternalLabelDeclaration",
+          "description": "An optional to-one label on a row of an indexed related collection."
+        },
+        "projection": {
+          "$ref": "#/$defs/LocalId"
+        }
+      },
+      "required": [
+        "id",
+        "projection",
+        "fromField"
       ],
       "type": "object"
     },
@@ -2873,51 +2892,9 @@
       ],
       "type": "object"
     },
-    "ExternalLinkSource": {
+    "ExternalProjectionDeclaration": {
       "additionalProperties": false,
-      "properties": {
-        "fields": {
-          "items": {
-            "$ref": "#/$defs/LocalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "fromField": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "identifierScheme": {
-          "$ref": "#/$defs/ExternalId"
-        },
-        "label": {
-          "$ref": "#/$defs/ExternalLabelSource",
-          "description": "An optional to-one label on a row of an indexed related collection."
-        },
-        "projection": {
-          "$ref": "#/$defs/LocalId"
-        }
-      },
-      "required": [
-        "id",
-        "projection",
-        "fromField",
-        "identifierScheme",
-        "fields"
-      ],
-      "type": "object"
-    },
-    "ExternalProjectionMode": {
-      "enum": [
-        "live",
-        "indexed"
-      ],
-      "type": "string"
-    },
-    "ExternalProjectionSource": {
-      "additionalProperties": false,
+      "description": "Authoring form of an external projection. `compile` fills the derived\nmembers of [`ExternalProjectionSource`].",
       "properties": {
         "cacheTtlSeconds": {
           "format": "uint32",
@@ -2941,12 +2918,6 @@
         "mode": {
           "$ref": "#/$defs/ExternalProjectionMode"
         },
-        "operation": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "operationVersion": {
-          "$ref": "#/$defs/ExternalId"
-        },
         "purpose": {
           "$ref": "#/$defs/ExternalId"
         },
@@ -2957,22 +2928,36 @@
           "$ref": "#/$defs/ExternalId"
         },
         "selectorScheme": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "Required for cardinality `many`; refused for `one`, which selects by\nthe record type's identifier scheme."
+        },
+        "sourceRoute": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The source route the projection calls."
+        },
+        "sourceRouteVersion": {
           "$ref": "#/$defs/ExternalId"
         }
       },
       "required": [
         "id",
         "recordType",
-        "operation",
-        "operationVersion",
+        "sourceRoute",
+        "sourceRouteVersion",
         "purpose",
         "scope",
-        "selectorScheme",
         "mode",
         "cardinality",
         "fields"
       ],
       "type": "object"
+    },
+    "ExternalProjectionMode": {
+      "enum": [
+        "live",
+        "indexed"
+      ],
+      "type": "string"
     },
     "ExternalRecordTypeSource": {
       "additionalProperties": false,
@@ -3018,6 +3003,30 @@
       ],
       "type": "object"
     },
+    "ExternalViewDeclaration": {
+      "additionalProperties": false,
+      "description": "Authoring form of an external view.",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/$defs/ExternalLinkDeclaration"
+          },
+          "type": "array"
+        },
+        "recordType": {
+          "$ref": "#/$defs/LocalId"
+        }
+      },
+      "required": [
+        "id",
+        "recordType",
+        "links"
+      ],
+      "type": "object"
+    },
     "ExternalViewPermissionSource": {
       "additionalProperties": false,
       "properties": {
@@ -3033,29 +3042,6 @@
       },
       "required": [
         "view",
-        "links"
-      ],
-      "type": "object"
-    },
-    "ExternalViewSource": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "links": {
-          "items": {
-            "$ref": "#/$defs/ExternalLinkSource"
-          },
-          "type": "array"
-        },
-        "recordType": {
-          "$ref": "#/$defs/LocalId"
-        }
-      },
-      "required": [
-        "id",
-        "recordType",
         "links"
       ],
       "type": "object"
@@ -5383,14 +5369,53 @@
       },
       "type": "object"
     },
+    "StatisticalContributorSource": {
+      "description": "Who a summed value belongs to, for the contributor minimum and the\ndominance rule of a minimum-count-and-rounding release.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "A value belongs to the Record its `reference` field names, so one\ncontributor may own many unit Records.",
+          "properties": {
+            "field": {
+              "description": "The unit Record `reference` field naming the contributor. The\npublisher must be able to read it.",
+              "type": "string"
+            },
+            "type": {
+              "const": "field",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Each unit Record is its own contributor.",
+          "properties": {
+            "type": {
+              "const": "each-record",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "StatisticalDatasetSource": {
       "additionalProperties": false,
       "properties": {
         "dimensions": {
-          "description": "Unit Record fields used to group counts. Each field must be boolean or\nvocabulary-code, and each may appear once. `period`, `value`, and `status`\nare reserved output columns and cannot be dimension field names.",
+          "description": "Unit Record fields used to group every measure. Each field must be boolean or\nvocabulary-code, and each may appear once. `period`, `measure`, `value`,\nand `status` are reserved output columns and cannot be dimension field\nnames. At most 12 dimensions.",
           "items": {
             "type": "string"
           },
+          "maxItems": 12,
           "type": "array"
         },
         "disclosure": {
@@ -5400,8 +5425,25 @@
           "$ref": "#/$defs/PresentationSource",
           "description": "Authored presentation only; labels never establish identity or authority."
         },
+        "exactReads": {
+          "$ref": "#/$defs/StatisticalExactReadsSource",
+          "description": "How `read-exact` reads compute. Required when a profile holds `read-exact` on the dataset, and refused otherwise."
+        },
         "id": {
           "$ref": "#/$defs/LocalId"
+        },
+        "measures": {
+          "default": [
+            {
+              "id": "count",
+              "type": "count"
+            }
+          ],
+          "description": "The values the dataset publishes, one cell per period, dimension\ncombination, and measure. Each id is unique, and at most one measure has\ntype `count`. Omitting the member publishes one `count` measure named\n`count`; an empty list is refused.",
+          "items": {
+            "$ref": "#/$defs/StatisticalMeasureSource"
+          },
+          "type": "array"
         },
         "period": {
           "$ref": "#/$defs/StatisticalPeriodSource"
@@ -5423,26 +5465,257 @@
       "type": "object"
     },
     "StatisticalDisclosureSource": {
-      "additionalProperties": false,
-      "properties": {
-        "minimumCount": {
-          "format": "uint64",
-          "maximum": 9007199254740991,
-          "minimum": 2,
-          "type": "integer"
+      "description": "How a statistical release protects the values it states.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "Count and distinct-count cells below `minimumCount` are suppressed and\ncounts are rounded to a multiple of `roundingBase`. A sum cell is\nsuppressed when fewer than `minimumCount` contributors stand behind it\nor when the p% rule finds it dominated; an `int64` sum is rounded like\na count and a decimal sum is exact. A release carries counts and\ndistinct counts; a sum is held until its disclosure rules are reviewed,\nand a mean, ratio or percentile is read live or released exactly. A\ndataset that declares a sum and grants `publish` also names who a value\nbelongs to (`contributor`) and the p of the p% rule\n(`dominancePercent`); every other dataset omits both.",
+          "properties": {
+            "contributor": {
+              "$ref": "#/$defs/StatisticalContributorSource",
+              "description": "Who a summed value belongs to. A cell is withheld when fewer than\n`minimumCount` contributors stand behind it. Required when the\ndataset declares a sum and grants `publish`, and refused otherwise."
+            },
+            "dominancePercent": {
+              "description": "The p of the p% rule, 1 to 100: a sum cell is withheld when the\nvalues outside its two largest contributors total less than p% of\nthe largest. Required when the dataset declares a sum and grants\n`publish`, and refused otherwise.",
+              "format": "uint32",
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "minimumCount": {
+              "format": "uint64",
+              "maximum": 9007199254740991,
+              "minimum": 2,
+              "type": "integer"
+            },
+            "roundingBase": {
+              "format": "uint64",
+              "maximum": 9007199254740991,
+              "minimum": 2,
+              "type": "integer"
+            },
+            "type": {
+              "const": "minimum-count-and-rounding",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "minimumCount",
+            "roundingBase"
+          ],
+          "type": "object"
         },
-        "roundingBase": {
-          "format": "uint64",
-          "maximum": 9007199254740991,
-          "minimum": 2,
-          "type": "integer"
+        {
+          "additionalProperties": false,
+          "description": "A release states every measure exactly. Admitted only when\nthe unit Record type, every field the dataset reads, and every Record\ntype a derived field reads from are classified `public`.",
+          "properties": {
+            "type": {
+              "const": "exact-public-values",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "StatisticalExactReadsSource": {
+      "additionalProperties": false,
+      "description": "The profile whose visibility `read-exact` reads of a statistical dataset compute under.",
+      "properties": {
+        "accessProfile": {
+          "description": "The profile whose caller-independent visibility an exact read computes under.",
+          "type": "string"
         }
       },
       "required": [
-        "minimumCount",
-        "roundingBase"
+        "accessProfile"
       ],
       "type": "object"
+    },
+    "StatisticalMeasureSource": {
+      "description": "One value a statistical dataset publishes.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "description": "The number of unit Records in the population.",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "type": {
+              "const": "count",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The sum of an `int64` or `decimal` unit Record field over the\npopulation, at the field's scale. Records with no value for the field\nare left out. Not carried by a minimum-count-and-rounding release.",
+          "properties": {
+            "field": {
+              "description": "The unit Record field to add up.",
+              "type": "string"
+            },
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "type": {
+              "const": "sum",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The mean of an `int64` or `decimal` unit Record field over the records\nthat have a value for it, rounded half away from zero to `scale`\nfractional digits. Not carried by a minimum-count-and-rounding release.",
+          "properties": {
+            "field": {
+              "description": "The unit Record field to average.",
+              "type": "string"
+            },
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "scale": {
+              "description": "Fractional digits of the reported mean, 0 to 38.",
+              "format": "uint32",
+              "maximum": 38,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "mean",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "field",
+            "scale"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The number of distinct values of a `reference` field among the\npopulation's records. Records with no value for the field are left out.",
+          "properties": {
+            "field": {
+              "description": "The unit Record `reference` field whose distinct values are counted.",
+              "type": "string"
+            },
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "type": {
+              "const": "distinct-count",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "One measure of the dataset over another, such as a sum over a count,\nrounded half away from zero to `scale` fractional digits. A cell whose\ndenominator is zero has no value. Not carried by a minimum-count-and-rounding release.",
+          "properties": {
+            "denominator": {
+              "$ref": "#/$defs/LocalId",
+              "description": "The `count`, `distinct-count` or `sum` measure to divide by, other\nthan the numerator."
+            },
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "numerator": {
+              "$ref": "#/$defs/LocalId",
+              "description": "The `count`, `distinct-count` or `sum` measure to divide."
+            },
+            "scale": {
+              "description": "Fractional digits of the reported ratio, 0 to 38.",
+              "format": "uint32",
+              "maximum": 38,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "ratio",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "numerator",
+            "denominator",
+            "scale"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The percentile of an `int64` or `decimal` unit Record field over the\nrecords that have a value for it: the inverse of the empirical\ndistribution function, averaging the two values either side of a\nboundary (Hyndman and Fan definition 2), so the median of an even number\nof values is the mean of the middle two. Rounded half away from zero to\n`scale` fractional digits. Not carried by a minimum-count-and-rounding release.",
+          "properties": {
+            "field": {
+              "description": "The unit Record field to take the percentile of.",
+              "type": "string"
+            },
+            "id": {
+              "$ref": "#/$defs/LocalId",
+              "description": "Names the measure on every cell that reports it."
+            },
+            "percentile": {
+              "description": "Which percentile, 1 to 99; the median is 50.",
+              "format": "uint32",
+              "maximum": 99,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "scale": {
+              "description": "Fractional digits of the reported percentile, 0 to 38.",
+              "format": "uint32",
+              "maximum": 38,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "percentile",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "field",
+            "percentile",
+            "scale"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "StatisticalPeriodGranularitySource": {
       "enum": [
@@ -6110,7 +6383,7 @@
     },
     "externalProjections": {
       "items": {
-        "$ref": "#/$defs/ExternalProjectionSource"
+        "$ref": "#/$defs/ExternalProjectionDeclaration"
       },
       "type": "array"
     },
@@ -6122,7 +6395,7 @@
     },
     "externalViews": {
       "items": {
-        "$ref": "#/$defs/ExternalViewSource"
+        "$ref": "#/$defs/ExternalViewDeclaration"
       },
       "type": "array"
     },
