@@ -169,6 +169,10 @@
       "additionalProperties": false,
       "description": "The PostgreSQL connection a stateful runtime uses. Both URLs are secret\nreferences and may name the same secret.",
       "properties": {
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
+        },
         "migrationUrlRef": {
           "$ref": "#/$defs/SecretReference",
           "description": "Secret reference to the migration connection URL."
@@ -181,10 +185,6 @@
           "default": false,
           "description": "Allow a plaintext connection. Refused outside test builds.",
           "type": "boolean"
-        },
-        "trustedRootCertificateRef": {
-          "$ref": "#/$defs/SecretReference",
-          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
         }
       },
       "required": [
@@ -320,6 +320,23 @@
       "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
       "pattern": "^[a-z][a-z0-9_-]{0,63}$",
       "type": "string"
+    },
+    "MetricsListenerConfig": {
+      "additionalProperties": false,
+      "description": "The operator-private metrics listener of a runtime. `networkExposure`\nhas the meaning it has on the serving listener: `private-address` (the\ndefault) requires a loopback or private address, and `container-private`\nalso permits the unspecified address inside a private container network.",
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind"
+        },
+        "networkExposure": {
+          "$ref": "#/$defs/ListenerNetworkExposure",
+          "default": "private-address"
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
     },
     "OidcConfig": {
       "additionalProperties": false,
@@ -966,6 +983,10 @@
     },
     "listener": {
       "$ref": "#/$defs/PrivateListenerConfig"
+    },
+    "metricsListener": {
+      "$ref": "#/$defs/MetricsListenerConfig",
+      "description": "The operator-private listener that serves `/metrics`. Omit it to\nserve no metrics."
     },
     "package": {
       "$ref": "#/$defs/PackageConfig"

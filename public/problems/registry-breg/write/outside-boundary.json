@@ -7,8 +7,8 @@
   "product": "registry-breg",
   "code": "write.outside-boundary",
   "title": "Forbidden",
-  "summary": "The resulting record falls outside the selected access profile's row boundary.",
-  "description": "The resulting record falls outside the selected access profile's row boundary.",
+  "summary": "The write falls outside what the selected access profile may write: its row boundary or a disclosure condition.",
+  "description": "The write falls outside what the selected access profile may write: its row boundary or a disclosure condition.",
   "category": null,
   "http_statuses": [
     403
@@ -37,8 +37,8 @@
   },
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "36d25ef65267fce0c8f38446e9b18677977e9698",
+    "commit": "2a2acebb0e958131b0ddb9127ee2851ec8bf65f7",
     "path": "crates/registry-breg/src/problem.rs",
-    "sha256": "0d852a01e6a4f71e84e4766721859af45e4aa9c114012b27a7cd4faefd5e8052"
+    "sha256": "c18ba2208005e7c196085ed0351546fd21d21c327da4bd18d9dda431a5534d1b"
   }
 }

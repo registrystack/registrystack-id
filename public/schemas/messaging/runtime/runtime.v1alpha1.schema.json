@@ -170,6 +170,10 @@
       "additionalProperties": false,
       "description": "The PostgreSQL connection a stateful runtime uses. Both URLs are secret\nreferences and may name the same secret.",
       "properties": {
+        "caBundleRef": {
+          "$ref": "#/$defs/SecretReference",
+          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
+        },
         "migrationUrlRef": {
           "$ref": "#/$defs/SecretReference",
           "description": "Secret reference to the migration connection URL."
@@ -182,10 +186,6 @@
           "default": false,
           "description": "Allow a plaintext connection. Refused outside test builds.",
           "type": "boolean"
-        },
-        "trustedRootCertificateRef": {
-          "$ref": "#/$defs/SecretReference",
-          "description": "Secret reference to a PEM root certificate the connection trusts.\nAbsent, the connection trusts the platform's root certificates."
         }
       },
       "required": [
@@ -481,19 +481,6 @@
       "minLength": 1,
       "type": "string"
     },
-    "ListenerConfig": {
-      "additionalProperties": false,
-      "description": "The listener of a runtime that declares no TLS or exposure settings.",
-      "properties": {
-        "bind": {
-          "$ref": "#/$defs/ListenerBind"
-        }
-      },
-      "required": [
-        "bind"
-      ],
-      "type": "object"
-    },
     "ListenerNetworkExposure": {
       "description": "The operator-declared private network placement of an HTTP listener.",
       "enum": [
@@ -506,6 +493,23 @@
       "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
       "pattern": "^[a-z][a-z0-9_-]{0,63}$",
       "type": "string"
+    },
+    "MetricsListenerConfig": {
+      "additionalProperties": false,
+      "description": "The operator-private metrics listener of a runtime. `networkExposure`\nhas the meaning it has on the serving listener: `private-address` (the\ndefault) requires a loopback or private address, and `container-private`\nalso permits the unspecified address inside a private container network.",
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind"
+        },
+        "networkExposure": {
+          "$ref": "#/$defs/ListenerNetworkExposure",
+          "default": "private-address"
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
     },
     "OidcConfig": {
       "additionalProperties": false,
@@ -642,6 +646,10 @@
             "authentication": {
               "$ref": "#/$defs/SmtpAuthentication"
             },
+            "caBundleRef": {
+              "$ref": "#/$defs/SecretReference",
+              "description": "A PEM root certificate trusted in addition to the public web roots,\nfor a relay behind a private certificate authority."
+            },
             "host": {
               "description": "The relay's DNS name or IP literal. It is resolved once per attempt and\nis the name TLS verifies the relay's certificate against.",
               "type": "string"
@@ -655,10 +663,6 @@
             },
             "tls": {
               "$ref": "#/$defs/SmtpTlsMode"
-            },
-            "trustedRootCertificateRef": {
-              "$ref": "#/$defs/SecretReference",
-              "description": "A PEM root certificate trusted in addition to the public web roots,\nfor a relay behind a private certificate authority."
             },
             "type": {
               "const": "smtp",
@@ -1030,7 +1034,7 @@
       "$ref": "#/$defs/PrivateListenerConfig"
     },
     "metricsListener": {
-      "$ref": "#/$defs/ListenerConfig"
+      "$ref": "#/$defs/MetricsListenerConfig"
     },
     "package": {
       "$ref": "#/$defs/PackageConfig"

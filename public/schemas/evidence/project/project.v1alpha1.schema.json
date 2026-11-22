@@ -474,9 +474,6 @@
           ],
           "description": "Human explanation for authors and reviewers; excluded from behavior revisions."
         },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
         "interface": {
           "$ref": "#/$defs/FunctionInterface"
         },
@@ -496,7 +493,6 @@
         }
       },
       "required": [
-        "id",
         "interface",
         "source"
       ],
@@ -842,6 +838,47 @@
       ],
       "type": "object"
     },
+    "ProjectIdentity": {
+      "additionalProperties": false,
+      "description": "The members that name a project (CFG-ENV-6): a project's `project` block\nholds these, and may add project-wide members of the product's own.\n`id` and `version` are required. `label` and `description` are optional\ndisplay text for people. Neither changes a product's behavior or stable\nidentity. A product whose digest covers the whole authored document, such\nas Scheduling, still sees them, so a relabel changes that digest. An absent\nmember is omitted when the block is serialized, so a project that sets\nneither compiles to the same bytes.\nSchema name `ProjectIdentity`.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "An optional explanation of the project for readers."
+        },
+        "id": {
+          "$ref": "#/$defs/LocalId",
+          "description": "The project identifier."
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DisplayText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "An optional human label for the project."
+        },
+        "version": {
+          "description": "The project version.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "type": "object"
+    },
     "ProjectionDisclosure": {
       "enum": [
         "top-level"
@@ -1145,40 +1182,18 @@
       },
       "type": "object"
     },
-    "description": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/DisplayText"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Human explanation for authors and reviewers; excluded from behavior revisions."
-    },
     "functions": {
-      "items": {
+      "additionalProperties": {
         "$ref": "#/$defs/Function"
       },
-      "type": "array"
-    },
-    "id": {
-      "$ref": "#/$defs/LocalId"
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "kind": {
       "const": "EvidenceProject",
       "type": "string"
-    },
-    "label": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/DisplayText"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "description": "Optional presentation label. Stable references use the identifier."
     },
     "maximumHolderBoundBatchSize": {
       "description": "Maximum assertions released together in one holder-bound batch; omission means one.",
@@ -1189,6 +1204,10 @@
         "integer",
         "null"
       ]
+    },
+    "project": {
+      "$ref": "#/$defs/ProjectIdentity",
+      "description": "The shared identity: `project.id` names this project and\n`project.version` is a human release label. The compiled bundle carries\nonly the id. The optional `project.label` and `project.description` are\npresentation for authors and reviewers: stable references use the\nidentifier, and neither enters a behavior revision."
     },
     "selectorProfiles": {
       "additionalProperties": {
@@ -1212,7 +1231,7 @@
   "required": [
     "apiVersion",
     "kind",
-    "id",
+    "project",
     "selectorProfiles",
     "functions",
     "sources",
