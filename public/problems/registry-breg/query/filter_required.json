@@ -1,0 +1,44 @@
+{
+  "id": "https://id.registrystack.org/problems/registry-breg/query/filter_required",
+  "type": "https://id.registrystack.org/problems/registry-breg/query/filter_required",
+  "kind": "problem",
+  "lifecycle_status": "active",
+  "compatibility_line": "v1alpha1",
+  "product": "registry-breg",
+  "code": "query.filter_required",
+  "title": "Bad Request",
+  "summary": "The list did not carry the search criteria its access profile requires.",
+  "description": "The list did not carry the search criteria its access profile requires.",
+  "category": null,
+  "http_statuses": [
+    400
+  ],
+  "guidance": {
+    "status": "not_published",
+    "retryable": null,
+    "caller_action": null,
+    "operator_action": null,
+    "note": "No per-identifier remediation guidance is published in this resolver record."
+  },
+  "documented_by": [
+    {
+      "title": "Error and status code reference",
+      "href": "https://docs.registrystack.org/reference/errors/"
+    }
+  ],
+  "authority": {
+    "scope": "identifier metadata",
+    "statement": "This site publishes the current Registry Stack identifiers from a digest-bound source catalog. Product source and the actual service response remain authoritative for runtime behavior. For problem responses, use the stable code extension and the response status/detail fields. Do not parse URL paths for program logic."
+  },
+  "identifier_policy": {
+    "stability": "stable",
+    "programmatic_key": "code",
+    "parsing": "Do not parse semantics from the URL path."
+  },
+  "source_reference": {
+    "repository": "registry-stack",
+    "commit": "2a2acebb0e958131b0ddb9127ee2851ec8bf65f7",
+    "path": "crates/registry-breg/src/problem.rs",
+    "sha256": "c18ba2208005e7c196085ed0351546fd21d21c327da4bd18d9dda431a5534d1b"
+  }
+}

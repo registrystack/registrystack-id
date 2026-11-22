@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "LocalId": {
+      "description": "A local identifier: a lowercase letter, then up to 63 lowercase letters, digits, `_`, or `-`.",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "type": "string"
+    },
+    "OriginProfile": {
+      "description": "The publication profile an approved origin implements.",
+      "enum": [
+        "registry-discovery-v1alpha1"
+      ],
+      "type": "string"
+    },
+    "Url": {
+      "description": "An absolute http or https URL with a host preserved as written, no user information, and no backslash, whitespace or control character. DNS case and equivalent IPv6 literals are permitted.",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^/?#@\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]+([/?#][^\\u005C\\u0000-\\u0020\\u007F-\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000]*)?$",
+      "type": "string"
+    }
+  },
+  "$id": "https://id.registrystack.org/schemas/discovery/origins/origins.v1alpha1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The origins the operator approves for one index.",
+  "properties": {
+    "apiVersion": {
+      "const": "id.registrystack.org/formats/discovery/origins/v1alpha1",
+      "description": "The format and version of this file.",
+      "type": "string"
+    },
+    "kind": {
+      "const": "DiscoveryOrigins",
+      "description": "The kind of this file.",
+      "type": "string"
+    },
+    "origins": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "description": "One approved origin: a provider whose public description the index\ncollects.",
+        "properties": {
+          "catalogUrl": {
+            "$ref": "#/$defs/Url",
+            "description": "Exact production HTTPS URL without credentials, query, or fragment.\nLoopback HTTP is a development exception `discoveryctl` accepts only\nwith `--allow-loopback`, not part of this production authoring schema.",
+            "pattern": "^https://[^\\s\\u0000-\\u001F\\u007F-\\u009F/?#@]+(?!.*//)(?:/[^\\s\\u0000-\\u001F\\u007F-\\u009F?#]*)?$"
+          },
+          "enabled": {
+            "default": true,
+            "description": "Whether `discoveryctl package` collects this origin. Absent, it does.",
+            "type": "boolean"
+          },
+          "profile": {
+            "$ref": "#/$defs/OriginProfile"
+          }
+        },
+        "required": [
+          "catalogUrl",
+          "profile"
+        ],
+        "type": "object"
+      },
+      "description": "One to 128 approved origins, keyed by origin id and held in id order.",
+      "maxProperties": 128,
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId",
+        "description": "The origin's name in this project, unique among its origins."
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "origins"
+  ],
+  "title": "Registry Discovery approved origins",
+  "type": "object"
+}

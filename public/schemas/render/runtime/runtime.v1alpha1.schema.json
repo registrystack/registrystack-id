@@ -318,6 +318,23 @@
       "pattern": "^[a-z][a-z0-9_-]{0,63}$",
       "type": "string"
     },
+    "MetricsListenerConfig": {
+      "additionalProperties": false,
+      "description": "The operator-private metrics listener of a runtime. `networkExposure`\nhas the meaning it has on the serving listener: `private-address` (the\ndefault) requires a loopback or private address, and `container-private`\nalso permits the unspecified address inside a private container network.",
+      "properties": {
+        "bind": {
+          "$ref": "#/$defs/ListenerBind"
+        },
+        "networkExposure": {
+          "$ref": "#/$defs/ListenerNetworkExposure",
+          "default": "private-address"
+        }
+      },
+      "required": [
+        "bind"
+      ],
+      "type": "object"
+    },
     "OidcAllowedClients": {
       "anyOf": [
         {
@@ -808,6 +825,10 @@
     },
     "listener": {
       "$ref": "#/$defs/ListenerRuntime"
+    },
+    "metricsListener": {
+      "$ref": "#/$defs/MetricsListenerConfig",
+      "description": "The operator-private listener that serves `/metrics`. Omit it to serve\nno metrics. It must be a loopback or private address on a non-zero\nport, apart from `listener`."
     },
     "package": {
       "$ref": "#/$defs/PackageConfig",

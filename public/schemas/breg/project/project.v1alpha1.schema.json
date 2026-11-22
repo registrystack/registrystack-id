@@ -83,149 +83,6 @@
       ],
       "type": "object"
     },
-    "AccessProfileSource": {
-      "additionalProperties": false,
-      "properties": {
-        "actorKind": {
-          "$ref": "#/$defs/ActorKindSource"
-        },
-        "allowCount": {
-          "type": "boolean"
-        },
-        "allowDataExport": {
-          "default": false,
-          "type": "boolean"
-        },
-        "default": {
-          "default": false,
-          "type": "boolean"
-        },
-        "display": {
-          "$ref": "#/$defs/PresentationSource"
-        },
-        "filterableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "lookups": {
-          "items": {
-            "$ref": "#/$defs/LookupPermissionSource"
-          },
-          "type": "array"
-        },
-        "membershipBoundaries": {
-          "items": {
-            "$ref": "#/$defs/MembershipBoundarySource"
-          },
-          "type": "array"
-        },
-        "operations": {
-          "items": {
-            "$ref": "#/$defs/Operation"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "principalClaim": {
-          "description": "The token claim that names the caller. Every profile serves authenticated callers, so every profile names one.",
-          "type": "string"
-        },
-        "provenanceFields": {
-          "items": {
-            "$ref": "#/$defs/ProvenanceFieldSource"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "readPaths": {
-          "items": {
-            "$ref": "#/$defs/ReadPathPermissionSource"
-          },
-          "type": "array"
-        },
-        "readableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requesterClients": {
-          "description": "The OAuth clients whose tokens may select this profile. Omit to accept every client.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requireConsent": {
-          "items": {
-            "$ref": "#/$defs/ConsentRequirementSource"
-          },
-          "type": "array"
-        },
-        "requiredPurposes": {
-          "description": "The verified token's purpose must match one listed value. Omit to accept every purpose.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requiredScopes": {
-          "$ref": "#/$defs/RequiredScopes",
-          "description": "The scopes the verified token must carry: `unrestricted`, or a list of at least one scope, all of which must be present."
-        },
-        "revisionAccess": {
-          "default": false,
-          "type": "boolean"
-        },
-        "rowBoundaries": {
-          "$ref": "#/$defs/RowBoundaries",
-          "description": "Row reach: `unrestricted`, or a list of at least one row boundary."
-        },
-        "sortableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "spatialQueries": {
-          "$ref": "#/$defs/SpatialQueryPermissionSource"
-        },
-        "taskGrant": {
-          "$ref": "#/$defs/CompiledTaskGrantSource"
-        },
-        "writableFields": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "id",
-        "principalClaim",
-        "requiredScopes",
-        "operations",
-        "rowBoundaries"
-      ],
-      "type": "object"
-    },
     "AccessRequirementsSource": {
       "additionalProperties": false,
       "description": "Compile-time requirements, not grants. Profiles must explicitly satisfy them.",
@@ -908,56 +765,6 @@
       },
       "required": [
         "input"
-      ],
-      "type": "object"
-    },
-    "ActionSource": {
-      "additionalProperties": false,
-      "properties": {
-        "apiName": {
-          "type": "string"
-        },
-        "commitGuards": {
-          "$ref": "#/$defs/CommitGuardsSource",
-          "default": {
-            "evidence": [],
-            "targets": []
-          }
-        },
-        "consentIssuer": {
-          "$ref": "#/$defs/ConsentIssuerSource"
-        },
-        "display": {
-          "$ref": "#/$defs/ModelDisplaySource",
-          "default": {}
-        },
-        "evidence": {
-          "items": {
-            "$ref": "#/$defs/ActionEvidenceSource"
-          },
-          "type": "array"
-        },
-        "execution": {
-          "$ref": "#/$defs/ActionExecutionSource"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "inputs": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ActionInputSource"
-          },
-          "type": "array"
-        },
-        "plan": {
-          "$ref": "#/$defs/ActionPlanSource"
-        }
-      },
-      "required": [
-        "id",
-        "execution",
-        "plan"
       ],
       "type": "object"
     },
@@ -1803,22 +1610,6 @@
       ],
       "type": "object"
     },
-    "DatasetSource": {
-      "additionalProperties": false,
-      "properties": {
-        "display": {
-          "$ref": "#/$defs/DisplaySource",
-          "default": {}
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "type": "object"
-    },
     "DateFieldSourceSchema": {
       "additionalProperties": false,
       "properties": {
@@ -2245,6 +2036,107 @@
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
     },
+    "DisclosureWhenPredicate": {
+      "description": "One literal test of a record's current values. Predicates in a condition\nare ANDed, and an absent member counts as null.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "type": {
+              "const": "field-equals",
+              "type": "string"
+            },
+            "value": true
+          },
+          "required": [
+            "type",
+            "field",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "The field equals one of 1 to 32 literals.",
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "type": {
+              "const": "field-in",
+              "type": "string"
+            },
+            "values": {
+              "items": true,
+              "type": "array"
+            }
+          },
+          "required": [
+            "type",
+            "field",
+            "values"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "type": {
+              "const": "field-is-null",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "field"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "field": {
+              "type": "string"
+            },
+            "type": {
+              "const": "field-is-not-null",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "field"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "DisclosureWithholdSource": {
+      "description": "What a matching disclosure condition withholds from a profile it does not\nexempt.",
+      "oneOf": [
+        {
+          "const": "record",
+          "description": "The whole record behaves as absent.",
+          "type": "string"
+        },
+        {
+          "const": "history",
+          "description": "Every revision and snapshot of the record behaves as absent. The\ncurrent record stays readable.",
+          "type": "string"
+        },
+        {
+          "const": "fields",
+          "description": "The named `fields` are omitted from reads and history.",
+          "type": "string"
+        }
+      ]
+    },
     "DisplayPurpose": {
       "description": "The purpose a Record or Action declares for itself.",
       "enum": [
@@ -2377,6 +2269,15 @@
           },
           "type": "array"
         },
+        "requiredFilters": {
+          "description": "Alternative search criteria; a `list` must satisfy at least one. Omit to put no criteria on lists.",
+          "items": {
+            "$ref": "#/$defs/RequiredFilterSource"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "type": "array"
+        },
         "revisionAccess": {
           "default": false,
           "type": "boolean"
@@ -2409,133 +2310,6 @@
         "recordType",
         "operations",
         "rowBoundaries"
-      ],
-      "type": "object"
-    },
-    "EntitySource": {
-      "additionalProperties": false,
-      "properties": {
-        "accessLog": {
-          "$ref": "#/$defs/AccessLogSource",
-          "description": "Subject-facing record access history, separate from the operational audit."
-        },
-        "accessProfiles": {
-          "default": [],
-          "description": "Module profile contributions, read through the sentinels a project profile uses.",
-          "items": {
-            "$ref": "#/$defs/AccessProfileSource"
-          },
-          "type": "array"
-        },
-        "accessRequirements": {
-          "$ref": "#/$defs/AccessRequirementsSource",
-          "description": "Mandatory request-access requirements checked against every profile, including module contributions."
-        },
-        "apiName": {
-          "type": "string"
-        },
-        "batch": {
-          "$ref": "#/$defs/BatchSource"
-        },
-        "classification": {
-          "$ref": "#/$defs/Classification",
-          "default": "internal"
-        },
-        "consentRecord": {
-          "$ref": "#/$defs/ConsentRecordSource",
-          "description": "Declares this entity's rows as subject-issued consent decisions that\n`requireConsent` permissions check before returning a subject's row."
-        },
-        "constraints": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/ConstraintSource"
-          },
-          "type": "array"
-        },
-        "derived": {
-          "items": {
-            "$ref": "#/$defs/DerivedSource"
-          },
-          "type": "array"
-        },
-        "display": {
-          "$ref": "#/$defs/ModelDisplaySource",
-          "default": {}
-        },
-        "eventRecord": {
-          "$ref": "#/$defs/EventRecordSource",
-          "description": "Declares this record type's rows as event records: which fields\nsay what the row is about, when it happened, when it takes effect, what\nit was recorded from and what it corrects. It adds no storage, endpoint\nor authority."
-        },
-        "fields": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/FieldSource"
-          },
-          "type": "array"
-        },
-        "geojson": {
-          "$ref": "#/$defs/GeoJsonSource"
-        },
-        "hooks": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/HookSource"
-          },
-          "type": "array"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "indexes": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/IndexSource"
-          },
-          "type": "array"
-        },
-        "mutationMode": {
-          "$ref": "#/$defs/MutationMode"
-        },
-        "mutationPolicy": {
-          "$ref": "#/$defs/MutationPolicySource"
-        },
-        "primaryDataset": {
-          "type": "string"
-        },
-        "readPaths": {
-          "items": {
-            "$ref": "#/$defs/ReadPathSource"
-          },
-          "type": "array"
-        },
-        "route": {
-          "type": "string"
-        },
-        "selectorProfiles": {
-          "items": {
-            "$ref": "#/$defs/SelectorProfileSource"
-          },
-          "type": "array"
-        },
-        "temporal": {
-          "$ref": "#/$defs/TemporalSource"
-        },
-        "timers": {
-          "items": {
-            "$ref": "#/$defs/TimerSource"
-          },
-          "type": "array"
-        },
-        "tombstone": {
-          "default": false,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "id",
-        "primaryDataset",
-        "route",
-        "mutationMode"
       ],
       "type": "object"
     },
@@ -2710,32 +2484,21 @@
       "type": "object"
     },
     "EventTrigger": {
-      "enum": [
-        "created",
-        "patched",
-        "tombstoned"
-      ],
-      "type": "string"
-    },
-    "EvidenceProviderSource": {
-      "additionalProperties": false,
-      "properties": {
-        "contracts": {
+      "oneOf": [
+        {
+          "enum": [
+            "created",
+            "patched",
+            "tombstoned"
+          ],
           "type": "string"
         },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "subjectResolution": {
-          "$ref": "#/$defs/EvidenceSubjectResolution"
+        {
+          "const": "read",
+          "description": "A read by one of the hook's `profiles`, recorded in the subject access log.",
+          "type": "string"
         }
-      },
-      "required": [
-        "id",
-        "contracts",
-        "subjectResolution"
-      ],
-      "type": "object"
+      ]
     },
     "EvidenceSubjectResolution": {
       "enum": [
@@ -2892,103 +2655,12 @@
       ],
       "type": "object"
     },
-    "ExternalProjectionDeclaration": {
-      "additionalProperties": false,
-      "description": "Authoring form of an external projection. `compile` fills the derived\nmembers of [`ExternalProjectionSource`].",
-      "properties": {
-        "cacheTtlSeconds": {
-          "format": "uint32",
-          "maximum": 31536000,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "cardinality": {
-          "$ref": "#/$defs/ExternalCardinality"
-        },
-        "fields": {
-          "items": {
-            "$ref": "#/$defs/LocalId"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "mode": {
-          "$ref": "#/$defs/ExternalProjectionMode"
-        },
-        "purpose": {
-          "$ref": "#/$defs/ExternalId"
-        },
-        "recordType": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "scope": {
-          "$ref": "#/$defs/ExternalId"
-        },
-        "selectorScheme": {
-          "$ref": "#/$defs/ExternalId",
-          "description": "Required for cardinality `many`; refused for `one`, which selects by\nthe record type's identifier scheme."
-        },
-        "sourceRoute": {
-          "$ref": "#/$defs/LocalId",
-          "description": "The source route the projection calls."
-        },
-        "sourceRouteVersion": {
-          "$ref": "#/$defs/ExternalId"
-        }
-      },
-      "required": [
-        "id",
-        "recordType",
-        "sourceRoute",
-        "sourceRouteVersion",
-        "purpose",
-        "scope",
-        "mode",
-        "cardinality",
-        "fields"
-      ],
-      "type": "object"
-    },
     "ExternalProjectionMode": {
       "enum": [
         "live",
         "indexed"
       ],
       "type": "string"
-    },
-    "ExternalRecordTypeSource": {
-      "additionalProperties": false,
-      "properties": {
-        "authority": {
-          "$ref": "#/$defs/ExternalId"
-        },
-        "display": {
-          "$ref": "#/$defs/DisplaySource",
-          "default": {}
-        },
-        "fields": {
-          "items": {
-            "$ref": "#/$defs/ExternalFieldSource"
-          },
-          "type": "array"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "identifierScheme": {
-          "$ref": "#/$defs/ExternalId"
-        }
-      },
-      "required": [
-        "id",
-        "authority",
-        "identifierScheme",
-        "fields"
-      ],
-      "type": "object"
     },
     "ExternalReferenceSource": {
       "additionalProperties": false,
@@ -3000,30 +2672,6 @@
       },
       "required": [
         "namespace"
-      ],
-      "type": "object"
-    },
-    "ExternalViewDeclaration": {
-      "additionalProperties": false,
-      "description": "Authoring form of an external view.",
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "links": {
-          "items": {
-            "$ref": "#/$defs/ExternalLinkDeclaration"
-          },
-          "type": "array"
-        },
-        "recordType": {
-          "$ref": "#/$defs/LocalId"
-        }
-      },
-      "required": [
-        "id",
-        "recordType",
-        "links"
       ],
       "type": "object"
     },
@@ -3253,50 +2901,6 @@
       },
       "type": "object"
     },
-    "FunctionSource": {
-      "additionalProperties": false,
-      "properties": {
-        "abi": {
-          "const": "registry.action-plan/v1",
-          "type": "string"
-        },
-        "capabilities": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/FunctionCapabilitySource"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "entrypoint": {
-          "type": "string"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "limits": {
-          "$ref": "#/$defs/FunctionLimitsSource",
-          "default": {
-            "maximumOperations": 10000,
-            "maximumOutputBytes": 8192
-          }
-        },
-        "runtime": {
-          "$ref": "#/$defs/ActionHandlerKindSource"
-        },
-        "source": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "runtime",
-        "source",
-        "entrypoint",
-        "abi"
-      ],
-      "type": "object"
-    },
     "GeoJsonSource": {
       "additionalProperties": false,
       "properties": {
@@ -3424,6 +3028,14 @@
           "description": "The access profile a proposal from this hook is applied under.\nOptional: a hook that declares none is a non-proposing hook, and a\nproposal from one is refused and dead-lettered at delivery time.\nDeclaring none is not an authoring error.",
           "type": "string"
         },
+        "profiles": {
+          "description": "The access profiles whose reads produce the event. Required for the read trigger and refused otherwise.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
         "projection": {
           "description": "Declared field identifiers to include in `values`. System event metadata is included separately.",
           "items": {
@@ -3434,7 +3046,7 @@
         },
         "trigger": {
           "$ref": "#/$defs/EventTrigger",
-          "description": "Committed record change that can produce this hook."
+          "description": "The committed record change, or the logged read, that can produce this hook."
         },
         "when": {
           "$ref": "#/$defs/EventConditionSource",
@@ -4107,25 +3719,6 @@
       },
       "type": "object"
     },
-    "ModuleLockSource": {
-      "additionalProperties": false,
-      "properties": {
-        "digest": {
-          "$ref": "#/$defs/Digest"
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "version"
-      ],
-      "type": "object"
-    },
     "MutationMode": {
       "enum": [
         "mutable",
@@ -4315,71 +3908,6 @@
           "$ref": "#/$defs/DisplayText"
         }
       },
-      "type": "object"
-    },
-    "ProjectAccessProfileSource": {
-      "additionalProperties": false,
-      "description": "One access profile as a project writes it.",
-      "properties": {
-        "actorKind": {
-          "$ref": "#/$defs/ActorKindSource"
-        },
-        "default": {
-          "default": false,
-          "type": "boolean"
-        },
-        "display": {
-          "$ref": "#/$defs/PresentationSource",
-          "description": "Authored presentation only; labels never establish identity or authority."
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "permissions": {
-          "$ref": "#/$defs/PermissionsSource",
-          "default": {
-            "actions": [],
-            "datasets": [],
-            "proposals": [],
-            "records": []
-          },
-          "description": "What the profile may do, grouped by what each permission names. Omit when the profile grants nothing."
-        },
-        "principalClaim": {
-          "description": "The token claim that names the caller. Every profile serves authenticated callers, so every profile names one.",
-          "type": "string"
-        },
-        "requesterClients": {
-          "description": "The OAuth clients whose tokens may select this profile. Omit to accept every client.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requiredPurposes": {
-          "description": "The verified token's purpose must match one listed value. Omit to accept every purpose.",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "requiredScopes": {
-          "$ref": "#/$defs/RequiredScopes",
-          "description": "The scopes the verified token must carry: `unrestricted`, or a list of at least one scope, all of which must be present."
-        },
-        "taskGrant": {
-          "$ref": "#/$defs/TaskGrantSource"
-        }
-      },
-      "required": [
-        "id",
-        "principalClaim",
-        "requiredScopes"
-      ],
       "type": "object"
     },
     "ProposalApplicationSource": {
@@ -5039,6 +4567,23 @@
       ],
       "type": "object"
     },
+    "RequiredFilterSource": {
+      "additionalProperties": false,
+      "description": "One alternative set of search criteria a caller must supply to `list`.\nThe `$filter` must carry a top-level `eq` predicate with a non-null\nliteral for every named field.",
+      "properties": {
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "fields"
+      ],
+      "type": "object"
+    },
     "RequiredScopes": {
       "anyOf": [
         {
@@ -5231,26 +4776,6 @@
         }
       ]
     },
-    "ReviewAuthoritySource": {
-      "additionalProperties": false,
-      "properties": {
-        "display": {
-          "$ref": "#/$defs/DisplaySource",
-          "default": {}
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "protocol": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "protocol"
-      ],
-      "type": "object"
-    },
     "RowBoundaries": {
       "anyOf": [
         {
@@ -5406,63 +4931,6 @@
           "type": "object"
         }
       ]
-    },
-    "StatisticalDatasetSource": {
-      "additionalProperties": false,
-      "properties": {
-        "dimensions": {
-          "description": "Unit Record fields used to group every measure. Each field must be boolean or\nvocabulary-code, and each may appear once. `period`, `measure`, `value`,\nand `status` are reserved output columns and cannot be dimension field\nnames. At most 12 dimensions.",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 12,
-          "type": "array"
-        },
-        "disclosure": {
-          "$ref": "#/$defs/StatisticalDisclosureSource"
-        },
-        "display": {
-          "$ref": "#/$defs/PresentationSource",
-          "description": "Authored presentation only; labels never establish identity or authority."
-        },
-        "exactReads": {
-          "$ref": "#/$defs/StatisticalExactReadsSource",
-          "description": "How `read-exact` reads compute. Required when a profile holds `read-exact` on the dataset, and refused otherwise."
-        },
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "measures": {
-          "default": [
-            {
-              "id": "count",
-              "type": "count"
-            }
-          ],
-          "description": "The values the dataset publishes, one cell per period, dimension\ncombination, and measure. Each id is unique, and at most one measure has\ntype `count`. Omitting the member publishes one `count` measure named\n`count`; an empty list is refused.",
-          "items": {
-            "$ref": "#/$defs/StatisticalMeasureSource"
-          },
-          "type": "array"
-        },
-        "period": {
-          "$ref": "#/$defs/StatisticalPeriodSource"
-        },
-        "population": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "unit",
-        "population",
-        "period",
-        "dimensions"
-      ],
-      "type": "object"
     },
     "StatisticalDisclosureSource": {
       "description": "How a statistical release protects the values it states.",
@@ -6326,25 +5794,6 @@
         "vocabulary"
       ],
       "type": "object"
-    },
-    "VocabularySource": {
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/LocalId"
-        },
-        "values": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "id",
-        "values"
-      ],
-      "type": "object"
     }
   },
   "$id": "https://id.registrystack.org/schemas/breg/project/project.v1alpha1.schema.json",
@@ -6352,59 +5801,343 @@
   "additionalProperties": false,
   "properties": {
     "accessProfiles": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/ProjectAccessProfileSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "description": "One access profile as a project writes it.",
+        "properties": {
+          "actorKind": {
+            "$ref": "#/$defs/ActorKindSource"
+          },
+          "default": {
+            "default": false,
+            "type": "boolean"
+          },
+          "display": {
+            "$ref": "#/$defs/PresentationSource",
+            "description": "Authored presentation only; labels never establish identity or authority."
+          },
+          "permissions": {
+            "$ref": "#/$defs/PermissionsSource",
+            "default": {
+              "actions": [],
+              "datasets": [],
+              "proposals": [],
+              "records": []
+            },
+            "description": "What the profile may do, grouped by what each permission names. Omit when the profile grants nothing."
+          },
+          "principalClaim": {
+            "description": "The token claim that names the caller. Every profile serves authenticated callers, so every profile names one.",
+            "type": "string"
+          },
+          "requesterClients": {
+            "description": "The OAuth clients whose tokens may select this profile. Omit to accept every client.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "requireAccessReason": {
+            "description": "Every request under the profile must carry a `Registry-Access-Reason` header, which the subject access log records.",
+            "type": "boolean"
+          },
+          "requiredPurposes": {
+            "description": "The verified token's purpose must match one listed value. Omit to accept every purpose.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "requiredScopes": {
+            "$ref": "#/$defs/RequiredScopes",
+            "description": "The scopes the verified token must carry: `unrestricted`, or a list of at least one scope, all of which must be present."
+          },
+          "taskGrant": {
+            "$ref": "#/$defs/TaskGrantSource"
+          }
+        },
+        "required": [
+          "principalClaim",
+          "requiredScopes"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "description": "Written as a mapping from each profile id to the rest of the profile\n(CFG-ID-5) and held sorted by id.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "actions": {
-      "items": {
-        "$ref": "#/$defs/ActionSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "apiName": {
+            "type": "string"
+          },
+          "commitGuards": {
+            "$ref": "#/$defs/CommitGuardsSource",
+            "default": {
+              "evidence": [],
+              "targets": []
+            }
+          },
+          "consentIssuer": {
+            "$ref": "#/$defs/ConsentIssuerSource"
+          },
+          "display": {
+            "$ref": "#/$defs/ModelDisplaySource",
+            "default": {}
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/ActionEvidenceSource"
+            },
+            "type": "array"
+          },
+          "execution": {
+            "$ref": "#/$defs/ActionExecutionSource"
+          },
+          "inputs": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/ActionInputSource"
+            },
+            "type": "array"
+          },
+          "plan": {
+            "$ref": "#/$defs/ActionPlanSource"
+          }
+        },
+        "required": [
+          "execution",
+          "plan"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "description": "Written as a mapping from each Action id to the rest of the Action\n(CFG-ID-5) and held sorted by id.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "apiVersion": {
       "const": "id.registrystack.org/formats/breg/project/v1alpha1",
       "type": "string"
     },
     "datasets": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/DatasetSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "$ref": "#/$defs/DisplaySource",
+            "default": {}
+          }
+        },
+        "required": [],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "evidenceProviders": {
-      "items": {
-        "$ref": "#/$defs/EvidenceProviderSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "contracts": {
+            "type": "string"
+          },
+          "subjectResolution": {
+            "$ref": "#/$defs/EvidenceSubjectResolution"
+          }
+        },
+        "required": [
+          "contracts",
+          "subjectResolution"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "externalProjections": {
-      "items": {
-        "$ref": "#/$defs/ExternalProjectionDeclaration"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "description": "Authoring form of an external projection. `compile` fills the derived\nmembers of [`ExternalProjectionSource`].",
+        "properties": {
+          "cacheTtlSeconds": {
+            "format": "uint32",
+            "maximum": 31536000,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "cardinality": {
+            "$ref": "#/$defs/ExternalCardinality"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/$defs/LocalId"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "mode": {
+            "$ref": "#/$defs/ExternalProjectionMode"
+          },
+          "purpose": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "recordType": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "scope": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "selectorScheme": {
+            "$ref": "#/$defs/ExternalId",
+            "description": "Required for cardinality `many`; refused for `one`, which selects by\nthe record type's identifier scheme."
+          },
+          "sourceRoute": {
+            "$ref": "#/$defs/LocalId",
+            "description": "The source route the projection calls."
+          },
+          "sourceRouteVersion": {
+            "$ref": "#/$defs/ExternalId"
+          }
+        },
+        "required": [
+          "recordType",
+          "sourceRoute",
+          "sourceRouteVersion",
+          "purpose",
+          "scope",
+          "mode",
+          "cardinality",
+          "fields"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "externalRecordTypes": {
-      "items": {
-        "$ref": "#/$defs/ExternalRecordTypeSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "authority": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "display": {
+            "$ref": "#/$defs/DisplaySource",
+            "default": {}
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/$defs/ExternalFieldSource"
+            },
+            "type": "array"
+          },
+          "identifierScheme": {
+            "$ref": "#/$defs/ExternalId"
+          }
+        },
+        "required": [
+          "authority",
+          "identifierScheme",
+          "fields"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "externalViews": {
-      "items": {
-        "$ref": "#/$defs/ExternalViewDeclaration"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "description": "Authoring form of an external view.",
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/$defs/ExternalLinkDeclaration"
+            },
+            "type": "array"
+          },
+          "recordType": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "required": [
+          "recordType",
+          "links"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "functions": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/FunctionSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "abi": {
+            "const": "registry.action-plan/v1",
+            "type": "string"
+          },
+          "capabilities": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/FunctionCapabilitySource"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "entrypoint": {
+            "type": "string"
+          },
+          "limits": {
+            "$ref": "#/$defs/FunctionLimitsSource",
+            "default": {
+              "maximumOperations": 10000,
+              "maximumOutputBytes": 8192
+            }
+          },
+          "runtime": {
+            "$ref": "#/$defs/ActionHandlerKindSource"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runtime",
+          "source",
+          "entrypoint",
+          "abi"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "description": "Written as a mapping from each function id to the rest of the function\n(CFG-ID-5) and held sorted by id.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "kind": {
       "const": "BRegProject",
@@ -6414,11 +6147,27 @@
       "$ref": "#/$defs/ManifestProjectionSource"
     },
     "modules": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/ModuleLockSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "digest": {
+            "$ref": "#/$defs/Digest"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "description": "Written as a mapping from each module id to its locked version and digest\n(CFG-ID-5) and held sorted by id.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "package": {
       "$ref": "#/$defs/PackageIdentitySource"
@@ -6431,11 +6180,333 @@
       "description": "Named organizations and frozen groups that consent may be given to."
     },
     "recordTypes": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/EntitySource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "accessLog": {
+            "$ref": "#/$defs/AccessLogSource",
+            "description": "Subject-facing record access history, separate from the operational audit."
+          },
+          "accessProfiles": {
+            "additionalProperties": {
+              "additionalProperties": false,
+              "properties": {
+                "actorKind": {
+                  "$ref": "#/$defs/ActorKindSource"
+                },
+                "allowCount": {
+                  "type": "boolean"
+                },
+                "allowDataExport": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "default": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "display": {
+                  "$ref": "#/$defs/PresentationSource"
+                },
+                "filterableFields": {
+                  "default": [],
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "lookups": {
+                  "items": {
+                    "$ref": "#/$defs/LookupPermissionSource"
+                  },
+                  "type": "array"
+                },
+                "membershipBoundaries": {
+                  "items": {
+                    "$ref": "#/$defs/MembershipBoundarySource"
+                  },
+                  "type": "array"
+                },
+                "operations": {
+                  "items": {
+                    "$ref": "#/$defs/Operation"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "principalClaim": {
+                  "description": "The token claim that names the caller. Every profile serves authenticated callers, so every profile names one.",
+                  "type": "string"
+                },
+                "provenanceFields": {
+                  "items": {
+                    "$ref": "#/$defs/ProvenanceFieldSource"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "readPaths": {
+                  "items": {
+                    "$ref": "#/$defs/ReadPathPermissionSource"
+                  },
+                  "type": "array"
+                },
+                "readableFields": {
+                  "default": [],
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "requesterClients": {
+                  "description": "The OAuth clients whose tokens may select this profile. Omit to accept every client.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "requireAccessReason": {
+                  "description": "Every request under the profile must carry a `Registry-Access-Reason` header.",
+                  "type": "boolean"
+                },
+                "requireConsent": {
+                  "items": {
+                    "$ref": "#/$defs/ConsentRequirementSource"
+                  },
+                  "type": "array"
+                },
+                "requiredFilters": {
+                  "description": "Alternative search criteria; a `list` must satisfy at least one. Omit to put no criteria on lists.",
+                  "items": {
+                    "$ref": "#/$defs/RequiredFilterSource"
+                  },
+                  "maxItems": 8,
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "requiredPurposes": {
+                  "description": "The verified token's purpose must match one listed value. Omit to accept every purpose.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "requiredScopes": {
+                  "$ref": "#/$defs/RequiredScopes",
+                  "description": "The scopes the verified token must carry: `unrestricted`, or a list of at least one scope, all of which must be present."
+                },
+                "revisionAccess": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "rowBoundaries": {
+                  "$ref": "#/$defs/RowBoundaries",
+                  "description": "Row reach: `unrestricted`, or a list of at least one row boundary."
+                },
+                "sortableFields": {
+                  "default": [],
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "spatialQueries": {
+                  "$ref": "#/$defs/SpatialQueryPermissionSource"
+                },
+                "taskGrant": {
+                  "$ref": "#/$defs/CompiledTaskGrantSource"
+                },
+                "writableFields": {
+                  "default": [],
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "principalClaim",
+                "requiredScopes",
+                "operations",
+                "rowBoundaries"
+              ],
+              "type": "object"
+            },
+            "default": {},
+            "description": "Module profile contributions, read through the sentinels a project profile uses.",
+            "propertyNames": {
+              "$ref": "#/$defs/LocalId"
+            },
+            "type": "object"
+          },
+          "accessRequirements": {
+            "$ref": "#/$defs/AccessRequirementsSource",
+            "description": "Mandatory request-access requirements checked against every profile, including module contributions."
+          },
+          "apiName": {
+            "type": "string"
+          },
+          "batch": {
+            "$ref": "#/$defs/BatchSource"
+          },
+          "classification": {
+            "$ref": "#/$defs/Classification",
+            "default": "internal"
+          },
+          "consentRecord": {
+            "$ref": "#/$defs/ConsentRecordSource",
+            "description": "Declares this entity's rows as subject-issued consent decisions that\n`requireConsent` permissions check before returning a subject's row."
+          },
+          "constraints": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/ConstraintSource"
+            },
+            "type": "array"
+          },
+          "derived": {
+            "items": {
+              "$ref": "#/$defs/DerivedSource"
+            },
+            "type": "array"
+          },
+          "disclosureConditions": {
+            "additionalProperties": {
+              "additionalProperties": false,
+              "description": "A rule that withholds a record, its history or named fields from every\naccess profile it does not exempt, while the record's current values match\n`when`.",
+              "properties": {
+                "exemptProfiles": {
+                  "default": [],
+                  "description": "The access profiles that see the record whatever `when` says. At least one.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "fields": {
+                  "description": "The optional stored fields to omit. Required for `withhold: fields` and refused otherwise.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "when": {
+                  "description": "One to four literal tests of the record's current values, ANDed.",
+                  "items": {
+                    "$ref": "#/$defs/DisclosureWhenPredicate"
+                  },
+                  "type": "array"
+                },
+                "withhold": {
+                  "$ref": "#/$defs/DisclosureWithholdSource"
+                }
+              },
+              "required": [
+                "when",
+                "withhold"
+              ],
+              "type": "object"
+            },
+            "description": "Rules that withhold the record, its history or named fields from profiles they do not exempt.\nWritten as a mapping from each condition id to the rest of the\ncondition (CFG-ID-5) and held sorted by id.",
+            "maxProperties": 8,
+            "propertyNames": {
+              "$ref": "#/$defs/LocalId"
+            },
+            "type": "object"
+          },
+          "display": {
+            "$ref": "#/$defs/ModelDisplaySource",
+            "default": {}
+          },
+          "eventRecord": {
+            "$ref": "#/$defs/EventRecordSource",
+            "description": "Declares this record type's rows as event records: which fields\nsay what the row is about, when it happened, when it takes effect, what\nit was recorded from and what it corrects. It adds no storage, endpoint\nor authority."
+          },
+          "fields": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/FieldSource"
+            },
+            "type": "array"
+          },
+          "geojson": {
+            "$ref": "#/$defs/GeoJsonSource"
+          },
+          "hooks": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/HookSource"
+            },
+            "type": "array"
+          },
+          "indexes": {
+            "default": [],
+            "items": {
+              "$ref": "#/$defs/IndexSource"
+            },
+            "type": "array"
+          },
+          "mutationMode": {
+            "$ref": "#/$defs/MutationMode"
+          },
+          "mutationPolicy": {
+            "$ref": "#/$defs/MutationPolicySource"
+          },
+          "primaryDataset": {
+            "type": "string"
+          },
+          "readPaths": {
+            "items": {
+              "$ref": "#/$defs/ReadPathSource"
+            },
+            "type": "array"
+          },
+          "route": {
+            "type": "string"
+          },
+          "selectorProfiles": {
+            "items": {
+              "$ref": "#/$defs/SelectorProfileSource"
+            },
+            "type": "array"
+          },
+          "temporal": {
+            "$ref": "#/$defs/TemporalSource"
+          },
+          "timers": {
+            "items": {
+              "$ref": "#/$defs/TimerSource"
+            },
+            "type": "array"
+          },
+          "tombstone": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "primaryDataset",
+          "route",
+          "mutationMode"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "description": "Written as a mapping from each Record type id to the rest of the Record\ntype (CFG-ID-5) and held sorted by id.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "retiredConsentScopes": {
       "description": "Consent scope codes of removed gated profiles, kept so existing consent\nrows still validate. A retired scope matches nothing.",
@@ -6445,18 +6516,87 @@
       "type": "array"
     },
     "reviewAuthorities": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/ReviewAuthoritySource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "$ref": "#/$defs/DisplaySource",
+            "default": {}
+          },
+          "protocol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "protocol"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "statisticalDatasets": {
-      "description": "Declared count tables computed from governed Registry records.",
-      "items": {
-        "$ref": "#/$defs/StatisticalDatasetSource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "dimensions": {
+            "description": "Unit Record fields used to group every measure. Each field must be boolean or\nvocabulary-code, and each may appear once. `period`, `measure`, `value`,\nand `status` are reserved output columns and cannot be dimension field\nnames. At most 12 dimensions.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 12,
+            "type": "array"
+          },
+          "disclosure": {
+            "$ref": "#/$defs/StatisticalDisclosureSource"
+          },
+          "display": {
+            "$ref": "#/$defs/PresentationSource",
+            "description": "Authored presentation only; labels never establish identity or authority."
+          },
+          "exactReads": {
+            "$ref": "#/$defs/StatisticalExactReadsSource",
+            "description": "How `read-exact` reads compute. Required when a profile holds `read-exact` on the dataset, and refused otherwise."
+          },
+          "measures": {
+            "default": [
+              {
+                "id": "count",
+                "type": "count"
+              }
+            ],
+            "description": "The values the dataset publishes, one cell per period, dimension\ncombination, and measure. Each id is unique, and at most one measure has\ntype `count`. Omitting the member publishes one `count` measure named\n`count`; an empty list is refused.",
+            "items": {
+              "$ref": "#/$defs/StatisticalMeasureSource"
+            },
+            "type": "array"
+          },
+          "period": {
+            "$ref": "#/$defs/StatisticalPeriodSource"
+          },
+          "population": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit",
+          "population",
+          "period",
+          "dimensions"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "description": "Declared count tables computed from governed Registry records.",
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     },
     "timerGrants": {
       "description": "Root-owned enablement of autonomous Record timers. Modules may declare\ntimers, but cannot contribute this authority.",
@@ -6476,11 +6616,26 @@
       "type": "object"
     },
     "vocabularies": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/VocabularySource"
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "values"
+        ],
+        "type": "object"
       },
-      "type": "array"
+      "default": {},
+      "propertyNames": {
+        "$ref": "#/$defs/LocalId"
+      },
+      "type": "object"
     }
   },
   "required": [
