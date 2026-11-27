@@ -8,7 +8,7 @@
   "owner": "registry-record",
   "source_reference": {
     "repository": "registry-stack",
-    "commit": "0d4f292653d5b72547262a7b23c83a4feb3341ec",
+    "commit": "cd83550e454c3e39f9dd47c112b9317cbe080c7f",
     "path": "products/registry-record/context/registry-record-v1.jsonld",
     "sha256": "c336506f4dcd7e266155e8cd1ff9710766bc240f395e27b0480b2e193e74e2ee"
   },
